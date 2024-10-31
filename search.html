@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GraveSearch - Find and Remember Loved Ones</title>
+    
+        <!-- External fonts and icons -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    
+        <style>
+            :root {
+                --primary-color: #41464a;
+                --secondary-color: #1F262A;
+                --text-color: #F2E9E4;
+                --background-color: #ece7e7;
+                --accent-color: #4A4E69;
+                --card-bg-color: #ffffff;
+            }
+    
+            body, html {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                font-family: 'Inter', sans-serif;
+                background-color: var(--background-color);
+                color: var(--secondary-color);
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+    
+            .top-nav {
+                    display: flex;
+                    align-items: center;
+                    background-color: var(--primary-color);
+                    color: var(--text-color);
+                    padding: 15px;
+                    height: 50px;
+                    width: 100%;
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    z-index: 1000;
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                }
+
+                .top-nav h1 {
+                    flex-grow: 0; /* Remove flex-grow */
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%); /* Center the icon horizontally */
+                    font-size: 1.4em;
+                    margin: 0;
+                    font-weight: 600;
+}
+
+                .top-nav .menu-btn {
+                    font-size: 28px;
+                    cursor: pointer;
+                    background-color: transparent;
+                    color: var(--text-color);
+                    border: none;
+                    margin-right: 20px; /* Space between the button and the heading */
+                    margin-left: 20px; /* Space between the button and the heading */
+
+                    transition: transform 0.3s ease;
+                }
+
+                .top-nav .menu-btn:hover {
+                    transform: scale(1.1);
+                }
+
+                .logo {
+    width: 160px; /* Adjust this value to control the width */
+    height: auto; /* Maintain the aspect ratio */
+    vertical-align: middle; /* Align the logo with the text */
+}
+
+
+.sidebar {
+        height: 100%;
+        width: 280px;
+        position: fixed;
+        z-index: 3000;
+        top: 0;
+        left: -280px;
+        background-color: var(--secondary-color);
+        overflow-x: hidden;
+        transition: left 0.4s ease;
+        padding-top: 60px;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.0);
+    }
+
+                .sidebar a {
+                    padding: 05px 25px;
+                    text-decoration: none;
+                    font-size: 18px;
+                    color: var(--text-color);
+                    display: block;
+                    transition: 0.3s;
+                    border-bottom: 1px solid rgba(145, 5, 5, 0.1);
+                }
+
+                .sidebar i {
+                    margin-right: 30px; /* Space between the icon and text */
+                }
+
+                .sidebar a:hover {
+                    background-color: var(--accent-color);
+                }
+
+                .sidebar .closebtn {
+                    position: absolute;
+                    top: 10px;
+                    right: 20px;
+                    font-size: 30px;
+                    color: var(--text-color);
+                    cursor: pointer;
+                }
+
+                .flag-buttons {
+                    display: flex;
+                    justify-content: space-around;
+                    margin-top: 30px;
+                    padding: 0 20px;
+                }
+
+                .flag-buttons img {
+                    width: 40px;
+                    height: 40px;
+                    cursor: pointer;
+                    border-radius: 50%;
+                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+                    transition: transform 0.3s ease;
+                }
+
+                .flag-buttons img:hover {
+                    transform: scale(1.1);
+                }
+    
+            .search-container {
+                margin-top: 15px;
+                margin-bottom: 15px;
+                width: 100%;
+            }
+    
+            #searchInput {
+                width: 100%;
+                padding: 10px;
+                font-size: 18px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+    
+            .add-new {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 60px;
+                height: 60px;
+                background-color: var(--primary-color);
+                color: var(--text-color);
+                font-size: 28px;
+                text-decoration: none;
+                border-radius: 50%;
+                border: none;
+                transition: background-color 0.3s ease, transform 0.3s ease;
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+                cursor: pointer;
+                z-index: 1001;
+            }
+    
+            .add-new:hover {
+                background-color: var(--accent-color);
+                transform: scale(1.1);
+            }
+    
+            #death-cards-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                padding: 10px;
+            }
+    
+            .death-card {
+                background-color: var(--card-bg-color);
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                padding: 15px;
+                width: calc(100% - 40px);
+                cursor: pointer;
+                transition: transform 0.3s ease;
+                position: relative;
+                margin-bottom: 10px;
+            }
+    
+            .death-card-actions {
+                display: flex;
+                justify-content: flex-end;
+                gap: 10px;
+                margin-bottom: 10px;
+            }
+    
+            .action-button {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 18px;
+                color: var(--primary-color);
+                transition: color 0.3s ease;
+            }
+    
+            .action-button:hover {
+                color: var(--accent-color);
+            }
+    
+            .action-button.favorite-btn {
+                color: var(--primary-color);
+            }
+    
+            .action-button.favorite-btn:hover {
+                color: #ff4136;
+            }
+    
+            .death-card-content {
+                display: flex;
+                gap: 15px;
+            }
+    
+            .death-card-image {
+                width: 120px;
+                height: 120px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+    
+            .death-card-info {
+                flex-grow: 1;
+            }
+    
+            .death-card h3 {
+                margin: 0 0 5px 0;
+                color: var(--primary-color);
+            }
+    
+            .info-items {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+    
+            .info-item {
+                display: flex;
+                align-items: center;
+                margin-bottom: 2px;
+                font-size: 0.9em;
+            }
+    
+            .info-item i {
+                margin-right: 5px;
+                width: 16px;
+                text-align: center;
+            }
+    
+            .info-item p {
+                margin: 0;
+            }
+    
+            .date-container {
+                display: flex;
+                gap: 10px;
+            }
+    
+            .match-percentage {
+                display: inline-flex;
+                align-items: center;
+                margin-left: 10px;
+                font-weight: bold;
+                color: var(--accent-color);
+            }
+    
+            .match-percentage i {
+                margin-right: 5px;
+            }
+    
+            .search-explanation {
+                background-color: var(--card-bg-color);
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+    
+            .search-explanation h2 {
+                color: var(--primary-color);
+                margin-top: 0;
+            }
+    
+            .search-explanation p {
+                margin-bottom: 10px;
+            }
+    
+            .search-explanation ul {
+                padding-left: 20px;
+            }
+    
+            .popup {
+                display: none;
+                position: fixed;
+                z-index: 9999;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0,0,0,0.4);
+            }
+    
+            .popup-content {
+                background-color: var(--card-bg-color);
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 600px;
+                border-radius: 8px;
+            }
+    
+            .popup-close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+    
+            .popup-close:hover,
+            .popup-close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    
+    <body>
+    
+        <div class="top-nav">
+            <button class="menu-btn" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+            <h1><img src="images/logo/logotitre.png" alt="Logo" class="logo"></h1>            
+        </div>
+    
+        <div id="mySidebar" class="sidebar">
+            <div class="flag-buttons">
+                <img src="images/page/ar.png" alt="Arabic" title="العربية">
+                <img src="images/page/fr.png" alt="French" title="Français">
+                <img src="images/page/en.png" alt="English" title="English">
+            </div>
+            <br> <br/>
+            <br> <br/>
+            <span class="closebtn" onclick="toggleNav()">&times;</span>
+            <a href="search.html"><i class="fas fa-search"></i> Nouvelle recherche</a>
+            <a href="favourite.html"><i class="fas fa-heart"></i> Mes favoris</a>
+            <br> <br/>
+            <a href="aboutus.html"><i class="fas fa-info-circle"></i> Qui sommes nous?</a>
+            <a href="mission.html"><i class="fas fa-tasks"></i> Nos missions</a>
+            <br> <br/>
+            <a href="joinus.html"><i class="fas fa-user-plus"></i>Rejoins-Nous</a>
+            <a href="contactus.html"><i class="fas fa-envelope"></i> Contact</a>
+            <br> <br/>
+            <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
+        </div>
+    
+        <!-- Main Content -->
+        <div id="main">
+            <!-- Search explanation -->
+            <div class="search-explanation">
+                <h2>Comment utiliser la fonction de recherche</h2>
+                <p>Notre algorithme avancé vous permet de trouver rapidement des informations. Voici comment :</p>
+                <ul>
+                    <li>Saisissez un nom, année de naissance ou décès, lieu de naissance, profession ou description.</li>
+                    <li>Les résultats s'affichent en temps réel.
+                    <li>Les résultats sont triés par pertinence avec un pourcentage de correspondance.</li>
+                </ul>
+                <p>Exemples : "Amina 1984 Rabat" ou "1984 Benjelloun Amina professeur"</p>                
+            </div>
+    
+            <!-- Search Input -->
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Recherchez par nom, dates ou autres détails.">
+            </div>
+    
+            <!-- Death Cards Section -->
+            <div id="death-cards-container"></div>
+        </div>
+    
+        <!-- removed but still needed somewhow  -->
+        <div id="addNewEntryModal" class="modal">
+            <div class="modal-content">
+                <form class="modal-form" id="addEntryForm">
+            </div>
+        </div>
+    
+        <!-- Profile Popup -->
+        <div id="profilePopup" class="popup">
+            <div class="popup-content">
+                <span class="popup-close" onclick="closePopup()">&times;</span>
+                <div id="profileContent"></div>
+            </div>
+        </div>
+    
+        <!-- Scripts -->
+        <script>
+            
+            const deathEntries = [
+    { familyName: "El Khatib", firstName: "Ahmed", dob: "1975-04-10", birthplace: "Rabat", dod: "2023-06-12", location: "33.5762, -7.6115", image: "images/DataBase/1.jpg", description: "Beloved father and husband", cemetery: "Casablanca - Chouhada", profession: "Engineer" },
+    { familyName: "Benhaddou", firstName: "Youssef", dob: "1980-02-14", birthplace: "Casablanca", dod: "2023-05-20", location: "33.5769, -7.6220", image: "images/DataBase/2.jpg" , description: "Kindhearted soul", cemetery: "Casablanca - Chouhada", profession: "Teacher" },
+    { familyName: "Ouazzani", firstName: "Mohamed", dob: "1965-11-18", birthplace: "Tangier", dod: "2023-04-30", location: "34.0282, -6.8413", image: "images/DataBase/3.jpg", description: "Devoted uncle", cemetery: "Rabat - Chouhada", profession: "Doctor" },
+    { familyName: "Bensalem", firstName: "Hassan", dob: "1978-09-05", birthplace: "Tanger", dod: "2023-03-11", location: "34.03087867785178, -6.839582106791568", image: "images/DataBase/4.jpg", description: "Loving uncle", cemetery: "Rabat - Chouhada", profession: "Sportif" },
+    { familyName: "Alaoui", firstName: "Ismail", dob: "1983-06-23", birthplace: "Fes", dod: "2023-07-25", location: "33.5735, -7.6008", image: "images/DataBase/5.jpg", description: "Caring father", cemetery: "Casablanca - Chouhada", profession: "Lawyer" },
+    { familyName: "Bennani", firstName: "Fatima", dob: "1988-03-12", birthplace: "Meknes", dod: "2023-08-19", location: "34.0201, -6.8500", image: "images/DataBase/6.jpg", description: "Beloved mother", cemetery: "Rabat - Chouhada", profession: "Teacher" },
+    { familyName: "Fassi", firstName: "Nadia", dob: "1992-11-07", birthplace: "Rabat", dod: "2023-09-10", location: "33.5800, -7.5901", image: "images/DataBase/7.jpg", description: "Kind and gentle friend", cemetery: "Casablanca - Chouhada", profession: "Nurse" },
+    { familyName: "Mansouri", firstName: "Zineb", dob: "1985-01-22", birthplace: "Casablanca", dod: "2023-10-15", location: "33.5748, -7.5962", image: "images/DataBase/8.jpg", description: "Passionate artist", cemetery: "Casablanca - Chouhada", profession: "Artist" },
+    ]
+            const favoriteEntries = [
+    { familyName: "Bouhlal", firstName: "Abdel Karim", dob: "1988-03-12", birthplace: "Rabat", dod: "2023-08-19", location: "34.03080380309956, -6.8388454224546384", image: "images/DataBase/9.jpg", description: "Beloved grand father", cemetery: "Rabat - Chouhada", profession: "Musicien" },
+    { familyName: "Lhrizi", firstName: "Hajiba", dob: "1965-11-18", birthplace: "Sale", dod: "2023-04-30", location: "34.03079228390211, -6.838789823637387", image: "images/DataBase/10.jpg", description: "Devoted grand mother", cemetery: "Rabat - Chouhada", profession: "Mere au foyer" },
+            ];
+    
+            function toggleNav() {
+                const sidebar = document.getElementById("mySidebar");
+                sidebar.style.left = (sidebar.style.left === "0px") ? "-280px" : "0px";
+            }
+    
+            function filterCards() {
+                const searchInput = document.getElementById('searchInput').value.toLowerCase();
+                const searchTerms = searchInput.split(' ').filter(term => term.trim() !== '');
+                const container = document.getElementById("death-cards-container");
+                container.innerHTML = "";
+    
+                const flatDeathEntries = deathEntries.flat();
+                const entriesToShow = flatDeathEntries.concat(favoriteEntries);
+    
+                entriesToShow.sort((a, b) => {
+                    const matchCountA = calculateMatchCount(a, searchTerms);
+                    const matchCountB = calculateMatchCount(b, searchTerms);
+                    return matchCountB - matchCountA;
+                });
+    
+                entriesToShow.forEach((entry, index) => {
+                    const matchCount = calculateMatchCount(entry, searchTerms);
+                    const matchPercentage = Math.min((matchCount / 5) * 99, 99);
+    
+                    const card = createCard(entry, index, searchTerms, matchPercentage);
+                    container.appendChild(card);
+                });
+            }
+    
+            function createCard(entry, index, searchTerms, matchPercentage) {
+                const card = document.createElement("div");
+                card.className = "death-card";
+                card.innerHTML = `
+                    <div class="death-card-actions">
+                        <button class="action-button info-btn" title="View Profile"><i class="fas fa-info-circle"></i></button>
+                        <button class="action-button favorite-btn" title="Add to Favorites"><i class="fas fa-heart"></i></button>
+                         <span class="match-percentage"><i class="fas fa-chart-line"></i> ${matchPercentage.toFixed(1)}%</span>
+
+                        </div>
+                    <br></br>
+                    <div class="death-card-content">
+                        <img src="file:///C:/Users/Public/1408/Images/DataBase/${entry.image.split('\\').pop()}" alt="${entry.familyName} ${entry.firstName}" class="death-card-image">
+                        <div class="death-card-info">
+                            <div class="death-card-details">
+                                <h3>${highlightText(entry.familyName + ' ' + entry.firstName, searchTerms)}</h3>
+                                <div class="info-items">
+                                    <div class="date-container">
+                                        <div class="info-item"><i class="fas fa-birthday-cake"></i><p>${highlightText(entry.dob, searchTerms)}</p></div>
+                                        <div class="info-item"><i class="fas fa-monument"></i><p>${highlightText(entry.dod, searchTerms)}</p></div>
+                                    </div>
+                                    <div class="info-item"><i class="fas fa-baby"></i><p>${highlightText(entry.birthplace, searchTerms)}</p></div>
+                                    <div class="info-item"><i class="fas fa-cross"></i><p>${highlightText(entry.cemetery, searchTerms)}</p></div>
+                                    <div class="info-item"><i class="fas fa-briefcase"></i><p>${highlightText(entry.profession, searchTerms)}</p></div>
+                                    <div class="info-item">
+                                        <i class="fas fa-info-circle"></i>
+                                        <p>${highlightText(entry.description, searchTerms)}</p>                                    </div>
+                      <br></br>           
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                card.querySelector('.info-btn').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    showProfile(entry);
+                });
+                
+                card.querySelector('.favorite-btn').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    addToFavorites(entry);
+                });
+                
+                return card;
+            }
+    
+            function showProfile(entry) {
+                const popup = document.getElementById('profilePopup');
+                const content = document.getElementById('profileContent');
+                content.innerHTML = `
+                    <h2>${entry.familyName} ${entry.firstName}</h2>
+                    <img src="file:///C:/Users/Public/1408/Images/DataBase/${entry.image.split('\\').pop()}" alt="${entry.familyName} ${entry.firstName}" style="width: 200px; height: 200px; object-fit: cover;">
+                    <p><strong>Date of Birth:</strong> ${entry.dob}</p>
+                    <p><strong>Date of Death:</strong> ${entry.dod}</p>
+                    <p><strong>Birthplace:</strong> ${entry.birthplace}</p>
+                    <p><strong>Profession:</strong> ${entry.profession}</p>
+                    <p><strong>Description:</strong> ${entry.description}</p>
+                    <p><strong>Cemetery:</strong> ${entry.cemetery}</p>
+                `;
+                popup.style.display = 'block';
+            }
+    
+            function closePopup() {
+                document.getElementById('profilePopup').style.display = 'none';
+            }
+    
+            function highlightText(text, searchTerms) {
+                if (!searchTerms.length) return text;
+                const regex = new RegExp(`(${searchTerms.join('|')})`, 'gi');
+                return text.replace(regex, '<mark>$1</mark>');
+            }
+    
+            function calculateMatchCount(entry, searchTerms) {
+                let matchCount = 0;
+                const entryFields = [
+                    entry.familyName,
+                    entry.firstName,
+                    entry.dob.split('-')[0], // Year of birth
+                    entry.dod.split('-')[0], // Year of death
+                    entry.birthplace,
+                    entry.description,
+                    entry.cemetery,
+                    entry.profession
+                ];
+    
+                searchTerms.forEach(term => {
+                    entryFields.forEach((field, index) => {
+                        if (typeof field === 'string' && field.toLowerCase().includes(term.toLowerCase())) {
+                            if (index < 5) {
+                                matchCount++;
+                            } else {
+                                matchCount = Math.min(matchCount + 1, 5);
+                            }
+                        }
+                    });
+                });
+    
+                return matchCount;
+            }
+    
+            function addToFavorites(entry) {
+                const isAlreadyFavorite = favoriteEntries.some(favorite => 
+                    favorite.familyName === entry.familyName && 
+                    favorite.firstName === entry.firstName && 
+                    favorite.dob === entry.dob
+                );
+    
+                if (!isAlreadyFavorite) {
+                    favoriteEntries.push(entry);
+                    alert(`${entry.familyName} ${entry.firstName} has been added to favorites.`);
+                } else {
+                    alert(`${entry.familyName} ${entry.firstName} is already in your favorites.`);
+                }
+            }
+    
+            document.getElementById("addEntryForm").onsubmit = function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                const newEntry = Object.fromEntries(formData.entries());
+    
+                const fileInput = document.getElementById('image');
+                if (fileInput.files && fileInput.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        newEntry.image = e.target.result;
+                        deathEntries.push(newEntry);
+                        filterCards();
+                        document.getElementById("addNewEntryModal").style.display = "none";
+                        this.reset();
+                    };
+                    reader.readAsDataURL(fileInput.files[0]);
+                } else {
+                    newEntry.image = "C:\\Users\\Public\\1408\\Images\\DataBase\\default.jpg";
+                    deathEntries.push(newEntry);
+                    filterCards();
+                    document.getElementById("addNewEntryModal").style.display = "none";
+                    this.reset();
+                }
+            };
+    
+            // Initial card creation
+            filterCards();
+    
+            // Add event listener for search
+            document.getElementById('searchInput').addEventListener('input', filterCards);
+        </script>
+    </body>
+    </html>
