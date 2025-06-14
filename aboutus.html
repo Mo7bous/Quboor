@@ -1,307 +1,220 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>À Propos de Nous</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #41464a;
-            --secondary-color: #1F262A;
-            --text-color: #F2E9E4;
-            --background-color: #ece7e7;
-            --accent-color: #4A4E69;
-            --card-bg-color: #ffffff;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qui sommes-nous ? - Quboor</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #41464a;
+      --secondary-color: #1F262A;
+      --text-color: #F2E9E4;
+      --background-color: #f4f4f4;
+      --accent-color: #4A4E69;
+      --card-bg-color: #ffffff;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--secondary-color);
-            background-color: var(--background-color);
-            margin: 0;
-            padding: 0;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background-color: var(--background-color);
+      color: var(--secondary-color);
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    .top-nav {
+      display: flex;
+      align-items: center;
+      background-color: var(--primary-color);
+      color: var(--text-color);
+      padding: 15px;
+      height: 50px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
 
-        .top-nav {
-            display: flex;
-            align-items: center;
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            padding: 15px;
-            height: 50px;
-            width: 100%;
-            position: relative;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+    .top-nav h1 {
+      flex-grow: 0;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0;
+    }
 
-        .top-nav h1 {
-            flex-grow: 0;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.4em;
-            margin: 0;
-            font-weight: 600;
-        }
+    .menu-btn {
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: var(--text-color);
+      cursor: pointer;
+    }
 
-        .top-nav .menu-btn {
-            font-size: 28px;
-            cursor: pointer;
-            background-color: transparent;
-            color: var(--text-color);
-            border: none;
-            margin-right: 20px;
-            transition: transform 0.3s ease;
-        }
+    .logo {
+      width: 160px;
+    }
 
-        .top-nav .menu-btn:hover {
-            transform: scale(1.1);
-        }
+    .sidebar {
+      height: 100%;
+      width: 280px;
+      position: fixed;
+      top: 0;
+      left: -280px;
+      background-color: var(--secondary-color);
+      overflow-x: hidden;
+      transition: 0.4s;
+      padding-top: 60px;
+      z-index: 1000;
+    }
 
-        .top-nav .fa-home {
-            font-size: 1.5em;
-            margin-right: 0px;
-        }
+    .sidebar a {
+      padding: 10px 25px;
+      font-size: 18px;
+      color: var(--text-color);
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
 
-        .logo 
-                    {
-                    width: 160px; /* Adjust this value to control the width */
-                    height: auto; /* Maintain the aspect ratio */
-                    vertical-align: middle; /* Align the logo with the text */
-                    }
+    .sidebar a i {
+      margin-right: 15px;
+    }
 
-        
+    .sidebar .closebtn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 30px;
+      color: var(--text-color);
+      cursor: pointer;
+    }
 
-        .flag-buttons {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 30px;
-            padding: 0 20px;
-        }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
 
-        .flag-buttons img {
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            border-radius: 50%;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
+    .section {
+      background-color: var(--card-bg-color);
+      padding: 30px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      animation: fadeInUp 1s ease both;
+    }
 
-        .flag-buttons img:hover {
-            transform: scale(1.1);
-        }
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
 
-        .menu-btn {
-            font-size: 24px;
-            background: none;
-            border: none;
-            color: var(--text-color);
-            cursor: pointer;
-        }
+    h2 {
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
 
-        h1, h2 {
-            color: var(--primary-color);
-        }
+    p, li {
+      font-size: 1.05em;
+      line-height: 1.6;
+    }
 
-        .about-section {
-            background-color: var(--card-bg-color);
-            border-radius: 8px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+    ul {
+      padding-left: 20px;
+    }
 
-        .team-member {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-        }
+    .team {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-around;
+    }
 
-        .team-member img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-right: 20px;
-        }
+    .team-member {
+      flex: 1 1 250px;
+      text-align: center;
+    }
 
-        .team-member-info {
-            flex-grow: 1;
-        }
+    .team-member img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
 
-        .team-member h3 {
-            margin: 0;
-            color: var(--primary-color);
-        }
+    .team-member h3 {
+      margin: 10px 0 5px;
+    }
 
-        .team-member p {
-            margin: 5px 0;
-        }
-
-        .sidebar {
-            height: 100%;
-            width: 280px;
-            position: fixed;
-            z-index: 3000;
-            top: 0;
-            left: -280px;
-            background-color: var(--secondary-color);
-            overflow-x: hidden;
-            transition: left 0.4s ease;
-            padding-top: 60px;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-        }
-
-        .sidebar a {
-            padding: 05px 25px;
-            text-decoration: none;
-            font-size: 18px;
-            color: var(--text-color);
-            display: block;
-            transition: 0.3s;
-            border-bottom: 1px solid rgba(145, 5, 5, 0.1);
-        }
-
-        .sidebar i {
-            margin-right: 30px;
-        }
-
-        .sidebar a:hover {
-            background-color: var(--accent-color);
-        }
-
-        .sidebar .closebtn {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 30px;
-            color: var(--text-color);
-            cursor: pointer;
-        }
-
-        .quote {
-            font-style: italic;
-            font-size: 1.2em;
-            color: var(--accent-color);
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        ul {
-            padding-left: 20px;
-        }
-
-        @media screen and (max-height: 450px) {
-            .sidebar {padding-top: 15px;}
-            .sidebar a {font-size: 18px;}
-        }
-    </style>
+    .team-member p {
+      font-size: 0.95em;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
-    <div class="top-nav">
-        <button class="menu-btn" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
-        <h1><img src="logotitre.png" alt="Logo" class="logo"></h1>            
+  <div class="top-nav">
+    <button class="menu-btn" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+    <h1><img src="img/logotitre.png" alt="Logo Quboor" class="logo"></h1>
+  </div>
+
+<div id="mySidebar" class="sidebar">
+    <span class="closebtn" onclick="toggleNav()">&times;</span>
+    <a href="search.html"><i class="fas fa-search" style="margin-right: 15px;"></i>Recherche</a>
+    <a href="mission.html"><i class="fas fa-tasks" style="margin-right: 15px;"></i>Nos missions</a>
+    <a href="aboutus.html"><i class="fas fa-info-circle" style="margin-right: 15px;"></i>À propos</a>
+    <a href="contactus.html"><i class="fas fa-envelope" style="margin-right: 15px;"></i>Contact</a>
+    <a href="joinus.html"><i class="fas fa-user-plus" style="margin-right: 15px;"></i>Rejoins-nous</a>
+    <a href="index.html"><i class="fas fa-home" style="margin-right: 15px;"></i>Accueil</a>
+</div>
+
+  <div class="container">
+    <div class="section">
+      <h2>Notre mission</h2>
+      <p>Quboor est une initiative citoyenne marocaine visant à préserver, organiser et partager les informations relatives aux cimetières du Royaume en commencant par celui de Chouhada à Rabat comme projet pilote. Nous aspirons à faciliter la localisation, l'entretien et la mémoire de nos défunts, en créant une base de données participative et accessible à tous.</p>
+      <p>Nous croyons fermement qu’honorer nos morts passe par un traitement digne, propre, accessible et conforme à nos traditions. Améliorer les tombes, les chemins, l’accès et la lisibilité des lieux est un devoir de communauté. Quboor met aussi en lumière les métiers invisibles mais essentiels – qui entretiennent avec peu de moyens mais beaucoup de foi et d'engagement ce micro-univers sacré. En travaillant avec eux, nous réunissons les visiteurs et les familles autour d’un espace de paix, de recueillement et de mémoire vivante.</p>
     </div>
 
-    <div id="mySidebar" class="sidebar">
-        <div class="flag-buttons">
-            <img src="morocco_round_icon_640.png" alt="Arabic" title="العربية">
-            <img src="france_round_icon_640.png" alt="French" title="Français">
-            <img src="united_kingdom_round_icon_640.png" alt="English" title="English">
-        </div>
-        <br> <br/>
-        <br> <br/>
-        <span class="closebtn" onclick="toggleNav()">&times;</span>
-        <a href="search.html"><i class="fas fa-search"></i> Nouvelle recherche</a>
-        <a href="favourite.html"><i class="fas fa-heart"></i> Mes favoris</a>
-        <br> <br/>
-        <a href="aboutus.html"><i class="fas fa-info-circle"></i> Qui sommes nous?</a>
-        <a href="mission.html"><i class="fas fa-tasks"></i> Votre contribution</a>
-        <br> <br/>
-        <a href="joinus.html"><i class="fas fa-user-plus"></i>Rejoins-Nous</a>
-        <a href="contactus.html"><i class="fas fa-envelope"></i> Contact</a>
-        <br> <br/>
-        <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
+    <div class="section">
+      <h2>Nos valeurs</h2>
+      <ul>
+        <li><strong>Respect :</strong> Honorer la mémoire des défunts avec dignité</li>
+        <li><strong>Solidarité :</strong> Permettre à chacun de contribuer à la mémoire collective</li>
+        <li><strong>Innovation :</strong> Utiliser la technologie pour un patrimoine vivant</li>
+        <li><strong>Transparence :</strong> Informations ouvertes et partagées</li>
+      </ul>
     </div>
 
-    <div class="container">
-        <div class="about-section">
-            <div class="quote">
-                "Préserver le passé, éclairer le présent et inspirer l'avenir à travers la mémoire de nos ancêtres."
-            </div>
-
-            <h2>Qui sommes-nous ?</h2>
-            <p>Quboor a pour ambition de deveir un partenaire de confiance pour localiser et préserver les registres des cimetières. Notre plateforme est conçue pour aider les gens à localiser et partager les lieux de repos final de leurs proches en facilitant ainsi la visite et le recueillement des familles et amis auprès de ceux qui nous ont quittés.</p>
-            <h2>Notre Histoire</h2>
-            <p>Quboor est née de la volonté de simplifier la recherche de sépultures et de démocratiser l'accès à l'information généalogique au Maroc. Notre équipe travaille sans relâche pour numériser et indexer les registres des cimetières, rendant ces précieuses informations accessibles à tous.</p>
-            <h2>Notre Engagement</h2>
-            <ul>
-                <li>Respecter la vie privée et la dignité des défunts et de leurs familles</li>
-                <li>Fournir des informations précises et vérifiées</li>
-                <li>Contribuer à la préservation du patrimoine historique</li>
-                <li>Faciliter les recherches généalogiques pour tous</li>
-            </ul>
-
-            <p>Nous nous efforçons de rendre l'exploration et la découverte des registres de cimetières accessibles et simples. Notre plateforme offre un ensemble complet d'outils pour vous aider à rechercher des ancêtres et des proches, ainsi qu'à vous engager dans des efforts significatifs de préservation.</p>
+    <div class="section">
+      <h2>L'équipe Quboor</h2>
+      <div class="team">
+        <div class="team-member">
+          <img src="team1.png" alt="Jean Dupont">
+          <h3>Jean Dupont</h3>
+          <p>Fondateur & Visionnaire</p>
         </div>
 
-        <div class="about-section">
-            <h2>Notre Équipe</h2>
-            <div class="team-member">
-                <img src="team1.png" alt="Jean Dupont">
-                <div class="team-member-info">
-                    <h3>Jean Dupont</h3>
-                    <p>Fondateur &amp; PDG</p>
-                    <p>Jean apporte plus de 15 ans d'expérience en technologie et en recherche généalogique à Quboor.</p>
-                </div>
-            </div>
-            <div class="team-member">
-                <img src="team2.png" alt="Marie Lefebvre">
-                <div class="team-member-info">
-                    <h3>Marie Lefebvre</h3>
-                    <p>Développeuse en Chef</p>
-                    <p>Marie est le cerveau derrière notre puissant algorithme de recherche et notre interface conviviale.</p>
-                </div>
-            </div>
-            <div class="team-member">
-                <img src="team3.png" alt="Pierre Martin">
-                <div class="team-member-info">
-                    <h3>Pierre Martin</h3>
-                    <p>Responsable des Partenariats</p>
-                    <p>Pierre travaille sans relâche pour établir des partenariats avec les cimetières et les sociétés généalogiques du monde entier.</p>
-                </div>
-            </div>
+        <div class="team-member">
+          <img src="team3.png" alt="Pierre Martin">
+          <h3>Pierre Martin</h3>
+          <p>Partenariats & Terrains</p>
         </div>
+      </div>
     </div>
+  </div>
 
-    <script>
-        function openNav() {
-            document.getElementById("mySidebar").style.width = "250px";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidebar").style.width = "0";
-        }
-
-        function toggleNav() {
-        const sidebar = document.getElementById("mySidebar");
-        if (sidebar.style.left === "0px") {
-            sidebar.style.left = "-280px"; // Close the sidebar
-        } else {
-            sidebar.style.left = "0"; // Open the sidebar
-        }
+  <script>
+    function toggleNav() {
+      const sidebar = document.getElementById("mySidebar");
+      sidebar.style.left = (sidebar.style.left === "0px") ? "-280px" : "0px";
     }
-    </script>
+  </script>
 </body>
 </html>

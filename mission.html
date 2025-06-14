@@ -28,10 +28,8 @@
 
         .container {
             max-width: 1100px;
-            width: 100%;
             margin: 0 auto;
             padding: 20px;
-            box-sizing: border-box;
         }
 
         .top-nav {
@@ -40,23 +38,10 @@
             background-color: var(--primary-color);
             color: var(--text-color);
             padding: 15px;
-            height: 50px;
+            height: 60px;
             width: 100%;
             position: relative;
-            top: 0;
-            left: 0;
-            z-index: 1000;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .top-nav h1 {
-            flex-grow: 0;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.4em;
-            margin: 0;
-            font-weight: 600;
         }
 
         .top-nav .menu-btn {
@@ -65,7 +50,6 @@
             background-color: transparent;
             color: var(--text-color);
             border: none;
-            margin-right: 20px;
             margin-left: 20px;
             transition: transform 0.3s ease;
         }
@@ -74,33 +58,69 @@
             transform: scale(1.1);
         }
 
+        .top-nav h1 {
+            flex-grow: 1;
+            text-align: center;
+            margin: 0;
+        }
+
         .logo {
-            width: 160px;
-            height: auto;
-            vertical-align: middle;
+            height: 40px;
         }
 
-        h1, h2 {
-            color: var(--primary-color);
+        .sidebar {
+            height: 100%;
+            width: 280px;
+            position: fixed;
+            top: 0;
+            left: -280px;
+            background-color: var(--secondary-color);
+            overflow-x: hidden;
+            transition: left 0.4s ease;
+            padding-top: 60px;
+            z-index: 3000;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
         }
 
-        h4 {
-            color: #ece7e7;
+        .sidebar.open {
+            left: 0 !important;
+        }
+
+        .sidebar a {
+            padding: 10px 25px;
+            text-decoration: none;
+            font-size: 18px;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .sidebar a i {
+            margin-right: 15px;
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            color: var(--text-color);
+            cursor: pointer;
         }
 
         .mission-section {
             background-color: var(--card-bg-color);
             border-radius: 8px;
             padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             margin-top: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .image-comparison {
             position: relative;
             width: 100%;
-            max-width: 100%;
             height: 300px;
             margin-bottom: 30px;
             overflow: hidden;
@@ -115,27 +135,23 @@
             object-fit: cover;
         }
 
+        .image-before {
+            clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+        }
+
         .image-after {
             clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
         }
 
         .slider {
             position: absolute;
-            -webkit-appearance: none;
-            appearance: none;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            outline: none;
+            background: transparent;
             margin: 0;
-            transition: all 0.2s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .slider:hover {
-            background: rgba(0, 0, 0, 0.1);
+            -webkit-appearance: none;
+            appearance: none;
+            z-index: 10;
         }
 
         .slider::-webkit-slider-thumb {
@@ -162,18 +178,7 @@
             left: 50%;
             transform: translateX(-50%);
             pointer-events: none;
-        }
-
-        .quote {
-            font-style: italic;
-            font-size: 1.2em;
-            color: var(--accent-color);
-            text-align: center;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #f0f0f0;
-            border-radius: 8px;
-            max-width: 80%;
+            z-index: 5;
         }
 
         .mission-cards {
@@ -184,9 +189,10 @@
         }
 
         .mission-card {
-            background-color:#f2f1f1;
+            background-color: #f2f1f1;
             border-radius: 8px;
             padding: 20px;
+            width: 300px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
@@ -213,7 +219,6 @@
         }
 
         .cta-button {
-            display: inline-block;
             background-color: var(--accent-color);
             color: var(--text-color);
             padding: 15px 30px;
@@ -224,10 +229,19 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
+            .cta-buttondon {
+            background-color: var(--background-color);
+            color:var(--secondary-color);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
         .cta-button:hover {
             background-color: var(--primary-color);
             transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
         }
 
         .contact-section {
@@ -238,200 +252,121 @@
             margin: 30px 0;
         }
 
-        .contact-section h2 {
+        .contact-section h4 {
             margin-top: 0;
         }
 
-        .contact-form input, .contact-form textarea {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 4px;
-        }
+        #banner {
+    background-color: #2c3e50; /* Dark blue-grey */
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center logo */
+    position: relative; /* For positioning burger menu */
+    height: 60px; /* Adjust as needed */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-        .contact-form button {
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .contact-form button:hover {
-            background-color: var(--accent-color);
-        }
-
-        .sidebar {
-            height: 100%;
-            width: 280px;
-            position: fixed;
-            z-index: 3000;
-            top: 0;
-            left: -280px;
-            background-color: var(--secondary-color);
-            overflow-x: hidden;
-            transition: left 0.4s ease;
-            padding-top: 60px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Augmenter la visibilité de l'ombre portée */
-        }
-
-        .sidebar a {
-            padding: 5px 25px; /* Ajoute de l'espace autour du texte et de l'icône */
-            text-decoration: none;
-            font-size: 18px;
-            color: var(--text-color);
-            display: flex; /* Utilise Flexbox pour aligner les éléments */
-            align-items: center; /* Centre verticalement les éléments */
-            transition: 0.3s;
-            border-bottom: 1px solid rgba(145, 5, 5, 0.1);
-        }
-
-        .sidebar i {
-            margin-right: 20px; /* Espace entre l'icône et le texte */
-        }
-
-        .sidebar .closebtn {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 30px;
-            color: var(--text-color);
-            cursor: pointer;
-        }
-
-        .flag-buttons {
-                    display: flex;
-                    justify-content: space-around;
-                    margin-top: 30px;
-                    padding: 0 20px;
-                }
-
-                .flag-buttons img {
-                    width: 40px;
-                    height: 40px;
-                    cursor: pointer;
-                    border-radius: 50%;
-                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-                    transition: transform 0.3s ease;
-                }
-
-                .flag-buttons img:hover {
-                    transform: scale(1.1);
-                }
-
+#banner-logo {
+    height: 50px; /* Adjust as needed */
+    width: auto;
+}
     </style>
 </head>
 <body>
+
     <div class="top-nav">
         <button class="menu-btn" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
-        <h1><img src="images/logo/logotitre.png" alt="Logo" class="logo"></h1>            
+        <h1><img src="img/logotitre.png" alt="Logo GraveSearch" class="logo"></h1>
     </div>
 
-    <div id="mySidebar" class="sidebar">
-        <div class="flag-buttons">
-            <img src="images/page/ar.png" alt="Arabic" title="العربية">
-            <img src="images/page/fr.png" alt="French" title="Français">
-            <img src="images/page/en.png" alt="English" title="English">
-        </div>
-        <br> <br/>
-        <br> <br/>
-        <span class="closebtn" onclick="toggleNav()">&times;</span>
-        <a href="search.html"><i class="fas fa-search"></i> Nouvelle recherche</a>
-        <a href="favourite.html"><i class="fas fa-heart"></i> Mes favoris</a>
-        <br> <br/>
-        <a href="aboutus.html"><i class="fas fa-info-circle"></i> Qui sommes nous?</a>
-        <a href="mission.html"><i class="fas fa-tasks"></i> Nos missions</a>
-        <br> <br/>
-        <a href="joinus.html"><i class="fas fa-user-plus"></i>Rejoins-Nous</a>
-        <a href="contactus.html"><i class="fas fa-envelope"></i> Contact</a>
-        <br> <br/>
-        <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
-    </div>
+<div id="mySidebar" class="sidebar">
+    <span class="closebtn" onclick="toggleNav()">&times;</span>
+    <a href="search.html"><i class="fas fa-search" style="margin-right: 15px;"></i>Recherche</a>
+    <a href="mission.html"><i class="fas fa-tasks" style="margin-right: 15px;"></i>Nos missions</a>
+    <a href="aboutus.html"><i class="fas fa-info-circle" style="margin-right: 15px;"></i>À propos</a>
+    <a href="contactus.html"><i class="fas fa-envelope" style="margin-right: 15px;"></i>Contact</a>
+    <a href="joinus.html"><i class="fas fa-user-plus" style="margin-right: 15px;"></i>Rejoins-nous</a>
+    <a href="index.html"><i class="fas fa-home" style="margin-right: 15px;"></i>Accueil</a>
+</div>
 
     <div class="container">
         <div class="mission-section">
-            <h1>Nos Missions</h1>
-            
             <div class="image-comparison">
-                <img src="file:///C:\Users\Public\1408\Images\Pages Contents\before.jpg" alt="Before image" class="image-before">
-                <img src="file:///C:\Users\Public\1408\Images\Pages Contents\after.jpg" alt="After image" class="image-after">
-                <input type="range" min="0" max="100" value="50" class="slider" name="slider" id="slider">
+                <img src="img/old.jpg" alt="Avant" class="image-before">
+                <img src="img/new.jpg" alt="Après" class="image-after">
+                <input type="range" min="0" max="100" value="50" class="slider" id="slider">
                 <div class="slider-line"></div>
             </div>
 
-            <div class="quote">
-                "Nous nous donnons comme but de préserver la dignité de nos ancêtres en restaurant et entretenant leurs lieux de repos" - Co-Fondateur
-            </div>
+<p>
+Quboor développe une initiative structurée autour de deux objectifs majeurs :  
+d’une part, la <strong>collecte et la digitalisation des données funéraires</strong> pour créer une base locale fiable, géolocalisée et accessible à des fins de mémoire et de recherche ;  
+d’autre part, la <strong>structuration des métiers présents dans les cimetières</strong>, en particulier au sein du cimetière des Chouhada à Rabat, en encadrant leurs activités à travers des contrats déclarés et des conditions de travail dignes.  
+Ce projet, financé par des dons et des partenariats, vise à améliorer la qualité des services funéraires tout en valorisant un patrimoine humain souvent négligé.
+</p>
 
-            <h2>Notre Engagement</h2>
-            <p>Chez GraveSearch, nous croyons que le respect de nos ancêtres passe aussi par l'entretien de leurs lieux de repos. C'est pourquoi nous avons lancé une initiative majeure de nettoyage et de restauration des cimetières à travers le pays.</p>
+
 
             <h2>Nos Missions</h2>
-            
-            <div class="mission-cards">
-                <div class="mission-card">
-                    <h3><i class="fas fa-tools"></i> Restauration et Entretien</h3>
-                    <p>Notre première mission consiste à restaurer et entretenir les cimetières négligés. Nous organisons des journées de nettoyage, réparons les tombes endommagées et assurons un entretien régulier pour préserver la dignité de ces lieux sacrés.</p>
-                </div>
 
-                <div class="mission-card">
-                    <h3><i class="fas fa-database"></i> Documentation et Numérisation</h3>
-                    <p>Nous travaillons à documenter et numériser les informations sur les tombes et les cimetières. Cela inclut la photographie des pierres tombales, la transcription des inscriptions et la création d'une base de données accessible pour les recherches généalogiques.</p>
-                </div>
-
-                <div class="mission-card">
-                    <h3><i class="fas fa-bullhorn"></i> Sensibilisation</h3>
-                    <p>Nous menons des campagnes de sensibilisation pour éduquer le public sur l'importance de préserver notre patrimoine funéraire. Cela comprend des conférences, des visites guidées et des ateliers éducatifs dans les écoles.</p>
-                </div>
-
-                <div class="mission-card">
-                    <h3><i class="fas fa-book-open"></i> Recherches Historiques</h3>
-                    <p>Nous encourageons et soutenons la recherche historique liée à nos cimetières. Cela nous aide à mieux comprendre notre passé et à préserver des histoires importantes pour les générations futures.</p>
-                </div>
-            </div>
-
-            <div class="cta-section">
-                <h2>Comment pouvez-vous aider ?</h2>
-                <p>Nous recherchons des bénévoles passionnés par la préservation du patrimoine et le nettoyage des sites funéraires. Rejoignez notre équipe et faites la différence.</p>
-                <a href="C:\Users\Public\1408\HTML\joinus.html" class="cta-button">Devenez bénévole</a>
-            </div>
-
-            <div class="contact-section">
-                <h4>Contactez-nous</h4>
-                <p>Pour toute question ou pour obtenir plus d'informations sur notre programme de bénévolat, n'hésitez pas à nous contacter.</p>
-                <a href="mailto:info@quboor.org" class="contact-button">Envoyez-nous un e-mail</a>
-            </div>
-        </div>
+<div class="mission-cards">
+    <div class="mission-card">
+        <h3><i class="fas fa-database"></i> Recensement & Digitalisation</h3>
+        <p>Collecte et structuration des données funéraires : noms, dates, emplacements, inscriptions. Création d'une base de données fiable et accessible pour la mémoire collective et les recherches historiques.</p>
+    </div>
+    
+    <div class="mission-card">
+        <h3><i class="fas fa-chart-line"></i> Analyse & Reporting</h3>
+        <p>Production de statistiques démographiques, cartographies des sépultures, et rapports analytiques pour les familles, chercheurs, institutions et collectivités locales.</p>
     </div>
 
+    <div class="mission-card">
+        <h3><i class="fas fa-handshake"></i> Intégration des Métiers</h3>
+        <p>Encadrement formel de cinq corps de métier liés aux cimetières (lecture coranique, creusage, entretien, accueil, vente). Mise en place de contrats déclarés et couverture sociale.</p>
+    </div>
+
+    <div class="mission-card">
+        <h3><i class="fas fa-users"></i> Valorisation & Transmission</h3>
+        <p>Reconnaissance du rôle social et culturel de ces métiers. Sensibilisation du public à travers des actions éducatives, partenariats locaux et communication autour du patrimoine funéraire.</p>
+    </div>
+</div>
+
+<div class="cta-section">
+    <h2>Comment pouvez-vous contribuer ?</h2>
+    <p>
+        Quboor est une initiative citoyenne et sociale qui repose sur l'engagement collectif.  
+        Si vous partagez notre vision, vous pouvez nous aider de différentes manières :  
+        en rejoignant nos équipes de bénévoles sur le terrain, en mettant à disposition vos compétences, ou en soutenant financièrement notre action.  
+        Chaque contribution permet de renforcer la qualité de nos services et d’offrir une reconnaissance digne à des métiers essentiels mais oubliés.
+    </p>
+        <br> <br/>
+    <a href="joinus.html" class="cta-button">Rejoindre l'équipe bénévole</a>
+</div>
+
+<div class="contact-section">
+    <p>
+        Votre soutien financier est essentiel pour la mise en œuvre de nos missions :  
+        structuration des métiers funéraires, digitalisation des données, équipements, encadrement, accompagnement humain.  
+        Grâce à vos dons, nous pouvons proposer des contrats déclarés, former des intervenants, et bâtir un modèle durable de préservation du patrimoine.
+    </p>
+            <br> <br/>
+    <a href="https://don.quboor.org" class="cta-buttondon">Faire un don</a>
+</div>
+
     <script>
-
         function toggleNav() {
-        const sidebar = document.getElementById("mySidebar");
-                sidebar.style.left = (sidebar.style.left === "0px") ? "-280px" : "0px";
-            }
-
-        function openNav() {
-            document.getElementById("mySidebar").style.left = "0";
+            const sidebar = document.getElementById("mySidebar");
+            sidebar.classList.toggle("open");
         }
 
-        function closeNav() {
-            document.getElementById("mySidebar").style.left = "-280px";
-        }
-
-        function changeLanguage(lang) {
-            console.log('Changing language to: ' + lang);
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const slider = document.getElementById('slider');
             const beforeImage = document.querySelector('.image-before');
             const afterImage = document.querySelector('.image-after');
             const sliderLine = document.querySelector('.slider-line');
 
-            slider.addEventListener('input', function() {
+            slider.addEventListener('input', function () {
                 const sliderValue = this.value + '%';
                 beforeImage.style.clipPath = `polygon(0 0, ${sliderValue} 0, ${sliderValue} 100%, 0 100%)`;
                 afterImage.style.clipPath = `polygon(${sliderValue} 0, 100% 0, 100% 100%, ${sliderValue} 100%)`;
@@ -439,5 +374,6 @@
             });
         });
     </script>
+
 </body>
 </html>

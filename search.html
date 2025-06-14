@@ -1,612 +1,1852 @@
-<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>GraveSearch - Find and Remember Loved Ones</title>
-    
-        <!-- External fonts and icons -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    
-        <style>
-            :root {
-                --primary-color: #41464a;
-                --secondary-color: #1F262A;
-                --text-color: #F2E9E4;
-                --background-color: #ece7e7;
-                --accent-color: #4A4E69;
-                --card-bg-color: #ffffff;
-            }
-    
-            body, html {
-                margin: 0;
-                padding: 0;
-                height: 100%;
-                font-family: 'Inter', sans-serif;
-                background-color: var(--background-color);
-                color: var(--secondary-color);
-                overflow-x: hidden;
-                overflow-y: auto;
-            }
-    
-            .top-nav {
-                    display: flex;
-                    align-items: center;
-                    background-color: var(--primary-color);
-                    color: var(--text-color);
-                    padding: 15px;
-                    height: 50px;
-                    width: 100%;
-                    position: relative;
-                    top: 0;
-                    left: 0;
-                    z-index: 1000;
-                    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-                }
-
-                .top-nav h1 {
-                    flex-grow: 0; /* Remove flex-grow */
-                    position: absolute;
-                    left: 50%;
-                    transform: translateX(-50%); /* Center the icon horizontally */
-                    font-size: 1.4em;
-                    margin: 0;
-                    font-weight: 600;
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memorial Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+          crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+:root {
+  --primary-color: #41464a;
+  --secondary-color: #1F262A;
+  --text-color: #F2E9E4;
+  --background-color: #f4f4f4;
 }
 
-                .top-nav .menu-btn {
-                    font-size: 28px;
-                    cursor: pointer;
-                    background-color: transparent;
-                    color: var(--text-color);
-                    border: none;
-                    margin-right: 20px; /* Space between the button and the heading */
-                    margin-left: 20px; /* Space between the button and the heading */
-
-                    transition: transform 0.3s ease;
-                }
-
-                .top-nav .menu-btn:hover {
-                    transform: scale(1.1);
-                }
-
-                .logo {
-    width: 160px; /* Adjust this value to control the width */
-    height: auto; /* Maintain the aspect ratio */
-    vertical-align: middle; /* Align the logo with the text */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: #333;
 }
 
+/* NAVBAR */
+.top-nav {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 15px 20px;
+  height: 70px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+}
 
+.top-nav h1 {
+  flex-grow: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+}
+
+.menu-btn {
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  z-index: 1; /* Ensure it's clickable */
+}
+
+.top-nav-right {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.dark-mode-toggle-btn {
+    position: static;
+    transform: none;
+    font-size: 22px;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* SIDEBAR */
 .sidebar {
-        height: 100%;
-        width: 280px;
-        position: fixed;
-        z-index: 3000;
-        top: 0;
-        left: -280px;
-        background-color: var(--secondary-color);
-        overflow-x: hidden;
-        transition: left 0.4s ease;
-        padding-top: 60px;
-        box-shadow: 2px 0 5px rgba(0,0,0,0.0);
+  height: 100%;
+  width: 280px;
+  position: fixed;
+  top: 0;
+  left: -280px;
+  background-color: var(--secondary-color);
+  overflow-x: hidden;
+  transition: 0.4s;
+  padding-top: 60px;
+  z-index: 1001; /* Match old z-index */
+}
+
+.sidebar a {
+  padding: 10px 25px;
+  font-size: 18px;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  transition: background-color 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: var(--primary-color);
+}
+
+.sidebar a i {
+  margin-right: 15px;
+}
+
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+#main {
+    padding: 10px 20px 80px;
+    margin-top: 70px; /* Adjust based on new banner height */
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.search-explanation {
+    background-color: #e9f5ff;
+    border-left: 4px solid #007bff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.search-explanation p {
+    margin: 5px 0;
+}
+
+.search-explanation strong {
+    color: #0056b3;
+}
+
+.search-container {
+    margin-bottom: 20px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#death-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.death-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    position: relative;
+}
+
+.death-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.card-actions button {
+    background: none;
+    border: none;
+    color: #777;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+}
+.card-actions button:hover {
+    color: #333;
+}
+
+
+.death-card-info {
+    display: flex;
+    align-items: center;
+}
+
+.death-card-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    border: 2px solid #eee;
+}
+
+.death-card-details h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.info-items {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.info-item i {
+    margin-right: 5px;
+    color: #777;
+}
+
+.info-item p {
+    margin: 0;
+}
+
+mark {
+    background-color: #ffda79;
+    padding: 0.1em;
+}
+
+.match-percentage {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: rgba(40, 167, 69, 0.8);
+    color: white;
+    padding: 3px 6px;
+    border-radius: 3px;
+    font-size: 0.8em;
+}
+
+.popup {
+    display: none; 
+    position: fixed; 
+    z-index: 1002; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.6);
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 700px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.popup-close {
+    color: #aaa;
+    float: right;
+    font-size: 32px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.popup-close:hover,
+.popup-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#profileContent {
+    margin-bottom: 20px; 
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 4px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.profile-header h2 {
+    margin: 10px 0 5px 0;
+    color: #333;
+}
+
+.profile-description {
+    font-size: 1em;
+    color: #666;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    font-style: italic;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile-body {
+    /* container for sections below header */
+}
+
+.profile-section {
+    margin-bottom: 25px;
+}
+.profile-section:last-child {
+    margin-bottom: 0;
+}
+
+.profile-section h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    font-size: 1.1em;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 8px;
+    font-weight: 700;
+}
+
+.profile-details .profile-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 1em;
+    color: #444;
+}
+
+.profile-details .profile-item i {
+    width: 20px; 
+    margin-right: 15px;
+    color: var(--primary-color); 
+    text-align: center;
+}
+.profile-details .profile-item span {
+    flex-grow: 1;
+}
+
+.relatives-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+}
+
+.relative-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #eee;
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.relative-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+
+.relative-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 8px;
+    border: 2px solid #ddd;
+}
+
+.relative-name {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #333;
+}
+
+.profile-gallery-section {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 25px;
+}
+
+.profile-gallery-section h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    font-size: 1.1em;
+    text-align: left;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 8px;
+    font-weight: 700;
+}
+
+.gallery-images-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin-bottom: 15px;
+    max-height: 300px; 
+    overflow-y: auto;
+    padding: 5px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
+.gallery-images-container img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    cursor: pointer; 
+    transition: opacity 0.2s;
+}
+
+.gallery-images-container img:hover {
+    opacity: 0.8;
+}
+
+.gallery-images-container p {
+    text-align: center;
+    color: #777;
+    grid-column: 1 / -1; 
+}
+
+.gallery-upload {
+    text-align: center;
+}
+
+.upload-btn {
+    background-color: #0275d8;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.9em;
+}
+
+.upload-btn:hover {
+    background-color: #025aa5;
+}
+
+.upload-btn i {
+    margin-right: 8px;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.profile-directions-btn {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0; /* Let flex gap handle spacing */
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.profile-directions-btn:hover {
+    background-color: #0056b3;
+}
+
+.profile-directions-btn i {
+    margin-right: 8px;
+}
+
+.profile-share-btn {
+    background-color: #25D366; /* WhatsApp Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.profile-share-btn:hover {
+    background-color: #1DA851; /* Darker WhatsApp Green */
+}
+
+.profile-share-btn i {
+    margin-right: 8px;
+}
+
+/* Report Error Button */
+.report-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+.report-error-btn {
+    background-color: #c9302c;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.report-error-btn:hover {
+    background-color: #ac2925;
+}
+
+.report-error-btn i {
+    margin-right: 8px;
+}
+
+/* Image Viewer Modal Styles */
+#imageViewerPopup {
+    background-color: rgba(0,0,0,0.9);
+    z-index: 1003;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-viewer-content {
+    margin: auto;
+    display: block;
+    max-width: 80vw;
+    max-height: 80vh;
+}
+
+.image-viewer-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.image-viewer-close:hover,
+.image-viewer-close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Next & previous buttons */
+#imageViewerPopup .prev, #imageViewerPopup .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background-color: rgba(0,0,0,0.3);
+}
+
+/* Position the "next button" to the right */
+#imageViewerPopup .next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+#imageViewerPopup .prev {
+    left: 0;
+}
+
+/* On hover, add a black background color with a little bit of transparency */
+#imageViewerPopup .prev:hover, #imageViewerPopup .next:hover {
+  background-color: rgba(0,0,0,0.6);
+}
+
+/* --- Quran Audio Player --- */
+#audio-player-container {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 10px 20px;
+    box-sizing: border-box;
+    transition: background-color 0.3s;
+    margin-bottom: 0;
+    border-radius: 8px;
+    box-shadow: none;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#play-pause-btn {
+    background: none;
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+#play-pause-btn:hover {
+    background-color: var(--text-color);
+    color: var(--primary-color);
+}
+
+#play-pause-btn .fa-play {
+    margin-left: 3px; /* To center the play icon better */
+}
+
+.player-info {
+    text-align: center;
+    flex-grow: 1;
+    margin: 0 15px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.player-info span {
+    font-weight: bold;
+    display: block;
+    font-size: 0.9em;
+}
+
+.player-info small {
+    font-size: 0.75em;
+    opacity: 0.8;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+}
+
+.volume-control i {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+#volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 80px;
+    height: 4px;
+    background: #5a6268;
+    border-radius: 5px;
+    outline: none;
+    transition: opacity .2s;
+    cursor: pointer;
+}
+
+#volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--text-color);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+#volume-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: var(--text-color);
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+}
+
+/* --- Dark Mode Styles --- */
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+body.dark-mode .top-nav {
+    background-color: #1F262A;
+}
+
+body.dark-mode .sidebar {
+    background-color: #111;
+}
+
+body.dark-mode .sidebar a:hover {
+    background-color: #1F262A;
+}
+
+body.dark-mode #map {
+    /* The filter was removed to prevent inverting map colors in dark mode. */
+}
+
+body.dark-mode .search-explanation {
+    background-color: #2c3e50;
+    border-left-color: #3498db;
+    color: #ecf0f1;
+}
+
+body.dark-mode .search-explanation strong {
+    color: #5dade2;
+}
+
+body.dark-mode #searchInput {
+    background-color: #333;
+    color: #eee;
+    border-color: #555;
+}
+
+body.dark-mode .death-card {
+    background-color: #2b2b2b;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    border: 1px solid #444;
+}
+
+body.dark-mode .death-card-details h3,
+body.dark-mode .relative-name {
+    color: #f2f2f2;
+}
+
+body.dark-mode .info-item,
+body.dark-mode .info-item p {
+    color: #b0b0b0;
+}
+
+body.dark-mode .info-item i {
+    color: #888;
+}
+
+body.dark-mode mark {
+    background-color: #b38600;
+    color: #fff;
+}
+
+body.dark-mode .popup-content {
+    background-color: #252525;
+    color: #eee;
+}
+
+body.dark-mode .popup-close {
+    color: #888;
+}
+body.dark-mode .popup-close:hover {
+    color: #eee;
+}
+
+body.dark-mode .profile-header {
+    border-bottom-color: #444;
+}
+
+body.dark-mode .profile-image {
+    border-color: #444;
+}
+
+body.dark-mode .profile-header h2 {
+    color: #f5f5f5;
+}
+
+body.dark-mode .profile-description {
+    color: #ccc;
+}
+
+body.dark-mode .profile-section h4 {
+    color: #5dade2;
+    border-bottom-color: #5dade2;
+}
+
+body.dark-mode .profile-details .profile-item {
+    color: #ddd;
+}
+
+body.dark-mode .profile-details .profile-item i {
+    color: #5dade2;
+}
+
+body.dark-mode .relative-card {
+    background-color: #333;
+    border-color: #444;
+}
+
+body.dark-mode .gallery-images-container {
+    background-color: #222;
+}
+
+body.dark-mode .gallery-images-container img {
+    border-color: #555;
+}
+
+body.dark-mode .report-section {
+    border-top-color: #444;
+}
+
+body.dark-mode .report-error-btn:hover {
+    background-color: #c0392b;
+}
+
+body.dark-mode #audio-player-container {
+    background-color: #1F262A;
+    box-shadow: none;
+}
+
+body.dark-mode #play-pause-btn {
+    border-color: #e0e0e0;
+    color: #e0e0e0;
+}
+
+body.dark-mode #play-pause-btn:hover {
+    background-color: #e0e0e0;
+    color: #1F262A;
+}
+
+body.dark-mode #volume-slider {
+    background: #444;
+}
+
+body.dark-mode #volume-slider::-webkit-slider-thumb {
+    background: #e0e0e0;
+}
+
+body.dark-mode #volume-slider::-moz-range-thumb {
+    background: #e0e0e0;
+}
+    </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "leaflet": "https://unpkg.com/leaflet@1.9.3/dist/leaflet-src.esm.js"
+      }
+    }
+    </script>
+</head>
+<body>
+    <!-- HEADER / TOP NAV -->
+    <div class="top-nav">
+        <button class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <h1>
+            <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
+        </h1>
+        <div class="top-nav-right">
+            <div id="audio-player-container">
+                <div class="player-controls">
+                    <button id="play-pause-btn" title="Play/Pause">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <div class="player-info">
+                        <span>Radio Coran</span>
+                        <small>Diffusion en direct</small>
+                    </div>
+                    <div class="volume-control">
+                        <i class="fas fa-volume-up"></i>
+                        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.8" title="Volume">
+                    </div>
+                </div>
+                <audio id="quran-player" src="https://stream.radiojar.com/8s5u5tpw81quv" preload="none"></audio>
+            </div>
+            <button id="darkModeToggle" class="dark-mode-toggle-btn">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div id="mySidebar" class="sidebar">
+        <span class="closebtn">&times;</span>
+        <a href="search.html"><i class="fas fa-search"></i>Recherche</a>
+        <a href="mission.html"><i class="fas fa-tasks"></i>Nos missions</a>
+        <a href="aboutus.html"><i class="fas fa-info-circle"></i>À propos</a>
+        <a href="contactus.html"><i class="fas fa-envelope"></i>Contact</a>
+        <a href="joinus.html"><i class="fas fa-user-plus"></i>Rejoins-nous</a>
+        <a href="index.html"><i class="fas fa-home"></i>Accueil</a>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main">
+        <!-- Map Section -->
+        <div id="map"></div>
+
+        <!-- Search Explanation -->
+        <div class="search-explanation">
+            <p><strong>Comment rechercher ?</strong> L'algorithme recherche des correspondances dans tous les champs (nom, prénom, dates, etc.). Chaque champ contenant un terme de votre recherche augmente le pourcentage de pertinence.</p>
+            <p><strong>Exemple :</strong> Taper "Dupont Rabat" trouvera les personnes nommées "Dupont" ainsi que celles liées à "Rabat", accordant un score plus élevé à celles qui correspondent aux deux termes.</p>
+        </div>
+
+        <!-- Search Input -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Recherchez par nom, date ou autres détails">
+        </div>
+
+        <!-- Death Cards Section -->
+        <div id="death-cards-container"></div>
+    </div>
+
+    <!-- Profile Popup -->
+    <div id="profilePopup" class="popup">
+        <div class="popup-content">
+            <span class="popup-close">&times;</span>
+            <div id="profileContent">
+                <!-- Profile details will be loaded here -->
+            </div>
+            <div class="profile-gallery-section">
+                <h4>Galerie d'images</h4>
+                <div id="profileGalleryImages" class="gallery-images-container">
+                    <!-- Gallery images will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Viewer Popup/Modal -->
+    <div id="imageViewerPopup" class="popup">
+        <span class="popup-close image-viewer-close">&times;</span>
+        <a class="prev">&#10094;</a>
+        <a class="next">&#10095;</a>
+        <img class="image-viewer-content" id="fullSizeImage">
+    </div>
+
+    <!-- Quran Audio Player -->
+    <div id="audio-player-container-old" style="display: none;">
+        <div class="player-controls">
+            <button id="play-pause-btn-old" title="Play/Pause">
+                <i class="fas fa-play"></i>
+            </button>
+            <div class="player-info">
+                <span>Radio Coran</span>
+                <small>Diffusion en direct</small>
+            </div>
+            <div class="volume-control">
+                <i class="fas fa-volume-up"></i>
+                <input type="range" id="volume-slider-old" min="0" max="1" step="0.01" value="0.8" title="Volume">
+            </div>
+        </div>
+        <audio id="quran-player-old" src="https://stream.radiojar.com/8s5u5tpw81quv" preload="none"></audio>
+    </div>
+
+    <script type="module">
+import * as L from 'leaflet';
+
+// Set default path for Leaflet marker icons
+L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.9.3/dist/images/';
+
+const deathEntries = [
+{
+    familyName: "Bouhlal",
+    firstName: "Mouhcine",
+    dob: "1980-06-10",
+    birthplace: "Rabat",
+    dod: "2022-12-25",
+    deathplace: "Casablanca",
+    location: "33.5899, -7.6039",
+    images: ["users/158/1.jpeg", "users/158/2.jpeg", "users/158/3.jpeg", "users/158/4.jpeg", "users/158/5.jpeg"],
+    description: "Un homme remarquable",
+    cemetery: "Cimetière F",
+    profession: "Sportif"
+},
+{
+    familyName: "Bouhlal",
+    firstName: "Sara",
+    dob: "1975-03-14",
+    birthplace: "Fès",
+    dod: "2021-08-19",
+    deathplace: "Fès",
+    location: "34.0331, -5.0005",
+    images: ["users/159/1.jpeg", "users/159/2.jpeg", "users/159/3.jpeg", "users/159/4.jpeg", "users/159/5.jpeg"],
+    description: "Une femme de cœur et de courage",
+    cemetery: "Cimetière Bab Ftouh",
+    profession: "Médecin"
+},
+{
+    familyName: "Bouhlal",
+    firstName: "Yassine",
+    dob: "1968-01-22",
+    birthplace: "Tanger",
+    dod: "2023-03-01",
+    deathplace: "Tanger",
+    location: "35.7595, -5.8340",
+    images: ["users/160/1.jpeg", "users/160/2.jpeg", "users/160/3.jpeg", "users/160/4.jpeg", "users/160/5.jpeg"],
+    description: "Toujours souriant, toujours présent",
+    cemetery: "Cimetière Merican",
+    profession: "Commerçant"
+},
+{
+    familyName: "Bensalah",
+    firstName: "Zahra",
+    dob: "1987-09-05",
+    birthplace: "Marrakech",
+    dod: "2020-11-12",
+    deathplace: "Marrakech",
+    location: "31.6295, -7.9811",
+    images: ["users/161/1.jpeg", "users/161/2.jpeg", "users/161/3.jpeg", "users/161/4.jpeg", "users/161/5.jpeg"],
+    description: "Une artiste passionnée par la vie",
+    cemetery: "Cimetière Sidi Ghanem",
+    profession: "Artiste peintre"
+},
+{
+    familyName: "El Fadili",
+    firstName: "Ahmed",
+    dob: "1952-12-02",
+    birthplace: "Meknès",
+    dod: "2021-06-28",
+    deathplace: "Rabat",
+    location: "34.0209, -6.8416",
+    images: ["users/162/1.jpeg", "users/162/2.jpeg", "users/162/3.jpeg", "users/162/4.jpeg", "users/162/5.jpeg"],
+    description: "Homme respecté et généreux",
+    cemetery: "Cimetière Chouhada",
+    profession: "Notaire"
+},
+{
+    familyName: "El Fadili",
+    firstName: "Laila",
+    dob: "1990-07-30",
+    birthplace: "Agadir",
+    dod: "2022-01-18",
+    deathplace: "Agadir",
+    location: "30.4278, -9.5981",
+    images: ["users/163/1.jpeg", "users/163/2.jpeg", "users/163/3.jpeg", "users/163/4.jpeg", "users/163/5.jpeg"],
+    description: "Toujours à l’écoute de ses proches",
+    cemetery: "Cimetière Taddart",
+    profession: "Enseignante"
+},
+{
+    familyName: "Mekki",
+    firstName: "Jamal",
+    dob: "1983-04-11",
+    birthplace: "Oujda",
+    dod: "2023-02-14",
+    deathplace: "Oujda",
+    location: "34.6836, -1.9086",
+    images: ["users/164/1.jpeg", "users/164/2.jpeg", "users/164/3.jpeg", "users/164/4.jpeg", "users/164/5.jpeg"],
+    description: "Frère aimant et fidèle ami",
+    cemetery: "Cimetière Sidi Yahya",
+    profession: "Ingénieur"
+},
+{
+    familyName: "El Fadili",
+    firstName: "Imane",
+    dob: "1995-11-17",
+    birthplace: "Casablanca",
+    dod: "2022-09-09",
+    deathplace: "Mohammedia",
+    location: "33.6833, -7.3833",
+    images: ["users/165/1.jpeg", "users/165/2.jpeg", "users/165/3.jpeg", "users/165/4.jpeg", "users/165/5.jpeg"],
+    description: "Rayonnante et généreuse",
+    cemetery: "Cimetière Errahma",
+    profession: "Étudiante"
+},
+{
+    familyName: "Alaoui",
+    firstName: "Khalid",
+    dob: "1970-06-21",
+    birthplace: "Tétouan",
+    dod: "2020-03-15",
+    deathplace: "Tétouan",
+    location: "35.5785, -5.3684",
+    images: ["users/166/1.jpeg", "users/166/2.jpeg", "users/166/3.jpeg", "users/166/4.jpeg", "users/166/5.jpeg"],
+    description: "Pilier de sa communauté",
+    cemetery: "Cimetière Sidi Al Mandri",
+    profession: "Avocat"
+},
+{
+    familyName: "Alaoui",
+    firstName: "Imane",
+    dob: "1960-08-08",
+    birthplace: "Taza",
+    dod: "2021-04-22",
+    deathplace: "Fès",
+    location: "34.0331, -5.0005",
+    images: ["users/167/1.jpeg", "users/167/2.jpeg", "users/167/3.jpeg", "users/167/4.jpeg", "users/167/5.jpeg"],
+    description: "Femme forte et bienveillante",
+    cemetery: "Cimetière Ziat",
+    profession: "Pharmacienne"
+},
+{
+    familyName: "Talbi",
+    firstName: "Rachid",
+    dob: "1972-02-15",
+    birthplace: "El Jadida",
+    dod: "2023-03-10",
+    deathplace: "El Jadida",
+    location: "33.2333, -8.5000",
+    images: ["users/168/1.jpeg", "users/168/2.jpeg", "users/168/3.jpeg", "users/168/4.jpeg", "users/168/5.jpeg"],
+    description: "Toujours prêt à aider",
+    cemetery: "Cimetière Al Fida",
+    profession: "Électricien"
+},
+{
+    familyName: "Sebti",
+    firstName: "Imane",
+    dob: "1985-05-09",
+    birthplace: "Salé",
+    dod: "2022-11-01",
+    deathplace: "Rabat",
+    location: "34.0309, -6.8361",
+    images: ["users/169/1.jpeg", "users/169/2.jpeg", "users/169/3.jpeg", "users/169/4.jpeg", "users/169/5.jpeg"],
+    description: "Son sourire rayonnait",
+    cemetery: "Cimetière Yacoub El Mansour",
+    profession: "Infirmière"
+},
+{
+    familyName: "Bouhlal",
+    firstName: "Omar",
+    dob: "1966-07-19",
+    birthplace: "Kénitra",
+    dod: "2023-03-10",
+    deathplace: "Kénitra",
+    location: "34.2541, -6.5890",
+    images: ["users/170/1.jpeg", "users/170/2.jpeg", "users/170/3.jpeg", "users/170/4.jpeg", "users/170/5.jpeg"],
+    description: "Un homme juste et droit",
+    cemetery: "Cimetière Ain Sbaa",
+    profession: "Chauffeur"
+},
+{
+    familyName: "Dlimi",
+    firstName: "Najwa",
+    dob: "1993-03-03",
+    birthplace: "Nador",
+    dod: "2023-06-23",
+    deathplace: "Nador",
+    location: "35.1688, -2.9335",
+    images: ["users/171/1.jpeg", "users/171/2.jpeg", "users/171/3.jpeg", "users/171/4.jpeg", "users/171/5.jpeg"],
+    description: "Créative et inspirante",
+    cemetery: "Cimetière El Bassatine",
+    profession: "Designer"
+},
+{
+    familyName: "Fikri",
+    firstName: "Samir",
+    dod: "2023-03-10",
+    birthplace: "Settat",
+    dod: "2021-07-04",
+    deathplace: "Casablanca",
+    location: "33.5899, -7.6039",
+    images: ["users/172/1.jpeg", "users/172/2.jpeg", "users/172/3.jpeg", "users/172/4.jpeg", "users/172/5.jpeg"],
+    description: "Un père aimant et respecté",
+    cemetery: "Cimetière Sidi Moumen",
+    profession: "Chauffeur"
+},
+{
+    familyName: "Mahmoudi",
+    firstName: "Nadia",
+    dob: "1981-01-27",
+    birthplace: "Safi",
+    dod: "2022-03-18",
+    deathplace: "Safi",
+    location: "32.2994, -9.2372",
+    images: ["users/173/1.jpeg", "users/173/2.jpeg", "users/173/3.jpeg", "users/173/4.jpeg", "users/173/5.jpeg"],
+    description: "Femme de conviction et d’amour",
+    cemetery: "Cimetière Sidi Bouzid",
+    profession: "Enseignante"
+},
+{
+    familyName: "Essaid",
+    firstName: "Mehdi",
+    dob: "1991-08-11",
+    birthplace: "Errachidia",
+    dod: "2021-09-29",
+    deathplace: "Fès",
+    location: "34.0331, -5.0005",
+    images: ["users/174/1.jpeg", "users/174/2.jpeg", "users/174/3.jpeg", "users/174/4.jpeg", "users/174/5.jpeg"],
+    description: "Rêveur, poète, et loyal",
+    cemetery: "Cimetière Bab Ftouh",
+    profession: "Étudiant"
+},
+{
+    familyName: "Zerhouni",
+    firstName: "Latifa",
+    dob: "1955-04-06",
+    birthplace: "Ouarzazate",
+    dod: "2020-05-20",
+    deathplace: "Ouarzazate",
+    location: "30.9335, -6.9370",
+    images: ["users/175/1.jpeg", "users/175/2.jpeg", "users/175/3.jpeg", "users/175/4.jpeg", "users/175/5.jpeg"],
+    description: "La mémoire de la famille",
+    cemetery: "Cimetière central",
+    profession: "Couturière"
+},
+{
+    familyName: "Chafai",
+    firstName: "Ilyas",
+    dob: "2000-12-12",
+    birthplace: "Beni Mellal",
+    dod: "2023-04-02",
+    deathplace: "Casablanca",
+    location: "33.5899, -7.6039",
+    images: ["users/176/1.jpeg", "users/176/2.jpeg", "users/176/3.jpeg", "users/176/4.jpeg", "users/176/5.jpeg"],
+    description: "Jeune homme plein d’espoir",
+    cemetery: "Cimetière Arrahma",
+    profession: "Étudiant"
+},
+{
+    familyName: "Slaoui",
+    firstName: "Asmae",
+    dob: "1988-06-06",
+    birthplace: "Tiznit",
+    dod: "2022-10-12",
+    deathplace: "Agadir",
+    location: "30.4278, -9.5981",
+    images: ["users/177/1.jpeg", "users/177/2.jpeg", "users/177/3.jpeg", "users/177/4.jpeg", "users/177/5.jpeg"],
+    description: "Chaleureuse et bienveillante",
+    cemetery: "Cimetière Taddart",
+    profession: "Pharmacienne"
+}
+
+
+];
+
+const favoriteEntries = []; 
+
+const markers = {};
+let map; 
+let markerClusterGroup; // For MarkerCluster plugin
+let currentProfileIndex = -1; // To keep track of the currently open profile
+let currentImageIndex = 0;
+let currentGalleryImages = [];
+
+function initializeMap() {
+    map = L.map('map').setView([33.5731, -7.5898], 6);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: ' OpenStreetMap contributors'
+    }).addTo(map);
+    // Initialize MarkerCluster group
+    if (L.markerClusterGroup) {
+        markerClusterGroup = L.markerClusterGroup();
+        map.addLayer(markerClusterGroup);
+    }
+}
+
+// Helper function to format date from YYYY-MM-DD to DD-MM-YYYY
+function formatDateToDDMMYYYY(dateString) {
+    if (!dateString || typeof dateString !== 'string') return 'N/A';
+    const parts = dateString.split('-');
+    if (parts.length === 3) {
+        return `${parts[2]}-${parts[1]}-${parts[0]}`;
+    }
+    return dateString; // Fallback if format is unexpected
+}
+
+const searchInputDOM = document.getElementById('searchInput');
+
+window.onclick = function(event) {
+    const profilePopup = document.getElementById('profilePopup');
+    if (event.target == profilePopup) {
+        closePopup();
+    }
+}
+
+function highlightText(text, searchTerms) {
+    if (!text) return '';
+    if (!searchTerms.length) return text;
+    const regex = new RegExp(`(${searchTerms.join('|').replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+}
+
+function calculateMatchPercentage(entry, searchTerms) {
+    if (searchTerms.length === 0) return 0;
+
+    const entryFields = [
+        entry.familyName,
+        entry.firstName,
+        formatDateToDDMMYYYY(entry.dob),
+        formatDateToDDMMYYYY(entry.dod),
+        entry.birthplace,
+        entry.deathplace,
+        entry.description,
+        entry.cemetery,
+        entry.profession
+    ].map(f => (f || '').toLowerCase());
+
+    const totalFields = entryFields.length;
+    const matchedFields = new Set();
+
+    searchTerms.forEach(term => {
+        const lowerCaseTerm = term.toLowerCase();
+        entryFields.forEach((field, index) => {
+            if (field.includes(lowerCaseTerm)) {
+                matchedFields.add(index);
+            }
+        });
+    });
+
+    const score = matchedFields.size;
+    const percentage = (score / totalFields) * 100;
+    
+    // As requested, from 0 to 99.5%
+    return Math.min(percentage, 99.5);
+}
+
+function createCard(entry, index, searchTerms, matchPercentage) {
+    const card = document.createElement("div");
+    card.className = "death-card";
+    
+    const dobFormatted = formatDateToDDMMYYYY(entry.dob);
+    const dodFormatted = formatDateToDDMMYYYY(entry.dod);
+    const primaryImage = entry.images && entry.images.length > 0 ? entry.images[0] : 'default_profile_image.png';
+
+    const descriptionText = entry.description || '';
+    const truncatedDescription = descriptionText.length > 25 ? descriptionText.substring(0, 25) + '...' : descriptionText;
+
+    card.innerHTML = `
+        <div class="card-actions">
+            <button title="Info" class="info-btn"><i class="fas fa-info-circle"></i></button>
+        </div>
+        <div class="death-card-info">
+            <img src="${primaryImage}" alt="${entry.familyName} ${entry.firstName}" class="death-card-image" onerror="this.src='default_profile_image.png';">
+            <div class="death-card-details">
+                <h3>${highlightText(entry.familyName + ' ' + entry.firstName, searchTerms)}</h3>
+                <div class="info-items">
+                    <div class="info-item"><i class="fas fa-birthday-cake"></i><p>${highlightText(dobFormatted, searchTerms)}</p></div>
+                    <div class="info-item"><i class="fas fa-cross"></i><p>${highlightText(dodFormatted, searchTerms)}</p></div>
+                </div>
+                <div class="info-item"><i class="fas fa-briefcase"></i><p>${highlightText(entry.profession || '', searchTerms)}</p></div>
+                <div class="info-item"><i class="fas fa-info-circle"></i><p>${highlightText(truncatedDescription, searchTerms)}</p></div>
+            </div>
+        </div>
+        ${matchPercentage > 0 ? `<div class="match-percentage">${matchPercentage.toFixed(1)}%</div>` : ''}
+    `;
+
+    card.querySelector('.info-btn').addEventListener('click', (event) => showInfo(index, event));
+    
+    card.addEventListener('click', (event) => {
+        // Ensure the click is not on an action button within the card
+        if (event.target.closest('.card-actions')) {
+            return; 
+        }
+        // Scroll map into view
+        const mapElement = document.getElementById('map');
+        if (mapElement) {
+            mapElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        showLocationOnMap(entry, index); // Show popup on map
+    });
+    return card;
+}
+
+function filterCards() {
+    const searchInput = searchInputDOM.value.toLowerCase();
+    const searchTerms = searchInput.split(' ').filter(term => term.trim() !== '');
+    const container = document.getElementById("death-cards-container");
+    container.innerHTML = "";
+
+    const entriesToShow = [...deathEntries, ...favoriteEntries]; 
+
+    // Calculate match percentage for each entry
+    const scoredEntries = entriesToShow.map(entry => ({
+        entry,
+        matchPercentage: calculateMatchPercentage(entry, searchTerms)
+    }));
+
+    // Sort entries by their match percentage in descending order
+    scoredEntries.sort((a, b) => b.matchPercentage - a.matchPercentage);
+
+    // Clear existing markers if using MarkerCluster
+    if (markerClusterGroup) {
+        markerClusterGroup.clearLayers();
     }
 
-                .sidebar a {
-                    padding: 05px 25px;
-                    text-decoration: none;
-                    font-size: 18px;
-                    color: var(--text-color);
-                    display: block;
-                    transition: 0.3s;
-                    border-bottom: 1px solid rgba(145, 5, 5, 0.1);
-                }
+    scoredEntries.forEach(({ entry, matchPercentage }) => { 
+        const actualIndexInDeathEntries = deathEntries.findIndex(de => de === entry);
 
-                .sidebar i {
-                    margin-right: 30px; /* Space between the icon and text */
-                }
+        // Only show cards that have a match if a search is being performed
+        if (searchTerms.length > 0 && matchPercentage === 0) {
+            // Do not display this card
+        } else {
+            const card = createCard(entry, actualIndexInDeathEntries, searchTerms, matchPercentage);
+            container.appendChild(card);
+        }
 
-                .sidebar a:hover {
-                    background-color: var(--accent-color);
+        if (entry.location) {
+            const [lat, lng] = entry.location.split(',').map(coord => parseFloat(coord.trim()));
+            if (!isNaN(lat) && !isNaN(lng)) {
+                 if (!markers[actualIndexInDeathEntries]) {
+                    markers[actualIndexInDeathEntries] = L.marker([lat, lng]);
                 }
+                 markers[actualIndexInDeathEntries].on('click', () => showLocationOnMap(entry, actualIndexInDeathEntries));
+                 // Add marker to cluster group instead of map directly
+                 if (markerClusterGroup) {
+                    markerClusterGroup.addLayer(markers[actualIndexInDeathEntries]);
+                 } else {
+                    markers[actualIndexInDeathEntries].addTo(map); // Fallback if plugin fails
+                 }
+            }
+        }
+    });
+}
 
-                .sidebar .closebtn {
-                    position: absolute;
-                    top: 10px;
-                    right: 20px;
-                    font-size: 30px;
-                    color: var(--text-color);
-                    cursor: pointer;
-                }
+function renderProfileGallery(images) {
+    const galleryContainer = document.getElementById('profileGalleryImages');
+    galleryContainer.innerHTML = ''; // Clear existing images
 
-                .flag-buttons {
-                    display: flex;
-                    justify-content: space-around;
-                    margin-top: 30px;
-                    padding: 0 20px;
-                }
+    const displayImages = [];
+    const numImagesToDisplay = 5;
 
-                .flag-buttons img {
-                    width: 40px;
-                    height: 40px;
-                    cursor: pointer;
-                    border-radius: 50%;
-                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-                    transition: transform 0.3s ease;
-                }
+    if (images && images.length > 0) {
+        for (let i = 0; i < numImagesToDisplay; i++) {
+            displayImages.push(images[i % images.length] || 'default_profile_image.png');
+        }
+    } else {
+        for (let i = 0; i < numImagesToDisplay; i++) {
+            displayImages.push('default_profile_image.png');
+        }
+    }
+    
+    displayImages.forEach((imageSrc, index) => {
+        const imgElement = document.createElement('img');
+        imgElement.src = imageSrc;
+        imgElement.alt = "Galerie d'image";
+        imgElement.onerror = function() { this.src = 'default_profile_image.png'; };
+        imgElement.addEventListener('click', () => {
+            openImageViewer(displayImages, index);
+        });
+        galleryContainer.appendChild(imgElement);
+    });
 
-                .flag-buttons img:hover {
-                    transform: scale(1.1);
-                }
-    
-            .search-container {
-                margin-top: 15px;
-                margin-bottom: 15px;
-                width: 100%;
-            }
-    
-            #searchInput {
-                width: 100%;
-                padding: 10px;
-                font-size: 18px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-            }
-    
-            .add-new {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 60px;
-                height: 60px;
-                background-color: var(--primary-color);
-                color: var(--text-color);
-                font-size: 28px;
-                text-decoration: none;
-                border-radius: 50%;
-                border: none;
-                transition: background-color 0.3s ease, transform 0.3s ease;
-                position: fixed;
-                bottom: 30px;
-                right: 30px;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-                cursor: pointer;
-                z-index: 1001;
-            }
-    
-            .add-new:hover {
-                background-color: var(--accent-color);
-                transform: scale(1.1);
-            }
-    
-            #death-cards-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-                padding: 10px;
-            }
-    
-            .death-card {
-                background-color: var(--card-bg-color);
-                border-radius: 8px;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-                padding: 15px;
-                width: calc(100% - 40px);
-                cursor: pointer;
-                transition: transform 0.3s ease;
-                position: relative;
-                margin-bottom: 10px;
-            }
-    
-            .death-card-actions {
-                display: flex;
-                justify-content: flex-end;
-                gap: 10px;
-                margin-bottom: 10px;
-            }
-    
-            .action-button {
-                background-color: transparent;
-                border: none;
-                cursor: pointer;
-                font-size: 18px;
-                color: var(--primary-color);
-                transition: color 0.3s ease;
-            }
-    
-            .action-button:hover {
-                color: var(--accent-color);
-            }
-    
-            .action-button.favorite-btn {
-                color: var(--primary-color);
-            }
-    
-            .action-button.favorite-btn:hover {
-                color: #ff4136;
-            }
-    
-            .death-card-content {
-                display: flex;
-                gap: 15px;
-            }
-    
-            .death-card-image {
-                width: 120px;
-                height: 120px;
-                object-fit: cover;
-                border-radius: 50%;
-            }
-    
-            .death-card-info {
-                flex-grow: 1;
-            }
-    
-            .death-card h3 {
-                margin: 0 0 5px 0;
-                color: var(--primary-color);
-            }
-    
-            .info-items {
-                display: flex;
-                flex-direction: column;
-                gap: 5px;
-            }
-    
-            .info-item {
-                display: flex;
-                align-items: center;
-                margin-bottom: 2px;
-                font-size: 0.9em;
-            }
-    
-            .info-item i {
-                margin-right: 5px;
-                width: 16px;
-                text-align: center;
-            }
-    
-            .info-item p {
-                margin: 0;
-            }
-    
-            .date-container {
-                display: flex;
-                gap: 10px;
-            }
-    
-            .match-percentage {
-                display: inline-flex;
-                align-items: center;
-                margin-left: 10px;
-                font-weight: bold;
-                color: var(--accent-color);
-            }
-    
-            .match-percentage i {
-                margin-right: 5px;
-            }
-    
-            .search-explanation {
-                background-color: var(--card-bg-color);
-                border-radius: 8px;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-                padding: 20px;
-                margin-bottom: 20px;
-            }
-    
-            .search-explanation h2 {
-                color: var(--primary-color);
-                margin-top: 0;
-            }
-    
-            .search-explanation p {
-                margin-bottom: 10px;
-            }
-    
-            .search-explanation ul {
-                padding-left: 20px;
-            }
-    
-            .popup {
-                display: none;
-                position: fixed;
-                z-index: 9999;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                overflow: auto;
-                background-color: rgba(0,0,0,0.4);
-            }
-    
-            .popup-content {
-                background-color: var(--card-bg-color);
-                margin: 15% auto;
-                padding: 20px;
-                border: 1px solid #888;
-                width: 80%;
-                max-width: 600px;
-                border-radius: 8px;
-            }
-    
-            .popup-close {
-                color: #aaa;
-                float: right;
-                font-size: 28px;
-                font-weight: bold;
-                cursor: pointer;
-            }
-    
-            .popup-close:hover,
-            .popup-close:focus {
-                color: #000;
-                text-decoration: none;
-                cursor: pointer;
-            }
-        </style>
-    </head>
-    
-    <body>
-    
-        <div class="top-nav">
-            <button class="menu-btn" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
-            <h1><img src="images/logo/logotitre.png" alt="Logo" class="logo"></h1>            
-        </div>
-    
-        <div id="mySidebar" class="sidebar">
-            <div class="flag-buttons">
-                <img src="images/page/ar.png" alt="Arabic" title="العربية">
-                <img src="images/page/fr.png" alt="French" title="Français">
-                <img src="images/page/en.png" alt="English" title="English">
-            </div>
-            <br> <br/>
-            <br> <br/>
-            <span class="closebtn" onclick="toggleNav()">&times;</span>
-            <a href="search.html"><i class="fas fa-search"></i> Nouvelle recherche</a>
-            <a href="favourite.html"><i class="fas fa-heart"></i> Mes favoris</a>
-            <br> <br/>
-            <a href="aboutus.html"><i class="fas fa-info-circle"></i> Qui sommes nous?</a>
-            <a href="mission.html"><i class="fas fa-tasks"></i> Nos missions</a>
-            <br> <br/>
-            <a href="joinus.html"><i class="fas fa-user-plus"></i>Rejoins-Nous</a>
-            <a href="contactus.html"><i class="fas fa-envelope"></i> Contact</a>
-            <br> <br/>
-            <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
-        </div>
-    
-        <!-- Main Content -->
-        <div id="main">
-            <!-- Search explanation -->
-            <div class="search-explanation">
-                <h2>Comment utiliser la fonction de recherche</h2>
-                <p>Notre algorithme avancé vous permet de trouver rapidement des informations. Voici comment :</p>
-                <ul>
-                    <li>Saisissez un nom, année de naissance ou décès, lieu de naissance, profession ou description.</li>
-                    <li>Les résultats s'affichent en temps réel.
-                    <li>Les résultats sont triés par pertinence avec un pourcentage de correspondance.</li>
-                </ul>
-                <p>Exemples : "Amina 1984 Rabat" ou "1984 Benjelloun Amina professeur"</p>                
-            </div>
-    
-            <!-- Search Input -->
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Recherchez par nom, dates ou autres détails.">
-            </div>
-    
-            <!-- Death Cards Section -->
-            <div id="death-cards-container"></div>
-        </div>
-    
-        <!-- removed but still needed somewhow  -->
-        <div id="addNewEntryModal" class="modal">
-            <div class="modal-content">
-                <form class="modal-form" id="addEntryForm">
+    if (displayImages.length === 0) {
+        galleryContainer.innerHTML = '<p>Aucune image dans la galerie.</p>';
+    }
+}
+
+function showInfo(index, event) {
+    if (event) event.stopPropagation();
+    currentProfileIndex = index; // Set current profile index
+    const entry = deathEntries[index];
+    if (!entry) return;
+
+    // Remove existing report section to avoid duplicates when opening a new profile
+    const existingReportSection = document.querySelector('#profilePopup .popup-content .report-section');
+    if (existingReportSection) {
+        existingReportSection.remove();
+    }
+
+    const primaryImage = entry.images && entry.images.length > 0 ? entry.images[0] : 'default_profile_image.png';
+
+    let directionsButtonHTML = '';
+    if (entry.location) {
+        const [lat, lng] = entry.location.split(',').map(coord => parseFloat(coord.trim()));
+        if (!isNaN(lat) && !isNaN(lng)) {
+            directionsButtonHTML = `
+                <button onclick="window.openDirections(${lat}, ${lng})" class="profile-directions-btn">
+                    <i class="fas fa-directions"></i> Itinéraire
+                </button>
+            `;
+        }
+    }
+
+    const shareButtonHTML = `
+        <button onclick="window.shareProfile(${index})" class="profile-share-btn">
+            <i class="fab fa-whatsapp"></i> Partager
+        </button>
+    `;
+
+    const profileContent = document.getElementById('profileContent');
+    profileContent.innerHTML = `
+        <div class="profile-header">
+            <img src="${primaryImage}" alt="${entry.familyName} ${entry.firstName}" class="profile-image" onerror="this.src='default_profile_image.png';">
+            <h2>${entry.familyName} ${entry.firstName}</h2>
+            <p class="profile-description">"${entry.description || ''}"</p>
+            <div class="profile-actions">
+                ${directionsButtonHTML}
+                ${shareButtonHTML}
             </div>
         </div>
-    
-        <!-- Profile Popup -->
-        <div id="profilePopup" class="popup">
-            <div class="popup-content">
-                <span class="popup-close" onclick="closePopup()">&times;</span>
-                <div id="profileContent"></div>
+        <div class="profile-body">
+            <div class="profile-section">
+                <h4>Informations</h4>
+                <div class="profile-details">
+                    <div class="profile-item"><i class="fas fa-birthday-cake"></i><span><strong>Date de naissance:</strong> ${entry.dob ? formatDateToDDMMYYYY(entry.dob) : 'N/A'}</span></div>
+                    <div class="profile-item"><i class="fas fa-map-marker-alt"></i><span><strong>Lieu de naissance:</strong> ${entry.birthplace || 'N/A'}</span></div>
+                    <div class="profile-item"><i class="fas fa-cross"></i><span><strong>Date de décès:</strong> ${entry.dod ? formatDateToDDMMYYYY(entry.dod) : 'N/A'}</span></div>
+                    <div class="profile-item"><i class="fas fa-map-marker-alt"></i><span><strong>Lieu de décès:</strong> ${entry.deathplace || 'N/A'}</span></div>
+                    <div class="profile-item"><i class="fas fa-church"></i><span><strong>Cimetière:</strong> ${entry.cemetery || 'N/A'}</span></div>
+                    <div class="profile-item"><i class="fas fa-briefcase"></i><span><strong>Profession:</strong> ${entry.profession || 'N/A'}</span></div>
+                    <div class="profile-item"><i class="fas fa-map-pin"></i><span><strong>Localisation:</strong> ${entry.location || 'N/A'}</span></div>
+                </div>
+            </div>
+            <div class="profile-section" id="relativesSection">
+                <!-- Relatives will be injected here -->
             </div>
         </div>
-    
-        <!-- Scripts -->
-        <script>
-            
-            const deathEntries = [
-    { familyName: "El Khatib", firstName: "Ahmed", dob: "1975-04-10", birthplace: "Rabat", dod: "2023-06-12", location: "33.5762, -7.6115", image: "images/DataBase/1.jpg", description: "Beloved father and husband", cemetery: "Casablanca - Chouhada", profession: "Engineer" },
-    { familyName: "Benhaddou", firstName: "Youssef", dob: "1980-02-14", birthplace: "Casablanca", dod: "2023-05-20", location: "33.5769, -7.6220", image: "images/DataBase/2.jpg" , description: "Kindhearted soul", cemetery: "Casablanca - Chouhada", profession: "Teacher" },
-    { familyName: "Ouazzani", firstName: "Mohamed", dob: "1965-11-18", birthplace: "Tangier", dod: "2023-04-30", location: "34.0282, -6.8413", image: "images/DataBase/3.jpg", description: "Devoted uncle", cemetery: "Rabat - Chouhada", profession: "Doctor" },
-    { familyName: "Bensalem", firstName: "Hassan", dob: "1978-09-05", birthplace: "Tanger", dod: "2023-03-11", location: "34.03087867785178, -6.839582106791568", image: "images/DataBase/4.jpg", description: "Loving uncle", cemetery: "Rabat - Chouhada", profession: "Sportif" },
-    { familyName: "Alaoui", firstName: "Ismail", dob: "1983-06-23", birthplace: "Fes", dod: "2023-07-25", location: "33.5735, -7.6008", image: "images/DataBase/5.jpg", description: "Caring father", cemetery: "Casablanca - Chouhada", profession: "Lawyer" },
-    { familyName: "Bennani", firstName: "Fatima", dob: "1988-03-12", birthplace: "Meknes", dod: "2023-08-19", location: "34.0201, -6.8500", image: "images/DataBase/6.jpg", description: "Beloved mother", cemetery: "Rabat - Chouhada", profession: "Teacher" },
-    { familyName: "Fassi", firstName: "Nadia", dob: "1992-11-07", birthplace: "Rabat", dod: "2023-09-10", location: "33.5800, -7.5901", image: "images/DataBase/7.jpg", description: "Kind and gentle friend", cemetery: "Casablanca - Chouhada", profession: "Nurse" },
-    { familyName: "Mansouri", firstName: "Zineb", dob: "1985-01-22", birthplace: "Casablanca", dod: "2023-10-15", location: "33.5748, -7.5962", image: "images/DataBase/8.jpg", description: "Passionate artist", cemetery: "Casablanca - Chouhada", profession: "Artist" },
-    ]
-            const favoriteEntries = [
-    { familyName: "Bouhlal", firstName: "Abdel Karim", dob: "1988-03-12", birthplace: "Rabat", dod: "2023-08-19", location: "34.03080380309956, -6.8388454224546384", image: "images/DataBase/9.jpg", description: "Beloved grand father", cemetery: "Rabat - Chouhada", profession: "Musicien" },
-    { familyName: "Lhrizi", firstName: "Hajiba", dob: "1965-11-18", birthplace: "Sale", dod: "2023-04-30", location: "34.03079228390211, -6.838789823637387", image: "images/DataBase/10.jpg", description: "Devoted grand mother", cemetery: "Rabat - Chouhada", profession: "Mere au foyer" },
-            ];
-    
-            function toggleNav() {
-                const sidebar = document.getElementById("mySidebar");
-                sidebar.style.left = (sidebar.style.left === "0px") ? "-280px" : "0px";
-            }
-    
-            function filterCards() {
-                const searchInput = document.getElementById('searchInput').value.toLowerCase();
-                const searchTerms = searchInput.split(' ').filter(term => term.trim() !== '');
-                const container = document.getElementById("death-cards-container");
-                container.innerHTML = "";
-    
-                const flatDeathEntries = deathEntries.flat();
-                const entriesToShow = flatDeathEntries.concat(favoriteEntries);
-    
-                entriesToShow.sort((a, b) => {
-                    const matchCountA = calculateMatchCount(a, searchTerms);
-                    const matchCountB = calculateMatchCount(b, searchTerms);
-                    return matchCountB - matchCountA;
-                });
-    
-                entriesToShow.forEach((entry, index) => {
-                    const matchCount = calculateMatchCount(entry, searchTerms);
-                    const matchPercentage = Math.min((matchCount / 5) * 99, 99);
-    
-                    const card = createCard(entry, index, searchTerms, matchPercentage);
-                    container.appendChild(card);
-                });
-            }
-    
-            function createCard(entry, index, searchTerms, matchPercentage) {
-                const card = document.createElement("div");
-                card.className = "death-card";
-                card.innerHTML = `
-                    <div class="death-card-actions">
-                        <button class="action-button info-btn" title="View Profile"><i class="fas fa-info-circle"></i></button>
-                        <button class="action-button favorite-btn" title="Add to Favorites"><i class="fas fa-heart"></i></button>
-                         <span class="match-percentage"><i class="fas fa-chart-line"></i> ${matchPercentage.toFixed(1)}%</span>
+    `;
 
-                        </div>
-                    <br></br>
-                    <div class="death-card-content">
-                        <img src="file:///C:/Users/Public/1408/Images/DataBase/${entry.image.split('\\').pop()}" alt="${entry.familyName} ${entry.firstName}" class="death-card-image">
-                        <div class="death-card-info">
-                            <div class="death-card-details">
-                                <h3>${highlightText(entry.familyName + ' ' + entry.firstName, searchTerms)}</h3>
-                                <div class="info-items">
-                                    <div class="date-container">
-                                        <div class="info-item"><i class="fas fa-birthday-cake"></i><p>${highlightText(entry.dob, searchTerms)}</p></div>
-                                        <div class="info-item"><i class="fas fa-monument"></i><p>${highlightText(entry.dod, searchTerms)}</p></div>
-                                    </div>
-                                    <div class="info-item"><i class="fas fa-baby"></i><p>${highlightText(entry.birthplace, searchTerms)}</p></div>
-                                    <div class="info-item"><i class="fas fa-cross"></i><p>${highlightText(entry.cemetery, searchTerms)}</p></div>
-                                    <div class="info-item"><i class="fas fa-briefcase"></i><p>${highlightText(entry.profession, searchTerms)}</p></div>
-                                    <div class="info-item">
-                                        <i class="fas fa-info-circle"></i>
-                                        <p>${highlightText(entry.description, searchTerms)}</p>                                    </div>
-                      <br></br>           
-                                        </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                
-                card.querySelector('.info-btn').addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    showProfile(entry);
-                });
-                
-                card.querySelector('.favorite-btn').addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    addToFavorites(entry);
-                });
-                
-                return card;
+    // Find and render relatives
+    const relatives = deathEntries.filter((relativeEntry, relativeIndex) => {
+        return relativeEntry.familyName === entry.familyName && index !== relativeIndex;
+    });
+
+    const relativesSection = profileContent.querySelector('#relativesSection');
+    if (relatives.length > 0 && relativesSection) {
+        let relativesHTML = '<h4>Parents et proches</h4><div class="relatives-container">';
+        relatives.forEach(relative => {
+            const relativeIndex = deathEntries.findIndex(e => e === relative);
+            const relativePrimaryImage = relative.images && relative.images.length > 0 ? relative.images[0] : 'default_profile_image.png';
+            relativesHTML += `
+                <div class="relative-card" onclick="window.showRelativeProfile(${relativeIndex})">
+                    <img src="${relativePrimaryImage}" alt="${relative.firstName} ${relative.familyName}" class="relative-image" onerror="this.src='default_profile_image.png';">
+                    <div class="relative-name">${relative.firstName} ${relative.familyName}</div>
+                </div>
+            `;
+        });
+        relativesHTML += '</div>';
+        relativesSection.innerHTML = relativesHTML;
+    }
+
+    renderProfileGallery(entry.images);
+
+    // Add "Report Error" button at the bottom of the popup
+    const reportBtn = document.createElement('button');
+    reportBtn.className = 'report-error-btn';
+    reportBtn.innerHTML = `<i class="fas fa-envelope"></i> Signaler une erreur`;
+    reportBtn.onclick = () => {
+        const subject = `Erreur signalée pour ${entry.firstName} ${entry.familyName}`;
+        const body = `Bonjour,
+
+Je signale une erreur sur le profil de ${entry.firstName} ${entry.familyName}.
+
+Voici les informations actuelles du profil :
+------------------------------------------
+Nom: ${entry.familyName || 'N/A'}
+Prénom: ${entry.firstName || 'N/A'}
+Date de naissance: ${entry.dob ? formatDateToDDMMYYYY(entry.dob) : 'N/A'}
+Lieu de naissance: ${entry.birthplace || 'N/A'}
+Date de décès: ${entry.dod ? formatDateToDDMMYYYY(entry.dod) : 'N/A'}
+Lieu de décès: ${entry.deathplace || 'N/A'}
+Profession: ${entry.profession || 'N/A'}
+Description: "${entry.description || 'N/A'}"
+Cimetière: ${entry.cemetery || 'N/A'}
+Localisation: ${entry.location || 'N/A'}
+------------------------------------------
+
+Description de l'erreur:
+[Veuillez décrire l'erreur ici]
+
+Merci.`;
+        window.location.href = `mailto:info@qubor.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    };
+    const reportSection = document.createElement('div');
+    reportSection.className = 'profile-section report-section';
+    reportSection.appendChild(reportBtn);
+    document.querySelector('#profilePopup .popup-content').appendChild(reportSection);
+
+    document.getElementById('profilePopup').style.display = 'block';
+}
+
+function closePopup() {
+    document.getElementById('profilePopup').style.display = 'none';
+    currentProfileIndex = -1; // Reset current profile index
+}
+
+const profilePopupCloseButton = document.querySelector('#profilePopup .popup-close');
+if (profilePopupCloseButton) {
+    profilePopupCloseButton.addEventListener('click', closePopup);
+}
+
+// --- NEW FUNCTIONS FOR IMAGE VIEWER ---
+
+function updateImageViewer() {
+    if (currentGalleryImages.length > 0) {
+        const fullSizeImage = document.getElementById('fullSizeImage');
+        fullSizeImage.src = currentGalleryImages[currentImageIndex];
+    }
+}
+
+function openImageViewer(images, index) {
+    currentGalleryImages = images;
+    currentImageIndex = index;
+    const imageViewerPopup = document.getElementById('imageViewerPopup');
+    imageViewerPopup.style.display = 'flex'; // Use flex for centering
+    updateImageViewer();
+}
+
+function closeImageViewer() {
+    document.getElementById('imageViewerPopup').style.display = 'none';
+}
+
+function showNextImage() {
+    currentImageIndex = (currentImageIndex + 1) % currentGalleryImages.length;
+    updateImageViewer();
+}
+
+function showPrevImage() {
+    currentImageIndex = (currentImageIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+    updateImageViewer();
+}
+
+// --- END NEW FUNCTIONS ---
+
+function showLocationOnMap(entry, index) {
+    if (!entry.location) {
+        console.warn("Entry has no location:", entry);
+        return;
+    }
+    const [lat, lng] = entry.location.split(',').map(coord => parseFloat(coord.trim()));
+    if (isNaN(lat) || isNaN(lng)) {
+        console.warn("Invalid location coordinates for entry:", entry);
+        return;
+    }
+    
+    const marker = markers[index];
+    if (!marker) return;
+
+    const primaryImage = entry.images && entry.images.length > 0 ? entry.images[0] : 'default_profile_image.png';
+
+    const popupContent = `
+        <div style="text-align: center;">
+            <img src="${primaryImage}" alt="${entry.familyName} ${entry.firstName}" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;" onerror="this.src='default_profile_image.png';">
+            <h3 style="margin: 0 0 10px 0;">${entry.familyName} ${entry.firstName}</h3>
+            <div style="display: flex; justify-content: center; gap: 8px;">
+                 <button onclick="window.openDirections(${lat}, ${lng})" style="background-color: #007bff; border: none; color: white; padding: 8px 12px; text-align: center; text-decoration: none; display: inline-block; font-size: 14px; cursor: pointer; border-radius: 5px;">
+                    <i class="fas fa-directions" style="margin-right: 5px;"></i> Itinéraire
+                </button>
+                <button onclick="window.openProfile(${index})" style="background-color: #17a2b8; border: none; color: white; padding: 8px 12px; text-align: center; text-decoration: none; display: inline-block; font-size: 14px; cursor: pointer; border-radius: 5px;">
+                    <i class="fas fa-info-circle" style="margin-right: 5px;"></i> Détails
+                </button>
+            </div>
+        </div>
+    `;
+
+    marker.bindPopup(popupContent);
+
+    if (markerClusterGroup) {
+        markerClusterGroup.zoomToShowLayer(marker, () => {
+            marker.openPopup();
+        });
+    } else {
+        map.setView([lat, lng], 15);
+        marker.openPopup();
+    }
+}
+
+window.showRelativeProfile = function(index) {
+    closePopup();
+    setTimeout(() => {
+        showInfo(index);
+    }, 150);
+}
+
+window.openProfile = (index) => showInfo(index);
+
+window.shareProfile = function(index) {
+    const entry = deathEntries[index];
+    if (!entry) return;
+
+    const profileUrl = `${window.location.origin}${window.location.pathname}?entry=${index}`;
+    const text = `Consultez le mémorial pour ${entry.firstName} ${entry.familyName}: ${profileUrl}`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
+
+    window.open(whatsappUrl, '_blank');
+}
+
+window.openDirections = function(lat, lng) {
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+    window.open(url, '_blank');
+}
+
+function loadScript(src) {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.async = true;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    // Expose Leaflet to global scope for plugins
+    window.L = L;
+    try {
+        await loadScript('https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js');
+    } catch (e) {
+        console.error("MarkerCluster plugin could not be loaded. Markers will not be clustered.");
+    }
+
+    initializeMap();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const entryIdStr = urlParams.get('entry');
+    if (entryIdStr) {
+        const entryId = parseInt(entryIdStr, 10);
+        if (!isNaN(entryId) && entryId >= 0 && entryId < deathEntries.length) {
+            // Use a short timeout to ensure map and everything else is ready
+            setTimeout(() => {
+                showInfo(entryId);
+            }, 100);
+        }
+    }
+
+    if (searchInputDOM) {
+        searchInputDOM.addEventListener('input', filterCards);
+    }
+    filterCards();
+
+    // Sidebar toggle functionality
+    const menuBtn = document.querySelector('.menu-btn');
+    const closeBtn = document.querySelector('.closebtn');
+    const sidebar = document.getElementById("mySidebar");
+
+    const toggleNav = () => {
+        if (sidebar.style.left === "0px") {
+            sidebar.style.left = "-280px";
+        } else {
+            sidebar.style.left = "0px";
+        }
+    };
+
+    if (menuBtn) menuBtn.addEventListener('click', toggleNav);
+    if (closeBtn) closeBtn.addEventListener('click', toggleNav);
+
+    // Image viewer listeners
+    document.querySelector('#imageViewerPopup .image-viewer-close').addEventListener('click', closeImageViewer);
+    document.querySelector('#imageViewerPopup .next').addEventListener('click', showNextImage);
+    document.querySelector('#imageViewerPopup .prev').addEventListener('click', showPrevImage);
+
+    document.getElementById('imageViewerPopup').addEventListener('click', (event) => {
+        // Close if clicked on the background, but not on the image or controls
+        if (event.target.id === 'imageViewerPopup') {
+            closeImageViewer();
+        }
+    });
+
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            const icon = darkModeToggle.querySelector('i');
+            if (isDarkMode) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
             }
-    
-            function showProfile(entry) {
-                const popup = document.getElementById('profilePopup');
-                const content = document.getElementById('profileContent');
-                content.innerHTML = `
-                    <h2>${entry.familyName} ${entry.firstName}</h2>
-                    <img src="file:///C:/Users/Public/1408/Images/DataBase/${entry.image.split('\\').pop()}" alt="${entry.familyName} ${entry.firstName}" style="width: 200px; height: 200px; object-fit: cover;">
-                    <p><strong>Date of Birth:</strong> ${entry.dob}</p>
-                    <p><strong>Date of Death:</strong> ${entry.dod}</p>
-                    <p><strong>Birthplace:</strong> ${entry.birthplace}</p>
-                    <p><strong>Profession:</strong> ${entry.profession}</p>
-                    <p><strong>Description:</strong> ${entry.description}</p>
-                    <p><strong>Cemetery:</strong> ${entry.cemetery}</p>
-                `;
-                popup.style.display = 'block';
+        });
+    }
+
+    // Quran Audio Player Logic
+    const audioPlayer = document.getElementById('quran-player');
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const volumeSlider = document.getElementById('volume-slider');
+
+    if(playPauseBtn && audioPlayer && volumeSlider) {
+        const playIcon = playPauseBtn.querySelector('i');
+
+        playPauseBtn.addEventListener('click', () => {
+            if (audioPlayer.paused) {
+                audioPlayer.play().catch(e => console.error("Error playing audio:", e));
+            } else {
+                audioPlayer.pause();
             }
-    
-            function closePopup() {
-                document.getElementById('profilePopup').style.display = 'none';
-            }
-    
-            function highlightText(text, searchTerms) {
-                if (!searchTerms.length) return text;
-                const regex = new RegExp(`(${searchTerms.join('|')})`, 'gi');
-                return text.replace(regex, '<mark>$1</mark>');
-            }
-    
-            function calculateMatchCount(entry, searchTerms) {
-                let matchCount = 0;
-                const entryFields = [
-                    entry.familyName,
-                    entry.firstName,
-                    entry.dob.split('-')[0], // Year of birth
-                    entry.dod.split('-')[0], // Year of death
-                    entry.birthplace,
-                    entry.description,
-                    entry.cemetery,
-                    entry.profession
-                ];
-    
-                searchTerms.forEach(term => {
-                    entryFields.forEach((field, index) => {
-                        if (typeof field === 'string' && field.toLowerCase().includes(term.toLowerCase())) {
-                            if (index < 5) {
-                                matchCount++;
-                            } else {
-                                matchCount = Math.min(matchCount + 1, 5);
-                            }
-                        }
-                    });
-                });
-    
-                return matchCount;
-            }
-    
-            function addToFavorites(entry) {
-                const isAlreadyFavorite = favoriteEntries.some(favorite => 
-                    favorite.familyName === entry.familyName && 
-                    favorite.firstName === entry.firstName && 
-                    favorite.dob === entry.dob
-                );
-    
-                if (!isAlreadyFavorite) {
-                    favoriteEntries.push(entry);
-                    alert(`${entry.familyName} ${entry.firstName} has been added to favorites.`);
-                } else {
-                    alert(`${entry.familyName} ${entry.firstName} is already in your favorites.`);
-                }
-            }
-    
-            document.getElementById("addEntryForm").onsubmit = function(e) {
-                e.preventDefault();
-                const formData = new FormData(this);
-                const newEntry = Object.fromEntries(formData.entries());
-    
-                const fileInput = document.getElementById('image');
-                if (fileInput.files && fileInput.files[0]) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        newEntry.image = e.target.result;
-                        deathEntries.push(newEntry);
-                        filterCards();
-                        document.getElementById("addNewEntryModal").style.display = "none";
-                        this.reset();
-                    };
-                    reader.readAsDataURL(fileInput.files[0]);
-                } else {
-                    newEntry.image = "C:\\Users\\Public\\1408\\Images\\DataBase\\default.jpg";
-                    deathEntries.push(newEntry);
-                    filterCards();
-                    document.getElementById("addNewEntryModal").style.display = "none";
-                    this.reset();
-                }
-            };
-    
-            // Initial card creation
-            filterCards();
-    
-            // Add event listener for search
-            document.getElementById('searchInput').addEventListener('input', filterCards);
-        </script>
-    </body>
-    </html>
+        });
+
+        audioPlayer.addEventListener('play', () => {
+            playIcon.classList.remove('fa-play');
+            playIcon.classList.add('fa-pause');
+        });
+
+        audioPlayer.addEventListener('pause', () => {
+            playIcon.classList.remove('fa-pause');
+            playIcon.classList.add('fa-play');
+        });
+
+        volumeSlider.addEventListener('input', () => {
+            audioPlayer.volume = volumeSlider.value;
+        });
+
+        // Set initial volume from slider
+        audioPlayer.volume = volumeSlider.value;
+    }
+});
+</script>
+</body>
+</html>
