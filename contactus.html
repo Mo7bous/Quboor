@@ -39,7 +39,6 @@
   height: 50px;
   width: 100%;
   position: relative;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   box-sizing: border-box;
 }
 
@@ -57,14 +56,15 @@
   width: auto;
 }
 
-    .menu-btn {
-      font-size: 28px;
-      background: none;
-      border: none;
-      color: var(--text-color);
-      margin-left: 15px;
-      cursor: pointer;
-    }
+.menu-btn {
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  z-index: 1; /* Ensure it's clickable */
+}
+
 
     .nav-right-controls {
       position: absolute;
@@ -344,12 +344,14 @@ h23 {
 
   <div id="mySidebar" class="sidebar">
     <span class="closebtn">&times;</span>
-    <a href="search.html"><i class="fas fa-search"></i>Recherche</a>
-    <a href="mission.html"><i class="fas fa-tasks"></i>Nos missions</a>
-    <a href="aboutus.html"><i class="fas fa-info-circle"></i>À propos</a>
-    <a href="contactus.html"><i class="fas fa-envelope"></i>Contact</a>
-    <a href="joinus.html"><i class="fas fa-user-plus"></i>Rejoins-nous</a>
-    <a href="index.html"><i class="fas fa-home"></i>Accueil</a>
+        <br><br/>
+        <a href="search.html"><i class="fas fa-search"></i>Recherche</a>
+        <a href="mission.html"><i class="fas fa-tasks"></i>Nos missions</a>
+        <a href="dons.html"><i class="fas fa-info-circle"></i>Nos projets</a>
+        <a href="joinus.html"><i class="fas fa-user-plus"></i>Rejoins-nous</a>
+        <a href="contactus.html"><i class="fas fa-envelope"></i>Contact</a>
+        <br><br/>
+        <a href="index.html"><i class="fas fa-home"></i>Accueil</a>
   </div>
 
   <div class="container">
@@ -370,7 +372,7 @@ h23 {
   Ensemble, construisons un réseau solidaire et durable autour des lieux de mémoire.
 </h23>   
 
-<br> <br/>
+<br><br/>
 
 <form onsubmit="return sendMail();">
         <div class="form-group">
