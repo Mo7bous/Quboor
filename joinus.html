@@ -6,86 +6,543 @@
   <title>Nous Rejoindre - Quboor</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <style>
-    :root {
-      --primary-color: #41464a;
-      --secondary-color: #1F262A;
-      --text-color: #F2E9E4;
-      --background-color: #ece7e7;
-      --accent-color: #4A4E69;
-      --card-bg-color: #ffffff;
-    }
+        :root {
+            --primary-color: #41464a;
+            --secondary-color: #1F262A;
+            --text-color: #F2E9E4;
+            --background-color: #ece7e7;
+            --accent-color: #4A4E69;
+            --card-bg-color: #ffffff;
+        }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--background-color);
-      margin: 0;
-      padding: 0;
-      color: var(--secondary-color);
-    }
+        html, body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--secondary-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            text-align: justify;
+            overflow-x: hidden;
+        }
 
-    .top-nav {
-      display: flex;
-      align-items: center;
-      background-color: var(--primary-color);
-      color: var(--text-color);
-      padding: 15px;
-      height: 50px;
-      position: relative;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-    .top-nav h1 {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      margin: 0;
-    }
+.top-nav {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 15px 20px;
+  height: 50px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+}
+#main {
+    padding: 10px 20px 80px;
+    margin-top: 10px; /* Adjust based on new banner height */
 
-    .menu-btn {
-      font-size: 24px;
-      background: none;
-      border: none;
-      color: var(--text-color);
-      cursor: pointer;
-    }
+        }
+        
+.top-nav {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 15px 20px;
+  height: 50px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+}
 
-    .logo {
-      width: 160px;
-    }
+.top-nav h1 {
+  flex-grow: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
 
-    .sidebar {
-      height: 100%;
-      width: 280px;
-      position: fixed;
-      top: 0;
-      left: -280px;
-      background-color: var(--secondary-color);
-      overflow-x: hidden;
-      transition: 0.4s;
-      padding-top: 60px;
-      z-index: 1000;
-    }
+.logo {
+  height: 40px;
+  width: auto;
+}
 
-    .sidebar a {
-      padding: 10px 25px;
-      font-size: 18px;
-      color: var(--text-color);
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
+.menu-btn {
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  z-index: 1; /* Ensure it's clickable */
+}
 
-    .sidebar .closebtn {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 30px;
-      color: var(--text-color);
-      cursor: pointer;
-    }
+        .sidebar {
+  height: 100%;
+  width: 280px;
+  position: fixed;
+  top: 0;
+  left: -280px;
+  background-color: var(--primary-color);
+  overflow-x: hidden;
+  transition: 0.4s;
+  padding-top: 60px;
+  z-index: 1001; /* Match old z-index */
+}
 
-    .container {
+.sidebar a {
+  padding: 10px 25px;
+  font-size: 18px;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  border-bottom: 1px solid var(--primary-color);
+  transition: background-color 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: var(--primary-color);
+}
+
+.sidebar a i {
+  margin-right: 15px;
+}
+
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+
+        .mission-section {
+            background-color: var(--card-bg-color);
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+        .mission-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .mission-card {
+            background-color: #f2f1f1;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .mission-card h3 {
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mission-card i {
+            font-size: 1.5em;
+            color: var(--accent-color);
+        }
+
+        .cta-section {
+            text-align: justify;
+            margin-top: 40px;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+.cta-button {
+    text-align: center;
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    width: 80%;
+    height: auto;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 0 auto;
+}
+
+.cta-buttondon {
+    text-align: center;
+    background-color: var(--background-color);
+    color: var(--secondary-color);
+    width: 80%;
+    height: auto;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 0 auto;
+}
+
+.cta-button:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+        .contact-section {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .contact-section h4 {
+            margin-top: 0;
+        }
+
+        #banner {
+    background-color: #2c3e50; /* Dark blue-grey */
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center logo */
+    position: relative; /* For positioning burger menu */
+    height: 60px; /* Adjust as needed */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#banner-logo {
+    height: 50px; /* Adjust as needed */
+    width: auto;
+}
+
+#audio-player-container {
+    width: 100%;
+    background-color: var(--primary-color); /* même couleur que la bannière */
+    color: var(--text-color);
+    padding: 5px 5px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    max-width: none;
+    margin: 0 auto;
+}
+
+#play-pause-btn {
+    background: none;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+#play-pause-btn:hover {
+    background-color: var(--text-color);
+    color: var(--primary-color);
+}
+
+#play-pause-btn .fa-play {
+    margin-left: 2px; /* To center the play icon better */
+}
+
+.player-info {
+    text-align: center;
+    flex-grow: 1;
+    margin: 0 15px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.player-info span {
+    font-weight: bold;
+    display: block;
+    font-size: 0.9em;
+}
+
+.player-info small {
+    font-size: 0.75em;
+    opacity: 0.8;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+}
+
+.volume-control i {
+    margin-right: 8px;
+    font-size: 1em;
+}
+
+#volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 70px;
+    height: 3px;
+    background: #5a6268;
+    border-radius: 5px;
+    outline: none;
+    transition: opacity .2s;
+    cursor: pointer;
+}
+
+#volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: var(--text-color);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+#volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: var(--text-color);
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+}
+
+/* --- Dark Mode Styles --- */
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: var(--primary-color);
+}
+
+body.dark-mode .top-nav {
+    background-color: #1F262A;
+}
+
+body.dark-mode .sidebar {
+    background-color: #111;
+}
+
+body.dark-mode .sidebar a:hover {
+    background-color: #1F262A;
+}
+
+body.dark-mode #map {
+    /* The filter was removed to prevent inverting map colors in dark mode. */
+}
+
+body.dark-mode .search-explanation {
+    background-color: #2c3e50;
+    border-left-color: #3498db;
+    color: #ecf0f1;
+}
+
+body.dark-mode .search-explanation strong {
+    color: #5dade2;
+}
+
+body.dark-mode #searchInput {
+    background-color: #333;
+    color: #eee;
+    border-color: #555;
+}
+
+body.dark-mode .death-card {
+    background-color: #2b2b2b;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    border: 1px solid #444;
+}
+
+body.dark-mode .death-card-details h3,
+body.dark-mode .relative-name {
+    color: #f2f2f2;
+}
+
+body.dark-mode .info-item,
+body.dark-mode .info-item p {
+    color: #b0b0b0;
+}
+
+body.dark-mode .info-item i {
+    color: #888;
+}
+
+body.dark-mode mark {
+    background-color: #b38600;
+    color: #fff;
+}
+
+body.dark-mode .popup-content {
+    background-color: #252525;
+    color: #eee;
+}
+
+body.dark-mode .popup-close {
+    color: #888;
+}
+body.dark-mode .popup-close:hover {
+    color: #eee;
+}
+
+body.dark-mode .profile-header {
+    border-bottom-color: #444;
+}
+
+body.dark-mode .profile-image {
+    border-color: #444;
+}
+
+body.dark-mode .profile-header h2 {
+    color: #f5f5f5;
+}
+
+body.dark-mode .profile-description {
+    color: #ccc;
+}
+
+body.dark-mode .profile-section h4 {
+    color: #5dade2;
+    border-bottom-color: #5dade2;
+}
+
+body.dark-mode .profile-details .profile-item {
+    color: #ddd;
+}
+
+body.dark-mode .profile-details .profile-item i {
+    color: #5dade2;
+}
+
+body.dark-mode .relative-card {
+    background-color: #333;
+    border-color: #444;
+}
+
+body.dark-mode .gallery-images-container {
+    background-color: #222;
+}
+
+body.dark-mode .gallery-images-container img {
+    border-color: #555;
+}
+
+body.dark-mode .report-section {
+    border-top-color: #444;
+}
+
+body.dark-mode .report-error-btn:hover {
+    background-color: #c0392b;
+}
+
+body.dark-mode #audio-player-container {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+body.dark-mode #play-pause-btn {
+    border-color: #e0e0e0;
+    color: #e0e0e0;
+}
+
+body.dark-mode #play-pause-btn:hover {
+    background-color: #e0e0e0;
+    color: #1F262A;
+}
+
+body.dark-mode #volume-slider {
+    background: #444;
+}
+
+body.dark-mode #volume-slider::-webkit-slider-thumb {
+    background: #e0e0e0;
+}
+
+body.dark-mode #volume-slider::-moz-range-thumb {
+    background: #e0e0e0;
+}
+
+.nav-right-controls {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.dark-mode-toggle-btn {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    font-size: 22px;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 5px;
+}
+
+.boxed-text {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    max-width: 85%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+h22 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: block;
+    text-align: center;
+}
+
+ .container {
       max-width: 1000px;
       margin: auto;
       padding: 40px 20px;
@@ -177,20 +634,42 @@
   </style>
 </head>
 <body>
-  <div class="top-nav">
-    <button class="menu-btn" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
-    <h1><img src="img/logotitre.png" alt="Logo Quboor" class="logo"></h1>
-  </div>
+    <div class="top-nav">
+        <button class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <h1>
+            <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
+        </h1>
+        <div class="nav-right-controls">
+            <button id="darkModeToggle" class="dark-mode-toggle-btn">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </div>
 
-<div id="mySidebar" class="sidebar">
-    <span class="closebtn" onclick="toggleNav()">&times;</span>
-    <a href="search.html"><i class="fas fa-search" style="margin-right: 15px;"></i>Recherche</a>
-    <a href="mission.html"><i class="fas fa-tasks" style="margin-right: 15px;"></i>Nos missions</a>
-    <a href="aboutus.html"><i class="fas fa-info-circle" style="margin-right: 15px;"></i>À propos</a>
-    <a href="contactus.html"><i class="fas fa-envelope" style="margin-right: 15px;"></i>Contact</a>
-    <a href="joinus.html"><i class="fas fa-user-plus" style="margin-right: 15px;"></i>Rejoins-nous</a>
-    <a href="index.html"><i class="fas fa-home" style="margin-right: 15px;"></i>Accueil</a>
-</div>
+                <div id="audio-player-container">
+                <div class="player-controls">
+                    <button id="play-pause-btn" title="Play/Pause">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <div class="volume-control">
+                        <i class="fas fa-volume-up"></i>
+                        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.8" title="Volume">
+                    </div>
+                </div>
+                <audio id="quran-player" src="audio/ba9ara.mp3" preload="none"></audio>
+            </div>
+
+    <div id="mySidebar" class="sidebar">
+        <span class="closebtn">&times;</span>
+        <a href="search.html"><i class="fas fa-search"></i>Recherche</a>
+        <a href="mission.html"><i class="fas fa-tasks"></i>Nos missions</a>
+        <a href="dons.html"><i class="fas fa-info-circle"></i>Nos Projets</a>
+        <a href="contactus.html"><i class="fas fa-envelope"></i>Contact</a>
+        <a href="joinus.html"><i class="fas fa-user-plus"></i>Rejoins-nous</a>
+        <a href="index.html"><i class="fas fa-home"></i>Accueil</a>
+    </div>
 
   <div class="container">
     <div class="section">
@@ -244,24 +723,48 @@
   </div>
 
   <script>
-    function toggleNav() {
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuBtn = document.querySelector('.menu-btn');
+      const closeBtn = document.querySelector('.closebtn');
       const sidebar = document.getElementById("mySidebar");
-      sidebar.style.left = (sidebar.style.left === "0px") ? "-280px" : "0px";
-    }
+      const toggleNav = () => {
+        sidebar.style.left = (sidebar.style.left === "0px") ? "-280px" : "0px";
+      };
+      if (menuBtn) menuBtn.addEventListener('click', toggleNav);
+      if (closeBtn) closeBtn.addEventListener('click', toggleNav);
 
-    function sendEmail() {
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
-      const type = document.getElementById("type").value;
-      const message = document.getElementById("message").value;
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', () => {
+          document.body.classList.toggle('dark-mode');
+          const icon = darkModeToggle.querySelector('i');
+          icon.classList.toggle('fa-moon');
+          icon.classList.toggle('fa-sun');
+        });
+      }
 
-      const subject = "Candidature bénévole Quboor";
-      const body = `Nom : ${name}\nE-mail : ${email}\nParticipation : ${type}\n\nMotivation :\n${message}`;
-      const mailtoLink = `mailto:info@quboor.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const audioPlayer = document.getElementById('quran-player');
+      const playPauseBtn = document.getElementById('play-pause-btn');
+      const volumeSlider = document.getElementById('volume-slider');
+      const playIcon = playPauseBtn.querySelector('i');
 
-      window.location.href = mailtoLink;
-      return false;
-    }
+      playPauseBtn.addEventListener('click', () => {
+        if (audioPlayer.paused) audioPlayer.play();
+        else audioPlayer.pause();
+      });
+
+      audioPlayer.addEventListener('play', () => {
+        playIcon.classList.replace('fa-play', 'fa-pause');
+      });
+
+      audioPlayer.addEventListener('pause', () => {
+        playIcon.classList.replace('fa-pause', 'fa-play');
+      });
+
+      volumeSlider.addEventListener('input', () => {
+        audioPlayer.volume = volumeSlider.value;
+      });
+    });
   </script>
 </body>
 </html>
