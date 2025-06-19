@@ -40,7 +40,7 @@
         .logo {
             width: 300px;
             height: auto;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             animation: fadeInDown 1.5s ease-out;
         }
 
@@ -59,7 +59,7 @@
         }
 
         .enter-btn {
-            padding: 15px 30px;
+            padding: 15px 20px;
             font-size: 1.2rem;
             background-color: var(--accent-color);
             color: var(--text-color);
@@ -83,9 +83,8 @@
             bottom: -120px;
             left: 50%;
             transform: translateX(-50%);
-            width: 150px;
-            height: 100px;
-            background-color: #888;
+            width: 60vw;   /* 👈 20% de la largeur de l'écran */
+            height: 6vh;  /* 👈 12% de la hauteur de l'écran */            background-color: #888;
             border-radius: 10px 10px 0 0;
             animation: riseUp 1s ease-out 2s forwards;
             z-index: 5;
@@ -168,8 +167,7 @@
         <img src="img/logotitre.png" alt="Logo" class="logo">
         <h1>Bienvenue sur Quboor</h1>
         <p>Explorez l'histoire et rendez hommage à vos proches disparus. Découvrez les lieux de repos et préservez leur mémoire.</p>
-        <br> <br/>
-        <button class="enter-btn" onclick="window.location.href='search.html'">Commencez</button>
+        <button class="enter-btn" onclick="window.location.href='search.html'">Entrer</button>
         <div class="tombstone"></div>
         <div class="particles"></div>
     </div>
