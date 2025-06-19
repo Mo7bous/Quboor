@@ -132,13 +132,13 @@ body {
 
 #main {
     padding: 10px 20px 80px;
-    margin-top: 50px; /* Adjust based on new banner height */
+    margin-top: 10px; /* Adjust based on new banner height */
 }
 
 #map {
-    height: 400px;
+    height: 250px;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
@@ -289,7 +289,7 @@ mark {
     margin: 5% auto;
     padding: 30px;
     border-radius: 8px;
-    width: 90%;
+    width: 80%;
     max-width: 700px; 
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     position: relative;
@@ -652,14 +652,14 @@ mark {
 
 /* --- Quran Audio Player --- */
 #audio-player-container {
-    background-color: transparent;
+    width: 100%;
+    background-color: var(--primary-color); /* même couleur que la bannière */
     color: var(--text-color);
-    padding: 0;
+    padding: 5px 5px;
     box-sizing: border-box;
-    transition: none;
-    margin: 0;
-    border-radius: 0;
-    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .player-controls {
@@ -925,7 +925,13 @@ body.dark-mode #volume-slider::-moz-range-thumb {
             <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
         </h1>
         <div class="nav-right-controls">
-            <div id="audio-player-container">
+            <button id="darkModeToggle" class="dark-mode-toggle-btn">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </div>
+
+                <div id="audio-player-container">
                 <div class="player-controls">
                     <button id="play-pause-btn" title="Play/Pause">
                         <i class="fas fa-play"></i>
@@ -937,11 +943,6 @@ body.dark-mode #volume-slider::-moz-range-thumb {
                 </div>
                 <audio id="quran-player" src="audio/ba9ara.mp3" preload="none"></audio>
             </div>
-            <button id="darkModeToggle" class="dark-mode-toggle-btn">
-                <i class="fas fa-moon"></i>
-            </button>
-        </div>
-    </div>
 
     <div id="mySidebar" class="sidebar">
         <span class="closebtn">&times;</span>
@@ -1134,19 +1135,21 @@ function createCard(entry, index, searchTerms, matchPercentage) {
 
     card.querySelector('.info-btn').addEventListener('click', (event) => showInfo(index, event));
     
-    card.addEventListener('click', (event) => {
-        // Ensure the click is not on an action button within the card
-        if (event.target.closest('.card-actions')) {
-            return; 
-        }
-        // Scroll map into view
-        const mapElement = document.getElementById('map');
-        if (mapElement) {
-            mapElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-        
-        showLocationOnMap(entry, index); // Show popup on map
-    });
+card.addEventListener('click', (event) => {
+    if (event.target.closest('.card-actions')) return;
+
+    const mapElement = document.getElementById('map');
+    if (mapElement) {
+        const rect = mapElement.getBoundingClientRect();
+        const offsetTop = window.scrollY + rect.top - 20; // 👈 Ajoute un "gap" de 80px
+        window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+        });
+    }
+
+    showLocationOnMap(entry, index);
+});
     return card;
 }
 
