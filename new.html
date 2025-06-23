@@ -1,0 +1,859 @@
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inscription</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "leaflet": "https://cdn.skypack.dev/leaflet"
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+            --primary-color: #1F262A;
+            --secondary-color: #41464a;
+            --text-color: #4A4E69;
+            --background-color: #ece7e7;
+            --accent-color: #4A4E69;
+            --card-bg-color: #ffffff;
+
+      --tooltip-bg: #fefefe;
+      --tooltip-color: #333;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+
+    body.mode-jour {
+  --background-color: #ece7e7;
+  --text-color: #222222;
+  --secondary-color: #41464a;
+  --accent-color: #4A4E69;
+}
+
+body.mode-nuit {
+  --background-color: #121212;
+  --text-color: #eeeeee;
+  --secondary-color: #41464a;
+  --accent-color: #41464a;
+}
+
+    header {
+      background-color: var(--secondary-color);
+      padding: 1em;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.2em;
+      color: var(--text-color);
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2em auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5em;
+      padding: 1em;
+    }
+
+    .step-indicator {
+      text-align: center;
+      font-size: 1.1em;
+      font-weight: bold; 
+    }
+
+    .step {
+      display: none;
+      background-color: var(--secondary-color);
+      padding: 1em;
+      border-radius: 10px;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 1em;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.4em;
+      color: #ece7e7;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[list] {
+      width: 100%;
+      padding: 0.6em;
+      border-radius: 4px;
+      border: none;
+      background-color: #f2f5f7;
+      color: #222;
+    }
+
+    input[readonly] {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    button {
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 0.7em 1.2em;
+      font-size: 1em;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 0.5em 0.3em;
+    }
+
+    .controls {
+      text-align: center;
+      margin-top: 1.5em;
+
+    }
+
+    .photo-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .thumbnail-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .thumbnail-container img {
+      width: 90px;
+      height: auto;
+      border-radius: 4px;
+      border: 2px solid var(--accent-color);
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: crimson;
+      color: white;
+      border-radius: 50%;
+      border: none;
+      width: 20px;
+      height: 20px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .note {
+      font-size: 0.9em;
+      background-color: #5a4646;
+      color: #ffeb3b;
+      padding: 1em;
+      border-radius: 4px;
+      margin-top: 1em;
+    }
+
+    .thank-you {
+      text-align: center;
+      display: none;
+    }
+
+    .thank-you.active {
+      display: block;
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid var(--text-color);
+      display: block;
+      margin: 0 auto 1em;
+    }
+
+    .top-close {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background-color: transparent;
+      color: #fff;
+      font-size: 2em;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .top-close:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* New: Nav Bar and Sidebar Styles */
+    nav.top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--secondary-color);
+      padding: 0.5em 1em;
+      position: sticky;
+      top: 0;
+      z-index: 9998;
+    }
+
+    nav.top-nav img.logo {
+      height: 40px;
+    }
+
+    .dark-toggle-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.4em;
+      cursor: pointer;
+    }
+
+    .sidebar-toggle-btn {
+      background: none;
+      border: none;
+      color: var(--text-color);
+      font-size: 1.4em;
+      cursor: pointer;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 250px;
+      background-color: #111;
+      color: white;
+      padding: 1em;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 9999;
+    }
+
+    .sidebar.active {
+      transform: translateX(0);
+    }
+
+    .sidebar h2 {
+      color: #fff;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 1em;
+    }
+
+    .sidebar ul li {
+      padding: 0.5em 0;
+      border-bottom: 1px solid #444;
+      cursor: pointer;
+    }
+
+    .sidebar ul li:hover {
+      background-color: #222;
+    }
+
+    .stage {
+      text-align: center;
+      padding: 2em 1em;
+    }
+
+    .stage h2 {
+      margin-bottom: 0.6em;
+    }
+
+    .initial-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .initial-stage img {
+      margin-bottom: 1em;
+    }
+
+    .initial-stage p {
+      font-size: 1.2em;
+      margin-bottom: 1em;
+    }
+
+    .initial-controls {
+      display: flex;
+      gap: 1em;
+      justify-content: center;
+      margin-top: 1em;
+    }
+
+    .error-message {
+      background-color: #ffebee;
+      color: #c62828;
+      font-weight: bold;
+      padding: 1em;
+      text-align: center;
+      border: 1px solid #b71c1c;
+      border-radius: 4px;
+      margin-top: 1em;
+    }
+
+    /* Localisation buttons */
+    .location-controls {
+      display: flex;
+      gap: 10px;
+      flex-grow: 1;
+    }
+
+    #getLocationBtn,
+    #clearLocationBtn {
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      font-size: 1em;
+      padding: 0.6em;
+      border-radius: 5px;
+      width: 100%;
+      max-width: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #getLocationBtn svg,
+    #clearLocationBtn svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+
+    #localisation {
+      flex-grow: 1;
+    }
+
+    /* Updated system pop-up overlay */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .darkIcon{
+      color: white;
+    }
+
+    .popup-box {
+      background: var(--tooltip-bg);
+      color: var(--tooltip-color);
+      padding: 2em;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    .popup-box p {
+      margin-bottom: 1.5em;
+      font-size: 1.1em;
+    }
+
+    .popup-box button {
+      padding: 0.6em 1em;
+      border-radius: 6px;
+      margin: 0 0.5em;
+      font-size: 1em;
+      border: none;
+      cursor: pointer;
+      background: var(--accent-color);
+      color: white;
+    }
+
+    #initialStage .stage-message {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 1.2em;
+      border-radius: 10px;
+      max-width: 450px;
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: var(--text-color);
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar" id="sideMenu">
+    <h2><button style="float: right; background: none; border: none; color: white; font-size: 1.4em; cursor: pointer;" id="closeSidebarBtn">×</button></h2>
+    <ul>
+    </ul>
+  </div>
+
+  <!-- Top Nav -->
+  <nav class="top-nav">
+    <button class="sidebar-toggle-btn" id="toggleSidebar"></button>
+            <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
+<button class="dark-toggle-btn" id="darkToggleBtn">
+  <i id="darkIcon" class="fa-solid fa-moon"></i>
+</button>
+  </nav>
+
+  <button class="top-close" id="closePageBtn" style="box-shadow: none;">×</button>
+
+
+  <main>
+    <div id="initialStage" class="stage initial-stage">
+      <div class="stage-message">
+        <h2>Inscription en 4 étapes :</h2>
+      <ol>
+        <li>Coordonnées du déclarant.</li>
+        <li>Détails sur le défunt(e).</li>
+        <li>Localisation GPS de la tombe.</li>
+        <li>Galerie photo du défunt(e) et de la tombe.</li>
+      </ol>
+      
+      </div>
+      <div class="initial-controls">
+        <button id="cancelInitial">Annuler</button>
+        <button id="continueInitial">Continuer</button>
+      </div>
+    </div>
+
+    <div id="formStages" style="display: none;">
+      <div class="step-indicator" id="stepIndicator">Coordonées du déclarant</div>
+<br><br/>
+      <!-- Step 1A: Déclarant -->
+      <div class="step active" id="step1A">
+        <div class="note">
+          📌 Astuce : Pour faciliter le suivi de votre demande et permettre une éventuelle confirmation, veuillez indiquer des coordonnées e-mail où vous pouvez être facilement joignable.
+        </div>
+        <br><br/>
+
+        <div class="form-group">
+          <label>Prénom du déclarant</label>
+          <input type="text" id="userFirstName" placeholder="Votre prénom" />
+        </div>
+        <div class="form-group">
+          <label>Nom du déclarant</label>
+          <input type="text" id="userLastName" placeholder="Votre nom" />
+        </div>
+        <div class="form-group">
+          <label>Adresse email</label>
+          <input type="text" id="userEmail" placeholder="exemple@domaine.com" />
+        </div>
+        <div class="form-group">
+          <label>Lien d'affiliation</label>
+          <input type="text" id="affiliation" list="relationList" placeholder="Sélectionnez votre relation" />
+          <datalist id="relationList">
+            <option value="Père"></option>
+            <option value="Mère"></option>
+            <option value="Enfant"></option>
+            <option value="Petit-enfant"></option>
+            <option value="Arrière petit-enfant"></option>
+            <option value="Oncle"></option>
+            <option value="Tante"></option>
+            <option value="Neveu"></option>
+            <option value="Nièce"></option>
+            <option value="Famille proche"></option>
+            <option value="Famille éloignée"></option>
+            <option value="Ami(e)"></option>
+          </datalist>
+        </div>
+      </div>
+
+      <!-- Step 1B: Défunt -->
+      <div class="step" id="step1B">
+                <div class="note">
+  📌 Astuce : Merci de renseigner les informations disponibles sur le défunt afin de faciliter les recherches et les correspondances. Si certaines informations ne sont pas encore connues, vous pouvez laisser les champs vides et les compléter ultérieurement.        </div>
+<br><br/>
+        <div class="form-group">
+          <label>Nom</label>
+          <input type="text" id="lastname" />
+        </div>
+        <div class="form-group">
+          <label>Prénom</label>
+          <input type="text" id="firstname" />
+        </div>
+                <div class="form-group">
+          <label>UUID</label>
+          <input type="text" id="uid" readonly />
+        </div>
+
+        <div class="form-group">
+          <label>Date de naissance</label>
+          <input type="date" id="dob" />
+        </div>
+        <div class="form-group">
+          <label>Lieu de naissance</label>
+          <input type="text" id="birthplace" list="cities" />
+        </div>
+        <div class="form-group">
+          <label>Date de décès</label>
+          <input type="date" id="dod" />
+        </div>
+        <div class="form-group">
+          <label>Lieu de décès</label>
+          <input type="text" id="deathplace" list="cities" />
+        </div>
+        <div class="form-group">
+          <label>Cimetière</label>
+          <input type="text" id="cemetery" list="cemeteries" />
+        </div>
+        <div class="form-group">
+          <label>Profession</label>
+          <input type="text" id="profession" list="professions" />
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step" id="step2">
+      <div class="note">
+📌 Astuce : Indiquez la localisation la plus précise possible – Merci d’indiquer l’emplacement exact de la tombe pour faciliter son repérage. Si vous estimez que la localisation saisie n’est pas suffisamment précise, vous pouvez nous envoyer une localisation en direct via WhatsApp. Pour cela, ouvrez une nouvelle conversation ou message WhatsApp, appuyez sur le bouton 📎 (ou +), choisissez "Localisation", puis "Envoyer la localisation en direct".      </div>
+<br><br/>
+
+        <div class="form-group">
+          <label>Localisation actuelle</label>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <input type="text" id="localisation" class="readonly-input" readonly />
+            <div class="location-controls">
+              <button id="getLocationBtn" title="Obtenir ma position">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none"/>
+                  <circle cx="12" cy="12" r="3" fill="white"/>
+                </svg>
+              </button>
+              <button id="clearLocationBtn" title="Effacer">
+                <svg viewBox="0 0 24 24">
+                  <line x1="6" y1="6" x2="18" y2="18" stroke="white" stroke-width="2"/>
+                  <line x1="6" y1="18" x2="18" y2="6" stroke="white" stroke-width="2"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Adresse</label>
+          <span id="address">--</span>
+        </div>
+        <div class="form-group">
+          <label>Dernière mise à jour</label>
+          <span id="timestamp">--</span>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step" id="step3">
+        <div class="note">
+          📌 Astuce: Une fois l’inscription finalisée, un e-mail automatique vous sera géneré avec un lien pour uploader 5 photos : 1 photo de profil du défunt(e), 1 photo de la tombe de près, 1 photo de la tombe de loin dans son environnement, ainsi que 2 photos supplémentaires du défunt(e). Veillez à ce que les fichiers soient au format .jpeg et que la taille totale n’excède pas 25 Mo afin d’assurer une bonne réception et un traitement efficace.
+        </div>
+      </div>
+
+      <!-- Final message -->
+      <div class="thank-you" id="thankYou">
+        <h2>Merci pour votre inscription 🙏</h2>
+        <p>Nous traitons vos informations. Vous recevrez un email de confirmation sous peu.</p>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls">
+        <button id="cancelBtn">Annuler</button>
+        <button id="backBtn" disabled>Précédent</button>
+        <button id="nextBtn">Suivant</button>
+      </div>
+    </div>
+  </main>
+
+  <div class="popup-overlay" id="cancelPopup">
+    <div class="popup-box">
+      <p>Êtes-vous sûr d’annuler ? Toutes les données seront perdues.</p>
+      <button id="stayBtn">Non</button>
+      <button id="confirmCancelBtn">Oui</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import L from 'leaflet';
+
+    const generateUID = () => {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      return Array.from({ length: 8 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+    };
+
+    const initialUIDEl = document.getElementById('initialUID');
+    const uidInput = document.getElementById('uid');
+    const rawUID = generateUID();
+    // No longer display UID on first screen
+    uidInput.value = rawUID;
+
+    const initialStage = document.getElementById('initialStage');
+    const formStages = document.getElementById('formStages');
+    const continueInitialBtn = document.getElementById('continueInitial');
+    const cancelInitialBtn = document.getElementById('cancelInitial');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const closePageBtn = document.getElementById('closePageBtn');
+
+    const popupOverlay = document.getElementById('cancelPopup');
+    const stayBtn = document.getElementById('stayBtn');
+    const confirmCancelBtn = document.getElementById('confirmCancelBtn');
+
+    function showCancelPopup() {
+      popupOverlay.style.display = 'flex';
+    }
+
+    function hideCancelPopup() {
+      popupOverlay.style.display = 'none';
+    }
+
+    function confirmCancelAction() {
+      location.reload();
+    }
+
+    cancelInitialBtn.addEventListener('click', showCancelPopup);
+    closePageBtn.addEventListener('click', showCancelPopup);
+    cancelBtn.addEventListener('click', showCancelPopup);
+    stayBtn.addEventListener('click', hideCancelPopup);
+    confirmCancelBtn.addEventListener('click', confirmCancelAction);
+
+    continueInitialBtn.addEventListener('click', () => {
+      initialStage.style.display = 'none';
+      formStages.style.display = 'block';
+    });
+
+    const steps = [
+      document.getElementById('step1A'),
+      document.getElementById('step1B'),
+      document.getElementById('step2'),
+      document.getElementById('step3')
+    ];
+    const stepIndicator = document.getElementById('stepIndicator');
+    let currentStep = 0;
+
+    const backBtn = document.getElementById('backBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const thankYou = document.getElementById('thankYou');
+
+    const accuracy = document.getElementById('accuracy');
+    const address = document.getElementById('address');
+    const timestamp = document.getElementById('timestamp');
+    const localisationInput = document.getElementById('localisation');
+    const getLocationBtn = document.getElementById('getLocationBtn');
+    const clearLocBtn = document.getElementById('clearLocationBtn');
+
+    const images = [];
+
+    const updateStepView = () => {
+      steps.forEach((step, i) => step.classList.toggle('active', i === currentStep));
+      backBtn.disabled = currentStep === 0;
+      nextBtn.textContent = currentStep === steps.length - 1 ? 'Soumettre' : 'Suivant';
+      stepIndicator.textContent =
+        currentStep === 0 ? 'Coordonnées du déclarant'
+        : currentStep === 1 ? 'Informations sur le/la défunt(e)'
+        : currentStep === 2 ? 'Localisation'
+        : 'Gallerie';
+    };
+
+    // Dark mode toggle
+let currentMode = 'jour'; // Par défaut
+
+function setMode(mode) {
+  document.body.classList.remove('mode-jour', 'mode-nuit');
+  document.body.classList.add(`mode-${mode}`);
+
+  const icon = document.getElementById('darkIcon');
+  if (mode === 'jour') {
+    icon.className = 'fa-solid fa-moon'; // Icône lune
+  } else {
+    icon.className = 'fa-solid fa-sun'; // Icône soleil
+  }
+
+  currentMode = mode;
+}
+
+// Initialisation
+setMode('jour');
+
+document.getElementById('darkToggleBtn').addEventListener('click', () => {
+  setMode(currentMode === 'jour' ? 'nuit' : 'jour');
+});
+
+
+    // Sidebar toggle
+    const toggleSidebar = document.getElementById('toggleSidebar');
+    const sideMenu = document.getElementById('sideMenu');
+    toggleSidebar.addEventListener('click', () => {
+      sideMenu.classList.toggle('active');
+    });
+
+    closeSidebarBtn.addEventListener('click', () => {
+      sideMenu.classList.remove('active');
+    });
+
+    backBtn.addEventListener('click', () => {
+      if (currentStep > 0) {
+        currentStep--;
+        updateStepView();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentStep === steps.length - 1) {
+        const totalSize = images.reduce((acc, file) => acc + file.size, 0);
+        if (totalSize > 25 * 1024 * 1024) {
+          alert("La taille totale des images dépasse 25 Mo. Veuillez réduire la taille ou envoyer manuellement les images à info@quoboor.com avec le UID.");
+          return;
+        }
+        sendEmail();
+        thankYou.classList.add('active');
+        steps.forEach(s => s.classList.remove('active'));
+        document.querySelector('.controls').style.display = 'none';
+        stepIndicator.textContent = 'Merci !';
+        // Redirect after 3 seconds to index.html
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 3000);
+      } else {
+        currentStep++;
+        updateStepView();
+      }
+    });
+
+    function handleImagePreview(files) {
+      for (let file of files) {
+        if (!file.type.startsWith("image/")) continue;
+        images.push(file);
+        const container = document.createElement('div');
+        container.className = 'thumbnail-container';
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        const btn = document.createElement('button');
+        btn.className = 'delete-btn';
+        btn.textContent = '×';
+        btn.onclick = () => {
+          images.splice(images.indexOf(file), 1);
+          container.remove();
+        };
+        container.appendChild(img);
+        container.appendChild(btn);
+        previewDiv.appendChild(container);
+      }
+    }
+
+    cameraInput.addEventListener('change', e => handleImagePreview(e.target.files));
+    uploadInput.addEventListener('change', e => handleImagePreview(e.target.files));
+
+    getLocationBtn.addEventListener('click', () => {
+      if (navigator.geolocation) {
+        navigator.permissions.query({ name: 'geolocation' }).then(result => {
+          if (result.state === 'denied') {
+            alert("Permission de localisation refusée. Veuillez l’activer dans les paramètres de votre navigateur.");
+            return;
+          }
+
+          navigator.geolocation.getCurrentPosition(pos => {
+            const { latitude, longitude } = pos.coords;
+            localisationInput.value = `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
+            timestamp.textContent = new Date().toLocaleString();
+
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`)
+              .then(res => res.json())
+              .then(data => {
+                address.textContent = data.display_name ?? '--';
+              })
+              .catch(() => {
+                address.textContent = '--';
+              });
+          }, err => {
+            console.error("Erreur GPS", err);
+            alert("Impossible de localiser. Veuillez autoriser la géolocalisation.");
+          }, {
+            enableHighAccuracy: true,
+            timeout: 15000,
+            maximumAge: 0
+          });
+        });
+      } else {
+        alert("La géolocalisation n’est pas supportée.");
+      }
+    });
+
+    clearLocBtn.addEventListener('click', () => {
+      localisationInput.value = '';
+      accuracy.textContent = '--';
+      address.textContent = '--';
+      timestamp.textContent = '--';
+    });
+
+    function sendEmail() {
+      const getVal = id => {
+        const el = document.getElementById(id);
+        return el?.value?.trim?.() || 'n/a';
+      };
+
+      const body = [
+        '--- Étape 1: Informations du déclarant ---',
+        `UUID : ${uidInput.value}`,
+        `Prénom du déclarant : ${getVal('userFirstName')}`,
+        `Nom du déclarant : ${getVal('userLastName')}`,
+        `Email du déclarant : ${getVal('userEmail')}`,
+        `Lien d'affiliation : ${getVal('affiliation')}`,
+
+        '',
+        '--- Étape 2: Informations sur le défunt ---',
+        `Nom : ${getVal('lastname')}`,
+        `Prénom : ${getVal('firstname')}`,
+        `Date de naissance : ${getVal('dob')}`,
+        `Lieu de naissance : ${getVal('birthplace')}`,
+        `Date de décès : ${getVal('dod')}`,
+        `Lieu de décès : ${getVal('deathplace')}`,
+        `Cimetière : ${getVal('cemetery')}`,
+        `Profession : ${getVal('profession')}`,
+
+        '',
+        '--- Étape 3: Localisation ---',
+        `Localisation : ${localisationInput.value || 'n/a'}`,
+        `Adresse : ${address.textContent || 'n/a'}`,
+        `Dernière mise à jour : ${timestamp.textContent || 'n/a'}`
+      ].join('%0D%0A');
+
+      const subject = `Nouvelle demande - UID: ${uidInput.value}`;
+      const mailtoLink = `mailto:info@quoboor.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+      const mail = window.open(mailtoLink, '_blank');
+      if (!mail) alert("Veuillez autoriser les popups pour envoyer l'e-mail.");
+
+      if (images.length) {
+        alert('Un e-mail a été généré. Veuillez y attacher manuellement les images avec le UID du défunt ou de la défunte.');
+      }
+    }
+
+    updateStepView();
+  </script>
+</body>
+</html>
