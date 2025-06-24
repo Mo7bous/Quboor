@@ -1,18 +1,17 @@
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Inscription</title>
-  <script type="importmap">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inscription</title>
+<script type="importmap">
     {
       "imports": {
         "leaflet": "https://cdn.skypack.dev/leaflet"
       }
     }
   </script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-  <style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+<style>
     :root {
             --primary-color: #1F262A;
             --secondary-color: #41464a;
@@ -410,196 +409,189 @@ body.mode-nuit {
   </style>
 </head>
 <body>
-  <!-- Sidebar -->
-  <div class="sidebar" id="sideMenu">
-    <h2><button style="float: right; background: none; border: none; color: white; font-size: 1.4em; cursor: pointer;" id="closeSidebarBtn">×</button></h2>
-    <ul>
-    </ul>
-  </div>
-
-  <!-- Top Nav -->
-  <nav class="top-nav">
-    <button class="sidebar-toggle-btn" id="toggleSidebar"></button>
-            <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
+<!-- Sidebar -->
+<div class="sidebar" id="sideMenu">
+<h2><button id="closeSidebarBtn" style="float: right; background: none; border: none; color: white; font-size: 1.4em; cursor: pointer;">×</button></h2>
+<ul>
+</ul>
+</div>
+<!-- Top Nav -->
+<nav class="top-nav">
+<button class="sidebar-toggle-btn" id="toggleSidebar"></button>
+<img alt="Logo Quboor" class="logo" src="img/logotitre.png"/>
 <button class="dark-toggle-btn" id="darkToggleBtn">
-  <i id="darkIcon" class="fa-solid fa-moon"></i>
+<i class="fa-solid fa-moon" id="darkIcon"></i>
 </button>
-  </nav>
+</nav>
+<button class="top-close" id="closePageBtn" style="box-shadow: none;">×</button>
+<main>
+<input accept="image/*" capture="environment" id="cameraInput" style="display:none" type="file"/>
+<input accept="image/*" id="uploadInput" multiple="" style="display:none" type="file"/>
+<div class="photo-preview" id="previewDiv"></div>
 
-  <button class="top-close" id="closePageBtn" style="box-shadow: none;">×</button>
-
-
-  <main>
-    <div id="initialStage" class="stage initial-stage">
-      <div class="stage-message">
-        <h2>Inscription en 4 étapes :</h2>
-      <ol>
-        <li>Coordonnées du déclarant.</li>
-        <li>Détails sur le défunt(e).</li>
-        <li>Localisation GPS de la tombe.</li>
-        <li>Galerie photo du défunt(e) et de la tombe.</li>
-      </ol>
-      
-      </div>
-      <div class="initial-controls">
-        <button id="cancelInitial">Annuler</button>
-        <button id="continueInitial">Continuer</button>
-      </div>
-    </div>
-
-    <div id="formStages" style="display: none;">
-      <div class="step-indicator" id="stepIndicator">Coordonées du déclarant</div>
-<br><br/>
-      <!-- Step 1A: Déclarant -->
-      <div class="step active" id="step1A">
-        <div class="note">
+<div class="stage initial-stage" id="initialStage">
+<div class="stage-message">
+<h2>Inscription en 4 étapes :</h2>
+<ol>
+<li>Coordonnées du déclarant.</li>
+<li>Détails sur le défunt(e).</li>
+<li>Localisation GPS de la tombe.</li>
+<li>Galerie photo du défunt(e) et de la tombe.</li>
+</ol>
+</div>
+<div class="initial-controls">
+<button id="cancelInitial">Annuler</button>
+<button id="continueInitial">Continuer</button>
+</div>
+</div>
+<div id="formStages" style="display: none;">
+<div class="step-indicator" id="stepIndicator">Coordonées du déclarant</div>
+<br/><br>
+<!-- Step 1A: Déclarant -->
+<div class="step active" id="step1A">
+<div class="note">
           📌 Astuce : Pour faciliter le suivi de votre demande et permettre une éventuelle confirmation, veuillez indiquer des coordonnées e-mail où vous pouvez être facilement joignable.
         </div>
-        <br><br/>
-
-        <div class="form-group">
-          <label>Prénom du déclarant</label>
-          <input type="text" id="userFirstName" placeholder="Votre prénom" />
-        </div>
-        <div class="form-group">
-          <label>Nom du déclarant</label>
-          <input type="text" id="userLastName" placeholder="Votre nom" />
-        </div>
-        <div class="form-group">
-          <label>Adresse email</label>
-          <input type="text" id="userEmail" placeholder="exemple@domaine.com" />
-        </div>
-        <div class="form-group">
-          <label>Lien d'affiliation</label>
-          <input type="text" id="affiliation" list="relationList" placeholder="Sélectionnez votre relation" />
-          <datalist id="relationList">
-            <option value="Père"></option>
-            <option value="Mère"></option>
-            <option value="Enfant"></option>
-            <option value="Petit-enfant"></option>
-            <option value="Arrière petit-enfant"></option>
-            <option value="Oncle"></option>
-            <option value="Tante"></option>
-            <option value="Neveu"></option>
-            <option value="Nièce"></option>
-            <option value="Famille proche"></option>
-            <option value="Famille éloignée"></option>
-            <option value="Ami(e)"></option>
-          </datalist>
-        </div>
-      </div>
-
-      <!-- Step 1B: Défunt -->
-      <div class="step" id="step1B">
-                <div class="note">
+<br/><br>
+<div class="form-group">
+<label>Prénom du déclarant</label>
+<input id="userFirstName" placeholder="Votre prénom" type="text"/>
+</div>
+<div class="form-group">
+<label>Nom du déclarant</label>
+<input id="userLastName" placeholder="Votre nom" type="text"/>
+</div>
+<div class="form-group">
+<label>Adresse email</label>
+<input id="userEmail" placeholder="exemple@domaine.com" type="text"/>
+</div>
+<div class="form-group">
+<label>Lien d'affiliation</label>
+<input id="affiliation" list="relationList" placeholder="Sélectionnez votre relation" type="text"/>
+<datalist id="relationList">
+<option value="Père"></option>
+<option value="Mère"></option>
+<option value="Enfant"></option>
+<option value="Petit-enfant"></option>
+<option value="Arrière petit-enfant"></option>
+<option value="Oncle"></option>
+<option value="Tante"></option>
+<option value="Neveu"></option>
+<option value="Nièce"></option>
+<option value="Famille proche"></option>
+<option value="Famille éloignée"></option>
+<option value="Ami(e)"></option>
+</datalist>
+</div>
+</br></div>
+<!-- Step 1B: Défunt -->
+<div class="step" id="step1B">
+<div class="note">
   📌 Astuce : Merci de renseigner les informations disponibles sur le défunt afin de faciliter les recherches et les correspondances. Si certaines informations ne sont pas encore connues, vous pouvez laisser les champs vides et les compléter ultérieurement.        </div>
-<br><br/>
-        <div class="form-group">
-          <label>Nom</label>
-          <input type="text" id="lastname" />
-        </div>
-        <div class="form-group">
-          <label>Prénom</label>
-          <input type="text" id="firstname" />
-        </div>
-                <div class="form-group">
-          <label>UUID</label>
-          <input type="text" id="uid" readonly />
-        </div>
-
-        <div class="form-group">
-          <label>Date de naissance</label>
-          <input type="date" id="dob" />
-        </div>
-        <div class="form-group">
-          <label>Lieu de naissance</label>
-          <input type="text" id="birthplace" list="cities" />
-        </div>
-        <div class="form-group">
-          <label>Date de décès</label>
-          <input type="date" id="dod" />
-        </div>
-        <div class="form-group">
-          <label>Lieu de décès</label>
-          <input type="text" id="deathplace" list="cities" />
-        </div>
-        <div class="form-group">
-          <label>Cimetière</label>
-          <input type="text" id="cemetery" list="cemeteries" />
-        </div>
-        <div class="form-group">
-          <label>Profession</label>
-          <input type="text" id="profession" list="professions" />
-        </div>
-      </div>
-
-      <!-- Step 2 -->
-      <div class="step" id="step2">
-      <div class="note">
+<br/><br>
+<div class="form-group">
+<label>Nom</label>
+<input id="lastname" type="text"/>
+</div>
+<div class="form-group">
+<label>Prénom</label>
+<input id="firstname" type="text"/>
+</div>
+<div class="form-group">
+<label>UUID</label>
+<input id="uid" readonly="" type="text"/>
+</div>
+<div class="form-group">
+<label>Date de naissance</label>
+<input id="dob" type="date"/>
+</div>
+<div class="form-group">
+<label>Lieu de naissance</label>
+<input id="birthplace" list="cities" type="text"/>
+</div>
+<div class="form-group">
+<label>Date de décès</label>
+<input id="dod" type="date"/>
+</div>
+<div class="form-group">
+<label>Lieu de décès</label>
+<input id="deathplace" list="cities" type="text"/>
+</div>
+<div class="form-group">
+<label>Cimetière</label>
+<input id="cemetery" list="cemeteries" type="text"/>
+</div>
+<div class="form-group">
+<label>Profession</label>
+<input id="profession" list="professions" type="text"/>
+</div>
+</br></div>
+<!-- Step 2 -->
+<div class="step" id="step2">
+<div class="note">
 📌 Astuce : Indiquez la localisation la plus précise possible – Merci d’indiquer l’emplacement exact de la tombe pour faciliter son repérage. Si vous estimez que la localisation saisie n’est pas suffisamment précise, vous pouvez nous envoyer une localisation en direct via WhatsApp. Pour cela, ouvrez une nouvelle conversation ou message WhatsApp, appuyez sur le bouton 📎 (ou +), choisissez "Localisation", puis "Envoyer la localisation en direct".      </div>
-<br><br/>
+<br/><br>
+<div class="form-group">
+<label>Localisation actuelle</label>
+<div style="display: flex; gap: 10px; align-items: center;">
+<input class="readonly-input" id="localisation" readonly="" type="text"/>
+<div class="location-controls">
+<button id="getLocationBtn" title="Obtenir ma position">
+<svg viewbox="0 0 24 24">
+<circle cx="12" cy="12" fill="none" r="10" stroke="white" stroke-width="2"></circle>
+<circle cx="12" cy="12" fill="white" r="3"></circle>
+</svg>
+</button>
+<button id="clearLocationBtn" title="Effacer">
+<svg viewbox="0 0 24 24">
+<line stroke="white" stroke-width="2" x1="6" x2="18" y1="6" y2="18"></line>
+<line stroke="white" stroke-width="2" x1="6" x2="18" y1="18" y2="6"></line>
+</svg>
+</button>
+</div>
+</div>
+</div>
+<div class="form-group">
+<label>Précision</label>
+<span id="accuracy">--</span>
+</div>
 
-        <div class="form-group">
-          <label>Localisation actuelle</label>
-          <div style="display: flex; gap: 10px; align-items: center;">
-            <input type="text" id="localisation" class="readonly-input" readonly />
-            <div class="location-controls">
-              <button id="getLocationBtn" title="Obtenir ma position">
-                <svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none"/>
-                  <circle cx="12" cy="12" r="3" fill="white"/>
-                </svg>
-              </button>
-              <button id="clearLocationBtn" title="Effacer">
-                <svg viewBox="0 0 24 24">
-                  <line x1="6" y1="6" x2="18" y2="18" stroke="white" stroke-width="2"/>
-                  <line x1="6" y1="18" x2="18" y2="6" stroke="white" stroke-width="2"/>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Adresse</label>
-          <span id="address">--</span>
-        </div>
-        <div class="form-group">
-          <label>Dernière mise à jour</label>
-          <span id="timestamp">--</span>
-        </div>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="step" id="step3">
-        <div class="note">
+<div class="form-group">
+<label>Adresse</label>
+<span id="address">--</span>
+</div>
+<div class="form-group">
+<label>Dernière mise à jour</label>
+<span id="timestamp">--</span>
+</div>
+</br></div>
+<!-- Step 3 -->
+<div class="step" id="step3">
+<div class="note">
           📌 Astuce: Une fois l’inscription finalisée, un e-mail automatique vous sera géneré avec un lien pour uploader 5 photos : 1 photo de profil du défunt(e), 1 photo de la tombe de près, 1 photo de la tombe de loin dans son environnement, ainsi que 2 photos supplémentaires du défunt(e). Veillez à ce que les fichiers soient au format .jpeg et que la taille totale n’excède pas 25 Mo afin d’assurer une bonne réception et un traitement efficace.
         </div>
-      </div>
-
-      <!-- Final message -->
-      <div class="thank-you" id="thankYou">
-        <h2>Merci pour votre inscription 🙏</h2>
-        <p>Nous traitons vos informations. Vous recevrez un email de confirmation sous peu.</p>
-      </div>
-
-      <!-- Controls -->
-      <div class="controls">
-        <button id="cancelBtn">Annuler</button>
-        <button id="backBtn" disabled>Précédent</button>
-        <button id="nextBtn">Suivant</button>
-      </div>
-    </div>
-  </main>
-
-  <div class="popup-overlay" id="cancelPopup">
-    <div class="popup-box">
-      <p>Êtes-vous sûr d’annuler ? Toutes les données seront perdues.</p>
-      <button id="stayBtn">Non</button>
-      <button id="confirmCancelBtn">Oui</button>
-    </div>
-  </div>
-
-  <script type="module">
+</div>
+<!-- Final message -->
+<div class="thank-you" id="thankYou">
+<h2>Merci pour votre inscription 🙏</h2>
+<p>Nous traitons vos informations. Vous recevrez un email de confirmation sous peu.</p>
+</div>
+<!-- Controls -->
+<div class="controls">
+<button id="cancelBtn">Annuler</button>
+<button disabled="" id="backBtn">Précédent</button>
+<button id="nextBtn">Suivant</button>
+</div>
+</br></div>
+</main>
+<div class="popup-overlay" id="cancelPopup">
+<div class="popup-box">
+<p>Êtes-vous sûr d’annuler ? Toutes les données seront perdues.</p>
+<button id="stayBtn">Non</button>
+<button id="confirmCancelBtn">Oui</button>
+</div>
+</div>
+<script type="module">
     import L from 'leaflet';
 
     const generateUID = () => {
