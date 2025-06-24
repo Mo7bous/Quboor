@@ -785,7 +785,6 @@ body.dark-mode .sidebar a:hover {
 }
 
 body.dark-mode #map {
-    /* The filter was removed to prevent inverting map colors in dark mode. */
 }
 
 body.dark-mode .search-explanation {
@@ -900,20 +899,16 @@ body.dark-mode #play-pause-btn {
     border-color: #e0e0e0;
     color: #e0e0e0;
 }
-
 body.dark-mode #play-pause-btn:hover {
     background-color: #e0e0e0;
     color: #1F262A;
 }
-
 body.dark-mode #volume-slider {
     background: #444;
 }
-
 body.dark-mode #volume-slider::-webkit-slider-thumb {
     background: #e0e0e0;
 }
-
 body.dark-mode #volume-slider::-moz-range-thumb {
     background: #e0e0e0;
 }
@@ -932,7 +927,7 @@ body.dark-mode #volume-slider::-moz-range-thumb {
             <i class="fas fa-bars"></i>
         </button>
         <h1>
-            <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
+<img src="img/logotitre.png" alt="Logo Quboor" class="logo">
         </h1>
         <div class="nav-right-controls">
             <button id="darkModeToggle" class="dark-mode-toggle-btn">
@@ -968,19 +963,15 @@ body.dark-mode #volume-slider::-moz-range-thumb {
 
     <div id="main">
         <div id="map"></div>
-
         <div class="search-explanation">
             <p><strong>Comment rechercher ?</strong> Correspondances dans tous les champs (nom, prénom, dates, etc.). Chaque champ contenant un terme de votre recherche augmente le pourcentage de pertinence.</p>
             <p><strong>Exemple :</strong> Taper "Mohammed Rabat 1978" trouvera les personnes nommées "Mohammed" ainsi que celles liées à "Rabat" et autres filtres , accordant un score plus élevé à celles qui correspondent aux termes recherchés.</p>
         </div>
-
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Recherchez par nom, date ou autres détails">
         </div>
-
         <div id="death-cards-container"></div>
     </div>
-
     <div id="profilePopup" class="popup">
         <div class="popup-content">
             <span class="popup-close">&times;</span>
@@ -994,14 +985,12 @@ body.dark-mode #volume-slider::-moz-range-thumb {
             </div>
         </div>
     </div>
-
     <div id="imageViewerPopup" class="popup">
         <span class="popup-close image-viewer-close">&times;</span>
         <a class="prev">&#10094;</a>
         <a class="next">&#10095;</a>
         <img class="image-viewer-content" id="fullSizeImage">
     </div>
-
     <script type="module">
 import * as L from 'leaflet';
 
@@ -1015,13 +1004,13 @@ const deathEntries = [
     {uid:"PD1GTHTU",familyName:"Saïl",firstName:"Noureddine",dob:"1947-01-01",birthplace:"Tanger",dod:"2020-12-15",deathplace:"Rabat",location:"34.02920504233782, -6.844813985431729",images:["users/users/PD1GTHTU/1.jpeg","users/users/PD1GTHTU/2.jpeg","users/users/PD1GTHTU/3.jpeg","users/users/PD1GTHTU/4.jpeg","users/users/PD1GTHTU/5.jpeg"],description:"Critique cinématographique, ex‑patron de 2M et du CCM.",cemetery:"Cimetière Chouhada de Rabat",profession:"Critique & enseignant",relatives:[]},
     {uid:"R1E8KTZ3",familyName:"Benkhaldoun",firstName:"Soumia",dob:"1963-03-13",birthplace:"Marrakech",dod:"2023-06-28",deathplace:"Harhoura",location:"34.02920504233782, -6.844813985431729",images:["users/users/R1E8KTZ3/1.jpeg","users/users/R1E8KTZ3/2.jpeg","users/users/R1E8KTZ3/3.jpeg","users/users/R1E8KTZ3/4.jpeg","users/users/R1E8KTZ3/5.jpeg"],description:"Ancienne ministre, professeure et militante engagée pour les droits des femmes.",cemetery:"Cimetière Chouhada de Rabat",profession:"Ministre & Universitaire",relatives:[]},
     {uid:"12QQAWUR",familyName:"Radi",firstName:"Abdelouahed",dob:"1935-04-01",birthplace:"Salé",dod:"2023-03-26",deathplace:"Rabat",location:"34.02920504233782, -6.844813985431729",images:["users/users/12QQAWUR/1.jpeg","users/users/12QQAWUR/2.jpeg","users/users/12QQAWUR/3.jpeg","users/users/12QQAWUR/4.jpeg","users/users/12QQAWUR/5.jpeg"],description:"Ancien président de la Chambre des Représentants et ex‑Premier secrétaire de l’USFP.",cemetery:"Cimetière Chouhada de Rabat",profession:"Homme politique & professeur",relatives:[]},
-    {uid:"6Q1R5S2T",familyName:"Bouhlal",firstName:"Mouhcine",dob:"1975-01-30",birthplace:"Rabat",dod:"2023-01-15",deathplace:"Rabat",location:"34.03035867959946, -6.843429048160808",images:["users/users/6Q1R5S2T/1.jpeg","users/users/6Q1R5S2T/2.jpeg","users/users/6Q1R5S2T/3.jpeg","users/users/6Q1R5S2T/4.jpeg","users/users/6Q1R5S2T/5.jpeg"],description:"Leader d’une génération, il a marqué le football marocain par son talent, sa vision du jeu et son engagement exemplaire sur et en dehors du terrain.",cemetery:"Cimetière Chouhada de Rabat",profession:"Sportif",relatives:[]},
-    {uid:"P9I7Q1RD",familyName:"Bouhlal",firstName:"Abdel Karim",dob:"1960-11-05",birthplace:"Rabat",dod:"2021-05-20",deathplace:"Rabat",location:"34.03077574369565, -6.838867787876438",images:["users/users/P9I7Q1RD/1.jpeg","users/users/P9I7Q1RD/2.jpeg","users/users/P9I7Q1RD/3.jpeg","users/users/P9I7Q1RD/4.jpeg","users/users/P9I7Q1RD/5.jpeg"],description:"Ô Dieu, accorde-lui ta miséricorde et une place dans ton vaste paradis.",cemetery:"Cimetière Chouhada de Rabat",profession:"Musicien",relatives:[]},
-    {uid:"X8G2TQ7K",familyName:"Bouhlal",firstName:"Abdel Fettah",dob:"n/a",birthplace:"Rabat",dod:"2001-04-20",deathplace:"Rabat",location:"34.03065405853028, -6.838245091791529",images:["users/users/X8G2TQ7K/1.jpeg","users/users/X8G2TQ7K/2.jpeg","users/users/X8G2TQ7K/3.jpeg","users/users/X8G2TQ7K/4.jpeg","users/users/X8G2TQ7K/5.jpeg"],description:"Ô Dieu, accorde-lui ta miséricorde et une place dans ton vaste paradis.",cemetery:"Cimetière Chouhada de Rabat",profession:"n/a",relatives:[]},
-    {uid:"URU136EV",familyName:"Lhrizi",firstName:"Mehjouba",dob:"1978-09-05",birthplace:"Nador",dod:"2023-03-11",deathplace:"Rabat",location:"34.03076153229848, -6.8387874054214155",images:["users/users/URU136EV/1.jpeg","users/users/URU136EV/2.jpeg","users/users/URU136EV/3.jpeg","users/users/URU136EV/4.jpeg","users/users/URU136EV/5.jpeg"],description:"Ô Dieu, accorde-lui ta miséricorde et une place dans ton vaste paradis.",cemetery:"Cimetière Chouhada de Rabat",profession:"Femme au foyer",relatives:[]},
-    {uid:"HDKMLMKL",familyName:"Bensalem",firstName:"Hassan",dob:"1978-09-05",birthplace:"Tanger",dod:"2023-03-11",deathplace:"Rabat",location:"34.03089883028951, -6.841257164662843",images:["users/users/HDKMLMKL/1.jpeg","users/users/HDKMLMKL/2.jpeg","users/users/HDKMLMKL/3.jpeg","users/users/HDKMLMKL/4.jpeg","users/users/HDKMLMKL/5.jpeg"],description:"Ô Dieu, accorde-lui ta miséricorde et une place dans ton vaste paradis.",cemetery:"Cimetière Chouhada de Rabat",profession:"Sportif",relatives:[]},
-    {uid:"HDKMLMKL",familyName:"Bensalem",firstName:"Fatna",dob:"1978-09-05",birthplace:"Nador",dod:"2023-03-11",deathplace:"Rabat",location:"34.03038428663063, -6.840810491371483",images:["users/users/4SMK7LMK/1.jpeg","users/users/4SMK7LMK/2.jpeg","users/users/4SMK7LMK/3.jpeg","users/users/4SMK7LMK/4.jpeg","users/users/4SMK7LMK/5.jpeg"],description:"Ô Dieu, accorde-lui ta miséricorde et une place dans ton vaste paradis.",cemetery:"Cimetière Chouhada de Rabat",profession:"Femme au foyer",relatives:[]},
-    {uid:"4LMKHDKM",familyName:"Bensalem",firstName:"Rachid",dob:"1978-09-05",birthplace:"Rabat",dod:"2023-03-11",deathplace:"Meknes",location:"34.029569894590644, -6.84274458669287",images:["users/users/4LMKHDKM/1.jpeg","users/users/4LMKHDKM/2.jpeg","users/users/4LMKHDKM/3.jpeg","users/users/4LMKHDKM/4.jpeg","users/users/4LMKHDKM/5.jpeg"],description:"Ô Dieu, accorde-lui ta miséricorde et une place dans ton vaste paradis.",cemetery:"Cimetière Chouhada de Rabat",profession:"Cuisiner",relatives:[]},
+    {uid:"6Q1R5S2T",familyName:"Bouhlal",firstName:"Mouhcine",dob:"1975-01-30",birthplace:"Rabat",dod:"2023-01-15",deathplace:"Rabat",location:"34.03035867959946, -6.843429048160808",images:["users/users/6Q1R5S2T/1.jpeg","users/users/6Q1R5S2T/2.jpeg","users/users/6Q1R5S2T/3.jpeg","users/users/6Q1R5S2T/4.jpeg","users/users/6Q1R5S2T/5.jpeg"],description:"Leader d’une génération, il a marqué le football marocain par son talent, sa vision du jeu et son engagement exemplaire sur et en dehors du terrain.",cemetery:"Cimetière Chouhada de Rabat",profession:"Sportif",relatives:[8,9,10]},
+    {uid:"P9I7Q1RD",familyName:"Bouhlal",firstName:"Abdel Karim",dob:"1960-11-05",birthplace:"Rabat",dod:"2021-05-20",deathplace:"Rabat",location:"34.03077574369565, -6.838867787876438",images:["users/users/P9I7Q1RD/1.jpeg","users/users/P9I7Q1RD/2.jpeg","users/users/P9I7Q1RD/3.jpeg","users/users/P9I7Q1RD/4.jpeg","users/users/P9I7Q1RD/5.jpeg"],description:"Ô Dieu, accorde-lui ta miséricorde et une place dans ton vaste paradis.",cemetery:"Cimetière Chouhada de Rabat",profession:"Musicien",relatives:[7,9,10]},
+    {uid:"X8G2TQ7K",familyName:"Bouhlal",firstName:"Abdel Fettah",dob:"n/a",birthplace:"Rabat",dod:"2001-04-20",deathplace:"Rabat",location:"34.03065405853028, -6.838245091791529",images:["users/users/X8G2TQ7K/1.jpeg","users/users/X8G2TQ7K/2.jpeg","users/users/X8G2TQ7K/3.jpeg","users/users/X8G2TQ7K/4.jpeg","users/users/X8G2TQ7K/5.jpeg"],description:"Ô Dieu, accorde-lui ta miséricorde et une place dans ton vaste paradis.",cemetery:"Cimetière Chouhada de Rabat",profession:"Employer",relatives:[7,8]},
+    {uid:"URU136EV",familyName:"Lhrizi",firstName:"Mehjouba",dob:"1978-09-05",birthplace:"Nador",dod:"2023-03-11",deathplace:"Rabat",location:"34.03076153229848, -6.8387874054214155",images:["users/users/URU136EV/1.jpeg","users/users/URU136EV/2.jpeg","users/users/URU136EV/3.jpeg","users/users/URU136EV/4.jpeg","users/users/URU136EV/5.jpeg"],description:"Ô Dieu, accorde-lui ta miséricorde et une place dans ton vaste paradis.",cemetery:"Cimetière Chouhada de Rabat",profession:"Femme au foyer",relatives:[7,8,10]},
+    {uid:"HDKMLMKL",familyName:"Bensalem",firstName:"Hassan",dob:"1978-09-05",birthplace:"Tanger",dod:"2023-03-11",deathplace:"Rabat",location:"34.03089883028951, -6.841257164662843",images:["users/users/HDKMLMKL/1.jpeg","users/users/HDKMLMKL/2.jpeg","users/users/HDKMLMKL/3.jpeg","users/users/HDKMLMKL/4.jpeg","users/users/HDKMLMKL/5.jpeg"],description:"Ô Dieu, accorde-lui ta miséricorde et une place dans ton vaste paradis.",cemetery:"Cimetière Chouhada de Rabat",profession:"Sportif",relatives:[12,13]},
+    {uid:"HDKMLMKL",familyName:"Bensalem",firstName:"Fatna",dob:"1978-09-05",birthplace:"Nador",dod:"2023-03-11",deathplace:"Rabat",location:"34.03038428663063, -6.840810491371483",images:["users/users/4SMK7LMK/1.jpeg","users/users/4SMK7LMK/2.jpeg","users/users/4SMK7LMK/3.jpeg","users/users/4SMK7LMK/4.jpeg","users/users/4SMK7LMK/5.jpeg"],description:"Ô Dieu, accorde-lui ta miséricorde et une place dans ton vaste paradis.",cemetery:"Cimetière Chouhada de Rabat",profession:"Femme au foyer",relatives:[11,13]},
+    {uid:"4LMKHDKM",familyName:"Bensalem",firstName:"Rachid",dob:"1978-09-05",birthplace:"Rabat",dod:"2023-03-11",deathplace:"Meknes",location:"34.029569894590644, -6.84274458669287",images:["users/users/4LMKHDKM/1.jpeg","users/users/4LMKHDKM/2.jpeg","users/users/4LMKHDKM/3.jpeg","users/users/4LMKHDKM/4.jpeg","users/users/4LMKHDKM/5.jpeg"],description:"Ô Dieu, accorde-lui ta miséricorde et une place dans ton vaste paradis.",cemetery:"Cimetière Chouhada de Rabat",profession:"Cuisiner",relatives:[11,12]},
     {uid:"M8X2V5LK",familyName:"Elhanchi Elamrani",firstName:"Sidi Rachid",dob:"1945-11-17",birthplace:"n/a",dod:"2010-07-12",deathplace:"Rabat",location:"34.02920504233782, -6.844813985431729",images:["users/users/M8X2V5LK/1.jpeg","users/users/M8X2V5LK/2.jpeg","users/users/M8X2V5LK/3.jpeg","users/users/M8X2V5LK/4.jpeg","users/users/M8X2V5LK/5.jpeg"],description:"Rust in vrede onze zeer geliefde, echtgenoot, vader, opa en broer",cemetery:"Cimetière Chouhada de Rabat",profession:"n/a",relatives:[]},
     {uid:"F6J3A9B7",familyName:"Tazi",firstName:"Sidi Abdesselam",dob:"n/a",birthplace:"n/a",dod:"2010-07-31",deathplace:"Paris",location:"34.02920504233782, -6.844813985431729",images:["users/users/F6J3A9B7/1.jpeg","users/users/F6J3A9B7/2.jpeg","users/users/F6J3A9B7/3.jpeg","users/users/F6J3A9B7/4.jpeg","users/users/F6J3A9B7/5.jpeg"],description:"Ô Dieu, accorde-lui ta miséricorde et une place dans ton vaste paradis.",cemetery:"Cimetière Chouhada de Rabat",profession:"n/a",relatives:[]},
     {uid:"8A7B3C2D",familyName:"Mouaz",firstName:"Amina",dob:"n/a",birthplace:"n/a",dod:"2024-03-14",deathplace:"Rabat",location:"34.02920504233782, -6.844813985431729",images:["users/users/8A7B3C2D/1.jpeg","users/users/8A7B3C2D/2.jpeg","users/users/8A7B3C2D/3.jpeg","users/users/8A7B3C2D/4.jpeg","users/users/8A7B3C2D/5.jpeg"],description:"Ô Dieu, accorde-lui ta miséricorde et une place dans ton vaste paradis.",cemetery:"Cimetière Chouhada de Rabat",profession:"n/a",relatives:[]},
