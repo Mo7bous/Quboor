@@ -45,8 +45,7 @@
         }
 
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 20px;
             animation: fadeInUp 1.5s ease-out 0.5s both;
         }
@@ -80,7 +79,7 @@
 
         .tombstone {
             position: absolute;
-            bottom: -120px;
+            bottom: 0px; /* 👈 Positionné en dessous de l'écran */
             left: 50%;
             transform: translateX(-50%);
             width: 60vw;   /* 👈 20% de la largeur de l'écran */
@@ -164,9 +163,9 @@
 </head>
 <body>
     <div class="landing-container">
+        <h1>Bienvenue sur</h1>
         <img src="img/logotitre.png" alt="Logo" class="logo">
-        <h1>Bienvenue sur Quboor</h1>
-        <p>Explorez l'histoire et rendez hommage à vos proches disparus. Découvrez les lieux de repos et préservez leur mémoire.</p>
+        <p>Explorez l'histoire et rendez hommage à vos proches disparus. Découvrez les lieux et préservez leur mémoire.</p>
         <button class="enter-btn" onclick="window.location.href='search.html'">Entrer</button>
         <div class="tombstone"></div>
         <div class="particles"></div>
