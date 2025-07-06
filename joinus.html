@@ -7,10 +7,31 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <style>
 :root {
-  --primary-color: #41464a;
-  --secondary-color: #1F262A;
-  --text-color: #F2E9E4;
-  --background-color: #f4f4f4;
+            --primary-color: #2C3E50;
+            --secondary-color: #030404;
+            --third-color: red;
+            --fourth-color: yellow;
+            --fifth-color: #2c3f53;/* Couleur du text de base en mode normal primaire fonce lighter */
+            --sixth-color: #0f151b;  /* Couleur du text de base en mode normal primaire fonce */
+
+            --text-color: #f9f4ea;  /* Couleur du text de base en mode normal  */
+            --background-color: #f9f4ea;
+            --accent-color: #f9f4ea;
+        }
+
+
+
+/* NAVBAR */
+        .top-nav {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 15px 20px;
+  height: 50px;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
 }
 
         html, body {
@@ -24,18 +45,19 @@
             overflow-x: hidden;
         }
 
-
-/* NAVBAR */
 .top-nav {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: var(--primary-color);
   color: var(--text-color);
-  padding: 15px 20px;
-  height: 50px;
-  width: 100%;
-  position: relative;
+  height: 60px;
+  width: 91%;
+  margin: 20px auto 0 auto;
+  border-radius: 8px;
+  padding: 0 20px 0 32px; /* padding-left augmenté */
   box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .top-nav h1 {
@@ -48,6 +70,22 @@
   align-items: center;
 }
 
+    h23 {
+    font-size: 1em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: block;
+    text-align: justify;
+}
+
+    h1 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: block;
+    text-align: center;    }
+    
 .logo {
   height: 40px;
   width: auto;
@@ -62,10 +100,21 @@
   z-index: 1; /* Ensure it's clickable */
 }
 
-        .container {
-            max-width: 1100px;
+.container {
+            width: 91%;
             margin: 0 auto;
             padding: 20px;
+            color: var(--primary-color);
+            background-color: var(--text-color);
+        }
+
+        .container2 {
+            width: 91%;
+            margin: 0 auto;
+            padding: 20px;
+            color: var(--primary-color);
+              border-radius: 8px;
+            background-color: white;
         }
 
         
@@ -93,46 +142,46 @@
 }
 
 /* SIDEBAR */
-.sidebar {
-  height: 100%;
-  width: 280px;
-  position: fixed;
-  top: 0;
-  left: -280px;
-  background-color: var(--primary-color);
-  overflow-x: hidden;
-  transition: 0.4s;
-  padding-top: 60px;
-  z-index: 1001; /* Match old z-index */
-}
+    .sidebar {
+      height: 100%;
+      width: 280px;
+      position: fixed;
+      top: 0;
+      left: -280px;
+      background-color: var(--primary-color);
+      overflow-x: hidden;
+      transition: 0.4s;
+      padding-top: 60px;
+      z-index: 1001;
+    }
 
-.sidebar a {
-  padding: 10px 25px;
-  font-size: 18px;
-  color: var(--text-color);
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  border-bottom: 1px solid var(--primary-color);
-  transition: background-color 0.3s;
-}
+    .sidebar a {
+      padding: 10px 25px;
+      font-size: 18px;
+      color: var(--text-color);
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      border-bottom: 1px solid var(--primary-color);
+      transition: background-color 0.3s;
+    }
 
-.sidebar a:hover {
-    background-color: var(--primary-color);
-}
+    .sidebar a:hover {
+      background-color: var(--primary-color);
+    }
 
-.sidebar a i {
-  margin-right: 15px;
-}
+    .sidebar a i {
+      margin-right: 15px;
+    }
 
-.closebtn {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 30px;
-  color: var(--text-color);
-  cursor: pointer;
-}
+    .closebtn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 30px;
+      color: var(--text-color);
+      cursor: pointer;
+    }
 
 #main {
     padding: 10px 20px 80px;
@@ -184,7 +233,7 @@
 }
 
 .death-card {
-    background-color: white;
+    background-color: var(--text-color);
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     padding: 15px;
@@ -767,7 +816,7 @@ body.dark-mode {
 }
 
 body.dark-mode .top-nav {
-    background-color: #1F262A;
+    background-color: var(--primary-color);
 }
 
 body.dark-mode .sidebar {
@@ -912,6 +961,86 @@ body.dark-mode #volume-slider::-moz-range-thumb {
     background: #e0e0e0;
 }
 
+.volunteer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.card {
+  background-color: var(--text-color);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  flex: 1 1 250px;
+  max-width: 300px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card i {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+/* Formulaire */
+.form {
+  max-width: 600px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.submit-btn {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  width: 100%;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #1a252f;
+}
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        
+
   </style>
 </head>
 <body>
@@ -929,18 +1058,6 @@ body.dark-mode #volume-slider::-moz-range-thumb {
         </div>
     </div>
 
-                <div id="audio-player-container">
-                <div class="player-controls">
-                    <button id="play-pause-btn" title="Play/Pause">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <div class="volume-control">
-                        <i class="fas fa-volume-up"></i>
-                        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.8" title="Volume">
-                    </div>
-                </div>
-                <audio id="quran-player" src="audio/ba9ara.mp3" preload="none"></audio>
-            </div>
 
     <div id="mySidebar" class="sidebar">
         <span class="closebtn">&times;</span>
@@ -954,29 +1071,28 @@ body.dark-mode #volume-slider::-moz-range-thumb {
         <a href="index.html"><i class="fas fa-home"></i>Accueil</a>
     </div>
 
-  <div class="container">
+<div class="container">
+        <div class="container2">
     <div class="section">
 <h1> Rejoignez l'aventure Quboor</h1>
-<p>
+<h23>
   Le projet <strong>Quboor</strong> est une initiative citoyenne et solidaire visant à préserver la mémoire collective à travers la <strong>cartographie, la numérisation et la valorisation des cimetières marocains</strong>. 
-</p>
+</h23>
 
-<p>
+<h23>
   À ce jour, notre première mission se déroule au <strong>cimetière Chouhada à Rabat</strong>, où nous réalisons un travail de terrain minutieux : 
   repérage des tombes, prise de photos, enregistrement des informations visibles, et géolocalisation précise de chaque sépulture. 
-</p>
+</h23>
 
-<p>
+<h23>
   Notre objectif ? <strong>Créer une base de données ouverte, éthique et accessible</strong> à toutes les familles marocaines, qu'elles soient au pays ou à l'étranger. Ce travail contribue à éviter la disparition des traces mémorielles, à identifier les tombes abandonnées ou sans suivi, et à renforcer le lien entre générations.
-</p>
+</h23>
 
-<p>
-  Aucune compétence technique n’est nécessaire : votre volonté de contribuer à une cause noble suffit.
-</p>
+<h23>
+  Aucune compétence technique n’est nécessaire : votre volonté de contribuer à une cause noble suffit. Rejoindre Quboor, c’est participer à une œuvre de mémoire, de respect, et de transmission intergénérationnelle.</strong>
+</h23>
 
-<p style="margin-top: 20px;">
-   <strong>Rejoindre Quboor, c’est participer à une œuvre de mémoire, de respect, et de transmission intergénérationnelle.</strong>
-</p>
+</div>
       <div class="volunteer-grid">
         <div class="card">
           <i class="fas fa-broom"></i>
@@ -997,7 +1113,6 @@ body.dark-mode #volume-slider::-moz-range-thumb {
     </div>
 
     <div class="section">
-      <h2>Formulaire de participation</h2>
       <form class="form" onsubmit="return sendEmail()">
         <div class="form-group">
           <label for="name">Nom complet</label>

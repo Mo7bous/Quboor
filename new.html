@@ -12,17 +12,323 @@
   </script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
 <style>
-    :root {
-            --primary-color: #1F262A;
-            --secondary-color: #41464a;
-            --text-color: #4A4E69;
-            --background-color: #ece7e7;
-            --accent-color: #4A4E69;
-            --card-bg-color: #ffffff;
 
-      --tooltip-bg: #fefefe;
-      --tooltip-color: #333;
+
+                :root {
+            --primary-color: #2C3E50;
+            --secondary-color: #030404;
+            --third-color: red;
+            --fourth-color: yellow;
+            --fifth-color: #2c3f53;/* Couleur du text de base en mode normal primaire fonce lighter */
+            --sixth-color: #0f151b;  /* Couleur du text de base en mode normal primaire fonce */
+
+            --text-color: #f9f4ea;  /* Couleur du text de base en mode normal  */
+            --background-color: #f9f4ea;
+            --accent-color: #f9f4ea;
+        }
+
+
+
+        .top-nav {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  height: 50px;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+        html, body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--secondary-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            text-align: justify;
+            overflow-x: hidden;
+        }
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  height: 60px;
+  width: 91%;
+  margin: 20px auto 0 auto;
+  border-radius: 8px;
+  padding: 0 20px 0 32px; /* padding-left augmenté */
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.top-nav h1 {
+  flex-grow: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+    .logo {
+      height: 40px;
+      width: auto;
     }
+
+    h1 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: block;
+    text-align: center;    }
+
+.menu-btn {
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  z-index: 1; /* Ensure it's clickable */
+}
+
+
+    .nav-right-controls {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .dark-mode-toggle-btn {
+      font-size: 22px;
+      background: none;
+      border: none;
+      color: var(--text-color);
+      cursor: pointer;
+    }
+
+
+    .sidebar {
+      height: 100%;
+      width: 280px;
+      position: fixed;
+      top: 0;
+      left: -280px;
+      background-color: var(--primary-color);
+      overflow-x: hidden;
+      transition: 0.4s;
+      padding-top: 60px;
+      z-index: 1001;
+    }
+
+    .sidebar a {
+      padding: 10px 25px;
+      font-size: 18px;
+      color: var(--text-color);
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      border-bottom: 1px solid var(--primary-color);
+      transition: background-color 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: var(--primary-color);
+    }
+
+    .sidebar a i {
+      margin-right: 15px;
+    }
+
+    .closebtn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 30px;
+      color: var(--text-color);
+      cursor: pointer;
+    }
+
+    #audio-player-container {
+      width: 100%;
+      background-color: var(--primary-color);
+      color: var(--text-color);
+      padding: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .player-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    #play-pause-btn {
+      background: none;
+      border: 1px solid var(--text-color);
+      color: var(--text-color);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #play-pause-btn:hover {
+      background-color: var(--text-color);
+      color: var(--primary-color);
+    }
+
+    .volume-control {
+      display: flex;
+      align-items: center;
+    }
+
+    .volume-control i {
+      margin-right: 8px;
+    }
+
+    #volume-slider {
+      width: 70px;
+      height: 3px;
+      background: #5a6268;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #volume-slider::-webkit-slider-thumb,
+    #volume-slider::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      background: var(--text-color);
+      border-radius: 50%;
+      border: none;
+    }
+
+    body.dark-mode {
+      background-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    body.dark-mode .top-nav,
+    body.dark-mode .sidebar {
+      background-color: var(--primary-color);
+    }
+
+    body.dark-mode .sidebar a:hover {
+      background-color: #333;
+    }
+
+    body.dark-mode #audio-player-container {
+      background-color: #1F262A;
+    }
+
+    body.dark-mode #play-pause-btn {
+      border-color: #e0e0e0;
+      color: #e0e0e0;
+    }
+
+    body.dark-mode #play-pause-btn:hover {
+      background-color: #e0e0e0;
+      color: #1F262A;
+    }
+
+    body.dark-mode #volume-slider {
+      background: #444;
+    }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+    .section {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .goal {
+      margin-bottom: 20px;
+    }
+
+    .progress-bar {
+      height: 20px;
+      background: var(--text-color);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      background-color: var(--accent-color);
+      text-align: right;
+      padding-right: 5px;
+      color: var(--primary-color);
+      font-size: 0.8em;
+      line-height: 20px;
+    }
+
+    .cta-button {
+      background-color: var(--primary-color);
+      color: white;
+      width: 90%;
+      text-align: center;
+      padding: 12px 25px;
+      border-radius: 5px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    .cta-button:hover {
+      background-color: var(--sixth-color);
+    }
+
+    .bank-details {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 6px;
+      margin-top: 20px;
+      font-size: 0.95em;
+      line-height: 1.6;
+      border: 1px solid #ccc;
+    }
+
+    h23 {
+    font-size: 1em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: block;
+    text-align: justify;
+}
+
+   h3 {
+    font-size: 1em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: block;
+    text-align: justify;
+}
 
     body {
       margin: 0;
@@ -74,13 +380,14 @@ body.mode-nuit {
 
     .step {
       display: none;
-      background-color: var(--secondary-color);
+      background-color: var(--primary-color);
       padding: 1em;
       border-radius: 10px;
     }
 
     .step.active {
       display: block;
+      color: white;
     }
 
     .form-group {
@@ -111,7 +418,7 @@ body.mode-nuit {
     }
 
     button {
-      background-color: var(--accent-color);
+      background-color : var(--primary-color);
       color: white;
       border: none;
       padding: 0.7em 1.2em;
@@ -188,34 +495,25 @@ body.mode-nuit {
     }
 
     .top-close {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background-color: transparent;
-      color: #fff;
-      font-size: 2em;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      z-index: 1000;
-    }
-
-    .top-close:hover {
-      background-color: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  color: white;
+  background: none;
+  cursor: pointer;
     }
 
     /* New: Nav Bar and Sidebar Styles */
     nav.top-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: var(--secondary-color);
-      padding: 0.5em 1em;
-      position: sticky;
-      top: 0;
-      z-index: 9998;
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  height: 70px;
+  width: 91%;
+  position: relative;
+  box-sizing: border-box;
     }
 
     nav.top-nav img.logo {
@@ -370,7 +668,7 @@ body.mode-nuit {
     }
 
     .popup-box {
-      background: var(--tooltip-bg);
+      background: white;
       color: var(--tooltip-color);
       padding: 2em;
       border-radius: 8px;
@@ -411,7 +709,6 @@ body.mode-nuit {
 <body>
 <!-- Sidebar -->
 <div class="sidebar" id="sideMenu">
-<h2><button id="closeSidebarBtn" style="float: right; background: none; border: none; color: white; font-size: 1.4em; cursor: pointer;">×</button></h2>
 <ul>
 </ul>
 </div>
@@ -420,10 +717,9 @@ body.mode-nuit {
 <button class="sidebar-toggle-btn" id="toggleSidebar"></button>
 <img alt="Logo Quboor" class="logo" src="img/logotitre.png"/>
 <button class="dark-toggle-btn" id="darkToggleBtn">
-<i class="fa-solid fa-moon" id="darkIcon"></i>
+<i class="fas fa-close-button" id="darkIcon"></i>
 </button>
 </nav>
-<button class="top-close" id="closePageBtn" style="box-shadow: none;">×</button>
 <main>
 <input accept="image/*" capture="environment" id="cameraInput" style="display:none" type="file"/>
 <input accept="image/*" id="uploadInput" multiple="" style="display:none" type="file"/>
@@ -431,7 +727,7 @@ body.mode-nuit {
 
 <div class="stage initial-stage" id="initialStage">
 <div class="stage-message">
-<h2>Inscription en 4 étapes :</h2>
+<h2>Inscription en 4 étapes</h2>
 <ol>
 <li>Coordonnées du déclarant.</li>
 <li>Détails sur le défunt(e).</li>
@@ -439,16 +735,17 @@ body.mode-nuit {
 <li>Galerie photo du défunt(e) et de la tombe.</li>
 </ol>
 </div>
+  <h2><button id="closeSidebarBtn" style="float: right; background: none; border: none; color: ; font-size: 0.1em; cursor: pointer;">×</button></h2>
+  <button class="top-close" id="closePageBtn" style="box-shadow: none;"></button>
 <div class="initial-controls">
 <button id="cancelInitial">Annuler</button>
 <button id="continueInitial">Continuer</button>
 </div>
 </div>
 <div id="formStages" style="display: none;">
-<div class="step-indicator" id="stepIndicator">Coordonées du déclarant</div>
-<br/><br>
 <!-- Step 1A: Déclarant -->
 <div class="step active" id="step1A">
+  <div class="step-indicator" id="stepIndicator">Coordonées du déclarant</div>
 <div class="note">
           📌 Astuce : Pour faciliter le suivi de votre demande et permettre une éventuelle confirmation, veuillez indiquer des coordonnées e-mail où vous pouvez être facilement joignable.
         </div>
@@ -486,6 +783,8 @@ body.mode-nuit {
 </br></div>
 <!-- Step 1B: Défunt -->
 <div class="step" id="step1B">
+    <div class="step-indicator" id="stepIndicator">Informations sur le/la défunt(e)</div>
+
 <div class="note">
   📌 Astuce : Merci de renseigner les informations disponibles sur le défunt afin de faciliter les recherches et les correspondances. Si certaines informations ne sont pas encore connues, vous pouvez laisser les champs vides et les compléter ultérieurement.        </div>
 <br/><br>
@@ -528,8 +827,10 @@ body.mode-nuit {
 </br></div>
 <!-- Step 2 -->
 <div class="step" id="step2">
+      <div class="step-indicator" id="stepIndicator">Localisation</div>
+
 <div class="note">
-📌 Astuce : Indiquez la localisation la plus précise possible – Merci d’indiquer l’emplacement exact de la tombe pour faciliter son repérage. Si vous estimez que la localisation saisie n’est pas suffisamment précise, vous pouvez nous envoyer une localisation en direct via WhatsApp. Pour cela, ouvrez une nouvelle conversation ou message WhatsApp, appuyez sur le bouton 📎 (ou +), choisissez "Localisation", puis "Envoyer la localisation en direct".      </div>
+📌 Astuce : Indiquez la localisation la plus précise possible – Merci d’indiquer l’emplacement exact de la tombe pour faciliter son repérage. Vous pouvez nous envoyer par la suite une localisation en direct via WhatsApp. Pour cela, ouvrez une nouvelle conversation ou message WhatsApp, appuyez sur le bouton 📎 (ou +), choisissez "Localisation", puis "Envoyer la localisation en direct. Attendez que la précision soit à moins de 2 mètres avant d'envoyer".      </div>
 <br/><br>
 <div class="form-group">
 <label>Localisation actuelle</label>
@@ -567,6 +868,8 @@ body.mode-nuit {
 </br></div>
 <!-- Step 3 -->
 <div class="step" id="step3">
+      <div class="step-indicator" id="stepIndicator">Gallerie</div>
+
 <div class="note">
           📌 Astuce: Une fois l’inscription finalisée, un e-mail automatique vous sera géneré avec un lien pour uploader 5 photos : 1 photo de profil du défunt(e), 1 photo de la tombe de près, 1 photo de la tombe de loin dans son environnement, ainsi que 2 photos supplémentaires du défunt(e). Veillez à ce que les fichiers soient au format .jpeg et que la taille totale n’excède pas 25 Mo afin d’assurer une bonne réception et un traitement efficace.
         </div>
@@ -681,7 +984,7 @@ function setMode(mode) {
 
   const icon = document.getElementById('darkIcon');
   if (mode === 'jour') {
-    icon.className = 'fa-solid fa-moon'; // Icône lune
+    icon.className = 'fa-solid fa-close-button'; // Icône lune
   } else {
     icon.className = 'fa-solid fa-sun'; // Icône soleil
   }

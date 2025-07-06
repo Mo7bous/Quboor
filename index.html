@@ -9,18 +9,23 @@
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
 
         :root {
-            --primary-color: #41464a;
-            --secondary-color: #1F262A;
-            --text-color: #F2E9E4;
+            --primary-color: #2C3E50;
+            --secondary-color: #030404;
+            --third-color: transparent;
+            --fourth-color: transparent;
+            --fifth-color: transparent;
+            --sixth-color: transparent;
+
+            --text-color: #f9f4ea;
             --background-color: #2C3E50;
-            --accent-color: #4A4E69;
+            --accent-color: #686f74;
         }
 
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: var(--background-color);
             overflow: hidden;
         }
@@ -61,9 +66,9 @@
             padding: 15px 20px;
             font-size: 1.2rem;
             background-color: var(--accent-color);
-            color: var(--text-color);
+            color: #f9f4ea;
             border: none;
-            border-radius: 50px;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
             animation: fadeInUp 1.5s ease-out 1.5s both;
@@ -77,28 +82,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .tombstone {
-            position: absolute;
-            bottom: 0px; /* 👈 Positionné en dessous de l'écran */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60vw;   /* 👈 20% de la largeur de l'écran */
-            height: 6vh;  /* 👈 12% de la hauteur de l'écran */            background-color: #888;
-            border-radius: 10px 10px 0 0;
-            animation: riseUp 1s ease-out 2s forwards;
-            z-index: 5;
-        }
 
-        .tombstone::before {
-            content: "إِنَّا ِلِلَّٰهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ";
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            color: #333;
-        }
 
         @keyframes fadeInDown {
             from {
@@ -163,11 +147,11 @@
 </head>
 <body>
     <div class="landing-container">
-        <h1>Bienvenue sur</h1>
         <img src="img/logotitre.png" alt="Logo" class="logo">
+        <br><br/>
         <p>Explorez l'histoire et rendez hommage à vos proches disparus. Découvrez les lieux et préservez leur mémoire.</p>
+        <br><br/>
         <button class="enter-btn" onclick="window.location.href='search.html'">Entrer</button>
-        <div class="tombstone"></div>
         <div class="particles"></div>
     </div>
 

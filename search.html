@@ -12,12 +12,19 @@
           integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-:root {
-  --primary-color: #41464a;
-  --secondary-color: #1F262A;
-  --text-color: #F2E9E4;
-  --background-color: #f4f4f4;
-}
+
+        :root {
+            --primary-color: #2C3E50;
+            --secondary-color: #030404;
+            --third-color: red;
+            --fourth-color: yellow;
+            --fifth-color: #2c3f53;/* Couleur du text de base en mode normal primaire fonce lighter */
+            --sixth-color: #0f151b;  /* Couleur du text de base en mode normal primaire fonce */
+
+            --text-color: #f9f4ea;  /* Couleur du text de base en mode normal  */
+            --background-color: #f9f4ea;
+            --accent-color: #f9f4ea;
+        }
 
         html, body {
             font-family: 'Inter', sans-serif;
@@ -35,13 +42,16 @@
 .top-nav {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: var(--primary-color);
   color: var(--text-color);
-  padding: 15px 20px;
-  height: 70px;
-  width: 100%;
-  position: relative;
+  height: 60px;
+  width: 91%;
+  margin: 20px auto 0 auto;
+  border-radius: 8px;
+  padding: 0 20px 0 32px; /* padding-left augmenté */
   box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .top-nav h1 {
@@ -68,34 +78,35 @@
   z-index: 1; /* Ensure it's clickable */
 }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        
-.nav-right-controls {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    gap: 15px;
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
+        
+
 .dark-mode-toggle-btn {
-    position: relative;
-    right: auto;
-    top: auto;
-    transform: none;
+    position: relative; /* important: plus de absolute */
     font-size: 22px;
     background: none;
     border: none;
     color: var(--text-color);
     cursor: pointer;
     padding: 5px;
+    z-index: 1001; /* Match old z-index */
+
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+      z-index: 1001; /* Match old z-index */
+
 }
 
 /* SIDEBAR */
@@ -124,7 +135,7 @@
 }
 
 .sidebar a:hover {
-    background-color: var(--primary-color);
+    background-color: #1F262A;
 }
 
 .sidebar a i {
@@ -155,12 +166,12 @@
 
 .search-explanation {
     background-color: #e9f5ff;
-    border-left: 4px solid #007bff;
+    border-left: 4px solid #0056b3;
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 4px;
     font-size: 0.9em;
-    color: #333;
+    color: var(--sixth-color);
 }
 
 .search-explanation p {
@@ -768,16 +779,16 @@ mark {
 
 /* --- Dark Mode Styles --- */
 body.dark-mode {
-    background-color: #1F262A;
-    color: #e0e0e0;
+    background-color: var(--primary-color);
+    color: var(--text-color);
 }
 
 body.dark-mode .top-nav {
-    background-color: #1F262A;
+    background-color: var(--primary-color);
 }
 
 body.dark-mode .sidebar {
-    background-color: #1F262A;
+    background-color: var(--primary-color);
 }
 
 body.dark-mode .sidebar a:hover {
@@ -798,62 +809,62 @@ body.dark-mode .search-explanation strong {
 }
 
 body.dark-mode #searchInput {
-    background-color: #333;
-    color: #eee;
-    border-color: #555;
+    background-color: var(--text-color);
+    color: var(--primary-color);
+    border-color: var(--fifth-color);
 }
 
 body.dark-mode .death-card {
-    background-color: #2b2b2b;
+    background-color: var(--primary-color);
     box-shadow: 0 2px 5px rgba(0,0,0,0.5);
     border: 1px solid #444;
 }
 
 body.dark-mode .death-card-details h3,
 body.dark-mode .relative-name {
-    color: #f2f2f2;
+    color: var(--text-color);
 }
 
 body.dark-mode .info-item,
 body.dark-mode .info-item p {
-    color: #b0b0b0;
+    color: var(--text-color);
 }
 
 body.dark-mode .info-item i {
-    color: #888;
-}
+    color: var(--text-color);
+                }
 
 body.dark-mode mark {
-    background-color: #b38600;
-    color: #fff;
+    background-color: #ffda79;
+    color: var(--text-color);
 }
 
 body.dark-mode .popup-content {
-    background-color: #252525;
-    color: #eee;
+    background-color: var(--primary-color);
+    color: var(--text-color);
 }
 
 body.dark-mode .popup-close {
-    color: #888;
+    color: var(--text-color);
 }
 body.dark-mode .popup-close:hover {
     color: #eee;
 }
 
 body.dark-mode .profile-header {
-    border-bottom-color: #444;
+    color: var(--text-color);
 }
 
 body.dark-mode .profile-image {
-    border-color: #444;
+    color: var(--text-color);
 }
 
 body.dark-mode .profile-header h2 {
-    color: #f5f5f5;
+    color: var(--text-color);
 }
 
 body.dark-mode .profile-description {
-    color: #ccc;
+    color: var(--text-color);
 }
 
 body.dark-mode .profile-section h4 {
@@ -862,7 +873,7 @@ body.dark-mode .profile-section h4 {
 }
 
 body.dark-mode .profile-details .profile-item {
-    color: #ddd;
+    color: var(--text-color);
 }
 
 body.dark-mode .profile-details .profile-item i {
@@ -870,20 +881,20 @@ body.dark-mode .profile-details .profile-item i {
 }
 
 body.dark-mode .relative-card {
-    background-color: #333;
-    border-color: #444;
+    background-color: var(--fith-color);
+    border-color: var(--primary-color);
 }
 
 body.dark-mode .gallery-images-container {
-    background-color: #222;
+    background-color: var(--fifth-color);
 }
 
 body.dark-mode .gallery-images-container img {
-    border-color: #555;
+    color: #5dade2;
 }
 
 body.dark-mode .report-section {
-    border-top-color: #444;
+    color: #5dade2;
 }
 
 body.dark-mode .report-error-btn:hover {
@@ -1004,7 +1015,7 @@ const deathEntries = [
     {uid:"PD1GTHTU",familyName:"Saïl",firstName:"Noureddine",dob:"1947-01-01",birthplace:"Tanger",dod:"2020-12-15",deathplace:"Rabat",location:"34.02920504233782, -6.844813985431729",images:["users/users/PD1GTHTU/1.jpeg","users/users/PD1GTHTU/2.jpeg","users/users/PD1GTHTU/3.jpeg","users/users/PD1GTHTU/4.jpeg","users/users/PD1GTHTU/5.jpeg"],description:"Critique cinématographique, ex‑patron de 2M et du CCM.",cemetery:"Cimetière Chouhada de Rabat",profession:"Critique",relatives:[]},
     {uid:"R1E8KTZ3",familyName:"Benkhaldoun",firstName:"Soumia",dob:"1963-03-13",birthplace:"Marrakech",dod:"2023-06-28",deathplace:"Harhoura",location:"34.02920504233782, -6.844813985431729",images:["users/users/R1E8KTZ3/1.jpeg","users/users/R1E8KTZ3/2.jpeg","users/users/R1E8KTZ3/3.jpeg","users/users/R1E8KTZ3/4.jpeg","users/users/R1E8KTZ3/5.jpeg"],description:"Professeure et militante engagée pour les droits des femmes.",cemetery:"Cimetière Chouhada de Rabat",profession:"Ministre",relatives:[]},
     {uid:"12QQAWUR",familyName:"Radi",firstName:"Abdelouahed",dob:"1935-04-01",birthplace:"Salé",dod:"2023-03-26",deathplace:"Rabat",location:"34.02920504233782, -6.844813985431729",images:["users/users/12QQAWUR/1.jpeg","users/users/12QQAWUR/2.jpeg","users/users/12QQAWUR/3.jpeg","users/users/12QQAWUR/4.jpeg","users/users/12QQAWUR/5.jpeg"],description:"Ancien président de la Chambre des Représentants et ex‑Premier secrétaire de l’USFP.",cemetery:"Cimetière Chouhada de Rabat",profession:"Homme politique",relatives:[]},
-    {uid:"6Q1R5S2T",familyName:"Bouhlal",firstName:"Mouhcine",dob:"1970-04-22",birthplace:"Rabat",dod:"2025-04-05",deathplace:"Rabat",location:"34.03035867959946, -6.843429048160808",images:["users/users/6Q1R5S2T/1.jpeg","users/users/6Q1R5S2T/2.jpeg","users/users/6Q1R5S2T/3.jpeg","users/users/6Q1R5S2T/4.jpeg","users/users/6Q1R5S2T/5.jpeg","users/users/6Q1R5S2T/6.jpeg","users/users/6Q1R5S2T/7.jpeg","users/users/6Q1R5S2T/8.jpeg","users/users/6Q1R5S2T/9.jpeg","users/users/6Q1R5S2T/10.jpeg"],description:"Leader d’une génération, il a marqué le football marocain par son talent, sa vision du jeu et son engagement exemplaire sur et en dehors du terrain.",cemetery:"Cimetière Chouhada de Rabat",profession:"Sportif",relatives:[8,11,9,10]},
+    {uid:"6Q1R5S2T",familyName:"Bouhlal",firstName:"Mouhcine",dob:"1970-04-22",birthplace:"Rabat",dod:"2025-04-05",deathplace:"Rabat",location:"34.03035867959946, -6.843429048160808",images:["users/users/6Q1R5S2T/1.jpeg","users/users/6Q1R5S2T/2.jpeg","users/users/6Q1R5S2T/3.jpeg","users/users/6Q1R5S2T/10.jpeg","users/users/6Q1R5S2T/9.jpeg","users/users/6Q1R5S2T/6.jpeg","users/users/6Q1R5S2T/7.jpeg","users/users/6Q1R5S2T/8.jpeg","users/users/6Q1R5S2T/5.jpeg","users/users/6Q1R5S2T/4.jpeg"],description:"Leader d’une génération, il a marqué le football marocain par son talent, sa vision du jeu et son engagement exemplaire sur et en dehors du terrain.",cemetery:"Cimetière Chouhada de Rabat",profession:"Sportif",relatives:[8,11,9,10]},
     {uid:"P9I7Q1RD",familyName:"Bouhlal",firstName:"Abdelkarim",dob:"n/a",birthplace:"n/a",dod:"n/a",deathplace:"Salé",location:"34.03077574369565, -6.838867787876438",images:["users/users/P9I7Q1RD/1.jpeg","users/users/P9I7Q1RD/2.jpeg","users/users/P9I7Q1RD/3.jpeg","users/users/P9I7Q1RD/4.jpeg","users/users/P9I7Q1RD/5.jpeg","users/users/P9I7Q1RD/6.jpeg"],description:"Ô Dieu, accorde-lui ta miséricorde et une place dans ton vaste paradis.",cemetery:"Cimetière Chouhada de Rabat",profession:"n/a",relatives:[7,9,10,]},
     {uid:"X8G2TQ7K",familyName:"Bouhlal",firstName:"Abdelfettah",dob:"n/a",birthplace:"n/a",dod:"n/a",deathplace:"Rabat",location:"34.03065405853028, -6.838245091791529",images:["users/users/X8G2TQ7K/1.jpeg","users/users/X8G2TQ7K/2.jpeg","users/users/X8G2TQ7K/3.jpeg","users/users/X8G2TQ7K/4.jpeg","users/users/X8G2TQ7K/5.jpeg"],description:"Ô Dieu, accorde-lui ta miséricorde et une place dans ton vaste paradis.",cemetery:"Cimetière Chouhada de Rabat",profession:"n/a",relatives:[7,8,10]},
     {uid:"X8G2TQ7K",familyName:"Bouhlal",firstName:"Thami",dob:"n/a",birthplace:"n/a",dod:"n/a",deathplace:"Paris",location:"34.02920504233782, -6.844813985431729",images:["users/users/WET7HU7N/1.jpeg","users/users/WET7HU7N/2.jpeg","users/users/WET7HU7N/3.jpeg","users/users/WET7HU7N/4.jpeg","users/users/WET7HU7N/5.jpeg"],description:"Ô Dieu, accorde-lui ta miséricorde et une place dans ton vaste paradis.",cemetery:"Cimetière Chouhada de Rabat",profession:"n/a",relatives:[7,8,9]},
@@ -1206,7 +1217,7 @@ function renderProfileGallery(images) {
     galleryContainer.innerHTML = ''; // Clear existing images
 
     const displayImages = [];
-    const numImagesToDisplay = 10;
+    const numImagesToDisplay = 5;
 
     if (images && images.length > 0) {
         for (let i = 0; i < numImagesToDisplay; i++) {

@@ -7,14 +7,30 @@
   <title>Faire un don - Quboor</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
   <style>
-    :root {
-      --primary-color: #41464a;
-      --secondary-color: #1F262A;
-      --text-color: #F2E9E4;
-      --background-color: #f4f4f4;
-      --accent-color: #4A4E69;
-      --card-bg-color: #ffffff;
-    }
+        :root {
+            --primary-color: #2C3E50;
+            --secondary-color: #030404;
+            --third-color: red;
+            --fourth-color: yellow;
+            --fifth-color: #2c3f53;/* Couleur du text de base en mode normal primaire fonce lighter */
+            --sixth-color: #0f151b;  /* Couleur du text de base en mode normal primaire fonce */
+
+            --text-color: #f9f4ea;  /* Couleur du text de base en mode normal  */
+            --background-color: #f9f4ea;
+            --accent-color: #f9f4ea;
+        }
+
+        .top-nav {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 15px 20px;
+  height: 50px;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
 
         html, body {
             font-family: 'Inter', sans-serif;
@@ -27,27 +43,30 @@
             overflow-x: hidden;
         }
 
-    .top-nav {
-      display: flex;
-      align-items: center;
-      background-color: var(--primary-color);
-      color: var(--text-color);
-      padding: 15px 20px;
-      height: 50px;
-      width: 100%;
-      position: relative;
-      box-sizing: border-box;
-    }
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  height: 60px;
+  width: 91%;
+  margin: 20px auto 0 auto;
+  border-radius: 8px;
+  padding: 0 20px 0 32px; /* padding-left augmenté */
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
-    .top-nav h1 {
-      flex-grow: 0;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      margin: 0;
-      display: flex;
-      align-items: center;
-    }
+.top-nav h1 {
+  flex-grow: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
 
     .logo {
       height: 40px;
@@ -231,7 +250,7 @@
         }
 
     .section {
-      background-color: var(--card-bg-color);
+      background-color: white;
       padding: 30px;
       border-radius: 10px;
       margin-bottom: 30px;
@@ -244,7 +263,7 @@
 
     .progress-bar {
       height: 20px;
-      background: #ccc;
+      background: var(--text-color);
       border-radius: 10px;
       overflow: hidden;
     }
@@ -254,13 +273,13 @@
       background-color: var(--accent-color);
       text-align: right;
       padding-right: 5px;
-      color: white;
+      color: var(--primary-color);
       font-size: 0.8em;
       line-height: 20px;
     }
 
     .cta-button {
-      background-color: var(--accent-color);
+      background-color: var(--primary-color);
       color: white;
       width: 90%;
       text-align: center;
@@ -272,7 +291,7 @@
     }
 
     .cta-button:hover {
-      background-color: var(--primary-color);
+      background-color: var(--sixth-color);
     }
 
     .bank-details {
@@ -284,6 +303,22 @@
       line-height: 1.6;
       border: 1px solid #ccc;
     }
+
+    h23 {
+    font-size: 1em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: block;
+    text-align: justify;
+}
+
+   h3 {
+    font-size: 1em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: block;
+    text-align: justify;
+}
   </style>
 </head>
 <body>
@@ -297,16 +332,6 @@
     </div>
   </div>
 
-  <div id="audio-player-container">
-    <div class="player-controls">
-      <button id="play-pause-btn"><i class="fas fa-play"></i></button>
-      <div class="volume-control">
-        <i class="fas fa-volume-up"></i>
-        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.8"/>
-      </div>
-    </div>
-    <audio id="quran-player" src="audio/ba9ara.mp3" preload="none"></audio>
-  </div>
 
     <div id="mySidebar" class="sidebar">
         <span class="closebtn">&times;</span>
@@ -322,34 +347,45 @@
 
   <div class="container">
   <div class="section">
-    <h1>Contribuez au projet Quboor</h1>
-    <p>
+    <h1>Contribuez aux projets Quboor</h1>
+    <h23>
       Grâce à vos dons, nous pouvons préserver la mémoire, cartographier les lieux de repos de nos proches,
-      et offrir aux familles un accès facilité aux données funéraires. Chaque dirham compte
-    </p>
+      et offrir aux familles un accès facilité aux données funéraires.</h23>
     
-    <p>
-      Nos projets sont financés uniquement par votre générosité. Aidez-nous à atteindre nos objectifs :
-    </p>
+    <h23>
+      Nos projets sont financés uniquement par votre générosité.  Aidez-nous à atteindre nos objectifs et suivez en temps réel l'évolution de nos projets.
+    </h23>
 
-    <div class="goal">
-      <h3>📍 Projet 1 - Cartographie des cimetières</h3>
-      <p><em>Objectif : 10'000 MAD — Pour géolocaliser et documenter les sépultures</em></p>
-      <div class="progress-bar"><div class="progress" style="width: 05%;">05%</div></div>
-    </div>
+<div class="goal">
+  <h3>📍 Projet 1 – Cartographie interactive des cimetières</h3>
+  <h23 class="goal-description">
+    Objectif : <strong>30'000 MAD</strong> — Ce projet a pour but de créer une carte interactive et accessible en ligne qui permet de géolocaliser chaque sépulture d’un cimetière donné. 
+    Grâce à une collecte rigoureuse des coordonnées GPS et des informations sur les tombes (noms, dates, photographies), ce système facilitera l’identification des emplacements par les familles, les chercheurs, les généalogistes et les gestionnaires de cimetières. 
+    Il s’agit d’un premier pas vers la préservation de la mémoire collective et l’amélioration de la gestion des espaces funéraires.
+  </h23>
+  <div class="progress-bar"><div class="progress" style="width: 15%;">15%</div></div>
+</div>
 
-    <div class="goal">
-      <h3>🗂️ Projet 2 - Numérisation des tombes</h3>
-      <p><em>Objectif : 20'000 MAD — Pour archiver les données et photos des tombes</em></p>
-      <div class="progress-bar"><div class="progress" style="width: 1%;">1%</div></div>
-    </div>
+<div class="goal">
+  <h3>🗂️ Projet 2 – Numérisation et archivage des données funéraires</h3>
+  <h23 class="goal-description">
+    Objectif : <strong>50'000 MAD</strong> — Ce projet consiste à mettre en place une base de données numérique sécurisée pour conserver les informations liées aux sépultures (photos, inscriptions, emplacements, dates, liens familiaux, etc.).
+    Chaque tombe sera documentée avec soin, à travers des campagnes de prises de vues et de relevés sur le terrain, puis intégrée dans un système d’archivage accessible au public via une interface en ligne.
+    L’objectif est de préserver les traces de ceux qui nous ont précédés et de permettre aux familles éloignées ou à la diaspora de consulter les données à distance.
+  </h23>
+  <div class="progress-bar"><div class="progress" style="width: 8%;">8%</div></div>
+</div>
 
-    <div class="goal">
-      <h3>📱 Projet 3 - Nettoyage du cimetière</h3>
-      <p><em></h3>
-      <p><em>Objectif : 50'000 MAD — Pour organiser une journée nettoyage et remise au propre</em></p>
-      <div class="progress-bar"><div class="progress" style="width: 1%;">1%</div></div>
-    </div>
+<div class="goal">
+  <h3>🧹 Projet 3 – Nettoyage, entretien et valorisation du cimetière</h3>
+  <h23 class="goal-description">
+    Objectif : <strong>70'000 MAD</strong> — Ce projet prévoit l’organisation de plusieurs journées d’action citoyenne pour le nettoyage, l’élagage, la remise en état et la valorisation des cimetières abandonnés ou en mauvais état. 
+    Cela inclut la fourniture de matériel (gants, sacs, outils de jardinage, brosses), la mobilisation de bénévoles et la coordination avec les autorités locales pour sécuriser et rendre dignes les lieux de mémoire.
+    Ces opérations renforcent le respect du patrimoine funéraire, restaurent la dignité des lieux et encouragent la participation collective à leur préservation.
+  </h23>
+  <div class="progress-bar"><div class="progress" style="width: 5%;">5%</div></div>
+</div>
+
 <br><br/>
 <br><br/>
 
@@ -357,19 +393,19 @@
 
 
     <div class="bank-details">
-      <p><strong>Nom du bénéficiaire :</strong> Association Quboor</p>
-      <p><strong>Banque :</strong> Crédit Agricole Maroc</p>
-      <p><strong>RIB :</strong> 011 456 789 123456789012 75</p>
-      <p><strong>IBAN :</strong> MA65 0111 4567 8912 3456 7890 1275</p>
-      <p><strong>BIC / SWIFT :</strong> CDMAMAMCXXX</p>
-      <p><strong>Objet :</strong> Don pour soutien au projet Quboor</p>
+      <h23><strong>Nom du bénéficiaire :</strong> Bouxxxx Axxxxx</h23>
+      <h23><strong>Banque :</strong> Crédit Agricole Maroc</h23>
+      <h23><strong>RIB :</strong> xxx xxx xxx xxxxxxxxxxxxx xx</h23>
+      <h23><strong>IBAN :</strong> MAxx xxxx xxxx xxxx xxxx xxxx</h23>
+      <h23><strong>BIC / SWIFT :</strong> CDMAMAMCXXX</h23>
+      <h23><strong>Objet :</strong> Projet Quboor</h23>
     </div>
 
     <a class="cta-button" href="mailto:info@quboor.com?subject= Confirmation de don Quboor">J’ai fait un virement — prévenir l’équipe</a>
 
-    <p style="margin-top: 30px; font-style: italic; font-size: 0.95em; text-align: center;">
+    <h23 style="margin-top: 30px; font-style: italic; font-size: 0.95em; text-align: center;">
       Merci pour votre générosité. Ensemble, nous redonnons une voix à ceux qui reposent en silence.
-    </p>
+    </h23>
   </div>
 </div>
 
