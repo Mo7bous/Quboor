@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><script type='text/javascript' src='https://9o8hi4yj46ihk5oouaqv.c.websim.com/YEIAWSD9cECTzlxqYcKTrDDMucL4QFRltYpt3HfnaAj50aUbxbmzEmrJ47hijejNBJpv14t0v7rAXnkiiFinDw=='></script>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Outils - Memorial Map</title>
@@ -8,7 +8,6 @@
           integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-
         :root {
             --primary-color: #2C3E50;
             --secondary-color: #030404;
@@ -151,9 +150,10 @@
       cursor: pointer;
     }
 
+
         #main {
             padding: 20px;
-            background-color: var(--text-color);
+            margin-top: 5px;
         }
         
         /* --- Quran Audio Player --- */
@@ -246,18 +246,19 @@
         /* --- Dark Mode Styles --- */
         body.dark-mode {
             background-color: #1a1a1a;
-            color: #e0e0e0;
+            color: var(--text-color);
         }
-        body.dark-mode .top-nav { background-color: #1F262A; }
-        body.dark-mode .sidebar { background-color: #111; }
-        body.dark-mode .sidebar a:hover { background-color: #1F262A; }
+        body.dark-mode .top-nav { background-color: var(--primary-color); }
+        body.dark-mode .sidebar { background-color: var(--primary-color) }
+        body.dark-mode .sidebar a:hover { background-color: var(--primary-color) }
 
         /* --- Tools Page Specific Styles --- */
         .tools-container {
             max-width: 900px;
+            margin: 0px auto;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 10px;
+            gap: 25px;
         }
 
         .page-header {
@@ -281,6 +282,7 @@
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 15px;
             text-align: center;
             text-decoration: none;
             color: inherit;
@@ -289,7 +291,6 @@
             align-items: center;
             justify-content: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            min-height: 130px;
         }
 
         .tool-card:hover {
@@ -306,7 +307,7 @@
 
         .tool-card h3 {
             margin: 0 0 10px 0;
-            font-size: 1.3em;
+            font-size: 1.1em;
             color: #333;
         }
 
@@ -318,6 +319,287 @@
             flex-grow: 1;
         }
 
+        /* --- Memento Mori Styles --- */
+        #mementoMoriContainer {
+            width: 100%;
+        }
+        .mm-step {
+            display: none;
+        }
+        .mm-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .mm-form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .form-group.form-group-inline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .form-group.form-group-inline label {
+            margin-bottom: 0;
+            flex-shrink: 0;
+        }
+        .form-group.form-group-inline input[type="date"] {
+            flex-grow: 1;
+            max-width: 130px;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 0.9em;
+        }
+        .person-form {
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .person-form h5 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: var(--primary-color);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        
+        .form-group-icons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            min-height: 44px;
+        }
+        .form-group-icons label {
+            margin-bottom: 0;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+        .icon-choices {
+            display: flex;
+            gap: 8px;
+        }
+        .icon-choice {
+            background-color: lightgrey;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .icon-choice:hover {
+            border-color: var(--accent-color);
+        }
+        .icon-choice.selected {
+            background-color: var(--primary-color);
+            border-color: var(--accent-color);
+            color: var(--text-color) ;
+        }
+
+        .date-selector {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1.2fr;
+            gap: 10px;
+        }
+
+        .mm-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        .mm-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .mm-btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .mm-btn-primary:hover { background-color: #0056b3; }
+        .mm-btn-secondary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+         .mm-btn-secondary:hover { background-color: #0056b3; }
+
+         .mm-btn-third {
+            width: 100%;
+            position: center;
+            background-color: var(--primary-color);
+            color: white;
+        }
+         .mm-btn-third:hover { background-color: #0056b3; }
+
+        #mm-results {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #mm-scoreboard {
+            background-color: #e9f5ff;
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        .score-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .score-item i {
+            font-size: 12px;
+            color: var(--primary-color);
+        }
+        .score-item h4 {
+            margin: 0 0 5px 0;
+            font-size: 12px;
+            color: #555;
+        }
+         .score-item p {
+            margin: 0;
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        #mm-life-calendars {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .life-calendar-wrapper {
+            background: #fdfdfd;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+        .calendar-header {
+            margin-bottom: 15px;
+        }
+        .calendar-header h4 { margin: 0 0 5px 0; font-size: 1.2em; }
+        .calendar-header p { margin: 0; font-size: 0.9em; color: #666; }
+
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(52, 1fr);
+            gap: 3px;
+        }
+        .week-box {
+            width: 100%;
+            padding-bottom: 100%; /* For square aspect ratio */
+            border-radius: 2px;
+            background-color: #e0e0e0;
+        }
+        .week-box.past {
+            background-color: #f0f0f0;
+            position: relative;
+        }
+        .week-box.past::before,
+        .week-box.past::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 80%;
+            height: 2px;
+            background-color: #888888;
+            transform-origin: center;
+        }
+        .week-box.past::before {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+        .week-box.past::after {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+        .week-box.future { background-color: #d4edda; }
+        .week-box.common { background-color: #28a745; }
+        
+        .week-box.non-common {
+            background-color: #cccccc;
+            position: relative;
+        }
+        .week-box.non-common::before,
+        .week-box.non-common::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 80%;
+            height: 2px;
+            background-color: #888888;
+            transform-origin: center;
+        }
+        .week-box.non-common::before {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+        .week-box.non-common::after {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+        
+        #mm-filters {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .filter-checkbox input {
+             cursor: pointer;
+        }
+
         /* --- Qibla Compass styles --- */
         .compass-container {
             display: flex;
@@ -325,6 +607,7 @@
             align-items: center;
             justify-content: center;
             gap: 20px;
+            padding: 20px 0;
         }
 
         .compass {
@@ -376,7 +659,7 @@
         /* --- End Qibla Compass styles --- */
         
         /* Dark Mode for Tools Page */
-        body.dark-mode .page-header h1 { color: #5dade2; }
+        body.dark-mode .page-header h1 { color: var(--text-color) }
         body.dark-mode .page-header p { color: #ccc; }
         body.dark-mode .tool-card {
             background-color: #2b2b2b;
@@ -384,7 +667,38 @@
         }
         body.dark-mode .tool-card h3 { color: #f2f2f2; }
         body.dark-mode .tool-card p { color: #bbb; }
-        body.dark-mode .tool-card i { color: #5dade2; }
+        body.dark-mode .tool-card i { color:var(--text-color) }
+        
+        body.dark-mode .icon-choice {
+            background-color: #333;
+            border-color: #555;
+            color: #ccc;
+        }
+        body.dark-mode .icon-choice:hover {
+            border-color: #5dade2;
+        }
+        body.dark-mode .icon-choice.selected {
+            background-color: var(--text-color);
+            color: #1a1a1a;
+        }
+        body.dark-mode .week-box.past {
+            background-color: #444;
+        }
+        body.dark-mode .week-box.past::before,
+        body.dark-mode .week-box.past::after {
+            background-color: #e74c3c;
+        }
+        body.dark-mode .week-box.non-common {
+            background-color: #555;
+        }
+        body.dark-mode .week-box.non-common::before,
+        body.dark-mode .week-box.non-common::after {
+            background-color: #999;
+        }
+        body.dark-mode #mm-filters {
+            background-color: #222;
+        }
+        
         body.dark-mode .compass {
             background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='grad_dark' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' style='stop-color:rgb(60,60,60);stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:rgb(30,30,30);stop-opacity:1' /%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='48' fill='url(%23grad_dark)' stroke='%23111' stroke-width='1'/%3E%3Ccircle cx='50' cy='50' r='45' fill='none' stroke='%23555' stroke-width='1.5'/%3E%3Cpath d='M50 5 L50 10' stroke='%23eee' stroke-width='1.5'/%3E%3Ctext x='50' y='16' font-size='6' text-anchor='middle' fill='%23eee' font-weight='bold'%3EN%3C/text%3E%3Cpath d='M95 50 L90 50' stroke='%23eee' stroke-width='1'/%3E%3Ctext x='86' y='51.5' font-size='4' text-anchor='middle' fill='%23eee'%3EE%3C/text%3E%3Cpath d='M50 95 L50 90' stroke='%23eee' stroke-width='1'/%3E%3Ctext x='50' y='87' font-size='4' text-anchor='middle' fill='%23eee'%3ES%3C/text%3E%3Cpath d='M5 50 L10 50' stroke='%23eee' stroke-width='1'/%3E%3Ctext x='14' y='51.5' font-size='4' text-anchor='middle' fill='%23eee'%3EW%3C/text%3E%3C/svg%3E") no-repeat center center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.5), inset 0 2px 4px rgba(0,0,0,0.4);
@@ -393,53 +707,7 @@
             color: #ccc;
         }
 
-        
-        
-.prayer-time.passed {
-    background-color: #ffe5e5;
-    color: #000;
-    border-color: #f5c6cb;
-}
-
-        @keyframes pulse {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
-    }
-    70% {
-        transform: scale(1.05);
-        box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
-    }
-}
-
-.prayer-time.next-upcoming {
-    background-color: #e5f0ff;
-    color: #000;
-    border-color: #b8daff;
-    transform: scale(1.02);
-    animation: pulse 2s infinite;
-}
-
-        .prayer-time.upcoming {
-    background-color: #e5fbe5;
-    color: #000;
-    border-color: #c3e6cb;
-}
-
-    h23 {
-    font-size: 1em;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-    display: block;
-    text-align: justify;
-}
-
-    
-/* --- Popup/Modal Styles --- */
+        /* --- Popup/Modal Styles --- */
         .popup {
             display: none; 
             position: fixed; 
@@ -455,7 +723,7 @@
         }
 
         .popup-content {
-            background-color: var(--text-color);
+            background-color: #fefefe;
             margin: auto;
             padding: 30px;
             border-radius: 8px;
@@ -519,85 +787,47 @@
         .qibla-link-btn i { margin-right: 10px; }
 
         .content-section { margin-bottom: 20px; }
-        .content-section h4 { color: #333; border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-bottom: 10px; }
+        .content-section h4 { color: #333; border-bottom: 1px solid var(--text-color); padding-bottom: 5px; margin-bottom: 10px; }
         .content-section p { line-height: 1.6; }
         
         .reciter-list { list-style: none; padding: 0; }
-        .reciter-item {align-items: center; margin-bottom: 15px; padding: 10px; background: #f9f9f9; border-radius: 5px; }
-        .reciter-info { flex-grow: 1; margin: 0 15px; }
+        .reciter-item { align-items: center; margin-bottom: 15px; padding: 10px; background: var(--text-color); border-radius: 5px; }
+        .reciter-info { display: flex; flex-direction: column; margin-left: 1; margin: 0 15px; }
         .reciter-info h5 { margin: 0 0 5px 0; }
         .reciter-info p { margin: 0; font-size: 0.9em; color: #666; }
-        .reciter-item audio { height: 40px; width: 100%}
+        .reciter-item audio { height: 40px; width: 100%; }
+    
         
         #prayerTimesContainer { text-align: center; }
-        #prayerTimesContainer input { padding: 8px; border-radius: 4px; border: 1px solid #100f0f; margin-right: 5px; }
-        #prayerTimesContainer button { padding: 8px 12px; border-radius: 4px; border: none; background: var(--accent-color); color: white; cursor: pointer; }
-        #prayerTimesResults {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-}
-        .prayer-time {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-items: center;
-    align-items: center;
-    width: 95%;
-    background: #f9f9f9;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    transition: background-color 0.4s, color 0.4s;
-    font-size: 1em;
-            color: var(--primary-color);
-    text-align: center;
-}
+        #prayerTimesContainer input { padding: 8px; border-radius: 4px; border: 1px solid #ccc; margin-right: 5px; }
+        #prayerTimesContainer button { padding: 8px 12px; border-radius: 4px; border: none; background: var(--primary-color); color: white; cursor: pointer; }
+        #prayerTimesResults { margin-top: 15px; display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
+        .prayer-time { padding: 10px; background: var(--text-color); border-radius: 5px; border: 1px solid #eee; transition: background-color 0.4s, color 0.4s; }
         .prayer-time strong { display: block; }
         .prayer-time .time-display { font-size: 1.1em; font-weight: 500; margin: 4px 0; }
         .prayer-time .countdown { font-size: 0.85em; color: #555; height: 1.2em; display: block; transition: color 0.4s; }
         
-        
-.prayer-time.passed {
-    background-color: #ffe5e5;
-            color: var(--primary-color);
-    border-color: #f5c6cb;
-}
+        .prayer-time.passed {
+            background-color: #e9ecef;
+            color: #6c757d;
+        }
         .prayer-time.passed .countdown {
             visibility: hidden;
         }
 
         .prayer-time.upcoming {
-    background-color: #e5fbe5;
-            color: var(--primary-color);
-    border-color: #c3e6cb;
-}
-
+            /* Default for future prayers */
+        }
         
-        @keyframes pulse {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
-    }
-    70% {
-        transform: scale(1.05);
-        box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
-    }
-}
-
-.prayer-time.next-upcoming {
-    background-color: #e5f0ff;
-            color: var(--primary-color);
-    border-color: #b8daff;
-    transform: scale(1.02);
-    animation: pulse 2s infinite;
-}
+        .prayer-time.next-upcoming {
+            background-color: #28a745;
+            color: white;
+            border-color: #218838;
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(40, 167, 70, 0.3);
+        }
         .prayer-time.next-upcoming .countdown {
-            color: var(--primary-color);
+            color: #e0e0e0;
             font-weight: bold;
         }
 
@@ -628,7 +858,7 @@
         /* Dark Mode for popup */
         body.dark-mode .popup-content { background-color: #252525; color: #eee; }
         body.dark-mode .popup-header { border-bottom-color: #444; }
-        body.dark-mode .popup-header h2 { color: #5dade2; }
+        body.dark-mode .popup-header h2 { color: var(--text-color); }
         body.dark-mode .popup-close { color: #888; }
         body.dark-mode .popup-close:hover { color: #eee; }
         body.dark-mode .content-section h4 { color: #f2f2f2; border-bottom-color: #555; }
@@ -636,75 +866,91 @@
         body.dark-mode .reciter-info p { color: #bbb; }
         body.dark-mode #prayerTimesContainer input { background: #444; border-color: #666; color: #eee; }
         body.dark-mode #prayerTimesContainer button:hover { background-color: #0056b3; }
-        body.dark-mode .prayer-time {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-items: center;
-    align-items: center;
-    padding: 15px 20px;
-    width: 80%;
-    background: #f9f9f9;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    transition: background-color 0.4s, color 0.4s;
-    font-size: 1em;
-    color: #000;
-    text-align: center;
-}
+        body.dark-mode .prayer-time { background: #333; border-color: #444; }
         body.dark-mode .prayer-time .countdown { color: #aaa; }
         body.dark-mode .article-card { background: #333; }
-        body.dark-mode 
-.prayer-time.passed {
-    background-color: #ffe5e5;
-    color: #000;
-    border-color: #f5c6cb;
-}
-        body.dark-mode @keyframes pulse {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
-    }
-    70% {
-        transform: scale(1.05);
-        box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
-    }
-}
-
-.prayer-time.next-upcoming {
-    background-color: #e5f0ff;
-    color: #000;
-    border-color: #b8daff;
-    transform: scale(1.02);
-    animation: pulse 2s infinite;
-}
+        body.dark-mode .prayer-time.passed {
+            background-color: #2a2a2a;
+            color: #777;
+            border-color: #383838;
+        }
+        body.dark-mode .prayer-time.next-upcoming {
+            background-color: #218838;
+            color: white;
+            border-color: #1c7430;
+        }
          body.dark-mode .prayer-time.next-upcoming .countdown {
             color: #e0e0e0;
         }
 
-
-        .getPrayerTimesBtn {
-    text-align: center;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    width: 80%;
-    height: auto;
-    padding: 15px 30px;
-    text-decoration: none;
-    border-radius: 50px;
+        .mm-btnactive {
+height: 1px;
+width: 1px;    
+background-color:white;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     font-weight: bold;
-    transition: all 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;        
+}
+    
+.percent-tag {
+    background-color: #28a745;
+    color: white;
+    font-size: 0.75em;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+
+.h22{
+    font-size: 1.3em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
     display: block;
-    margin: 0 auto;
-        }
-    </style>
+    text-align: justify;
+}
+
+.h23{
+    font-size: 0.7em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    display: block;
+    text-align: justify;
+}
+
+body.dark-mode .h23 {
+        font-size: 0.7em;
+    color: var(--text-color)
+    margin-bottom: 20px;
+    display: block;
+    text-align: justify;
+}
+
+body.dark-mode.arabic-name {
+    position: absolute;
+    right: 5%;
+    font-size: 1.1em;
+    color: var(--text-color);
+    font-family: 'Amiri', serif; /* Optional: Arabic-styled font */
+}
+
+.arabic-name {
+    position: absolute;
+    right: 5%;
+    font-size: 1.1em;
+    font-family: 'Amiri', serif; /* Optional: Arabic-styled font */
+}
+
+</style>
 </head>
 <body>
-    <!-- HEADER / TOP NAV -->
+
+        <!-- HEADER / TOP NAV -->
     <div class="top-nav">
         <button class="menu-btn">
             <i class="fas fa-bars"></i>
@@ -732,26 +978,31 @@
         <a href="index.html"><i class="fas fa-home"></i>Accueil</a>
     </div>
 
+
     <!-- Main Content -->
     <div id="main">
         <div class="tools-container">
-                        <div class="tool-card" data-tool="douaa">
+            <div class="tool-card" data-tool="recitations">
+                <i class="fas fa-book-open"></i>
+                <h3>Coran</h3>
+            </div>
+            <div class="tool-card" data-tool="douaa">
                 <i class="fas fa-praying-hands"></i>
                 <h3>Dou'as & Invocations</h3>
             </div>
-            <div class="tool-card" data-tool="qibla">
+                        <div class="tool-card" data-tool="qibla">
                 <i class="fas fa-kaaba"></i>
                 <h3>Qibla / Boussole</h3>
             </div>
-                        <div class="tool-card" data-tool="prieres">
+
+            <div class="tool-card" data-tool="prieres">
                 <i class="fas fa-mosque"></i>
                 <h3>Horaires des Prières</h3>
             </div>
-            <div class="tool-card" data-tool="recitations">
-                <i class="fas fa-headphones-alt"></i>
-                <h3>Récitations du Coran</h3>
+            <div class="tool-card" data-tool="mementoMori">
+                <i class="fas fa-hourglass-half"></i>
+                <h3>Memento Mori</h3>
             </div>
-
         </div>
     </div>
 
@@ -842,11 +1093,51 @@
             const toolCards = document.querySelectorAll('.tool-card');
             const closePopupBtn = document.querySelector('.popup-close');
 
+            function getPersonHtml(idPrefix, title) {
+                const defaultDate = idPrefix === 'user' ? '2000-01-01' : (idPrefix === 'person-a' ? '1970-01-01' : '');
+                const required = idPrefix === 'user' ? 'required' : '';
+                
+                return `
+                    <div class="person-form" id="form-${idPrefix}">
+                        <h5>${title}</h5>
+                        <div class="form-group form-group-inline">
+                            <label for="${idPrefix}-dob">Date de naissance</label>
+                            <input type="date" id="${idPrefix}-dob" value="${defaultDate}" ${required}>
+                        </div>
+                        <div class="form-group-icons" data-key="gender" data-value="female">
+                            <label>Genre</label>
+                            <div class="icon-choices">
+                                <button type="button" class="icon-choice selected" data-value="female" title="Femme"><i class="fas fa-female"></i></button>
+                                <button type="button" class="icon-choice" data-value="male" title="Homme"><i class="fas fa-male"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group-icons" data-key="quality" data-value="normal">
+                             <label>Qualité de vie</label>
+                            <div class="icon-choices">
+                                <button type="button" class="icon-choice" data-value="sain" title="Saine"><i class="fas fa-smile-beam"></i></button>
+                                <button type="button" class="icon-choice selected" data-value="normal" title="Normale"><i class="fas fa-meh"></i></button>
+                                <button type="button" class="icon-choice" data-value="moyen" title="Moyenne"><i class="fas fa-frown"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group-icons" data-key="disease" data-value="non">
+                             <label>Maladie héréditaire?</label>
+                            <div class="icon-choices">
+                                <button type="button" class="icon-choice" data-value="oui" title="Oui"><i class="fas fa-check"></i></button>
+                                <button type="button" class="icon-choice selected" data-value="non" title="Non"><i class="fas fa-times"></i></button>
+                                <button type="button" class="icon-choice" data-value="nsp" title="Ne sais pas"><i class="fas fa-question"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
             const toolContents = {
                 qibla: {
                     title: 'Qibla / Boussole',
                     content: `
                         <div class="compass-container">
+                                                     <h8><i class="fas fa-arrow-down"></i></h8>
+   
                             <div class="compass" id="compass">
                                 <div class="compass-arrow-qibla" id="qibla-arrow"></div>
                             </div>
@@ -858,42 +1149,42 @@
                         </div>
                     `
                 },
-                recitations: {
-                    title: 'Récitations du Coran',
-                    content: `
-                        <ul class="reciter-list">
-                            <li class="reciter-item">
-                                <div class="reciter-info">
-                                    <h5>Al-Fatiha</h5>
-                                </div>
-                                <audio controls preload="none" src="audio/alfatiha.mp3"></audio>
-                            </li>
-                            <li class="reciter-item">
-                                <div class="reciter-info">
-                                    <h5>Al-Baqara</h5>
-                                </div>
-                                <audio controls preload="none" src="audio/albaqara.mp3"></audio>
-                            </li>
-                            <li class="reciter-item">
-                                <div class="reciter-info">
-                                    <h5>Al-Imran</h5>
-                                </div>
-                                <audio controls preload="none" src="audio/alimran.mp3"></audio>
-                            </li>                             
-                            <li class="reciter-item">
-                                <div class="reciter-info">
-                                    <h5>An-Nisa</h5>
-                                </div>
-                                <audio controls preload="none" src="audio/annisa.mp3"></audio>
-                            </li>
-                            <li class="reciter-item">
-                                <div class="reciter-info">
-                                    <h5>Al-Mai'dah</h5>
-                                </div>
-                                <audio controls preload="none" src="audio/almaidah.mp3"></audio>
-                            </li>
-                        </ul>
-                    `
+recitations: {
+    title: 'Récitations du Coran',
+    content: `
+        <ul class="reciter-list">
+            <li class="reciter-item" style="position: relative;">
+                <div class="reciter-info">
+                    <h5>Al-Fatiha <span class="arabic-name">الفاتحة</span></h5>
+                </div>
+                <audio controls preload="none" src="audio/alfatiha.mp3"></audio>
+            </li>
+            <li class="reciter-item" style="position: relative;">
+                <div class="reciter-info">
+                    <h5>Al-Baqara <span class="arabic-name">البقرة</span></h5>
+                </div>
+                <audio controls preload="none" src="audio/albaqara.mp3"></audio>
+            </li>
+            <li class="reciter-item" style="position: relative;">
+                <div class="reciter-info">
+                    <h5>Al-Imran <span class="arabic-name">آل عمران</span></h5>
+                </div>
+                <audio controls preload="none" src="audio/alimran.mp3"></audio>
+            </li>                             
+            <li class="reciter-item" style="position: relative;">
+                <div class="reciter-info">
+                    <h5>An-Nisa <span class="arabic-name">النساء</span></h5>
+                </div>
+                <audio controls preload="none" src="audio/annisa.mp3"></audio>
+            </li>
+            <li class="reciter-item" style="position: relative;">
+                <div class="reciter-info">
+                    <h5>Al-Mai'dah <span class="arabic-name">المائدة</span></h5>
+                </div>
+                <audio controls preload="none" src="audio/almaidah.mp3"></audio>
+            </li>
+        </ul>
+    `
                 },
                 douaa: {
                     title: "Dou'as & Invocations",
@@ -902,18 +1193,21 @@
                             <li class="reciter-item">
                                 <div class="reciter-info">
                                     <h23>« Ô Allah, pardonne-lui et accorde-lui Ta miséricorde. Accorde-lui le salut et le pardon. Assure-lui une noble demeure. Elargis-lui sa tombe et lave-le avec l’eau, la neige et la grêle. Nettoie-le de ses péchés comme on nettoie le vêtement blanc de la saleté. Donne-lui en échange une demeure meilleure que la sienne et une épouse meilleure que la sienne. Fais-le entrer au Paradis et préserve-le du châtiment de la tombe (et du châtiment de l’Enfer) »</h23>
-                                </div>
+                                <br></br>
+                                    </div>
                                 <audio controls preload="none" src="audio/156.mp3"></audio>
                             </li>
                             <li class="reciter-item">
                                 <div class="reciter-info">
                                     <h23>« Ô Allah, pardonne à nos vivants et à nos morts, aux présents et aux absents, aux jeunes et aux vieux, aux hommes et aux femmes. Ô Allah, celui d’entre nous que Tu maintiens en vie, fais-le vivre sur la voie de l’Islam et celui d’entre nous dont Tu as repris l’âme, fais-le mourir dans la foi. Ô Allah, ne nous prive pas de sa récompense et ne nous égare pas après sa mort. »</h23>
-                                </div>
+                                 <br></br>
+                                    </div>
                                 <audio controls preload="none" src="audio/157.mp3"></audio>
                             </li>
                             <li class="reciter-item">
                                 <div class="reciter-info">
                                     <h23>« Ô Allah, untel fils d’untel est sous Ta protection et à l’abri de Ton voisinage. Préserve-le donc de la fitna de la tombe et du châtiment de l’enfer. Ô Toi digne de loyauté et de raison, pardonne-lui et accorde-lui Ta miséricorde car c’est Toi le Pardonneur, le Très Miséricordieux. »</h23>
+                                <br></br>
                                 </div>
                                 <audio controls preload="none" src="audio/158.mp3"></audio>
                             </li>                             
@@ -936,13 +1230,57 @@
                         </div>
                     `
                 },
-            };
+                mementoMori: {
+                    title: 'Memento Mori',
+                    content: `
+                        <div id="mementoMoriContainer">
+                            <div id="mm-step-1" class="mm-step active">
+                                <h23>La projection repose sur les moyennes statistiques marocaines de 2025 mais ce ne sont que des chiffres — ni décrets divins, ni vérités absolues.
+                                Votre santé, vos choix, et la volonté d’Allah façonnent votre chemin.
+                                Ce qui importe dans cette démarche, ce n’est pas combien de temps il vous reste avant de mourir,
+                                mais de visualiser le temps qu'il vous reste et comment vous choisissez de le vivre.</h23>
+                                <div class="mm-form-grid">
+                                    ${getPersonHtml('user', 'Commençons par vous')}
+                                </div>
+                                <div class="mm-navigation">
+                                    <span></span>
+                                    <button id="mm-step-1-next" class="mm-btn mm-btn-primary">Suivant <i class="fas fa-arrow-right"></i></button>
+                                </div>
+                            </div>
 
-            
+                            <div id="mm-step-2" class="mm-step">
+                                <h23>Indiquez maintenant les informations d’une personne qui vous est chère.
+                                Cela peut être un parent, un(e) ami(e), ou toute âme avec qui vous partagez votre vie.
+                                L’objectif est de visualiser le temps qu’il vous reste à traverser ensemble.
+                                Non pas pour compter les jours, mais pour mieux en goûter la valeur.</h23>
+                                <div class="mm-form-grid">
+                                    ${getPersonHtml('person-a', 'Votre proche')}
+                                </div>
+                                <div class="mm-navigation">
+                                     <button id="mm-step-2-back" class="mm-btn mm-btn-secondary"><i class="fas fa-arrow-left"></i> Précédent</button>
+                                    <button id="mm-generate" class="mm-btn mm-btn-primary"><i class="fas fa-cogs"></i> Générer</button>
+                                </div>
+                            </div>
+
+                            <div id="mm-step-3" class="mm-step">
+                                <div id="mm-view-filters">
+                                    <button class="mm-btnactive" data-view="commun"></button>
+                                </div>
+                                <div id="mm-scoreboard"></div>
+                                <div id="mm-life-calendars"></div>
+                                <div class="mm-navigation">
+                                    <button id="mm-recalculate" class="mm-btn mm-btn-third"><i class="fas fa-sync-alt"></i> Recalculer</button>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                }
+            };
             
             let qiblaAngle = 0;
             let deviceOrientationHandler;
             let prayerCountdownInterval = null;
+            let mementoMoriAllPeopleData = [];
 
             function calculateQiblaDirection(latitude, longitude) {
                 const kaabaLat = 21.4225 * Math.PI / 180;
@@ -970,7 +1308,7 @@
                     const { latitude, longitude } = position.coords;
                     qiblaAngle = calculateQiblaDirection(latitude, longitude);
 
-                    statusDiv.innerHTML = "Veuillez orienter votre appareil. La flèche verte indique la Qibla.";
+                    statusDiv.innerHTML = "Veuillez orienter le Nord de la boussole vers la flèche noire. La flèche verte vous indiquera alors la Qibla.";
                     
                     deviceOrientationHandler = (event) => {
                         let alpha = event.alpha; // Compass direction (0-360)
@@ -1014,6 +1352,9 @@
                     if (tool === 'qibla') {
                         startQiblaCompass();
                     }
+                    if (tool === 'mementoMori') {
+                        initializeMementoMori();
+                    }
                 }
             }
 
@@ -1022,6 +1363,7 @@
                 stopPrayerCountdowns();
                 toolPopup.style.display = 'none';
                 popupBody.innerHTML = ''; // Clear content
+                mementoMoriAllPeopleData = [];
             }
 
             function stopPrayerCountdowns() {
@@ -1044,6 +1386,249 @@
                 }
             });
             
+            function initializeMementoMori() {
+                const steps = document.querySelectorAll('.mm-step');
+                const nextBtn = document.getElementById('mm-step-1-next');
+                const backBtn = document.getElementById('mm-step-2-back');
+                const generateBtn = document.getElementById('mm-generate');
+                const recalculateBtn = document.getElementById('mm-recalculate');
+                const container = document.getElementById('mementoMoriContainer');
+                const viewFilters = document.getElementById('mm-view-filters');
+
+                container.addEventListener('click', (e) => {
+                    const iconChoice = e.target.closest('.icon-choice');
+                    if(iconChoice) {
+                        const parentGroup = iconChoice.closest('.form-group-icons');
+                        const choices = parentGroup.querySelectorAll('.icon-choice');
+                        choices.forEach(c => c.classList.remove('selected'));
+                        iconChoice.classList.add('selected');
+                        parentGroup.dataset.value = iconChoice.dataset.value;
+                    }
+                });
+
+                if (viewFilters) {
+                    viewFilters.addEventListener('click', (e) => {
+                        const btn = e.target.closest('.mm-btn');
+                        if (!btn) return;
+
+                        viewFilters.querySelectorAll('.mm-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+
+                        const view = btn.dataset.view;
+                        const userCal = document.getElementById('calendar-user');
+                        const personACal = document.getElementById('calendar-person-a');
+
+                        if (userCal) userCal.style.display = 'none';
+                        if (personACal) personACal.style.display = 'none';
+
+                        if (view === 'vous') {
+                            if (userCal) userCal.style.display = 'block';
+                        } else if (view === 'personne-a') {
+                            if (personACal) personACal.style.display = 'block';
+                        } else if (view === 'commun') {
+                            if (userCal) userCal.style.display = 'block';
+                            if (personACal) personACal.style.display = 'block';
+                        }
+                    });
+                }
+
+                const switchStep = (stepNumber) => {
+                    steps.forEach(step => step.classList.remove('active'));
+                    const targetStep = document.getElementById(`mm-step-${stepNumber}`);
+                    if(targetStep) targetStep.classList.add('active');
+                };
+
+                nextBtn.addEventListener('click', () => {
+                    // Simple check if user form is filled
+                    if (document.getElementById('user-dob').value) {
+                         switchStep(2);
+                    } else {
+                        alert("Veuillez entrer votre date de naissance.");
+                    }
+                });
+                backBtn.addEventListener('click', () => switchStep(1));
+                recalculateBtn.addEventListener('click', () => {
+                    document.getElementById('mm-life-calendars').innerHTML = '';
+                    document.getElementById('mm-scoreboard').innerHTML = '';
+                    if (viewFilters) viewFilters.style.display = 'none';
+                    mementoMoriAllPeopleData = [];
+                    switchStep(1);
+                });
+
+                generateBtn.addEventListener('click', () => {
+                    mementoMoriAllPeopleData = processMementoMoriData();
+                    if(mementoMoriAllPeopleData.length > 0) {
+                        renderMementoMoriResults(mementoMoriAllPeopleData);
+                        switchStep(3);
+                    }
+                });
+            }
+
+            function processMementoMoriData() {
+                const WEEKS_IN_YEAR = 52.1775;
+                
+                const calculateLifeExpectancy = (gender, quality, disease) => {
+                    let base = gender === 'male' ? 74 : 77; // Morocco 2025 estimate
+                    if (quality === 'sain') base += 5;
+                    if (quality === 'moyen') base -= 5;
+                    if (disease === 'oui') base -= 10;
+                    if (disease === 'nsp') base -= 2;
+                    return base;
+                };
+
+                const getPersonData = (idPrefix) => {
+                    const dobValue = document.getElementById(`${idPrefix}-dob`).value;
+                    
+                    if (idPrefix !== 'user' && !dobValue) return null;
+                    
+                    if (idPrefix === 'user' && !dobValue) {
+                         alert(`Veuillez entrer votre date de naissance.`);
+                        return null;
+                    }
+
+                    const dobParts = dobValue.split('-'); // YYYY-MM-DD
+                    const dob = new Date(dobParts[0], dobParts[1] - 1, dobParts[2]);
+
+                     if (isNaN(dob.getTime())) { // Invalid date
+                        if (idPrefix === 'user') alert(`Date de naissance invalide pour Vous.`);
+                        return null;
+                    }
+
+                    const now = new Date();
+                    const age = (now - dob) / (1000 * 60 * 60 * 24 * 365.25);
+                    
+                    const gender = document.querySelector(`#form-${idPrefix} [data-key='gender']`).dataset.value;
+                    const quality = document.querySelector(`#form-${idPrefix} [data-key='quality']`).dataset.value;
+                    const disease = document.querySelector(`#form-${idPrefix} [data-key='disease']`).dataset.value;
+
+                    const lifeExpectancyYears = calculateLifeExpectancy(gender, quality, disease);
+                    const expectedDeath = new Date(dob);
+                    expectedDeath.setFullYear(dob.getFullYear() + Math.round(lifeExpectancyYears));
+                    
+                    const totalWeeks = Math.round(lifeExpectancyYears * WEEKS_IN_YEAR);
+                    const weeksPassed = Math.round(age * WEEKS_IN_YEAR);
+
+                    return {
+                        id: idPrefix,
+                        name: idPrefix === 'user' ? 'Vous' : (idPrefix === 'person-a' ? 'Personne A' : (idPrefix === 'person-b' ? 'Personne B' : 'Personne C')),
+                        dob,
+                        age: Math.floor(age),
+                        expectedDeath,
+                        lifeExpectancyYears: Math.round(lifeExpectancyYears),
+                        totalWeeks,
+                        weeksPassed,
+                    };
+                };
+
+                const user = getPersonData('user');
+                if (!user) {
+                    alert("Veuillez entrer vos informations correctement.");
+                    return [];
+                }
+
+                return [user, getPersonData('person-a')].filter(p => p !== null);
+            }
+            
+            function renderMementoMoriResults(peopleData) {
+                if (peopleData.length === 0) return;
+
+                const scoreboard = document.getElementById('mm-scoreboard');
+                const calendarsContainer = document.getElementById('mm-life-calendars');
+                const viewFilters = document.getElementById('mm-view-filters');
+                calendarsContainer.innerHTML = ''; // Clear previous calendars
+                
+                const user = peopleData.find(p => p.id === 'user');
+                const personA = peopleData.find(p => p.id === 'person-a');
+                
+                let scoreHtml = '';
+                const now = new Date();
+
+                if (peopleData.length === 1) { // Only user data
+                    viewFilters.style.display = 'none';
+                    scoreHtml = `
+`;
+                    renderLifeCalendar(user, now, now, now);
+
+                } else { // User and Person A
+                    viewFilters.style.display = 'flex';
+                    const earliestDeath = new Date(Math.min(user.expectedDeath, personA.expectedDeath));
+                    const latestDeath = new Date(Math.max(user.expectedDeath, personA.expectedDeath));
+                    
+                    const commonWeeksRemaining = (earliestDeath > now) ? Math.floor((earliestDeath - now) / (1000 * 60 * 60 * 24 * 7)) : 0;
+                    const survivorWeeks = (latestDeath > earliestDeath) ? Math.floor((latestDeath - earliestDeath) / (1000 * 60 * 60 * 24 * 7)) : 0;
+
+scoreHtml = `
+    <div class="score-item">
+        <h4>Depuis ton premier souffle , Allah t’a accordé jusque là ${user.weeksPassed.toLocaleString()} semaines de vie. Chaque semaine est un souffle, une preuve que ton heure approche. Tu as déjà parcouru <span class="percent-tag">${Math.round((user.weeksPassed / user.totalWeeks) * 100)}%</span> du chemin que Dieu t’a tracé. A toi de prioritiser et d'optimiser le temps restant.</h4>
+    </div>
+    <div class="score-item">
+        <h4>Ton proche, par la volonté d’Allah, a déjà traversé ${personA.weeksPassed.toLocaleString()} semaines dans ce bas monde. Riche d'histoires, d'anecdotes et d'expériences, cela représente <span class="percent-tag">${Math.round((personA.weeksPassed / personA.totalWeeks) * 100)}%</span> de son passage éphémère sur cette terre.</h4>
+    </div>
+    <div class="score-item">
+        <h4>Il vous reste ${commonWeeksRemaining.toLocaleString()} semaines à partager. C’est <span class="percent-tag">${Math.round((commonWeeksRemaining / Math.min(user.totalWeeks, personA.totalWeeks)) * 100)}%</span> de ce temps commun que le destin vous accorde encore avant que chacun reprenne sa route vers l’éternité.</h4>
+    </div>
+`;
+                    renderLifeCalendar(user, now, earliestDeath, latestDeath);
+                }
+                
+                scoreboard.innerHTML = scoreHtml;
+
+                // Reset filters to show "Commun" view
+                viewFilters.querySelectorAll('.mm-btn').forEach(b => b.classList.remove('active'));
+                viewFilters.querySelector('[data-view="commun"]').classList.add('active');
+                const userCal = document.getElementById('calendar-user');
+                const personACal = document.getElementById('calendar-person-a');
+                if (userCal) userCal.style.display = 'block';
+                if (personACal) personACal.style.display = 'block';
+            }
+
+            function renderLifeCalendar(person, now, earliestDeath, latestDeath) {
+                const calendarsContainer = document.getElementById('mm-life-calendars');
+                const calendarWrapper = document.createElement('div');
+                calendarWrapper.className = 'life-calendar-wrapper';
+                calendarWrapper.id = `calendar-${person.id}`;
+
+                const isComparison = (earliestDeath.getTime() !== now.getTime() && latestDeath.getTime() !== now.getTime());
+                
+                let weekGridHtml = '';
+                for (let i = 0; i < person.totalWeeks; i++) {
+                    let weekClass = 'future'; // Default to light green
+                    
+                    const weekStartDate = new Date(person.dob.getTime() + (i * 7 * 24 * 60 * 60 * 1000));
+                    
+                    if (i < person.weeksPassed) {
+                        weekClass = 'past';
+                    } else if (isComparison) {
+                        if (weekStartDate < earliestDeath) {
+                            weekClass = 'common';
+                        } else {
+                            const isSurvivor = person.expectedDeath.getTime() === latestDeath.getTime();
+                            if(isSurvivor) {
+                                weekClass = 'non-common';
+                            }
+                        }
+                    }
+
+                    weekGridHtml += `<div class="week-box ${weekClass}" title="Semaine ${i + 1}"></div>`;
+                }
+
+                calendarWrapper.innerHTML = `
+        <div class="calendar-header">
+                <h22>Qu’est-ce que Memento Mori ?</h22>
+                    <h23>Memento Mori est une expression latine qui signifie : « Souviens-toi que tu vas mourir. »
+                    Elle nous vient de la Rome antique, où les généraux victorieux se faisaient rappeler, au sommet de leur gloire, qu’ils n’étaient que des mortels. Plus tard, dans la tradition musulmane, ce concept a évolué en rappel spirituel : nous sommes tous de passage sur cette terre, et chaque jour est un pas de plus vers l’éternité.</h23>
+                    <h23>En islam, ce rappel est constant. Rapporté par At-Tirmidhi, Le Prophète ﷺ la qualifiait de « la destructrice des plaisirs » alors que 
+                    dans le Coran, Allah nous rappelle que « Toute âme goûtera à la mort. »</h23>
+                    <h23>Ce calendrier est une visualisation de ta vie en semaines, mais pas pour faire peur — pour te réveiller. Pour t’inviter à vivre avec conscience. À aimer mieux. À pardonner plus vite. À investir dans l’Au-delà. </h23>
+                    </div>
+                <h22>Comment l’interpréter ?</h22>
+                   <h23>Chaque petit carré représente une semaine de ta vie. Elle peut sembler insignifiante seule, mais regarde-les ensemble : elles forment un tableau. Certaines semaines sont passées, d’autres sont à venir. Les semaines en vert représentent les semaines restantes que vous partagez en commun.</h23>
+                   <br></br> 
+                   <div class="week-grid">${weekGridHtml}</div>
+                `;
+                calendarsContainer.appendChild(calendarWrapper);
+            }
+
             async function fetchPrayerTimes() {
                 const resultsDiv = document.getElementById('prayerTimesResults');
                 const legendDiv = document.getElementById('prayerTimesLegend');
@@ -1085,8 +1670,6 @@
                         });
                         resultsDiv.innerHTML = resultsHTML;
 
-                        // Add legend
-                        ;
 
                         updatePrayerCountdowns(); // Initial call
                         prayerCountdownInterval = setInterval(updatePrayerCountdowns, 1000);
@@ -1132,13 +1715,12 @@
                             el.classList.remove('next-upcoming');
                         }
 
-const totalSeconds = Math.floor(diff / 1000);
+                        const totalSeconds = Math.floor(diff / 1000);
 const hours = Math.floor(totalSeconds / 3600);
 const minutes = Math.floor((totalSeconds % 3600) / 60);
 const seconds = totalSeconds % 60;
 
-el.querySelector('.countdown').textContent = ` ${hours}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
-                    }
+el.querySelector('.countdown').textContent = `${hours}h ${minutes}m ${seconds.toString().padStart(2, '0')}s`;                    }
                 });
 
                 // If no future prayer was found, it means the last one just passed
