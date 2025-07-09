@@ -322,6 +322,7 @@
     text-align: justify;
 }
 
+
    h3 {
     font-size: 1em;
     color: var(--primary-color);
@@ -695,7 +696,7 @@ body.mode-nuit {
     }
 
     #initialStage .stage-message {
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: white;
       padding: 1.2em;
       border-radius: 10px;
       max-width: 450px;
@@ -704,6 +705,11 @@ body.mode-nuit {
       color: var(--text-color);
       text-align: left;
     }
+
+    .bullet-list {
+  color: var(--primary-color);
+  text-align: center;
+}
   </style>
 </head>
 <body>
@@ -727,13 +733,12 @@ body.mode-nuit {
 
 <div class="stage initial-stage" id="initialStage">
 <div class="stage-message">
-<h2>Inscription en 4 étapes</h2>
-<ol>
-<li>Coordonnées du déclarant.</li>
-<li>Détails sur le défunt(e).</li>
-<li>Localisation GPS de la tombe.</li>
-<li>Galerie photo du défunt(e) et de la tombe.</li>
-</ol>
+<div class="bullet-list">
+  <div class="bullet-item">Coordonnées du déclarant</div>
+  <div class="bullet-item">Détails sur le défunt(e)</div>
+  <div class="bullet-item">Localisation GPS de la tombe</div>
+  <div class="bullet-item">Galerie photo du défunt(e) et de la tombe</div>
+</div>
 </div>
   <h2><button id="closeSidebarBtn" style="float: right; background: none; border: none; color: ; font-size: 0.1em; cursor: pointer;">×</button></h2>
   <button class="top-close" id="closePageBtn" style="box-shadow: none;"></button>
