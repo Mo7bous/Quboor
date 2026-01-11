@@ -734,7 +734,7 @@ body.mode-nuit {
 <div class="stage initial-stage" id="initialStage">
 <div class="stage-message">
 <div class="bullet-list">
-    <h2>munissez vous des informations suivantes avant de commencer : </h2>
+    <h2>Munissez vous des informations suivantes avant de commencer : </h2>
   <div class="bullet-item">1.Coordonnées du déclarant</div>
   <div class="bullet-item">2.Détails sur le défunt(e)</div>
   <div class="bullet-item">3.Localisation GPS de la tombe</div>
@@ -749,11 +749,11 @@ body.mode-nuit {
 </div>
 </div>
 <div id="formStages" style="display: none;">
-<!-- Step 1A: Déclarant -->
+<!-- Étape 1 : Déclarant -->
 <div class="step active" id="step1A">
   <div class="step-indicator" id="stepIndicator">Coordonées du déclarant</div>
 <div class="note">
-          📌 Astuce : Pour faciliter le suivi de votre demande et permettre une éventuelle confirmation, veuillez indiquer des coordonnées e-mail où vous pouvez être facilement joignable.
+          📌 Astuce : Pour faciliter le suivi de votre demande et permettre une éventuelle confirmation, veuillez indiquer une adresse mail où vous pouvez être facilement joignable.
         </div>
 <br/><br>
 <div class="form-group">
@@ -765,7 +765,7 @@ body.mode-nuit {
 <input id="userLastName" placeholder="Votre nom" type="text"/>
 </div>
 <div class="form-group">
-<label>Adresse email</label>
+<label>Adresse e-mail</label>
 <input id="userEmail" placeholder="exemple@domaine.com" type="text"/>
 </div>
 <div class="form-group">
@@ -787,7 +787,7 @@ body.mode-nuit {
 </datalist>
 </div>
 </br></div>
-<!-- Step 1B: Défunt -->
+<!-- Étape 2 : Défunt -->
 <div class="step" id="step1B">
     <div class="step-indicator" id="stepIndicator">Informations sur le/la défunt(e)</div>
 
@@ -831,12 +831,12 @@ body.mode-nuit {
 <input id="profession" list="professions" type="text"/>
 </div>
 </br></div>
-<!-- Step 2 -->
+<!-- Étape 3 : Localisation -->
 <div class="step" id="step2">
       <div class="step-indicator" id="stepIndicator">Localisation</div>
 
 <div class="note">
-📌 Astuce : Indiquez la localisation la plus précise possible – Merci d’indiquer l’emplacement exact de la tombe pour faciliter son repérage. Vous pouvez nous envoyer par la suite une localisation en direct via WhatsApp. Pour cela, ouvrez une nouvelle conversation ou message WhatsApp, appuyez sur le bouton 📎 (ou +), choisissez "Localisation", puis "Envoyer la localisation en direct. Attendez que la précision soit à moins de 2 mètres avant d'envoyer".      </div>
+📌 Astuce : Indiquez la localisation la plus précise possible – Merci d’indiquer l’emplacement exact de la tombe pour faciliter son repérage. Vous pouvez nous envoyer par la suite une localisation en direct via WhatsApp. Pour cela, ouvrez une nouvelle conversation ou message WhatsApp, appuyez sur le bouton 📎 (ou +), choisissez "Localisation", puis "Envoyer la localisation en direct. Attendez que la précision soit à moins de 3 mètres avant d'envoyer".      </div>
 <br/><br>
 <div class="form-group">
 <label>Localisation actuelle</label>
@@ -858,10 +858,6 @@ body.mode-nuit {
 </div>
 </div>
 </div>
-<div class="form-group">
-<label>Précision</label>
-<span id="accuracy">--</span>
-</div>
 
 <div class="form-group">
 <label>Adresse</label>
@@ -872,12 +868,13 @@ body.mode-nuit {
 <span id="timestamp">--</span>
 </div>
 </br></div>
-<!-- Step 3 -->
-<div class="step" id="step3">
+<!-- Étape 4 : Gallerie -->
+    
+    <div class="step" id="step3">
       <div class="step-indicator" id="stepIndicator">Gallerie</div>
 
 <div class="note">
-          📌 Astuce: Une fois l’inscription finalisée, un e-mail automatique vous sera géneré avec un lien pour uploader 5 photos : 1 photo de profil du défunt(e), 1 photo de la tombe de près, 1 photo de la tombe de loin dans son environnement, ainsi que 2 photos supplémentaires du défunt(e). Veillez à ce que les fichiers soient au format .jpeg et que la taille totale n’excède pas 25 Mo afin d’assurer une bonne réception et un traitement efficace.
+          📌 Astuce: Une fois l’inscription finalisée, un e-mail automatique vous sera géneré. Vous pouvez uploader jusqu'à 5 photos .Idéalement : 1 photo de profil du défunt(e), 1 photo de la tombe de près, 1 photo de la tombe de loin dans son environnement, ainsi que 2 photos supplémentaires du défunt(e). Veillez à ce que les fichiers soient au format .jpeg et que la taille totale n’excède pas 25 Mo afin d’assurer une bonne réception et un traitement efficace.
         </div>
 </div>
 <!-- Final message -->
