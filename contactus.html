@@ -458,7 +458,12 @@ Ensemble, construisons un réseau solidaire et durable autour des lieux de mémo
       const email = document.getElementById("email").value.trim();
       const subject = document.getElementById("subject").value.trim();
       const message = document.getElementById("message").value.trim();
-      const mailtoLink = `mailto:info@quboor.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("Nom : " + name + "\\nE-mail : " + email + "\\n\\n" + message)}`;
+      const mailtoLink = `mailto:info@quboor.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+  "Nom : " + name +
+  "\r\nE-mail : " + email +
+  "\r\n\r\n" +
+  message
+)}`;
       window.location.href = mailtoLink;
       return false;
     }
