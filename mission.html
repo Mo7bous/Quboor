@@ -555,6 +555,20 @@ h22 {
     display: block;
     text-align: center;
 }
+
+.top-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.top-image-container img {
+    width: 95%;
+    max-width: 1400px; /* limite sur très grands écrans */
+    height: auto;
+    border-radius: 12px; /* optionnel */
+}
     </style>
 </head>
 <body>
@@ -584,6 +598,10 @@ h22 {
         <a href="index.html"><i class="fas fa-home"></i>Accueil</a>
     </div>
 
+    <div class="top-image-container">
+    <img src="image-haut.jpg" alt="Illustration1">
+    </div>
+    
 <div class="boxed-text">
 <h23>Quboor développe une initiative structurée autour de deux objectifs majeurs :  
 d’une part, la <strong>collecte et la digitalisation des données funéraires</strong> pour créer une base locale fiable, géolocalisée et accessible à des fins de mémoire et de recherche ;  
@@ -734,5 +752,6 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 </body>
 </html>
+
 
 
