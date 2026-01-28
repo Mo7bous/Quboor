@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Outils - Quboor</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Outils - Quboor</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+<style>
 :root{
   --primary:#2C3E50;
   --light:#f9f9f9;
@@ -48,565 +48,153 @@ a{color:inherit;text-decoration:none}
 .closebtn{position:absolute;top:8px;right:12px;font-size:28px;background:none;border:0;color:var(--light);cursor:pointer}
 
 /* Main layout */
-#main{
+main{
   width:92%;
   max-width:1100px;
-  margin:20px auto;
-  padding-bottom:40px;
-  /* Fit main area to viewport so the page itself doesn't scroll;
-     keep internal overflow hidden so only popups/list-wrappers scroll. */
+  margin:8px auto 0;
+  padding:8px 0 40px;
   height: calc(100vh - 120px);
   overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
-.page-header{text-align:center;margin:18px 0 26px}
-.page-header h1{color:var(--primary);font-size:1.4rem;margin-bottom:6px}
-.page-header p{color:var(--muted)}
 
-/* Tools grid */
-.tools-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.tool-card{
-  background:#fff;border-radius:10px;padding:20px;display:flex;flex-direction:column;align-items:center;gap:12px;border:1px solid #eee;
-  box-shadow:0 6px 18px rgba(0,0,0,0.04);cursor:pointer;text-align:center;transition:transform .18s,box-shadow .18s;
-  min-height:110px
-}
-.tool-card i{font-size:28px;color:var(--primary)}
-.tool-card h3{font-size:1rem;color:#333}
-.tool-card:active,.tool-card:hover{transform:translateY(-6px);box-shadow:0 10px 22px rgba(0,0,0,0.08)}
-
-/* Popup/modal */
-.popup{display:none;position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.45);align-items:center;justify-content:center;padding:20px;z-index:80}
-.popup[aria-hidden="false"]{display:flex}
-.popup-content{width:95%;height:95%;max-width:1200px;background:#fff;border-radius:10px;padding:18px;box-shadow:0 8px 30px rgba(0,0,0,0.25);display:flex;flex-direction:column;overflow:hidden}
-.popup-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  /* keep header visually separate and fixed at top of the popup */
-  position:sticky;
-  top:0;
-  z-index:3;
-  padding:12px 0;
-  background:var(--light);
-  /* subtle divider so header remains distinct while content scrolls */
-  border-bottom:1px solid #eee;
-}
-.popup-header h2{margin:0;font-size:1.1rem;color:var(--primary)}
-.popup-close{background:none;border:0;font-size:26px;cursor:pointer}
-
-/* Popup body: search + table list
-   Make the popup body a flex column so the search row and the list
-   wrapper sit correctly; only the list-wrapper scrolls, keeping the
-   header and the search row fixed. */
-.popup-body{
+.tools-container{
   display:flex;
   flex-direction:column;
-  flex:1 1 auto;
-  overflow:hidden; /* keep scrolling confined to .list-wrapper */
-  padding:0;
-}
-
-/* Make the search row sit under the header and stay visible while
-   only the results area scrolls. */
-.search-row{
-  display:flex;
-  gap:10px;
+  gap:12px;
   align-items:center;
-  margin:0; /* spacing handled by header and list wrapper */
-  padding:10px 0;
-  position:sticky;
-  top:56px; /* leaves space for the sticky popup-header above */
-  z-index:2;
-  background:var(--light);
-  border-bottom:1px solid #f1f1f1;
+  width:100%;
+  padding:0 8px;
 }
-.search-row input[type="search"]{flex:1;padding:10px 12px;border-radius:8px;border:1px solid #ddd;font-size:14px}
-.search-row .count{font-size:13px;color:var(--muted)}
+.tool-card{
+  width:95%;
+  max-width:980px;
+  background:#fff;
+  border-radius:10px;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border:1px solid #eee;
+  box-shadow:0 6px 18px rgba(0,0,0,0.04);
+  cursor:pointer;
+  transition:.18s;
+}
+.tool-card i{font-size:22px;width:44px;text-align:center}
+.tool-card:hover{transform:translateY(-4px)}
 
-/* Scrollable table listing */
-.list-table{width:100%;border-collapse:collapse;font-size:14px}
-.list-wrapper{flex:1;overflow:auto;border-top:1px solid #eee;padding-top:8px}
-.list-table th, .list-table td{padding:10px 12px;border-bottom:1px solid #f1f1f1;text-align:left}
-.list-table tr{cursor:pointer}
-.list-table tr:hover{background:#fafafa}
-
-/* Detail popup (smaller: 85%) */
-.detail-popup .popup-content{width:85%;height:85%;max-width:900px}
-.detail-body{overflow:auto;flex:1;padding-top:6px}
+/* Popup */
+.popup{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  align-items:center;
+  justify-content:center;
+  z-index:80;
+}
+.popup-content{
+  width:90%;
+  height:90%;
+  background:#fff;
+  border-radius:10px;
+  padding:18px;
+  overflow:auto;
+}
+.detail-popup .popup-content{width:85%;height:85%}
 
 /* Dark mode */
 body.dark-mode{background:#0f1112;color:#e9eef2}
 body.dark-mode .top-nav{background:#111824}
-body.dark-mode .tool-card{background:#14171a;color:#e9eef2;border:1px solid rgba(255,255,255,0.04)}
+body.dark-mode .tool-card{background:#14171a;color:#e9eef2}
 body.dark-mode .popup-content{background:#0f1112;color:#e9eef2}
-body.dark-mode .list-table th, body.dark-mode .list-table td{border-bottom-color:rgba(255,255,255,0.04)}
+</style>
 
- /* prevent body scrolling while a modal/popup is open */
-.no-scroll{overflow:hidden;height:100%;position:fixed;left:0;right:0}
-  </style>
 </head>
 <body>
 
- <!-- HEADER / TOP NAV -->
-    <div class="top-nav">
-        <button class="menu-btn">
-            <i class="fas fa-bars"></i>
-        </button>
-        <h1>
-            <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
-        </h1>
-        <div class="nav-right-controls">
-            <button id="darkModeToggle" class="dark-mode-toggle-btn">
-                <i class="fas fa-moon"></i>
-            </button>
-        </div>
-    </div>
+<header class="top-nav">
+  <button id="menuBtn" class="menu-btn"><i class="fas fa-bars"></i></button>
+  <img src="img/logotitre.png" class="logo">
+  <button id="darkModeToggle"><i class="fas fa-moon"></i></button>
+</header>
 
-    <!-- SIDEBAR -->
-<div id="mySidebar" class="sidebar">
-        <span class="closebtn">&times;</span>
-        <a href="search.html"><i class="fas fa-search"></i>Recherche</a>
-        <a href="new.html"><i class="fas fa-user-plus"></i>Ajouter</a>
-        <a href="mission.html"><i class="fas fa-tasks"></i>Missions</a>
-        <a href="dons.html"><i class="fas fa-hand-holding-heart"></i>Projets et Dons</a>
-        <a href="joinus.html"><i class="fas fa-users"></i>Rejoins-nous</a>
-        <a href="tools.html"><i class="fas fa-tools"></i>Outils</a>
-        <a href="contactus.html"><i class="fas fa-envelope"></i>Contact</a>    
-      <br></br>
-      <a href="tec.html"><i class="fas fa-file-contract"></i></i>Termes et conditions</a>
-      <a href="index.html"><i class="fas fa-home"></i>Accueil</a>
-      
-    </div>
+<aside id="sidebar" class="sidebar">
+  <button id="closeSidebar" class="closebtn">&times;</button>
+  <nav>
+    <a href="#"><i class="fas fa-home"></i> Accueil</a>
+    <a href="#"><i class="fas fa-search"></i> Recherche</a>
+    <a href="#"><i class="fas fa-tools"></i> Outils</a>
+  </nav>
+</aside>
 
-  <main id="main">
+<main>
+<section class="tools-container" id="toolsContainer">
+  <button class="tool-card" data-tool="coran-audio"><i class="fas fa-headphones"></i>Coran — Audio</button>
+  <button class="tool-card" data-tool="coran-livre"><i class="fas fa-book"></i>Coran — Livre</button>
+  <button class="tool-card" data-tool="douas"><i class="fas fa-praying-hands"></i>Dou'as</button>
+</section>
+</main>
 
-
-    <section class="tools-container" id="toolsContainer">
-      <button class="tool-card" data-tool="coran-audio" aria-haspopup="dialog">
-        <i class="fas fa-headphones"></i>
-        <h3>Coran — Audio</h3>
-      </button>
-
-      <button class="tool-card" data-tool="coran-livre" aria-haspopup="dialog">
-        <i class="fas fa-book"></i>
-        <h3>Coran — Livre</h3>
-      </button>
-
-      <button class="tool-card" data-tool="douas" aria-haspopup="dialog">
-        <i class="fas fa-praying-hands"></i>
-        <h3>Dou'as & Invocations</h3>
-      </button>
-    </section>
-  </main>
-
-  <!-- Generic popup modal (initially empty) -->
-  <div id="popup" class="popup" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="popup-content">
-      <header class="popup-header">
-        <h2 id="popupTitle"></h2>
-        <button id="popupClose" class="popup-close" aria-label="close">&times;</button>
-      </header>
-      <div class="popup-body" id="popupBody">
-        <!-- Content inserted by JS: search input + table list for items -->
-      </div>
-    </div>
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <button id="popupClose">&times;</button>
+    <div id="popupBody"></div>
   </div>
+</div>
 
-  <!-- Detail popup (smaller 85%) -->
-  <div id="detailPopup" class="popup detail-popup" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="popup-content">
-      <header class="popup-header">
-        <h2 id="detailTitle"></h2>
-        <button id="detailClose" class="popup-close" aria-label="close">&times;</button>
-      </header>
-      <div class="popup-body" id="detailBody">
-        <!-- Filled with item detail -->
-      </div>
-    </div>
+<div id="detailPopup" class="popup detail-popup">
+  <div class="popup-content">
+    <button id="detailClose">&times;</button>
+    <div id="detailBody"></div>
   </div>
+</div>
 
-  <script>
-            document.addEventListener('DOMContentLoaded', () => {
-            // Sidebar toggle functionality
-            const menuBtn = document.querySelector('.menu-btn');
-            const closeBtn = document.querySelector('.closebtn');
-            const sidebar = document.getElementById("mySidebar");
+<script>
+const popup=document.getElementById("popup");
+const popupBody=document.getElementById("popupBody");
+const popupClose=document.getElementById("popupClose");
+const detailPopup=document.getElementById("detailPopup");
+const detailBody=document.getElementById("detailBody");
+const detailClose=document.getElementById("detailClose");
+const toolsContainer=document.getElementById("toolsContainer");
+const sidebar=document.getElementById("sidebar");
 
-            const toggleNav = () => {
-                if (sidebar.style.left === "0px") {
-                    sidebar.style.left = "-280px";
-                } else {
-                    sidebar.style.left = "0px";
-                }
-            };
+menuBtn.onclick=()=>sidebar.classList.add("open");
+closeSidebar.onclick=()=>sidebar.classList.remove("open");
+darkModeToggle.onclick=()=>document.body.classList.toggle("dark-mode");
 
-            if (menuBtn) menuBtn.addEventListener('click', toggleNav);
-            if (closeBtn) closeBtn.addEventListener('click', toggleNav);
+const sourates=["1 Al-Fâtiha","2 Al-Baqara","3 Âl ʿImrân"];
+const douas=[{title:"Protection",text:"Ô Allah protège-moi..."}];
 
-            // Dark Mode Toggle
-            const darkModeToggle = document.getElementById('darkModeToggle');
-            if (darkModeToggle) {
-                darkModeToggle.addEventListener('click', () => {
-                    document.body.classList.toggle('dark-mode');
-                    const isDarkMode = document.body.classList.contains('dark-mode');
-                    const icon = darkModeToggle.querySelector('i');
-                    if (isDarkMode) {
-                        icon.classList.remove('fa-moon');
-                        icon.classList.add('fa-sun');
-                    } else {
-                        icon.classList.remove('fa-sun');
-                        icon.classList.add('fa-moon');
-                    }
-                });
-            }
-const popup = document.getElementById('popup');
-const popupTitle = document.getElementById('popupTitle');
-const popupBody = document.getElementById('popupBody');
-const popupClose = document.getElementById('popupClose');
+toolsContainer.onclick=e=>{
+  const btn=e.target.closest(".tool-card");
+  if(!btn)return;
+  openTool(btn.dataset.tool);
+};
 
-const detailPopup = document.getElementById('detailPopup');
-const detailTitle = document.getElementById('detailTitle');
-const detailBody = document.getElementById('detailBody');
-const detailClose = document.getElementById('detailClose');
-
-const toolsContainer = document.getElementById('toolsContainer');
-const sidebar = document.getElementById('sidebar');
-const menuBtn = document.getElementById('menuBtn');
-const closeSidebar = document.getElementById('closeSidebar');
-const darkModeToggle = document.getElementById('darkModeToggle');
-
-if (menuBtn) menuBtn.addEventListener('click', ()=> sidebar.classList.add('open'));
-if (closeSidebar) closeSidebar.addEventListener('click', ()=> sidebar.classList.remove('open'));
-
-// Data: list of 114 sourates and 10 douas
-const sourates = [
-"1 Al-Fâtiha",
-"2 Al-Baqara",
-"3 Âl ʿImrân",
-"4 An-Nisa'",
-"5 Al-Mâ'idah",
-"6 Al-An'am",
-"7 Al-A'râf",
-"8 Al-Anfâl",
-"9 At-Tawba",
-"10 Yûnus",
-"11 Hûd",
-"12 Yûsuf",
-"13 Ar-Ra'd",
-"14 Ibrâhîm",
-"15 Al-Hijr",
-"16 An-Naḥl",
-"17 Al-Isrâ",
-"18 Al-Kahf",
-"19 Maryam",
-"20 Tâ-Hâ",
-"21 Al-Anbiyâ'",
-"22 Al-Ḥajj",
-"23 Al-Mu'minûn",
-"24 An-Nûr",
-"25 Al-Furqân",
-"26 Ash-Shu‘arâ'",
-"27 An-Naml",
-"28 Al-Qaṣaṣ",
-"29 Al-ʿAnkabût",
-"30 Ar-Rûm",
-"31 Luqmân",
-"32 As-Sajda",
-"33 Al-Ahzâb",
-"34 Saba'",
-"35 Fâṭir",
-"36 Yâ-Sîn",
-"37 As-Ṣâffât",
-"38 Ṣâd",
-"39 Az-Zumar",
-"40 Ghâfir",
-"41 Fuṣṣilat",
-"42 Ash-Shûrâ",
-"43 Az-Zukhruf",
-"44 Ad-Dukhân",
-"45 Al-Jâthiya",
-"46 Al-Ahqâf",
-"47 Muhammad",
-"48 Al-Fatḥ",
-"49 Al-Ḥujurât",
-"50 Qâf",
-"51 Adh-Dhâriyât",
-"52 Aṭ-Ṭûr",
-"53 An-Najm",
-"54 Al-Qamar",
-"55 Ar-Raḥmân",
-"56 Al-Wâqi‘a",
-"57 Al-Ḥadîd",
-"58 Al-Mujâdila",
-"59 Al-Ḥashr",
-"60 Al-Mumtaḥana",
-"61 Aṣ-Ṣaff",
-"62 Al-Jumu‘a",
-"63 Al-Munâfiqûn",
-"64 At-Taghâbun",
-"65 Aṭ-Ṭalâq",
-"66 At-Taḥrîm",
-"67 Al-Mulk",
-"68 Al-Qalam",
-"69 Al-Ḥâqqah",
-"70 Al-Ma‘ârij",
-"71 Nûḥ",
-"72 Al-Jinn",
-"73 Al-Muzzammil",
-"74 Al-Muddaththir",
-"75 Al-Qiyâma",
-"76 Al-Insân",
-"77 Al-Mursalât",
-"78 An-Naba'",
-"79 An-Nâzi‘ât",
-"80 Abasa",
-"81 At-Takwîr",
-"82 Al-Infiṭâr",
-"83 Al-Muṭaffifîn",
-"84 Al-Inshiqâq",
-"85 Al-Burûj",
-"86 Aṭ-Ṭâriq",
-"87 Al-A'lâ",
-"88 Al-Ghâshiya",
-"89 Al-Fajr",
-"90 Al-Balad",
-"91 Ash-Shams",
-"92 Al-Layl",
-"93 Ad-Dhuha",
-"94 Al-Sharḥ",
-"95 At-Tîn",
-"96 Al-ʿAlaq",
-"97 Al-Qadr",
-"98 Al-Bayyinah",
-"99 Az-Zalzalah",
-"100 Al-ʿÂdiyât",
-"101 Al-Qâri'a",
-"102 At-Takâthur",
-"103 Al-ʿAṣr",
-"104 Al-Humaza",
-"105 Al-Fîl",
-"106 Quraysh",
-"107 Al-Mâ'ûn",
-"108 Al-Kawthar",
-"109 Al-Kâfirûn",
-"110 An-Naṣr",
-"111 Al-Masad",
-"112 Al-Ikhlâs",
-"113 Al-Falaq",
-"114 An-Nâs"
-];
-
-const douas = [
-  {title: "Doua pour la protection", text: "Ô Allah, je cherche Ta protection..."},
-  {title: "Doua pour la guérison", text: "Ô Seigneur, guéris-moi..."},
-  {title: "Doua du matin", text: "Au réveil nous disons..."},
-  {title: "Doua pour la famille", text: "Ô Allah, bénis ma famille..."},
-  {title: "Doua pour la subsistance", text: "Ô pourvoyeur, augmente ma subsistance..."},
-  {title: "Doua pour la facilité", text: "Ô Allah, rends les choses faciles..."},
-  {title: "Doua du soir", text: "En cette soirée nous demandons..."},
-  {title: "Doua pour le voyage", text: "Ô Allah, protège-nous pendant le voyage..."},
-  {title: "Doua pour le pardon", text: "Seigneur pardonne nos péchés..."},
-  {title: "Doua pour la guidance", text: "Guide-nous sur le droit chemin..."}
-];
-
-// Event wiring
-if (popupClose) popupClose.addEventListener('click', closePopup);
-popup.addEventListener('click', (e)=>{ if (e.target === popup) closePopup(); });
-if (detailClose) detailClose.addEventListener('click', closeDetail);
-detailPopup.addEventListener('click', (e)=>{ if (e.target === detailPopup) closeDetail(); });
-
-document.addEventListener('keydown', (e)=>{
-  if (e.key === 'Escape') {
-    if (detailPopup.getAttribute('aria-hidden') === 'false') closeDetail();
-    else closePopup();
-  }
-});
-
-// dark mode toggle (simple)
-darkModeToggle.addEventListener('click', ()=>{
-  document.body.classList.toggle('dark-mode');
-});
-
-// open popup when clicking a tool card
-toolsContainer.addEventListener('click', (e)=>{
-  const btn = e.target.closest('.tool-card');
-  if (!btn) return;
-  const tool = btn.dataset.tool || '';
-  openToolPopup(tool);
-});
-
-// Build popup content: search + table
-function buildListView(items, renderRowCallback){
-  popupBody.innerHTML = '';
-
-  const searchRow = document.createElement('div');
-  searchRow.className = 'search-row';
-  const searchInput = document.createElement('input');
-  searchInput.type = 'search';
-  searchInput.placeholder = 'Rechercher...';
-  searchInput.setAttribute('aria-label','Rechercher');
-  const countSpan = document.createElement('div');
-  countSpan.className = 'count';
-  searchRow.appendChild(searchInput);
-  searchRow.appendChild(countSpan);
-
-  const listWrapper = document.createElement('div');
-  listWrapper.className = 'list-wrapper';
-
-  const table = document.createElement('table');
-  table.className = 'list-table';
-  const thead = document.createElement('thead');
-  thead.innerHTML = '<tr><th>#</th><th>Nom</th></tr>';
-  const tbody = document.createElement('tbody');
-
-  table.appendChild(thead);
-  table.appendChild(tbody);
-  listWrapper.appendChild(table);
-
-  popupBody.appendChild(searchRow);
-  popupBody.appendChild(listWrapper);
-
-  // populate
-  function render(filter = ''){
-    tbody.innerHTML = '';
-    const q = filter.trim().toLowerCase();
-    const filtered = items.filter((it, idx)=>{
-      const name = (typeof it === 'string') ? it : (it.title || it.name || '');
-      return q === '' || name.toLowerCase().includes(q) || String(getItemNumber(it, items)).includes(q);
-    });
-    countSpan.textContent = `${filtered.length} résultat(s)`;
-    filtered.forEach((it, idx)=>{
-      const tr = document.createElement('tr');
-      const numTd = document.createElement('td');
-
-      // Determine the display number:
-      let displayNumber = '';
-      if (typeof it === 'string') {
-        const m = it.match(/^\s*(\d+)\b/);
-        if (m) displayNumber = m[1];
-      }
-      if (!displayNumber) {
-        const origIndex = items.indexOf(it);
-        if (origIndex !== -1) displayNumber = String(origIndex + 1);
-        else displayNumber = String(idx + 1);
-      }
-      numTd.textContent = displayNumber;
-
-      const nameTd = document.createElement('td');
-      if (typeof it === 'string') {
-        nameTd.textContent = it.replace(/^\s*\d+\s*/, '');
-      } else {
-        nameTd.textContent = (it.title || it.name || '');
-      }
-
-      tr.appendChild(numTd);
-      tr.appendChild(nameTd);
-      tr.addEventListener('click', ()=> renderRowCallback(it));
-      tbody.appendChild(tr);
-    });
-  }
-
-  function getItemNumber(it, itemsArr){
-    if (typeof it === 'string') {
-      const m = it.match(/^\s*(\d+)\b/);
-      if (m) return Number(m[1]);
-    }
-    const i = itemsArr.indexOf(it);
-    return i !== -1 ? i+1 : null;
-  }
-
-  // initial render all
-  render('');
-  searchInput.addEventListener('input', ()=> render(searchInput.value));
-}
-
-// Open main tool popup
-function openToolPopup(toolKey){
-  let title = '';
-  let items = [];
-  switch(toolKey){
-    case 'coran-audio': title = 'Coran — Audio'; items = sourates; break;
-    case 'coran-livre': title = 'Coran — Livre'; items = sourates; break;
-    case 'douas': title = "Dou'as & Invocations"; items = douas; break;
-    default: title = 'Outil';
-  }
-
-  popupTitle.textContent = title;
-  buildListView(items, (selected)=>{
-    // when an item is clicked open detail popup (85%)
-    openDetail(selected, toolKey);
+function openTool(tool){
+  popup.style.display="flex";
+  popupBody.innerHTML="";
+  const items=tool==="douas"?douas:sourates;
+  items.forEach(i=>{
+    const div=document.createElement("div");
+    div.textContent=typeof i==="string"?i:i.title;
+    div.onclick=()=>openDetail(i);
+    popupBody.appendChild(div);
   });
-
-  // prevent main page scrolling while popup is open
-  document.body.classList.add('no-scroll');
-
-  popup.setAttribute('aria-hidden','false');
-  popup.style.display = 'flex';
-  popupClose.focus();
 }
 
-function closePopup(){
-  popup.setAttribute('aria-hidden','true');
-  popup.style.display = 'none';
-  document.body.classList.remove('no-scroll');
+function openDetail(item){
+  detailPopup.style.display="flex";
+  detailBody.textContent=typeof item==="string"?item:item.text;
 }
 
-// Detail popup (smaller)
-function openDetail(item, toolKey){
-  let title = '';
-  let html = '';
+popupClose.onclick=()=>popup.style.display="none";
+detailClose.onclick=()=>detailPopup.style.display="none";
+</script>
 
-  // helper to create a safe slug for audio files (e.g. "2 Al-Baqara" -> "al-baqara")
-  function makeSlug(name){
-    if (!name) return '';
-    // remove leading number and dots, then normalize
-    const withoutNum = name.replace(/^\s*\d+\s*/,'');
-    return withoutNum.toLowerCase().replace(/[^\w\u0600-\u06FF]+/g,'-').replace(/^-+|-+$/g,'');
-  }
-
-  if (typeof item === 'string'){
-    title = item;
-    if (toolKey === 'coran-audio'){
-      const slug = makeSlug(item);
-      const src = `/audio/${slug}.mp3`;
-      html = '<div class="detail-body"><h3>' + escapeHtml(item) + '</h3>' +
-        '<p>Détails pour <strong>' + escapeHtml(item) + '</strong></p>' +
-        '<audio controls preload="none" style="width:100%;margin-top:12px">' +
-          '<source src="' + escapeHtml(src) + '" type="audio/mpeg">' +
-          'Votre navigateur ne supporte pas l\'élément audio.' +
-        '</audio>' +
-      '</div>';
-    } else {
-      html = '<div class="detail-body"><h3>' + escapeHtml(item) + '</h3><p>Détails pour <strong>' + escapeHtml(item) + '</strong> (' + escapeHtml(toolKey) + ')</p></div>';
-    }
-  } else {
-    title = item.title || item.name || 'Détail';
-    html = '<div class="detail-body"><h3>' + escapeHtml(title) + '</h3><p>' + escapeHtml(item.text || '') + '</p></div>';
-  }
-
-  detailTitle.textContent = title;
-  detailBody.innerHTML = html;
-
-  // prevent main page scrolling while detail popup is open
-  document.body.classList.add('no-scroll');
-
-  detailPopup.setAttribute('aria-hidden','false');
-  detailPopup.style.display = 'flex';
-  detailClose.focus();
-}
-
-function closeDetail(){
-  detailPopup.setAttribute('aria-hidden','true');
-  detailPopup.style.display = 'none';
-  document.body.classList.remove('no-scroll');
-}
-
-function escapeHtml(str){
-  if (!str) return '';
-  return String(str).replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; });
-}
-  </script>
 </body>
 </html>
