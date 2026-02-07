@@ -1,0 +1,1171 @@
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inscription</title>
+<script type="importmap">
+    {
+      "imports": {
+        "leaflet": "https://cdn.skypack.dev/leaflet"
+      }
+    }
+  </script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+<style>
+
+
+                :root {
+            --primary-color: #2C3E50;
+            --secondary-color: #030404;
+            --third-color: red;
+            --fourth-color: yellow;
+            --fifth-color: #2c3f53;/* Couleur du text de base en mode normal primaire fonce lighter */
+            --sixth-color: #0f151b;  /* Couleur du text de base en mode normal primaire fonce */
+
+            --text-color: #f9f4ea;  /* Couleur du text de base en mode normal  */
+            --background-color: #f9f4ea;
+            --accent-color: #f9f4ea;
+        }
+
+
+
+        .top-nav {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  height: 50px;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+        html, body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--secondary-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            text-align: justify;
+            overflow-x: hidden;
+        }
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  height: 60px;
+  width: 91%;
+  margin: 20px auto 0 auto;
+  border-radius: 8px;
+  padding: 0 20px 0 32px; /* padding-left augmenté */
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.top-nav h1 {
+  flex-grow: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+    .logo {
+      height: 40px;
+      width: auto;
+    }
+
+    h1 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: block;
+    text-align: center;    }
+
+.menu-btn {
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  z-index: 1; /* Ensure it's clickable */
+}
+
+
+    .nav-right-controls {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .dark-mode-toggle-btn {
+      font-size: 22px;
+      background: none;
+      border: none;
+      color: var(--text-color);
+      cursor: pointer;
+    }
+
+    .sidebar {
+      height: 100%;
+      width: 280px;
+      position: fixed;
+      top: 0;
+      left: -280px;
+      background-color: var(--primary-color);
+      overflow-x: hidden;
+      transition: 0.4s;
+      padding-top: 60px;
+      z-index: 1001;
+    }
+
+    .sidebar a {
+      padding: 10px 25px;
+      font-size: 18px;
+      color: var(--text-color);
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      border-bottom: 1px solid var(--primary-color);
+      transition: background-color 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: var(--primary-color);
+    }
+
+    .sidebar a i {
+      margin-right: 15px;
+    }
+
+    .closebtn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 30px;
+      color: var(--text-color);
+      cursor: pointer;
+        }
+
+    #audio-player-container {
+      width: 100%;
+      background-color: var(--primary-color);
+      color: var(--text-color);
+      padding: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .player-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    #play-pause-btn {
+      background: none;
+      border: 1px solid var(--text-color);
+      color: var(--text-color);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #play-pause-btn:hover {
+      background-color: var(--text-color);
+      color: var(--primary-color);
+    }
+
+    .volume-control {
+      display: flex;
+      align-items: center;
+    }
+
+    .volume-control i {
+      margin-right: 8px;
+    }
+
+    #volume-slider {
+      width: 70px;
+      height: 3px;
+      background: #5a6268;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #volume-slider::-webkit-slider-thumb,
+    #volume-slider::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      background: var(--text-color);
+      border-radius: 50%;
+      border: none;
+    }
+
+    body.dark-mode {
+      background-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    body.dark-mode .top-nav,
+    body.dark-mode .sidebar {
+      background-color: var(--primary-color);
+    }
+
+    body.dark-mode .sidebar a:hover {
+      background-color: #333;
+    }
+
+    body.dark-mode #audio-player-container {
+      background-color: #1F262A;
+    }
+
+    body.dark-mode #play-pause-btn {
+      border-color: #e0e0e0;
+      color: #e0e0e0;
+    }
+
+    body.dark-mode #play-pause-btn:hover {
+      background-color: #e0e0e0;
+      color: #1F262A;
+    }
+
+    body.dark-mode #volume-slider {
+      background: #444;
+    }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+    .section {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .goal {
+      margin-bottom: 20px;
+    }
+
+    .progress-bar {
+      height: 20px;
+      background: var(--text-color);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      background-color: var(--accent-color);
+      text-align: right;
+      padding-right: 5px;
+      color: var(--primary-color);
+      font-size: 0.8em;
+      line-height: 20px;
+    }
+
+    .cta-button {
+      background-color: var(--primary-color);
+      color: white;
+      width: 90%;
+      text-align: center;
+      padding: 12px 25px;
+      border-radius: 5px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    h222{
+    font-size: 1em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: block;
+    text-align: justify;
+    }
+
+    .cta-button:hover {
+      background-color: var(--sixth-color);
+    }
+
+    .bank-details {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 6px;
+      margin-top: 20px;
+      font-size: 0.95em;
+      line-height: 1.6;
+      border: 1px solid #ccc;
+    }
+
+    h23 {
+    font-size: 1em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: block;
+    text-align: justify;
+}
+
+
+   h3 {
+    font-size: 1em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: block;
+    text-align: justify;
+}
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+
+    body.mode-jour {
+  --background-color: #EBF4F8;
+  --text-color: #222222;
+  --secondary-color: #41464a;
+  --accent-color: #4A4E69;
+}
+
+body.mode-nuit {
+  --background-color: #121212;
+  --text-color: #eeeeee;
+  --secondary-color: #41464a;
+  --accent-color: #41464a;
+}
+
+    header {
+      background-color: var(--secondary-color);
+      padding: 1em;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.2em;
+      color: var(--text-color);
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2em auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5em;
+      padding: 1em;
+    }
+
+    .step-indicator {
+      text-align: center;
+      font-size: 1.1em;
+      font-weight: bold; 
+    }
+
+    .step {
+      display: none;
+      background-color: var(--primary-color);
+      padding: 1em;
+      border-radius: 10px;
+    }
+
+    .step.active {
+      display: block;
+      color: white;
+    }
+
+    .form-group {
+      margin-bottom: 1em;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.4em;
+      color: #ece7e7;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[list] {
+      width: 100%;
+      padding: 0.6em;
+      border-radius: 4px;
+      border: none;
+      background-color: #f2f5f7;
+      color: #222;
+    }
+
+    input[readonly] {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    button {
+      background-color : var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.7em 1.2em;
+      font-size: 1em;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 0.5em 0.3em;
+    }
+
+    .controls {
+      text-align: center;
+      margin-top: 1.5em;
+
+    }
+
+    .photo-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .thumbnail-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .thumbnail-container img {
+      width: 90px;
+      height: auto;
+      border-radius: 4px;
+      border: 2px solid var(--accent-color);
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: crimson;
+      color: white;
+      border-radius: 50%;
+      border: none;
+      width: 20px;
+      height: 20px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .note {
+      font-size: 0.9em;
+      background-color: #5a4646;
+      color: #ffeb3b;
+      padding: 1em;
+      border-radius: 4px;
+      margin-top: 1em;
+    }
+
+    .thank-you {
+      text-align: center;
+      display: none;
+    }
+
+    .thank-you.active {
+      display: block;
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid var(--text-color);
+      display: block;
+      margin: 0 auto 1em;
+    }
+
+    .top-close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  color: white;
+  background: none;
+  cursor: pointer;
+    }
+
+    /* New: Nav Bar and Sidebar Styles */
+    nav.top-nav {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  height: 70px;
+  width: 91%;
+  position: relative;
+  box-sizing: border-box;
+    }
+
+    nav.top-nav img.logo {
+      height: 40px;
+    }
+
+    .dark-toggle-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.4em;
+      cursor: pointer;
+    }
+
+    .sidebar-toggle-btn {
+      background: none;
+      border: none;
+      color: var(--text-color);
+      font-size: 1.4em;
+      cursor: pointer;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 250px;
+      background-color: #111;
+      color: white;
+      padding: 1em;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 9999;
+    }
+
+    .sidebar.active {
+      transform: translateX(0);
+    }
+
+    .sidebar h2 {
+      color: #fff;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 1em;
+    }
+
+    .sidebar ul li {
+      padding: 0.5em 0;
+      border-bottom: 1px solid #444;
+      cursor: pointer;
+    }
+
+    .sidebar ul li:hover {
+      background-color: #222;
+    }
+
+    .stage {
+      text-align: center;
+      padding: 2em 1em;
+    }
+
+    .stage h2 {
+      margin-bottom: 0.6em;
+    }
+
+    .initial-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .initial-stage img {
+      margin-bottom: 1em;
+    }
+
+    .initial-stage p {
+      font-size: 1.2em;
+      margin-bottom: 1em;
+    }
+
+    .initial-controls {
+      display: flex;
+      gap: 1em;
+      justify-content: center;
+      margin-top: 1em;
+    }
+
+    .error-message {
+      background-color: #ffebee;
+      color: #c62828;
+      font-weight: bold;
+      padding: 1em;
+      text-align: center;
+      border: 1px solid #b71c1c;
+      border-radius: 4px;
+      margin-top: 1em;
+    }
+
+    /* Localisation buttons */
+    .location-controls {
+      display: flex;
+      gap: 10px;
+      flex-grow: 1;
+    }
+
+    #getLocationBtn,
+    #clearLocationBtn {
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      font-size: 1em;
+      padding: 0.6em;
+      border-radius: 5px;
+      width: 100%;
+      max-width: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #getLocationBtn svg,
+    #clearLocationBtn svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+
+    #localisation {
+      flex-grow: 1;
+    }
+
+    /* Updated system pop-up overlay */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .darkIcon{
+      color: white;
+    }
+
+    .popup-box {
+      background: white;
+      color: var(--tooltip-color);
+      padding: 2em;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    .popup-box p {
+      margin-bottom: 1.5em;
+      font-size: 1.1em;
+    }
+
+    .popup-box button {
+      padding: 0.6em 1em;
+      border-radius: 6px;
+      margin: 0 0.5em;
+      font-size: 1em;
+      border: none;
+      cursor: pointer;
+      background: var(--accent-color);
+      color: white;
+    }
+
+    #initialStage .stage-message {
+      background-color: white;
+      padding: 1.2em;
+      border-radius: 10px;
+      max-width: 450px;
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: var(--text-color);
+      text-align: left;
+    }
+
+    .bullet-list {
+  color: var(--primary-color);
+  text-align: center;
+}
+  </style>
+</head>
+<body>
+<!-- Sidebar -->
+    
+<div class="sidebar" id="sideMenu">
+<ul>
+</ul>
+</div>
+<!-- Top Nav -->
+<nav class="top-nav">
+<button class="sidebar-toggle-btn" id="toggleSidebar"></button>
+<img alt="Logo Quboor" class="logo" src="img/logotitre.png"/>
+<button class="dark-toggle-btn" id="darkToggleBtn">
+<i class="fas fa-close-button" id="darkIcon"></i>
+</button>
+</nav>
+<main>
+<input accept="image/*" capture="environment" id="cameraInput" style="display:none" type="file"/>
+<input accept="image/*" id="uploadInput" multiple="" style="display:none" type="file"/>
+<div class="photo-preview" id="previewDiv"></div>
+
+<div class="stage initial-stage" id="initialStage">
+<div class="stage-message">
+<h222> 📌 نصيحة: للحصول على تحديد موقع دقيق، قم بالتسجيل عندما تكون قريبًا من القبر فعليًا. جهز المعلومات التالية قبل البدء: </h222>
+<div class="bullet-list">
+  <div class="bullet-item"> ▸ بيانات المبلغ</div>
+  <div class="bullet-item"> ▸ معلومات عن المتوفى/المتوفاة</div>
+  <div class="bullet-item"> ▸ صور المتوفى/المتوفاة والقبر </div>
+</div>
+</div>
+<h2><button id="closeSidebarBtn" style="float: right; background: none; border: none; color: ; font-size: 0.1em; cursor: pointer;">×</button></h2>
+<button class="top-close" id="closePageBtn" style="box-shadow: none;"></button>
+<div class="initial-controls">
+<button id="cancelInitial">إلغاء</button>
+<button id="continueInitial">متابعة</button>
+</div>
+</div>
+<div id="formStages" style="display: none;">
+<!-- المرحلة 1: المبلغ -->
+<div class="step active" id="step1A">
+  <div class="step-indicator" id="stepIndicator">بيانات المبلغ</div>
+<div class="note">
+          📌 نصيحة: لتسهيل متابعة طلبك، يرجى إدخال بريد إلكتروني يمكن التواصل معك من خلاله.
+        </div>
+<br/><br>
+<div class="form-group">
+<label>الاسم الأول للمبلغ</label>
+<input id="userFirstName" placeholder="اسمك الأول" type="text"/>
+</div>
+<div class="form-group">
+<label>اسم العائلة للمبلغ</label>
+<input id="userLastName" placeholder="اسم العائلة" type="text"/>
+</div>
+<div class="form-group">
+<label>البريد الإلكتروني</label>
+<input id="userEmail" placeholder="example@domain.com" type="text"/>
+</div>
+<div class="form-group">
+<label>صلة القرابة</label>
+<input id="affiliation" list="relationList" placeholder="اختر صلتك" type="text"/>
+<datalist id="relationList">
+<option value="أب"></option>
+<option value="أم"></option>
+<option value="ابن"></option>
+<option value="حفيد"></option>
+<option value="حفيد/ة من الجيل الثالث"></option>
+<option value="عم"></option>
+<option value="عمة"></option>
+<option value="ابن أخ"></option>
+<option value="ابنة أخت"></option>
+<option value="عائلة قريبة"></option>
+<option value="عائلة بعيدة"></option>
+<option value="صديق/ة"></option>
+</datalist>
+</div>
+</br></div>
+<!-- المرحلة 2: المتوفى/المتوفاة -->
+<div class="step" id="step1B">
+    <div class="step-indicator" id="stepIndicator">معلومات عن المتوفى/المتوفاة</div>
+
+<div class="note">
+  📌 نصيحة: يرجى إدخال المعلومات المتوفرة عن المتوفى لتسهيل البحث والتواصل. إذا كانت بعض المعلومات غير معروفة، يمكنك ترك الحقول فارغة واستكمالها لاحقًا عبر البريد الإلكتروني.
+</div>
+<br/><br>
+<div class="form-group">
+<label>اسم العائلة</label>
+<input id="lastname" type="text"/>
+</div>
+<div class="form-group">
+<label>الاسم الأول</label>
+<input id="firstname" type="text"/>
+</div>
+<div class="form-group">
+<label>معرّف UID</label>
+<input id="uid" readonly="" type="text"/>
+</div>
+<div class="form-group">
+<label>تاريخ الميلاد</label>
+<input id="dob" type="date"/>
+</div>
+<div class="form-group">
+<label>مكان الميلاد</label>
+<input id="birthplace" list="cities" type="text"/>
+</div>
+<div class="form-group">
+<label>تاريخ الوفاة</label>
+<input id="dod" type="date"/>
+</div>
+<div class="form-group">
+<label>مكان الوفاة</label>
+<input id="deathplace" list="cities" type="text"/>
+</div>
+<div class="form-group">
+<label>المقبرة</label>
+<input id="cemetery" list="cemeteries" type="text"/>
+</div>
+<div class="form-group">
+<label>المهنة</label>
+<input id="profession" list="professions" type="text"/>
+</div>
+</br></div>
+<!-- Étape 3 : Localisation -->
+<div class="step" id="step2">
+      <div class="step-indicator" id="stepIndicator">تحديد الموقع الجغرافي</div>
+
+<div class="note">
+📌 نصيحة: يرجى تحديد موقع بدقة قدر الإمكان لتسهيل العثور على القبر.
+يمكنك أيضًا إرسال الموقع عبر البريد الإلكتروني. في نهاية عملية التسجيل، سيتم إنشاء بريد إلكتروني. يرجى إدخال إحداثيات GPS يدويًا فيه.
+</div>
+<br/><br>
+<div class="form-group">
+<label>الموقع الحالي</label>
+<div style="display: flex; gap: 10px; align-items: center;">
+<input class="readonly-input" id="localisation" readonly="" type="text"/>
+<div class="location-controls">
+<button id="getLocationBtn" title="Obtenir ma position">
+<svg viewbox="0 0 24 24">
+<circle cx="12" cy="12" fill="none" r="10" stroke="white" stroke-width="2"></circle>
+<circle cx="12" cy="12" fill="white" r="3"></circle>
+</svg>
+</button>
+<button id="clearLocationBtn" title="Effacer">
+<svg viewbox="0 0 24 24">
+<line stroke="white" stroke-width="2" x1="6" x2="18" y1="6" y2="18"></line>
+<line stroke="white" stroke-width="2" x1="6" x2="18" y1="18" y2="6"></line>
+</svg>
+</button>
+</div>
+</div>
+</div>
+
+<div class="form-group">
+<label>العنوان</label>
+<span id="address">--</span>
+</div>
+<div class="form-group">
+<label>آخر تحديث</label>
+<span id="timestamp">--</span>
+</div>
+
+</br></div>
+<!-- المرحلة 4: المعرض -->
+<div class="step" id="step3">
+  <div class="step-indicator" id="stepIndicator">المعرض</div>
+
+<div class="note">
+  📌 نصيحة: بعد الانتهاء من التسجيل، سيتم إنشاء بريد إلكتروني تلقائي. قم بإرفاق حتى 5 صور: 1x صورة شخصية للمتوفى/المتوفاة، 1x صورة للقبر عن قرب، 1x صورة للقبر من بعيد في محيطه، بالإضافة إلى صورتين إضافيتين للمتوفى/المتوفاة. (الحد الأقصى 4 ميغابايت/صورة)
+</div>
+</div>
+
+<!-- رسالة الشكر النهائية -->
+<div class="thank-you" id="thankYou">
+<h2>شكرًا لتسجيلك.</h2>
+<p>نعمل على معالجة معلوماتك في أقرب وقت ممكن. ستتلقى رسالة تأكيد عبر البريد الإلكتروني بمجرد نشر الملف الشخصي. يمكنك التواصل معنا في أي وقت عبر البريد الإلكتروني. احتفظ بنفس UID لتسهيل معالجة الطلب.</p>
+</div>
+
+<!-- عناصر التحكم -->
+<div class="controls">
+<button id="cancelBtn">إلغاء</button>
+<button disabled="" id="backBtn">السابق</button>
+<button id="nextBtn">التالي</button>
+</div>
+</br></div>
+</main>
+
+<div class="popup-overlay" id="cancelPopup">
+<div class="popup-box">
+<p>هل أنت متأكد من الإلغاء؟ جميع البيانات سيتم فقدانها.</p>
+<button id="stayBtn">لا</button>
+<button id="confirmCancelBtn">نعم</button>
+</div>
+</div>
+<script type="module">
+    import L from 'leaflet';
+
+    const generateUID = () => {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      return Array.from({ length: 8 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+    };
+
+    const initialUIDEl = document.getElementById('initialUID');
+    const uidInput = document.getElementById('uid');
+    const rawUID = generateUID();
+    // No longer display UID on first screen
+    uidInput.value = rawUID;
+
+    const initialStage = document.getElementById('initialStage');
+    const formStages = document.getElementById('formStages');
+    const continueInitialBtn = document.getElementById('continueInitial');
+    const cancelInitialBtn = document.getElementById('cancelInitial');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const closePageBtn = document.getElementById('closePageBtn');
+
+    const popupOverlay = document.getElementById('cancelPopup');
+    const stayBtn = document.getElementById('stayBtn');
+    const confirmCancelBtn = document.getElementById('confirmCancelBtn');
+
+    function showCancelPopup() {
+      popupOverlay.style.display = 'flex';
+    }
+
+    function hideCancelPopup() {
+      popupOverlay.style.display = 'none';
+    }
+
+    function confirmCancelAction() {
+      location.reload();
+    }
+
+    cancelInitialBtn.addEventListener('click', showCancelPopup);
+    closePageBtn.addEventListener('click', showCancelPopup);
+    cancelBtn.addEventListener('click', showCancelPopup);
+    stayBtn.addEventListener('click', hideCancelPopup);
+    confirmCancelBtn.addEventListener('click', confirmCancelAction);
+
+    continueInitialBtn.addEventListener('click', () => {
+      initialStage.style.display = 'none';
+      formStages.style.display = 'block';
+    });
+
+    const steps = [
+      document.getElementById('step1A'),
+      document.getElementById('step1B'),
+      document.getElementById('step2'),
+      document.getElementById('step3')
+    ];
+    const stepIndicator = document.getElementById('stepIndicator');
+    let currentStep = 0;
+
+    const backBtn = document.getElementById('backBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const thankYou = document.getElementById('thankYou');
+
+    const accuracy = document.getElementById('accuracy');
+    const address = document.getElementById('address');
+    const timestamp = document.getElementById('timestamp');
+    const localisationInput = document.getElementById('localisation');
+    const getLocationBtn = document.getElementById('getLocationBtn');
+    const clearLocBtn = document.getElementById('clearLocationBtn');
+
+    const images = [];
+
+    const updateStepView = () => {
+      steps.forEach((step, i) => step.classList.toggle('active', i === currentStep));
+      backBtn.disabled = currentStep === 0;
+nextBtn.textContent = currentStep === steps.length - 1 ? 'إرسال' : 'التالي';
+      stepIndicator.textContent =
+currentStep === 0 ? 'بيانات المبلغ'
+: currentStep === 1 ? 'معلومات عن المتوفى/المتوفاة'
+: currentStep === 2 ? 'الموقع'
+: 'المعرض';
+    };
+
+    // Dark mode toggle
+let currentMode = 'jour'; // Par défaut
+
+function setMode(mode) {
+  document.body.classList.remove('mode-jour', 'mode-nuit');
+  document.body.classList.add(`mode-${mode}`);
+
+  const icon = document.getElementById('darkIcon');
+  if (mode === 'jour') {
+    icon.className = 'fa-solid fa-close-button'; // Icône lune
+  } else {
+    icon.className = 'fa-solid fa-sun'; // Icône soleil
+  }
+
+  currentMode = mode;
+}
+
+// Initialisation
+setMode('jour');
+
+document.getElementById('darkToggleBtn').addEventListener('click', () => {
+  setMode(currentMode === 'jour' ? 'nuit' : 'jour');
+});
+
+
+    // Sidebar toggle
+    const toggleSidebar = document.getElementById('toggleSidebar');
+    const sideMenu = document.getElementById('sideMenu');
+    toggleSidebar.addEventListener('click', () => {
+      sideMenu.classList.toggle('active');
+    });
+
+    closeSidebarBtn.addEventListener('click', () => {
+      sideMenu.classList.remove('active');
+    });
+
+    backBtn.addEventListener('click', () => {
+      if (currentStep > 0) {
+        currentStep--;
+        updateStepView();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentStep === steps.length - 1) {
+        const totalSize = images.reduce((acc, file) => acc + file.size, 0);
+        if (totalSize > 25 * 1024 * 1024) {
+          alert("La taille totale des images dépasse 25 Mo. Veuillez réduire la taille ou envoyer manuellement les images à info@quoboor.com avec le UID.");
+          return;
+        }
+        sendEmail();
+        thankYou.classList.add('active');
+        steps.forEach(s => s.classList.remove('active'));
+        document.querySelector('.controls').style.display = 'none';
+        stepIndicator.textContent = 'Merci !';
+        // Redirect after 3 seconds to index.html
+        setTimeout(() => {
+          window.location.href = "indexar.html";
+        }, 5000);
+      } else {
+        currentStep++;
+        updateStepView();
+      }
+    });
+
+    function handleImagePreview(files) {
+      for (let file of files) {
+        if (!file.type.startsWith("image/")) continue;
+        images.push(file);
+        const container = document.createElement('div');
+        container.className = 'thumbnail-container';
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        const btn = document.createElement('button');
+        btn.className = 'delete-btn';
+        btn.textContent = '×';
+        btn.onclick = () => {
+          images.splice(images.indexOf(file), 1);
+          container.remove();
+        };
+        container.appendChild(img);
+        container.appendChild(btn);
+        previewDiv.appendChild(container);
+      }
+    }
+
+    cameraInput.addEventListener('change', e => handleImagePreview(e.target.files));
+    uploadInput.addEventListener('change', e => handleImagePreview(e.target.files));
+
+    getLocationBtn.addEventListener('click', () => {
+      if (navigator.geolocation) {
+        navigator.permissions.query({ name: 'geolocation' }).then(result => {
+          if (result.state === 'denied') {
+alert("تم رفض إذن الموقع. يرجى تفعيله في إعدادات المتصفح الخاص بك.");
+            return;
+          }
+
+          navigator.geolocation.getCurrentPosition(pos => {
+            const { latitude, longitude } = pos.coords;
+            localisationInput.value = `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
+            timestamp.textContent = new Date().toLocaleString();
+
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`)
+              .then(res => res.json())
+              .then(data => {
+                address.textContent = data.display_name ?? '--';
+              })
+              .catch(() => {
+                address.textContent = '--';
+              });
+          }, err => {
+            console.error("Erreur GPS", err);
+alert("تعذر تحديد الموقع. يرجى السماح باستخدام تحديد الموقع الجغرافي.");
+          }, {
+            enableHighAccuracy: true,
+            timeout: 15000,
+            maximumAge: 0
+          });
+        });
+      } else {
+alert("تحديد الموقع الجغرافي غير مدعوم.");
+      }
+    });
+
+    clearLocBtn.addEventListener('click', () => {
+      localisationInput.value = '';
+      accuracy.textContent = '--';
+      address.textContent = '--';
+      timestamp.textContent = '--';
+    });
+
+    function sendEmail() {
+      const getVal = id => {
+        const el = document.getElementById(id);
+        return el?.value?.trim?.() || 'n/a';
+      };
+
+      const body = [
+'--- المرحلة 1: معلومات المبلغ ---',
+`UUID : ${uidInput.value}`,
+`الاسم الأول للمبلغ : ${getVal('userFirstName')}`,
+`اسم العائلة للمبلغ : ${getVal('userLastName')}`,
+`البريد الإلكتروني للمبلغ : ${getVal('userEmail')}`,
+`صلة القرابة : ${getVal('affiliation')}`,
+
+        '',
+'--- المرحلة 2: معلومات عن المتوفى/المتوفاة ---',
+`اسم العائلة : ${getVal('lastname')}`,
+`الاسم الأول : ${getVal('firstname')}`,
+`تاريخ الميلاد : ${getVal('dob')}`,
+`مكان الميلاد : ${getVal('birthplace')}`,
+`تاريخ الوفاة : ${getVal('dod')}`,
+`مكان الوفاة : ${getVal('deathplace')}`,
+`المقبرة : ${getVal('cemetery')}`,
+`المهنة : ${getVal('profession')}`,
+
+'',
+'--- المرحلة 3: الموقع ---',
+`الموقع : ${localisationInput.value || 'غير متوفر'}`,
+`العنوان : ${address.textContent || 'غير متوفر'}`,
+`آخر تحديث : ${timestamp.textContent || 'غير متوفر'}`
+].join('%0D%0A');
+
+
+      const subject = `طلب جديد - UID: ${uidInput.value}`;
+      const mailtoLink = `mailto:info@quoboor.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+      const mail = window.open(mailtoLink, '_blank');
+      if (!mail) alert("يرجى السماح بالنوافذ المنبثقة لإرسال البريد الإلكتروني");
+
+      if (images.length) {
+        alert('تم إنشاء البريد الإلكتروني. يرجى إرفاق الصور يدويًا باستخدام UID الخاص بالمتوفى/المتوفاة.');
+      }
+    }
+
+    updateStepView();
+  </script>
+</body>
+</html>

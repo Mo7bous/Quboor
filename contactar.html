@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>تواصلوا معنا</title>
+
+  <!-- fontawesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+:root{
+  --blue-dark: #2C3E50;
+  --beige-cold: #C3CED4;
+  --blue-very-pale: #EBF4F8;
+  --pastel-orange: #FFFCFA;
+
+  --primary: var(--blue-dark);
+  --nav-bg: var(--blue-dark);
+  --card-bg: #FFFCFA;
+  --page-bg: var(--blue-very-pale);
+  --muted: #6b6b6b;
+  --text-on-nav: var(--beige-cold);
+  --popup-search-bg: #f7fbfd;
+
+  --dm-nav-bg: var(--beige-cold);
+  --dm-sidebar-bg: #254045;
+  --dm-card-bg: #1f2f36;
+  --dm-text-on-surface: var(--beige-cold);
+  --dm-overlay: rgba(0,0,0,0.6);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+.top-nav{
+  width:92%;
+  max-width:1100px;
+  margin:18px auto;
+  height:70px;
+  background:var(--nav-bg);
+  color:var(--card-bg);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 16px;
+  border-radius:8px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+.logo{height:34px}
+.menu-btn{
+  background:none;border:0;color:#FFFCFA;font-size:20px;padding:8px;border-radius:6px;cursor:pointer
+}
+.dark-btn{
+  background:none;
+  border:0;
+  color:#FFFCFA;
+  font-size:18px;
+  padding:8px;
+  border-radius:6px;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.dark-btn i{width:20px; height:20px}
+.nav-controls{display:flex;gap:8px;align-items:center}
+
+.sidebar{
+  position:fixed;
+  left:-280px;
+  top:0;
+  height:100%;
+  width:280px;
+  background:var(--nav-bg);
+  color:var(--card-bg);
+  padding-top:20px;
+  padding-bottom:140px;
+  transition:left .28s;
+  z-index:60;
+  display:flex;
+  flex-wrap:wrap;
+  align-content:flex-start;
+  overflow:auto;
+}
+.sidebar.open{left:0}
+.sidebar a{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:50%;
+  box-sizing:border-box;
+  gap:6px;
+  padding:12px 6px;
+  color:#FFFCFA;
+  text-align:center;
+  font-size:14px;
+  min-height:72px;
+}
+.sidebar a:nth-child(odd){ border-right:1px solid rgba(255,255,255,0.03);}
+.sidebar a i{font-size:20px;display:block}
+.closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:#FFFCFA;cursor:pointer}
+
+.sidebar-separator{width:100%;height:18px;box-sizing:border-box;margin-top:42px;border-top:0;opacity:0.0;pointer-events:none;}
+
+.lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
+.lang-btn{display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:#FFFCFA;padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn:focus{outline:none;box-shadow:none}
+.lang-btn .flag{font-size:18px;line-height:1}
+.lang-btn .label{display:none}
+.lang-btn.active{box-shadow:0 4px 14px rgba(0,0,0,0.12);transform:translateY(-2px)}
+.lang-btn:active,.lang-btn:hover{transform:translateY(-2px)}
+
+#main{
+  width:92%;
+  max-width:1100px;
+  margin:8px auto 0;
+  padding:8px 0 40px;
+  height: auto; /* allow page to grow naturally */
+  overflow: auto; /* enable vertical scrolling so expanded cards and the form are fully reachable */
+  display: flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+/* Unified heading sizing for consistency across pages */
+h1, .page-header h1, .collapsible-card .card-header h3 {
+  font-size:1.15rem;
+  line-height:1.2;
+  margin:0 0 8px 0;
+}
+.card-sub, .content-inner p, .note {
+  font-size:13px;
+  line-height:1.4;
+}
+
+/* content card (collapsible card styles) */
+.content-card, .collapsible-card{
+  background:var(--card-bg);
+  border-radius:10px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.04);
+  color:var(--primary);
+  overflow: hidden;
+}
+.collapsible-card{border-radius:10px}
+.card-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 18px;
+  cursor:pointer;
+  user-select:none;
+}
+.card-header .title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.card-header .title .bar{
+  width:8px;height:40px;border-radius:6px;background:var(--nav-bg);
+}
+.card-header h3{margin:0;font-size:1.05rem;color:var(--primary)}
+.card-sub{font-size:13px;color:var(--primary)}
+
+/* arrow */
+.card-arrow{
+  width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;
+  background:transparent;border:0;color:var(--primary);font-size:14px;
+  transition:transform .22s ease;
+}
+
+/* card content collapsible area */
+.card-content{
+  padding:0 18px 18px 18px;
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .28s ease, padding .22s ease;
+}
+.card-content.open{
+  padding:12px 18px 18px 18px;
+}
+
+/* content interior */
+.content-inner{padding-top:6px}
+.content-card h1{font-size:1.2rem;margin-bottom:10px}
+/* Reduce paragraph/list text size inside contact/terms cards for denser display */
+.content-inline p,
+.content-card .card-sub,
+.content-inner p,
+.content-inner ol,
+.content-inner li {
+  font-size:13px;
+  line-height:1.35;
+  color:var(--primary);
+  text-align:justify;
+}
+.content-card ol{margin-left:18px;color:var(--muted);margin-bottom:12px}
+.content-card li{margin:8px 0}
+
+/* Contact form */
+.form-row{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.input, textarea, select{
+  width:100%;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid rgba(0,0,0,0.06);
+  background:transparent;
+  font-size:14px;
+  color:inherit;
+  box-sizing:border-box;
+}
+textarea{min-height:100px;resize:vertical}
+.form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+.btn{
+  background:var(--nav-bg);
+  color:var(--card-bg);
+  border:none;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+}
+.btn.secondary{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--primary)}
+
+.note{font-size:13px;color:var(--muted);margin-top:8px}
+
+/* dark mode */
+.dark{
+  --page-bg: #0b0c0f;
+  --card-bg: var(--dm-card-bg);
+  --card-border: rgba(255,255,255,0.06);
+  --primary: #FFFCFA;
+  --pastel-orange: #FFFCFA;
+  --popup-search-bg: #274a50;
+}
+.dark .top-nav{background:var(--nav-bg)}
+.dark .content-card{color:var(--primary);background:var(--card-bg)}
+.dark .btn{background: #0b0c0f;color:#FFFCFA}
+.dark .input,.dark textarea,.dark select{border:1px solid rgba(255,255,255,0.04);color:#FFFCFA;background:transparent}
+.dark .note{color:#FFFCFA}
+  </style>
+</head>
+<body>
+
+  <header class="top-nav">
+    <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
+    <div class="brand">
+      <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
+    </div>
+    <div class="nav-controls">
+      <button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button>
+    </div>
+  </header>
+
+  <div id="mySidebar" class="sidebar">
+        <!-- language switch (both flags shown, moved to bottom via CSS) -->
+        <div class="lang-switch" aria-label="Sélecteur de langue">
+          <button id="langBtnFR" class="lang-btn" data-lang="fr" aria-label="Français">
+            <span class="flag">الفرنسية</span>
+          </button>
+          <button id="langBtnMA" class="lang-btn" data-lang="ma" aria-label="العربية">
+            <span class="flag">العربية</span>
+          </button>
+        </div>
+
+        <span class="closebtn">&times;</span>
+        <div class="sidebar-separator" aria-hidden="true"></div>
+          <a href="searchar.html"><i class="fas fa-search"></i>بحث</a>
+          <a href="newar.html"><i class="fas fa-user-plus"></i>إضافة</a>
+          <a href="missionar.html"><i class="fas fa-tasks"></i>المهام</a>
+
+          <a href="projetsar.html"><i class="fas fa-hand-holding-heart"></i>مشاريعنا</a>
+          <a href="joinusar.html"><i class="fas fa-users"></i>انضم إلينا</a>
+          <a href="toolsar.html"><i class="fas fa-tools"></i>الأدوات</a>
+          <a href="contactar.html"><i class="fas fa-envelope"></i>اتصل بنا</a>    
+          <br></br>
+          <a href="tecar.html"><i class="fas fa-file-contract"></i>الشروط والأحكام</a>
+          <a href="indexar.html"><i class="fas fa-home"></i>الرئيسية</a>
+
+      
+    </div>
+
+  <main id="main">
+    <section style="width:92%;max-width:1100px;margin:12px auto 0;display:grid;grid-template-columns:1fr;gap:16px;">
+
+      <!-- Contact information card (description moved directly under title, not in a separate content block) -->
+      <article class="collapsible-card" id="contactInfoCard" aria-labelledby="ci-title">
+        <div class="card-header" role="button" aria-expanded="true" tabindex="0">
+          <div class="title">
+            <div>
+              <h3 id="ci-title">تواصلوا معنا</h3>
+              <div class="card-sub">هل لديكم سؤال أو فكرة؟ أو ترغبون في الانخراط معنا؟</div>
+            </div>
+          </div>
+          <button class="card-arrow" aria-hidden="true">▾</button>
+        </div>
+
+        <!-- Description placed directly below the header so it's visually part of the card title area -->
+        <div id="contactInfoContent" class="content-inline" style="padding:12px 18px 18px 18px;">
+          <!-- main description visible -->
+<p style="margin-bottom:8px;color:var(--primary)">
+هل لديكم سؤال، فكرة، أو رغبة في الانخراط إلى جانبنا؟
+لا تترددوا في التواصل معنا من أجل النقاش، اقتراح مبادرة، أو معرفة المزيد عن مقاربتنا المرتبطة بالذاكرة الجماعية.
+</p>
+
+<!-- following details hidden by default -->
+<div style="display:none">
+  <p style="margin-bottom:8px;color:var(--primary)">
+    <strong>الشراكات، المشاريع، الفعاليات والتبرعات</strong><br>
+    نرحب بجميع أشكال التعاون والدعم من أجل تطوير المشاريع، تنظيم الأنشطة، وتعزيز حماية وصون أماكن الذاكرة.
+  </p>
+
+  <p style="margin-bottom:8px;color:var(--primary)">
+    <strong>التطوع والعمل التطوعي من أجل القضية</strong><br>
+    انضموا إلينا كمتطوعين أو داعمين، وساهموا بفعالية في بناء شبكة تضامنية ومستدامة في خدمة الذاكرة.
+  </p>
+</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Contact form card (same format as Terms form) -->
+<aside class="collapsible-card" id="contactFormCard" aria-labelledby="cf-title">
+  <div class="card-header" role="button" aria-expanded="true" tabindex="0">
+    <div class="title">
+      <div>
+        <h3 id="cf-title">نموذج التواصل</h3>
+        <div class="card-sub">
+          يرجى توضيح موضوع طلبكم بشكل دقيق حتى نتمكن من الرد عليكم بأفضل شكل.
+        </div>
+      </div>
+    </div>
+    <button class="card-arrow" aria-hidden="true">▾</button>
+  </div>
+
+  <div class="card-content open" id="contactFormContent">
+    <div class="content-inner content-card" style="padding:18px;">
+      <form id="contactForm" class="form-row" onsubmit="return false;" style="display:grid;grid-template-columns:1fr;gap:10px;">
+        
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:160px">
+            <label style="font-size:13px;color:var(--muted)">الاسم</label>
+            <input id="c_name" class="input" type="text" placeholder="الاسم الكامل" required>
+          </div>
+
+          <div style="flex:1;min-width:160px">
+            <label style="font-size:13px;color:var(--muted)">البريد الإلكتروني</label>
+            <input id="c_email" class="input" type="email" placeholder="example@email.com" required>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:160px">
+            <label style="font-size:13px;color:var(--muted)">الموضوع</label>
+            <input id="c_subject" class="input" type="text" placeholder="موضوع الرسالة" required>
+          </div>
+        </div>
+
+        <div>
+          <label style="font-size:13px;color:var(--muted)">الرسالة</label>
+          <div class="note" style="margin-top:6px">
+            يرجى توضيح موضوع طلبكم بشكل دقيق حتى نتمكن من الرد عليكم بأفضل شكل.
+          </div>
+          <br></br>
+          <textarea id="c_message" class="input" placeholder="يرجى توضيح طلبكم بالتفصيل..." required style="min-height:120px"></textarea>
+        </div>
+
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px;">
+          <button id="c_generateBtn" class="btn" type="button">إنشاء البريد الإلكتروني</button>
+          <button id="c_clearBtn" class="btn secondary" type="button">مسح</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</aside>
+
+    </section>
+  </main>
+
+  <script>
+/* Sidebar toggle & language buttons & dark mode behavior (same logic as other pages) */
+const sidebar = document.getElementById('mySidebar');
+const menuBtn = document.getElementById('menuBtn');
+const closeSidebar = document.querySelector('#mySidebar .closebtn');
+const darkModeBtns = document.querySelectorAll('#darkModeBtn');
+const langBtnFR = document.getElementById('langBtnFR');
+const langBtnMA = document.getElementById('langBtnMA');
+
+if (menuBtn) menuBtn.addEventListener('click', ()=> sidebar.classList.add('open'));
+if (closeSidebar) closeSidebar.addEventListener('click', ()=> sidebar.classList.remove('open'));
+
+function setDarkMode(enabled){
+  if (enabled) document.documentElement.classList.add('dark');
+  else document.documentElement.classList.remove('dark');
+  darkModeBtns.forEach(b=>{
+    b.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+    const icon = b.querySelector('i');
+    if (icon){
+      icon.classList.remove('fa-moon','fa-sun');
+      icon.classList.add(enabled ? 'fa-sun' : 'fa-moon');
+    }
+  });
+  try{ localStorage.setItem('quboor-dark','' + (enabled?1:0)); }catch(e){}
+}
+
+darkModeBtns.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const current = document.documentElement.classList.contains('dark');
+    setDarkMode(!current);
+    btn.focus();
+  });
+});
+
+(function initDark(){
+  // Force the contact page to always open in light (normal) mode regardless of previous preference.
+  // This ensures contact.html is displayed in "écran normal" by default.
+  try{ localStorage.setItem('quboor-dark','0'); }catch(e){}
+  setDarkMode(false);
+})();
+
+if (langBtnFR) {
+  langBtnFR.addEventListener('click', () => {
+    langBtnFR.classList.add('active');
+    if (langBtnMA) langBtnMA.classList.remove('active');
+    window.location.href = 'index.html';
+  });
+}
+if (langBtnMA) {
+  langBtnMA.addEventListener('click', () => {
+    langBtnMA.classList.add('active');
+    if (langBtnFR) langBtnFR.classList.remove('active');
+    window.location.href = 'indexar.html';
+  });
+}
+
+/* Contact form -> generate mailto: to info@quboor.com with structured body */
+const generateBtn = document.getElementById('c_generateBtn');
+const clearBtn = document.getElementById('c_clearBtn');
+
+function buildContactBody(data){
+  return [
+    "Contact - Quboor",
+    "",
+    "Nom: " + data.name,
+    "E-mail: " + data.email,
+    "Sujet: " + data.subject,
+    "",
+    "Message:",
+    data.message,
+    "",
+    "Date: " + (new Date()).toLocaleString()
+  ].join("\n");
+}
+
+generateBtn.addEventListener('click', ()=>{
+  const name = document.getElementById('c_name').value.trim();
+  const email = document.getElementById('c_email').value.trim();
+  const subject = document.getElementById('c_subject').value.trim();
+  const message = document.getElementById('c_message').value.trim();
+
+  if (!name || !email || !subject || !message){
+    alert('Merci de remplir tous les champs du formulaire.');
+    return;
+  }
+
+  const body = buildContactBody({name,email,subject,message});
+  const mailto = `mailto:info@quboor.com?subject=${encodeURIComponent('[Contact] ' + subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailto;
+});
+
+clearBtn.addEventListener('click', ()=>{
+  document.getElementById('contactForm').reset();
+});
+
+/* Collapsible card behavior: contact info stays visible, contact form is closed by default */
+function setupCollapsibles(){
+  const cards = [
+    {cardId: 'contactInfoCard', contentId: 'contactInfoContent', defaultOpen: true},
+    {cardId: 'contactFormCard', contentId: 'contactFormContent', defaultOpen: false}
+  ];
+
+  cards.forEach(({cardId, contentId, defaultOpen})=>{
+    const card = document.getElementById(cardId);
+    if (!card) return;
+    const header = card.querySelector('.card-header');
+    const content = document.getElementById(contentId);
+    const arrow = header.querySelector('.card-arrow');
+    function setOpen(open){
+      if (content) {
+        if (open){
+          content.classList.add('open');
+          content.style.maxHeight = content.scrollHeight + 24 + 'px';
+        } else {
+          content.classList.remove('open');
+          content.style.maxHeight = '0px';
+        }
+      }
+      header.setAttribute('aria-expanded', open ? 'true' : 'false');
+      arrow.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+    // initialize per defaultOpen flag
+    setOpen(Boolean(defaultOpen));
+
+    header.addEventListener('click', ()=> {
+      const isOpen = header.getAttribute('aria-expanded') === 'true';
+      setOpen(!isOpen);
+    });
+    header.addEventListener('keydown', (e)=>{
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        header.click();
+      }
+    });
+    window.addEventListener('resize', ()=> {
+      if (header.getAttribute('aria-expanded') === 'true' && content) {
+        content.style.maxHeight = content.scrollHeight + 24 + 'px';
+      }
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', setupCollapsibles);
+  </script>
+</body>
+</html>

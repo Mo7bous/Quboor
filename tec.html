@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Termes et Conditions - Quboor</title>
+
+  <!-- fontawesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+:root{
+  /* New palette per request */
+  --blue-dark: #2C3E50;
+  --beige-cold: #cdd4c3;
+  --blue-very-pale: #eef2fe;
+  --pastel-orange: #FFFCFA;
+
+  --primary: var(--blue-dark);
+  --nav-bg: var(--blue-dark);
+  --card-bg: #FFFCFA;
+  --page-bg: var(--blue-very-pale);
+  --muted: #6b6b6b;
+  --text-on-nav: var(--beige-cold);
+  --popup-search-bg: #f7fbfd;
+
+  --dm-nav-bg: var(--beige-cold);
+  --dm-sidebar-bg: #254045;
+  --dm-card-bg: #1f2f36;
+  --dm-text-on-surface: var(--beige-cold);
+  --dm-overlay: rgba(0,0,0,0.6);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+.top-nav{
+  width:92%;
+  max-width:1100px;
+  margin:18px auto;
+  height:70px;
+  background:var(--nav-bg);
+  color:var(--card-bg);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 16px;
+  border-radius:8px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+.logo{height:34px}
+.menu-btn{
+  background:none;border:0;color:#FFFCFA;font-size:20px;padding:8px;border-radius:6px;cursor:pointer
+}
+.dark-btn{
+  background:none;
+  border:0;
+  color:#FFFCFA;
+  font-size:18px;
+  padding:8px;
+  border-radius:6px;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.dark-btn i{width:20px; height:20px}
+.nav-controls{display:flex;gap:8px;align-items:center}
+
+.sidebar{
+  position:fixed;
+  left:-280px;
+  top:0;
+  height:100%;
+  width:280px;
+  background:var(--nav-bg);
+  color:var(--card-bg);
+  padding-top:20px;
+  padding-bottom:140px;
+  transition:left .28s;
+  z-index:60;
+  display:flex;
+  flex-wrap:wrap;
+  align-content:flex-start;
+  overflow:auto;
+}
+.sidebar.open{left:0}
+.sidebar a{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:50%;
+  box-sizing:border-box;
+  gap:6px;
+  padding:12px 6px;
+  color:#FFFCFA;
+  text-align:center;
+  font-size:14px;
+  min-height:72px;
+}
+.sidebar a:nth-child(odd){ border-right:1px solid rgba(255,255,255,0.03);}
+.sidebar a i{font-size:20px;display:block}
+.closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:#FFFCFA;cursor:pointer}
+
+.sidebar-separator{width:100%;height:18px;box-sizing:border-box;margin-top:42px;border-top:0;opacity:0.0;pointer-events:none;}
+
+.lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
+.lang-btn{display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:#FFFCFA;padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn:focus{outline:none;box-shadow:none}
+.lang-btn .flag{font-size:18px;line-height:1}
+.lang-btn .label{display:none}
+.lang-btn.active{box-shadow:0 4px 14px rgba(0,0,0,0.12);transform:translateY(-2px)}
+.lang-btn:active,.lang-btn:hover{transform:translateY(-2px)}
+
+#main{
+  width:92%;
+  max-width:1100px;
+  margin:8px auto 0;
+  padding:8px 0 40px;
+  height: calc(100vh - 120px);
+  overflow: auto; /* allow page scrolling so expanded cards are fully viewable */
+  display: flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+/* content card (collapsible card styles) */
+.content-card, .collapsible-card{
+  background:var(--card-bg);
+  border-radius:10px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.04);
+  color:var(--primary);
+  overflow: hidden;
+}
+.collapsible-card{border-radius:10px}
+.card-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 18px;
+  cursor:pointer;
+  user-select:none;
+}
+.card-header .title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.card-header .title .bar{
+  width:8px;height:40px;border-radius:6px;background:var(--nav-bg);
+}
+.card-header h3{margin:0;font-size:1.05rem;color:var(--primary)}
+.card-sub{font-size:13px;#FFFCFA}
+
+/* arrow */
+.card-arrow{
+  width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;
+  background:transparent;border:0;color:var(--primary);font-size:14px;
+  transition:transform .22s ease;
+}
+
+/* card content collapsible area */
+.card-content{
+  padding:0 18px 18px 18px;
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .28s ease, padding .22s ease;
+}
+.card-content.open{
+  padding:12px 18px 18px 18px;
+}
+
+/* content interior */
+.content-inner{padding-top:6px}
+.content-card h1{font-size:1.2rem;margin-bottom:10px}
+/* Reduce paragraph/list text size inside contact/terms cards for denser display */
+.content-inner p,
+.content-inner ol,
+.content-inner li,
+.content-card .card-sub {
+  font-size:13px;
+  line-height:1.35;
+  color:var(--primary);
+  text-align:justify;
+}
+.content-card ol{margin-left:18px;color:var(--muted);margin-bottom:12px}
+.content-card li{margin:8px 0}
+
+/* GDPR form */
+.form-row{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.input, textarea, select{
+  width:100%;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid rgba(0,0,0,0.06);
+  background:transparent;
+  font-size:14px;
+  color:inherit;
+  box-sizing:border-box;
+}
+textarea{min-height:100px;resize:vertical}
+.form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+.btn{
+  background:var(--nav-bg);
+  color:var(--card-bg);
+  border:none;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+}
+.btn.secondary{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--primary)}
+
+.note{font-size:13px;color:var(--primary);margin-top:8px;text-align:justify}
+
+/* dark mode */
+.dark{
+  --page-bg: #0b0c0f;
+  --card-bg: #2C3E50;
+  --card-border: rgba(255,255,255,0.06);
+  --primary: #FFFCFA;
+  --pastel-orange: #FFDAB8;
+  --popup-search-bg: #274a50;
+}
+.dark .top-nav{background:var(--nav-bg)} /* keep nav same */
+.dark .content-card{color:var(--primary);background:var(--card-bg)}
+.dark .btn{background:#0b0c0f;color:#FFFCFA}
+.dark .input,.dark textarea,.dark select{border:1px solid rgba(255,255,255,0.04);color:#FFFCFA;background:transparent}
+.dark .note{color:#FFFCFA}
+
+/* Unified heading sizing for consistency across pages */
+h1, .page-header h1, .collapsible-card .card-header h3 {
+  font-size:1.15rem;
+  line-height:1.2;
+  margin:0 0 8px 0;
+}
+.card-sub, .content-inner p {
+  font-size:13px;
+  line-height:1.4;
+}
+  </style>
+</head>
+<body>
+
+  <header class="top-nav">
+    <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
+    <div class="brand">
+      <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
+    </div>
+    <div class="nav-controls">
+      <button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button>
+    </div>
+  </header>
+
+  <div id="mySidebar" class="sidebar">
+        <div class="lang-switch" aria-label="Sélecteur de langue">
+          <button id="langBtnFR" class="lang-btn" data-lang="fr" aria-label="Français">
+            <span class="flag">🇫🇷</span>
+          </button>
+          <button id="langBtnMA" class="lang-btn" data-lang="ma" aria-label="العربية">
+            <span class="flag">🇲🇦</span>
+          </button>
+        </div>
+
+        <span class="closebtn">&times;</span>
+        <div class="sidebar-separator" aria-hidden="true"></div>
+        <a href="search.html"><i class="fas fa-search"></i>Recherche</a>
+        <a href="new.html"><i class="fas fa-user-plus"></i>Ajouter</a>
+        <a href="mission.html"><i class="fas fa-tasks"></i>Missions</a>
+
+        <a href="projets.html"><i class="fas fa-hand-holding-heart"></i>Nos projets et dons</a>
+        <a href="joinus.html"><i class="fas fa-users"></i>Rejoins-nous</a>
+        <a href="tools.html"><i class="fas fa-tools"></i>Outils</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i>Contact</a>
+      <br></br>
+      <a href="tec.html"><i class="fas fa-file-contract"></i>Termes et conditions</a>
+      <a href="index.html"><i class="fas fa-home"></i>Accueil</a>
+      
+    </div>
+
+  <main id="main">
+    <section style="width:92%;max-width:1100px;margin:12px auto 0;display:grid;grid-template-columns:1fr;gap:16px;">
+
+      <!-- RGPD collapsible card -->
+      <aside class="collapsible-card" id="rgpdCard" aria-labelledby="rgpd-title">
+        <div class="card-header" role="button" aria-expanded="false" tabindex="0">
+          <div class="title">
+            
+            <div>
+              <h3 id="rgpd-title">Formulaire RGPD</h3>
+              <div class="card-sub">Demande de retrait, modification ou limitation de l'accès</div>
+            </div>
+          </div>
+          <button class="card-arrow" aria-hidden="true">▾</button>
+        </div>
+
+        <div class="card-content" id="rgpdContent">
+          <div class="content-inner content-card" style="padding:18px;">
+            <form id="rgpdForm" class="form-row" onsubmit="return false;" style="display:grid;grid-template-columns:1fr;gap:10px;">
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <div style="flex:1;min-width:160px">
+                  <label style="font-size:13px;color:var(--primary)">Objet de la demande</label>
+                  <div class="note" style="var(--primary)">Merci d’indiquer clairement l’objet de votre demande et toutes les informations permettant d’identifier la sépulture concernée. Votre demande sera traitée avec attention.</div>
+                  <br></br>
+                  <select id="reqType" class="input" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent">
+                    <option value="">Sélectionner...</option>
+                    <option value="Retrait">Retrait</option>
+                    <option value="Modification">Modification</option>
+                    <option value="Limitation de l'accès">Limitation de l'accès</option>
+                  </select>
+                </div>
+
+                <div style="flex:1;min-width:160px">
+                  <input id="name" class="input" type="text" placeholder="Votre nom complet" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent">
+                </div>
+              </div>
+
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <div style="flex:1;min-width:160px">
+                  <input id="email" class="input" type="email" placeholder="nom.prenom@email.com" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent">
+                </div>
+
+                <div style="flex:1;min-width:160px">
+                  <input id="subject" class="input" type="text" placeholder="Sujet" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent">
+                </div>
+              </div>
+
+              <div>
+                <textarea id="message" class="input" placeholder="Détails : UID , nom sur la tombe, dates, emplacement, ville... Toutes informations permettant d'identifier la sépulture" required style="width:100%;padding:12px;border-radius:8px;border:1px solid rgba(215, 10, 10, 0.06);background:transparent;min-height:120px"></textarea>
+              </div>
+
+              <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px;">
+                <button id="generateBtn" class="btn" type="button" style="padding:10px 14px;border-radius:8px">Générer l'e-mail</button>
+                <button id="clearBtn" class="btn secondary" type="button" style="padding:10px 14px;border-radius:8px">Effacer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Terms collapsible card -->
+      <article class="collapsible-card" id="termsCard" aria-labelledby="tc-title">
+        <div class="card-header" role="button" aria-expanded="false" tabindex="0">
+          <div class="title">
+            
+            <div>
+              <h3 id="tc-title">Termes et Conditions</h3>
+              <div class="card-sub">Informations légales & politique de traitement des données</div>
+            </div>
+          </div>
+          <button class="card-arrow" aria-hidden="true">▾</button>
+        </div>
+
+        <div class="card-content" id="termsContent">
+          <div class="content-inner content-card" style="padding:18px;">
+            <div style="max-height:44vh;overflow:auto;padding-right:8px;width:100%;box-sizing:border-box;">
+              <ol style="margin-left:18px;color:var(--muted);line-height:1.45">
+                <li><strong>Présentation du projet</strong>
+                  <div>Quboor est une initiative citoyenne, sociale et mémorielle ayant pour objectif la collecte, la numérisation, la structuration et la mise à disposition de données funéraires relatives aux cimetières marocains.
+
+        Le projet vise également à contribuer à la reconnaissance, à la structuration et à la régularisation des métiers liés aux espaces funéraires.
+
+        Quboor agit dans une démarche d’intérêt général, sans finalité commerciale directe, et repose sur des dons, des partenariats, du bénévolat et des collaborations institutionnelles.</div>
+                </li>
+
+                <li style="margin-top:8px"><strong>Champ d’application</strong>
+                  <div>Les présentes conditions générales d’utilisation et mentions légales encadrent l’accès, la consultation et l’utilisation de l’ensemble des services, contenus, outils, bases de données et fonctionnalités proposés par Quboor.
+
+        Toute utilisation du site ou des services implique l’acceptation pleine et entière des présentes conditions.</div>
+                </li>
+
+                <li style="margin-top:8px"><strong>Nature des données collectées</strong>
+                  <div>Quboor collecte et traite exclusivement des données à caractère funéraire, mémoriel et patrimonial, incluant notamment :
+                    <ul>
+                      <li>Noms et prénoms figurant sur les sépultures</li>
+                      <li>Dates visibles (naissance, décès)</li>
+                      <li>Inscriptions funéraires</li>
+                      <li>Photographies de tombes et stèles</li>
+                      <li>Emplacements et coordonnées géographiques (GPS)</li>
+                      <li>Données descriptives non sensibles liées à l’état des sépultures</li>
+                    </ul>
+                  </div>
+                </li>
+
+                <li style="margin-top:8px"><strong>Finalités de l’utilisation des données</strong>
+                  <div>Les données collectées sont utilisées exclusivement dans les cadres suivants :
+                    <ul>
+                      <li>Préservation de la mémoire collective et du patrimoine funéraire</li>
+                      <li>Consultation par les familles, y compris la diaspora</li>
+                      <li>Recherche historique, généalogique, sociologique ou territoriale</li>
+                      <li>Cartographie et visualisation des cimetières</li>
+                      <li>Analyse statistique anonymisée</li>
+                      <li>Amélioration de la gestion et de l’entretien des cimetières</li>
+                    </ul>
+                  </div>
+                </li>
+
+                <li style="margin-top:8px"><strong>Limitation de responsabilité</strong>
+                  <div>Quboor met en œuvre des moyens sérieux pour assurer l’exactitude des données collectées. Toutefois, les informations peuvent comporter des erreurs, omissions ou approximations.
+
+        Quboor ne garantit ni l’exhaustivité ni l’actualisation permanente des données et ne saurait être tenu responsable des décisions prises sur la base des informations consultées.
+
+        Le projet ne remplace en aucun cas les registres officiels administratifs ou religieux.</div>
+                </li>
+
+                <li style="margin-top:8px"><strong>Photographies et respect des lieux</strong>
+                  <div>Les photographies sont réalisées dans le respect de la dignité des défunts et des familles. Aucun corps, cérémonie ou élément intime n’est photographié.
+
+        Quboor s’engage à retirer ou masquer tout contenu jugé inapproprié sur simple demande justifiée.</div>
+                </li>
+
+                <li style="margin-top:8px"><strong>Droits des familles</strong>
+                  <div>Toute personne estimant qu’une information porte atteinte à la mémoire d’un défunt peut demander la correction, la suppression ou la limitation de l’accès public à certaines données.
+
+        Les demandes sont traitées avec sérieux, équité et respect.</div>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <script>
+/* Sidebar toggle & language buttons & dark mode behavior (same logic as other pages) */
+const popup = null; // placeholder for compatibility pattern
+const sidebar = document.getElementById('mySidebar');
+const menuBtn = document.getElementById('menuBtn');
+const closeSidebar = document.querySelector('#mySidebar .closebtn');
+const darkModeBtns = document.querySelectorAll('#darkModeBtn');
+const langBtnFR = document.getElementById('langBtnFR');
+const langBtnMA = document.getElementById('langBtnMA');
+
+if (menuBtn) menuBtn.addEventListener('click', ()=> sidebar.classList.add('open'));
+if (closeSidebar) closeSidebar.addEventListener('click', ()=> sidebar.classList.remove('open'));
+
+function setDarkMode(enabled){
+  if (enabled) document.documentElement.classList.add('dark');
+  else document.documentElement.classList.remove('dark');
+  darkModeBtns.forEach(b=>{
+    b.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+    const icon = b.querySelector('i');
+    if (icon){
+      icon.classList.remove('fa-moon','fa-sun');
+      icon.classList.add(enabled ? 'fa-sun' : 'fa-moon');
+    }
+  });
+  try{ localStorage.setItem('quboor-dark','' + (enabled?1:0)); }catch(e){}
+}
+
+darkModeBtns.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const current = document.documentElement.classList.contains('dark');
+    setDarkMode(!current);
+    btn.focus();
+  });
+});
+
+(function initDark(){
+  let stored = null;
+  try{ stored = localStorage.getItem('quboor-dark'); }catch(e){}
+  if (stored !== null){
+    setDarkMode(stored === '1');
+  } else {
+    setDarkMode(false);
+  }
+})();
+
+if (langBtnFR) {
+  langBtnFR.addEventListener('click', () => {
+    langBtnFR.classList.add('active');
+    if (langBtnMA) langBtnMA.classList.remove('active');
+    window.location.href = 'index.html';
+  });
+}
+if (langBtnMA) {
+  langBtnMA.addEventListener('click', () => {
+    langBtnMA.classList.add('active');
+    if (langBtnFR) langBtnFR.classList.remove('active');
+    window.location.href = 'indexar.html';
+  });
+}
+
+/* GDPR form -> generate mailto: to info@quoboor.com with structured body */
+const generateBtn = document.getElementById('generateBtn');
+const clearBtn = document.getElementById('clearBtn');
+
+function buildEmailBody(data){
+  return [
+    "Demande RGPD - Quboor",
+    "",
+    "Objet de la demande: " + data.type,
+    "Nom: " + data.name,
+    "E-mail: " + data.email,
+    "Sujet: " + data.subject,
+    "",
+    "Message / Informations permettant d'identifier la sépulture:",
+    data.message,
+    "",
+    "Je confirme que les informations fournies sont exactes et que ma demande respecte les obligations légales applicables.",
+    "",
+    "Date: " + (new Date()).toLocaleString()
+  ].join("\n");
+}
+
+generateBtn.addEventListener('click', ()=>{
+  const type = document.getElementById('reqType').value.trim();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const subject = document.getElementById('subject').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  if (!type || !name || !email || !subject || !message){
+    alert('Merci de remplir tous les champs du formulaire.');
+    return;
+  }
+
+  const body = buildEmailBody({type,name,email,subject,message});
+  const mailto = `mailto:info@quoboor.com?subject=${encodeURIComponent('[RGPD] ' + subject)}&body=${encodeURIComponent(body)}`;
+
+  // open user's mail client
+  window.location.href = mailto;
+});
+
+clearBtn.addEventListener('click', ()=>{
+  document.getElementById('rgpdForm').reset();
+});
+
+/* Collapsible card behavior: toggle open/close on header click or Enter/Space key */
+function setupCollapsibles(){
+  const cards = [
+    {cardId: 'termsCard', contentId: 'termsContent'},
+    {cardId: 'rgpdCard', contentId: 'rgpdContent'}
+  ];
+
+  cards.forEach(({cardId, contentId})=>{
+    const card = document.getElementById(cardId);
+    if (!card) return;
+    const header = card.querySelector('.card-header');
+    const content = document.getElementById(contentId);
+    const arrow = header.querySelector('.card-arrow');
+    function setOpen(open){
+      if (open){
+        content.classList.add('open');
+        // allow content to expand to its scrollHeight
+        content.style.maxHeight = content.scrollHeight + 24 + 'px';
+        header.setAttribute('aria-expanded','true');
+        arrow.style.transform = 'rotate(180deg)';
+      } else {
+        content.classList.remove('open');
+        content.style.maxHeight = '0px';
+        header.setAttribute('aria-expanded','false');
+        arrow.style.transform = 'rotate(0deg)';
+      }
+    }
+    // initialize closed
+    setOpen(false);
+
+    header.addEventListener('click', ()=> {
+      const isOpen = header.getAttribute('aria-expanded') === 'true';
+      setOpen(!isOpen);
+    });
+    header.addEventListener('keydown', (e)=>{
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        header.click();
+      }
+    });
+    // when content changes size (e.g. window resize) adjust maxHeight if open
+    window.addEventListener('resize', ()=> {
+      if (header.getAttribute('aria-expanded') === 'true') {
+        content.style.maxHeight = content.scrollHeight + 24 + 'px';
+      }
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', setupCollapsibles);
+  </script>
+</body>
+</html>

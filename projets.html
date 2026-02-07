@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nos projets - Quboor</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+:root{
+  --blue-dark: #2C3E50;      /* base dark blue */
+  --beige-cold: #cdd4c3;     /* very light / cold beige */
+  --blue-very-pale: #eef2fe;  /* very pale blue for cards / popup backgrounds */
+  --pastel-orange: #FFFCFA;   /* near-white with an ultra-pale orange tint for tool cards (lighter) */
+
+  --primary: var(--blue-dark);
+  --nav-bg: #2C3E50;
+  --card-bg: #FFFCFA;
+  --page-bg: var(--blue-very-pale);
+  --muted: #6b6b6b;
+}
+
+/* Reset and base */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* Top nav (copied structure used elsewhere) */
+.top-nav{width:92%;max-width:1100px;margin:18px auto;height:70px;background:var(--nav-bg);color:var(--card-bg);display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.logo{height:34px}
+.menu-btn{background:none;border:0;color:var(--pastel-orange);font-size:20px;padding:8px;border-radius:6px;cursor:pointer}
+.dark-btn{background:none;border:0;color:var(--pastel-orange);font-size:18px;padding:8px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+
+/* Sidebar - same layout as other pages */
+.sidebar{position:fixed;left:-280px;top:0;height:100%;width:280px;background:var(--nav-bg);color:var(--card-bg);padding-top:20px;padding-bottom:140px;transition:left .28s;z-index:60;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto}
+.sidebar.open{left:0}
+.sidebar a{display:flex;flex-direction:column;align-items:center;justify-content:center;width:50%;box-sizing:border-box;gap:6px;padding:12px 6px;color:var(--pastel-orange);text-align:center;font-size:14px;min-height:72px}
+.sidebar a:nth-child(odd){ border-right:1px solid rgba(255,255,255,0.03);}
+.sidebar a i{font-size:20px;display:block}
+.closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:var(--pastel-orange);cursor:pointer}
+.sidebar-separator{width:100%;height:18px;box-sizing:border-box;margin-top:42px;border-top:0;opacity:0.0;pointer-events:none;}
+.lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
+.lang-btn{display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:var(--pastel-orange);padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn .flag{font-size:18px;line-height:1}
+
+/* Page main area scrollable like contact us */
+#main{width:92%;max-width:1100px;margin:12px auto;padding:12px;height:auto;display:block;overflow:auto}
+
+/* Card styles */
+.collapsible-card{background:var(--card-bg);border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.04);overflow:hidden;margin-bottom:14px}
+.card-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer}
+.card-header .title{display:flex;flex-direction:column}
+.card-header h3{margin:0;font-size:1.05rem}
+.card-sub{font-size:13px;color:var(--muted)}
+.card-arrow{width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;background:transparent;border:0;color:var(--primary);font-size:14px;transition:transform .22s}
+.card-content{padding:0 16px 16px 16px;max-height:0;overflow:hidden;transition:max-height .28s,padding .22s}
+.card-content.open{padding:12px 16px 16px 16px}
+
+/* content text */
+.content-inner p{font-size:14px;line-height:1.45;color:var(--primary);text-align:justify}
+
+/* ensure comfortable spacing for intro */
+.intro{background:var(--card-bg);padding:14px;border-radius:10px;margin-bottom:12px;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+  /* Dark mode support for nosprojets page */
+  .dark{
+    --page-bg: #0b0c0f;
+    --card-bg: #2C3E50;
+    --primary: #FFFCFA;
+    --muted: #cfcfcf;
+    --nav-bg: #2C3E50;
+  }
+  .dark body, .dark html { background: var(--page-bg); }
+  .dark .intro, .dark .collapsible-card, .dark .support-card { background: var(--card-bg); color: var(--primary); box-shadow: none; }
+  .dark .card-sub, .dark .content-inner, .dark .support-card div { color: var(--primary); }
+  .dark .card-arrow { color: var(--primary); }
+  .dark .support-card a { color: var(--primary); }
+  .dark .support-card { box-shadow: 0 6px 14px rgba(0,0,0,0.12); }
+  </style>
+</head>
+<body>
+
+  <header class="top-nav">
+    <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
+    <div class="brand"><img src="img/logotitre.png" alt="Logo Quboor" class="logo"></div>
+    <div class="nav-controls"><button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button></div>
+  </header>
+
+  <div id="mySidebar" class="sidebar">
+    <span class="closebtn">&times;</span>
+    <div class="sidebar-separator" aria-hidden="true"></div>
+        <a href="search.html"><i class="fas fa-search"></i>Recherche</a>
+        <a href="new.html"><i class="fas fa-user-plus"></i>Ajouter</a>
+        <a href="mission.html"><i class="fas fa-tasks"></i>Missions</a>
+
+        <a href="projets.html"><i class="fas fa-hand-holding-heart"></i>Nos projets et dons</a>
+        <a href="joinus.html"><i class="fas fa-users"></i>Rejoins-nous</a>
+        <a href="tools.html"><i class="fas fa-tools"></i>Outils</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i>Contact</a>
+      <br></br>
+      <a href="tec.html"><i class="fas fa-file-contract"></i>Termes et conditions</a>
+      <a href="index.html"><i class="fas fa-home"></i>Accueil</a>
+
+
+    <div class="lang-switch" aria-label="Sélecteur de langue">
+      <button id="langBtnFR" class="lang-btn" data-lang="fr" aria-label="Français"><span class="flag">🇫🇷</span></button>
+      <button id="langBtnMA" class="lang-btn" data-lang="ma" aria-label="العربية"><span class="flag">🇲🇦</span></button>
+    </div>
+  </div>
+
+  <main id="main">
+    
+      <h1 style="font-size:1.15rem;margin:0 0 8px 0;text-align:center">Nos projets</h1>
+      <p class="content-inner" style="display:inline-block;text-align:justify;max-width:880px;margin:0 auto;">
+        Découvrez nos actions visant à préserver la mémoire collective et à restaurer les espaces funéraires : interventions sur le terrain, numérisation et archivage des données, sensibilisation et engagement citoyen.
+      </p>
+  
+      <br></br>
+
+    <!-- Project 1 -->
+    <article class="collapsible-card" id="proj1">
+      <div class="card-header" role="button" aria-expanded="false" tabindex="0">
+        <div class="title">
+          <h3><i class="fas fa-broom" style="margin-right:8px;color:var(--muted)"></i>Nettoyage et restauration</h3>
+          <div class="card-sub">Journées d'action citoyenne</div>
+        </div>
+        <button class="card-arrow" aria-hidden="true">▾</button>
+      </div>
+      <div class="card-content" id="proj1Content">
+              <br></br>
+
+        <div class="content-inner">
+          <p>Campagnes terrain organisées pour restaurer et valoriser cimetières dégradés, combinant actions courtes (1‑2 jours) et opérations de suivi trimestrielles.</p>
+
+          <h4 style="margin:10px 0 6px 0">Objectifs</h4>
+          <ul style="margin:6px 0 10px 18px;color:var(--primary);font-size: small;">
+            <li>Nettoyer 5 sites pilotes la première année</li>
+            <li>Mobiliser 200 bénévoles</li>
+            <li>Réduire les encombrements et signaler 100 sépultures prioritaires</li>
+          </ul>
+
+          <h4 style="margin:10px 0 6px 0">Moyens</h4>
+          <p>Fourniture de matériel (gants, sacs, brosses), coordination logistique, équipes de terrain et partenariats locaux. Estimation : 12 équipes bénévoles, 2 coordinateurs terrain.</p>
+
+          <h4 style="margin:10px 0 6px 0">Budget : 60 000 MAD</h4>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 2 -->
+    <article class="collapsible-card" id="proj2">
+      <div class="card-header" role="button" aria-expanded="false" tabindex="0">
+        <div class="title">
+          <h3><i class="fas fa-database" style="margin-right:8px;color:var(--muted)"></i>Numérisations funéraires</h3>
+          <div class="card-sub">Base de données sécurisée et accessible</div>
+        </div>
+        <button class="card-arrow" aria-hidden="true">▾</button>
+      </div>
+      <div class="card-content" id="proj2Content">
+              <br></br>
+
+        <div class="content-inner">
+          <p>Création d’un référentiel numérique réunissant photographies, transcriptions et coordonnées GPS pour chaque sépulture inventoriée.</p>
+
+          <h4 style="margin:10px 0 6px 0">Objectifs</h4>
+          <ul style="margin:6px 0 10px 18px;color:var(--primary);font-size: small;">
+            <li>Documenter 2 000 sépultures en 18 mois</li>
+            <li>Rendre 80% des fiches consultables en ligne</li>
+            <li>Assurer métadonnées et traçabilité</li>
+          </ul>
+
+          <h4 style="margin:10px 0 6px 0">Moyens</h4>
+          <p>Équipe de saisie, serveurs sécurisés, interface web, formation pour standardiser les relevés. Estimation : 4 postes de saisie, 1 administrateur serveur.</p>
+
+          <h4 style="margin:10px 0 6px 0">Budget : 160 000 MAD</h4>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 3 (summary placeholder) -->
+    <article class="collapsible-card" id="proj3">
+      <div class="card-header" role="button" aria-expanded="false" tabindex="0">
+        <div class="title">
+          <h3><i class="fas fa-chalkboard-teacher" style="margin-right:8px;color:var(--muted)"></i>Sensibilisation</h3>
+          <div class="card-sub">Ateliers et sessions pour bénévoles</div>
+        </div>
+        <button class="card-arrow" aria-hidden="true">▾</button>
+      </div>
+      <div class="card-content" id="proj3Content">
+              <br></br>
+
+        <div class="content-inner">
+          <p>Programme d’ateliers pour sensibiliser au respect des lieux, bonnes pratiques photographiques et méthodologies de relevé.</p>
+
+          <h4 style="margin:10px 0 6px 0">Objectifs</h4>
+          <ul style="margin:6px 0 10px 18px;color:var(--primary);font-size: small;">
+            <li>Former 150 bénévoles en 12 mois</li>
+            <li>Standardiser les relevés photo et textuels</li>
+            <li>Créer un guide pratique accessible</li>
+          </ul>
+
+          <h4 style="margin:10px 0 6px 0">Moyens</h4>
+          <p>Sessions locales, modules en ligne, supports imprimés et équipes formatrices (3 formateurs principaux).</p>
+
+          <h4 style="margin:10px 0 6px 0">Budget : 70 000 MAD</h4>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 4 (summary placeholder) -->
+    <article class="collapsible-card" id="proj4">
+      <div class="card-header" role="button" aria-expanded="false" tabindex="0">
+        <div class="title">
+          <h3><i class="fas fa-handshake" style="margin-right:8px;color:var(--muted)"></i>Coordination</h3>
+          <div class="card-sub">Actions durables et intégration locale</div>
+        </div>
+        <button class="card-arrow" aria-hidden="true">▾</button>
+      </div>
+      <div class="card-content" id="proj4Content">
+              <br></br>
+
+        <div class="content-inner">
+          <p>Renforcement des liens institutionnels pour sécuriser l'accès aux sites, obtenir autorisations et coordonner des actions durables à l’échelle locale.</p>
+
+          <h4 style="margin:10px 0 6px 0">Objectifs</h4>
+          <ul style="margin:6px 0 10px 18px;color:var(--primary);font-size: small;">
+            <li>Formaliser 6 partenariats locaux</li>
+            <li>Assurer soutiens logistiques et permissions officielles</li>
+            <li>Définir protocoles de conservation partagée</li>
+          </ul>
+
+          <h4 style="margin:10px 0 6px 0">Moyens</h4>
+          <p>Rencontres institutionnelles, conventions, documentation juridique, et coordination projet (1 chargé de partenariats).</p>
+
+          <h4 style="margin:10px 0 6px 0">Budget : 50 000 MAD</h4>
+        </div>
+      </div>
+    </article>
+
+          <br></br>
+
+    <!-- Nous supporter: intro text and individual non-collapsible cards (aligned with other project content) -->
+      <!-- image added above the support intro -->
+      <div style="display:flex;justify-content:center;margin-bottom:10px;">
+        <img src="img/img1.jpeg" alt="Soutenir Quboor" style="width:92%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.06);">
+      </div>
+            <br></br>
+
+      <h2 style="font-size:1.15rem;margin:0 0 8px 0;text-align:center">Nous supporter</h2>
+
+      <p class="content-inner" style="max-width:880px;margin:0 auto;text-align:justify;">
+        Soutenez Quboor via vos dons ou campagnes de financement participatif. 
+      </p>
+
+            <p class="content-inner" style="max-width:880px;margin:0 auto;text-align:justify;">
+        Votre contribution aide à l'organisation des actions sur le terrain,couverture des frais opéerationels, achat de matériel et formation des bénévoles via une des plateformes ci-dessous.
+      </p>
+
+
+            <br></br>
+
+    <div class="support-grid" style="display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:18px;">
+      <!-- PayPal card -->
+      <div class="support-card" style="background:var(--card-bg);padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.04);position:relative;text-align:center;">
+        <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
+          <h4 style="margin:0 0 6px 0"><i class="fab fa-paypal" style="margin-right:8px"></i>PayPal</h4>
+          <div style="font-size:13px;margin-bottom:8px">Don rapide et sécurisé via PayPal.</div>
+
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
+            <a href="https://google.com" target="_blank" rel="noreferrer" style="font-weight:600;color:var(--primary)">Lien</a>
+            <div style="font-size:13px">Contribution ponctuelle ou récurrente via PayPal.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tipeee card -->
+      <div class="support-card" style="background:var(--card-bg);padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.04);position:relative;text-align:center;">
+        <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
+          <h4 style="margin:0 0 6px 0"><i class="fas fa-hand-holding-usd" style="margin-right:8px;color:var(--muted)"></i>Tipeee</h4>
+          <div style="font-size:13px;margin-bottom:8px">Soutien ponctuel pour nos actions.</div>
+
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
+            <a href="https://google.com" target="_blank" rel="noreferrer" style="font-weight:600;color:var(--primary)">Lien</a>
+            <div style="font-size:13px">Plateforme pour soutenir nos projets et actions.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kickstarter card -->
+      <div class="support-card" style="background:var(--card-bg);padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.04);position:relative;text-align:center;">
+        <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
+          <h4 style="margin:0 0 6px 0"><i class="fas fa-rocket" style="margin-right:8px;color:var(--muted)"></i>Kickstarter</h4>
+          <div style="font-size:13px;margin-bottom:8px">Campagnes de financement pour projets.</div>
+
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
+            <a href="https://google.com" target="_blank" rel="noreferrer" style="font-weight:600;color:var(--primary)">Lien</a>
+            <div style="font-size:13px">Appels à financement pour initiatives et matériel.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+  /* Sidebar toggle, language, dark-mode logic consistent with other pages */
+  const sidebar = document.getElementById('mySidebar');
+  const menuBtn = document.getElementById('menuBtn');
+  const closeSidebar = document.querySelector('#mySidebar .closebtn');
+  const darkModeBtns = document.querySelectorAll('#darkModeBtn');
+  const langBtnFR = document.getElementById('langBtnFR');
+  const langBtnMA = document.getElementById('langBtnMA');
+
+  if (menuBtn) menuBtn.addEventListener('click', ()=> sidebar.classList.add('open'));
+  if (closeSidebar) closeSidebar.addEventListener('click', ()=> sidebar.classList.remove('open'));
+
+  function setDarkMode(enabled){
+    if (enabled) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
+    darkModeBtns.forEach(b=>{
+      b.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+      const icon = b.querySelector('i');
+      if (icon){
+        icon.classList.remove('fa-moon','fa-sun');
+        icon.classList.add(enabled ? 'fa-sun' : 'fa-moon');
+      }
+    });
+    try{ localStorage.setItem('quboor-dark','' + (enabled?1:0)); }catch(e){}
+  }
+  darkModeBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const current = document.documentElement.classList.contains('dark');
+      setDarkMode(!current);
+      btn.focus();
+    });
+  });
+  (function initDark(){
+    let stored = null;
+    try{ stored = localStorage.getItem('quboor-dark'); }catch(e){}
+    if (stored !== null){
+      setDarkMode(stored === '1');
+    } else {
+      setDarkMode(false);
+    }
+  })();
+if (langBtnFR) {
+  langBtnFR.addEventListener('click', () => {
+    langBtnFR.classList.add('active');
+    if (langBtnMA) langBtnMA.classList.remove('active');
+    window.location.href = 'index.html';
+  });
+}
+if (langBtnMA) {
+  langBtnMA.addEventListener('click', () => {
+    langBtnMA.classList.add('active');
+    if (langBtnFR) langBtnFR.classList.remove('active');
+    window.location.href = 'indexar.html';
+  });
+}
+
+  /* Collapsible card behavior for the four projects */
+  function setupProjects(){
+    const cards = [
+      {id:'proj1', content:'proj1Content'},
+      {id:'proj2', content:'proj2Content'},
+      {id:'proj3', content:'proj3Content'},
+      {id:'proj4', content:'proj4Content'}
+    ];
+    cards.forEach(({id,content})=>{
+      const card = document.getElementById(id);
+      if (!card) return;
+      const header = card.querySelector('.card-header');
+      const cont = document.getElementById(content);
+      const arrow = header.querySelector('.card-arrow');
+      function setOpen(open){
+        if (open){
+          cont.classList.add('open');
+          cont.style.maxHeight = cont.scrollHeight + 24 + 'px';
+          header.setAttribute('aria-expanded','true');
+          arrow.style.transform = 'rotate(180deg)';
+        } else {
+          cont.classList.remove('open');
+          cont.style.maxHeight = '0px';
+          header.setAttribute('aria-expanded','false');
+          arrow.style.transform = 'rotate(0deg)';
+        }
+        // allow page scrolling when any card expands
+        document.getElementById('main').style.overflow = 'auto';
+      }
+      setOpen(false);
+      header.addEventListener('click', ()=> {
+        const isOpen = header.getAttribute('aria-expanded') === 'true';
+        setOpen(!isOpen);
+      });
+      header.addEventListener('keydown', (e)=>{
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          header.click();
+        }
+      });
+      window.addEventListener('resize', ()=> {
+        if (header.getAttribute('aria-expanded') === 'true') {
+          cont.style.maxHeight = cont.scrollHeight + 24 + 'px';
+        }
+      });
+    });
+  }
+  document.addEventListener('DOMContentLoaded', setupProjects);
+  </script>
+</body>
+</html>

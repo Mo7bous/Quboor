@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rejoignez-nous - Quboor</title>
+
+  <!-- fontawesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+:root{
+  --blue-dark: #2C3E50;
+  --beige-cold: #C3CED4;
+  --blue-very-pale: #EBF4F8;
+  --pastel-orange: #FFFCFA;
+
+  --primary: var(--blue-dark);
+  --nav-bg: var(--blue-dark);
+  --card-bg: #FFFCFA;
+  --page-bg: var(--blue-very-pale);
+}
+
+/* Reset and base */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* Top nav */
+.top-nav{width:92%;max-width:1100px;margin:18px auto;height:70px;background:var(--nav-bg);color:var(--card-bg);display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.logo{height:34px}
+.menu-btn{background:none;border:0;color:var(--pastel-orange);font-size:20px;padding:8px;border-radius:6px;cursor:pointer}
+.dark-btn{background:none;border:0;color:var(--pastel-orange);font-size:18px;padding:8px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+
+/* Sidebar - match layout and behaviour used by other pages */
+.sidebar{position:fixed;left:-280px;top:0;height:100%;width:280px;background:var(--nav-bg);color:var(--card-bg);padding-top:20px;padding-bottom:140px;transition:left .28s;z-index:60;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto}
+.sidebar.open{left:0}
+.sidebar a{display:flex;flex-direction:column;align-items:center;justify-content:center;width:50%;box-sizing:border-box;gap:6px;padding:12px 6px;color:var(--pastel-orange);text-align:center;font-size:14px;min-height:72px}
+.sidebar a:nth-child(odd){ border-right:1px solid rgba(255,255,255,0.03);}
+.sidebar a i{font-size:20px;display:block}
+.closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:var(--pastel-orange);cursor:pointer}
+
+/* separator: keep spacing but remove any visible line so the close button isn't visually separated by a border */
+.sidebar-separator{
+  width:100%;
+  height:18px; /* vertical gap (matches other pages) */
+  box-sizing:border-box;
+  margin-top:42px; /* spacing so the link/module buttons sit a bit lower */
+  border-top:0; /* explicitly remove any divider line */
+  opacity:0.0;
+  pointer-events:none;
+}
+
+/* language switch in sidebar - centered at bottom (no inline styles) */
+.lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
+.lang-btn{display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:var(--pastel-orange);padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn .flag{font-size:18px;line-height:1}
+
+/* hide textual labels and show only flag glyphs in the sidebar language buttons (matches other pages) */
+.lang-btn .label{display:none}
+.lang-btn.active{
+  box-shadow:0 4px 14px rgba(0,0,0,0.12);
+  transform:translateY(-2px);
+}
+.lang-btn:active,.lang-btn:hover{transform:translateY(-2px)}
+
+/* simple dark theme switch for joinus: keep nav same, change page & card backgrounds */
+.dark{
+  --page-bg: #0b0c0f; /* match other pages' dark page background */
+  --card-bg: #1f2f36; /* dark card background */
+  --card-border: rgba(255,255,255,0.06);
+  --primary: #FFFCFA; /* pale-orange text in dark */
+  --pastel-orange: #FFFCFA;
+  --popup-search-bg: #274a50;
+}
+.dark .top-nav{background:var(--nav-bg)} /* keep nav same as other pages */
+.dark .hero-card, .dark .features-card { background:var(--card-bg); color:var(--primary) }
+.dark .btn{background:var(--nav-bg);color:var(--pastel-orange)}
+.lang-btn:focus{outline:none;box-shadow:none}
+
+/* Unified heading sizing for consistency across pages */
+h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
+  font-size:1.15rem;
+  line-height:1.2;
+  margin:0 0 8px 0;
+}
+.card-sub, .hero-card p, .feature-item p, .muted {
+  font-size:13px;
+  line-height:1.4;
+}
+
+/* Main single-column mobile-first layout */
+#main{width:100%;max-width:720px;margin:12px auto;padding:12px;height:auto;display:block}
+.hero-card{background:var(--card-bg);border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,0.04);margin-bottom:14px}
+.hero-card h1{font-size:1.15rem;margin-bottom:10px;text-align:center}
+.hero-card p{font-size:14px;line-height:1.5;color:var(--primary);text-align:justify;margin-bottom:12px}
+
+/* small features card (new) */
+.features-card{background:var(--card-bg);border-radius:12px;padding:14px;box-shadow:0 6px 18px rgba(0,0,0,0.04);margin-bottom:14px}
+.features-list{display:flex;flex-direction:column;gap:10px}
+.feature-item{background:transparent;border-radius:10px;padding:10px;display:flex;gap:10px;align-items:flex-start}
+.feature-item i{background:transparent;border-radius:8px;font-size:18px;width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center}
+.feature-item h4{margin:0;font-size:14px}
+.feature-item p{margin:0;font-size:13px;color:var(--muted);line-height:1.4}
+
+/* Image styling: smaller and centered for phones */
+.hero-image{width:100%;display:flex;justify-content:center;margin-bottom:12px}
+.hero-image img{width:92%;max-width:460px;border-radius:10px;object-fit:cover;box-shadow:0 6px 16px rgba(0,0,0,0.06)}
+
+/* Remove CTA and actions styling (kept minimal if future use) */
+.btn{display:inline-block;padding:10px 14px;border-radius:10px;font-weight:700;background:var(--nav-bg);color:var(--card-bg);border:none;text-align:center}
+
+/* Typography note for muted text */
+.muted{color:var(--muted);font-size:13.8px;line-height:1.5;text-align:justify}
+
+/* Ensure the page fits one mobile viewport nicely */
+@media(min-width:720px){
+  #main{padding:18px}
+  .hero-card h1{font-size:1.25rem}
+  .hero-card p{font-size:15px}
+}
+  </style>
+</head>
+<body>
+
+  <header class="top-nav">
+    <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
+    <div class="brand"><img src="img/logotitre.png" alt="Logo Quboor" class="logo"></div>
+    <div class="nav-controls"><button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button></div>
+  </header>
+
+  <div id="mySidebar" class="sidebar">
+    <span class="closebtn">&times;</span>
+    <div class="sidebar-separator" aria-hidden="true"></div>
+          <a href="searchar.html"><i class="fas fa-search"></i>بحث</a>
+          <a href="newar.html"><i class="fas fa-user-plus"></i>إضافة</a>
+          <a href="missionar.html"><i class="fas fa-tasks"></i>المهام</a>
+
+          <a href="projetsar.html"><i class="fas fa-hand-holding-heart"></i>مشاريعنا</a>
+          <a href="joinusar.html"><i class="fas fa-users"></i>انضم إلينا</a>
+          <a href="toolsar.html"><i class="fas fa-tools"></i>الأدوات</a>
+          <a href="contactar.html"><i class="fas fa-envelope"></i>اتصل بنا</a>    
+          <br></br>
+          <a href="tecar.html"><i class="fas fa-file-contract"></i>الشروط والأحكام</a>
+          <a href="indexar.html"><i class="fas fa-home"></i>الرئيسية</a>
+
+
+    <div class="lang-switch" aria-label="Sélecteur de langue">
+      <button id="langBtnFR" class="lang-btn" data-lang="fr" aria-label="Français"><span class="flag">الفرنسية</span></button>
+      <button id="langBtnMA" class="lang-btn" data-lang="ma" aria-label="العربية"><span class="flag">العربية</span></button>
+    </div>
+  </div>
+
+  <main id="main">
+    <!-- Single hero card with text first, then image, no CTAs or actions -->
+    <article class="hero-card" aria-labelledby="join-title">
+<h1 id="join-title">انضموا إلى مغامرة قبور</h1>
+
+<p>
+  مشروع قبور هو مبادرة مواطنة وتضامنية مخصصة للحفاظ على الذاكرة الجماعية — من خلال رسم الخرائط، الرقمنة، وتعزيز قيمة المقابر المغربية. مهمتنا التجريبية تجري حالياً في مقبرة الشهداء بالرباط، حيث نقوم بتحديد مواقع القبور، التقاط الصور، تسجيل النقوش الظاهرة، وتحديد الموقع الجغرافي بدقة للمدافن.
+</p>
+
+<div class="hero-image" aria-hidden="false">
+  <img src="img/img3.jpeg" alt="تفاصيل حجر قبر">
+</div>
+
+<p class="muted">
+  هدفنا هو إنشاء قاعدة بيانات مفتوحة، أخلاقية ومتاحة لجميع العائلات، داخل المغرب وخارجه. هذا العمل يساعد على الحفاظ على آثار الذاكرة، التعرف على القبور المهجورة، وتعزيز الروابط بين الأجيال. لا تتطلب أي مهارات تقنية: إرادتك للمساهمة تكفي. الانضمام إلى قبور يعني المشاركة في عمل جماعي للذاكرة، الاحترام، والنقل للأجيال القادمة.
+</p>
+    </article>
+    <br></br>
+    <!-- Call-to-action button: contact us (placed before features card) -->
+<div style="width:100%;display:flex;justify-content:center;margin:12px 0 18px 0;">
+  <a href="contactar.html" class="btn" style="padding:12px 18px;border-radius:10px;font-weight:700;background:var(--nav-bg);color:#FFFCFA;text-decoration:none;">
+    <i class="fas fa-envelope" style="margin-right:8px"></i>تواصل معنا
+  </a>
+</div>
+
+<!-- نص قصير تحت زر التواصل لتشجيع المستخدم -->
+<div style="width:100%;display:flex;justify-content:center;margin-bottom:8px;">
+  <p style="margin:0;color:var(--muted);font-size:13px;text-align:center;max-width:720px;">
+    لديك سؤال أو ترغب في المشاركة؟ راسلنا وسنرد عليك بسرعة.
+  </p>
+</div>
+
+<br></br>
+<!-- بطاقة ميزات النشاطات التشاركية -->
+<article class="features-card" aria-labelledby="features-title">
+  <br></br>
+
+  <h2 id="features-title" style="font-size:1.05rem;margin:0 0 10px 0;text-align:center">كيف يمكنك المساعدة</h2>
+  <br></br>
+
+  <div class="features-list">
+    <div class="feature-item">
+      <i class="fas fa-broom" aria-hidden="true"></i>
+      <div>
+        <h4>تنظيف</h4>
+        <p>شارك في صيانة وتنظيف القبور والممرات.</p>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <i class="fas fa-camera" aria-hidden="true"></i>
+      <div>
+        <h4>التصوير</h4>
+        <p>التقط صورًا للحجارة والنقوش واللوحات والعلامات.</p>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <div>
+        <h4>التسجيل والرقمنة</h4>
+        <p>قم بكتابة الأسماء والبيانات التي تم جمعها في قاعدة بياناتنا.</p>
+      </div>
+    </div>
+  </div>
+</article>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <script>
+  /* Sidebar toggle & language buttons & dark mode behavior (kept consistent with other pages) */
+  const sidebar = document.getElementById('mySidebar');
+  const menuBtn = document.getElementById('menuBtn');
+  const closeSidebar = document.querySelector('#mySidebar .closebtn');
+  const darkModeBtns = document.querySelectorAll('#darkModeBtn');
+  const langBtnFR = document.getElementById('langBtnFR');
+  const langBtnMA = document.getElementById('langBtnMA');
+
+  if (menuBtn) menuBtn.addEventListener('click', ()=> sidebar.classList.add('open'));
+  if (closeSidebar) closeSidebar.addEventListener('click', ()=> sidebar.classList.remove('open'));
+
+  function setDarkMode(enabled){
+    if (enabled) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
+    darkModeBtns.forEach(b=>{
+      b.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+      const icon = b.querySelector('i');
+      if (icon){
+        icon.classList.remove('fa-moon','fa-sun');
+        icon.classList.add(enabled ? 'fa-sun' : 'fa-moon');
+      }
+    });
+    try{ localStorage.setItem('quboor-dark','' + (enabled?1:0)); }catch(e){}
+  }
+  darkModeBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const current = document.documentElement.classList.contains('dark');
+      setDarkMode(!current);
+    });
+  });
+
+  (function initDark(){
+    let stored = null;
+    try{ stored = localStorage.getItem('quboor-dark'); }catch(e){}
+    if (stored !== null){
+      setDarkMode(stored === '1');
+    } else {
+      setDarkMode(false);
+    }
+  })();
+
+if (langBtnFR) {
+  langBtnFR.addEventListener('click', () => {
+    langBtnFR.classList.add('active');
+    if (langBtnMA) langBtnMA.classList.remove('active');
+    window.location.href = 'index.html';
+  });
+}
+if (langBtnMA) {
+  langBtnMA.addEventListener('click', () => {
+    langBtnMA.classList.add('active');
+    if (langBtnFR) langBtnFR.classList.remove('active');
+    window.location.href = 'indexar.html';
+  });
+}
+  </script>
+</body>
+</html>

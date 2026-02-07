@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>الشروط والأحكام - قبور</title>
+
+  <!-- fontawesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+:root{
+  /* New palette per request */
+  --blue-dark: #2C3E50;
+  --beige-cold: #cdd4c3;
+  --blue-very-pale: #eef2fe;
+  --pastel-orange: #FFFCFA;
+
+  --primary: var(--blue-dark);
+  --nav-bg: var(--blue-dark);
+  --card-bg: #FFFCFA;
+  --page-bg: var(--blue-very-pale);
+  --muted: #6b6b6b;
+  --text-on-nav: var(--beige-cold);
+  --popup-search-bg: #f7fbfd;
+
+  --dm-nav-bg: var(--beige-cold);
+  --dm-sidebar-bg: #254045;
+  --dm-card-bg: #1f2f36;
+  --dm-text-on-surface: var(--beige-cold);
+  --dm-overlay: rgba(0,0,0,0.6);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+.top-nav{
+  width:92%;
+  max-width:1100px;
+  margin:18px auto;
+  height:70px;
+  background:var(--nav-bg);
+  color:var(--card-bg);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 16px;
+  border-radius:8px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+.logo{height:34px}
+.menu-btn{
+  background:none;border:0;color:#FFFCFA;font-size:20px;padding:8px;border-radius:6px;cursor:pointer
+}
+.dark-btn{
+  background:none;
+  border:0;
+  color:#FFFCFA;
+  font-size:18px;
+  padding:8px;
+  border-radius:6px;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.dark-btn i{width:20px; height:20px}
+.nav-controls{display:flex;gap:8px;align-items:center}
+
+.sidebar{
+  position:fixed;
+  left:-280px;
+  top:0;
+  height:100%;
+  width:280px;
+  background:var(--nav-bg);
+  color:var(--card-bg);
+  padding-top:20px;
+  padding-bottom:140px;
+  transition:left .28s;
+  z-index:60;
+  display:flex;
+  flex-wrap:wrap;
+  align-content:flex-start;
+  overflow:auto;
+}
+.sidebar.open{left:0}
+.sidebar a{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:50%;
+  box-sizing:border-box;
+  gap:6px;
+  padding:12px 6px;
+  color:#FFFCFA;
+  text-align:center;
+  font-size:14px;
+  min-height:72px;
+}
+.sidebar a:nth-child(odd){ border-right:1px solid rgba(255,255,255,0.03);}
+.sidebar a i{font-size:20px;display:block}
+.closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:#FFFCFA;cursor:pointer}
+
+.sidebar-separator{width:100%;height:18px;box-sizing:border-box;margin-top:42px;border-top:0;opacity:0.0;pointer-events:none;}
+
+.lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
+.lang-btn{display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:#FFFCFA;padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn:focus{outline:none;box-shadow:none}
+.lang-btn .flag{font-size:18px;line-height:1}
+.lang-btn .label{display:none}
+.lang-btn.active{box-shadow:0 4px 14px rgba(0,0,0,0.12);transform:translateY(-2px)}
+.lang-btn:active,.lang-btn:hover{transform:translateY(-2px)}
+
+#main{
+  width:92%;
+  max-width:1100px;
+  margin:8px auto 0;
+  padding:8px 0 40px;
+  height: calc(100vh - 120px);
+  overflow: auto; /* allow page scrolling so expanded cards are fully viewable */
+  display: flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+/* content card (collapsible card styles) */
+.content-card, .collapsible-card{
+  background:var(--card-bg);
+  border-radius:10px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.04);
+  color:var(--primary);
+  overflow: hidden;
+}
+.collapsible-card{border-radius:10px}
+.card-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 18px;
+  cursor:pointer;
+  user-select:none;
+}
+.card-header .title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.card-header .title .bar{
+  width:8px;height:40px;border-radius:6px;background:var(--nav-bg);
+}
+.card-header h3{margin:0;font-size:1.05rem;color:var(--primary)}
+.card-sub{font-size:13px;#FFFCFA}
+
+/* arrow */
+.card-arrow{
+  width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;
+  background:transparent;border:0;color:var(--primary);font-size:14px;
+  transition:transform .22s ease;
+}
+
+/* card content collapsible area */
+.card-content{
+  padding:0 18px 18px 18px;
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .28s ease, padding .22s ease;
+}
+.card-content.open{
+  padding:12px 18px 18px 18px;
+}
+
+/* content interior */
+.content-inner{padding-top:6px}
+.content-card h1{font-size:1.2rem;margin-bottom:10px}
+/* Reduce paragraph/list text size inside contact/terms cards for denser display */
+.content-inner p,
+.content-inner ol,
+.content-inner li,
+.content-card .card-sub {
+  font-size:13px;
+  line-height:1.35;
+  color:var(--primary);
+  text-align:justify;
+}
+.content-card ol{margin-left:18px;color:var(--muted);margin-bottom:12px}
+.content-card li{margin:8px 0}
+
+/* GDPR form */
+.form-row{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.input, textarea, select{
+  width:100%;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid rgba(0,0,0,0.06);
+  background:transparent;
+  font-size:14px;
+  color:inherit;
+  box-sizing:border-box;
+}
+textarea{min-height:100px;resize:vertical}
+.form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+.btn{
+  background:var(--nav-bg);
+  color:var(--card-bg);
+  border:none;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+}
+.btn.secondary{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--primary)}
+
+.note{font-size:13px;color:var(--primary);margin-top:8px;text-align:justify}
+
+/* dark mode */
+.dark{
+  --page-bg: #0b0c0f;
+  --card-bg: #2C3E50;
+  --card-border: rgba(255,255,255,0.06);
+  --primary: #FFFCFA;
+  --pastel-orange: #FFDAB8;
+  --popup-search-bg: #274a50;
+}
+.dark .top-nav{background:var(--nav-bg)} /* keep nav same */
+.dark .content-card{color:var(--primary);background:var(--card-bg)}
+.dark .btn{background:#0b0c0f;color:#FFFCFA}
+.dark .input,.dark textarea,.dark select{border:1px solid rgba(255,255,255,0.04);color:#FFFCFA;background:transparent}
+.dark .note{color:#FFFCFA}
+
+/* Unified heading sizing for consistency across pages */
+h1, .page-header h1, .collapsible-card .card-header h3 {
+  font-size:1.15rem;
+  line-height:1.2;
+  margin:0 0 8px 0;
+}
+.card-sub, .content-inner p {
+  font-size:13px;
+  line-height:1.4;
+}
+  </style>
+</head>
+<body>
+
+  <header class="top-nav">
+    <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
+    <div class="brand">
+      <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
+    </div>
+    <div class="nav-controls">
+      <button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button>
+    </div>
+  </header>
+
+  <div id="mySidebar" class="sidebar">
+        <div class="lang-switch" aria-label="Sélecteur de langue">
+          <button id="langBtnFR" class="lang-btn" data-lang="fr" aria-label="Français">
+            <span class="flag">الفرنسية</span>
+          </button>
+          <button id="langBtnMA" class="lang-btn" data-lang="ma" aria-label="العربية">
+            <span class="flag">العربية</span>
+          </button>
+        </div>
+
+        <span class="closebtn">&times;</span>
+        <div class="sidebar-separator" aria-hidden="true"></div>
+          <a href="searchar.html"><i class="fas fa-search"></i>بحث</a>
+          <a href="newar.html"><i class="fas fa-user-plus"></i>إضافة</a>
+          <a href="missionar.html"><i class="fas fa-tasks"></i>المهام</a>
+
+          <a href="projetsar.html"><i class="fas fa-hand-holding-heart"></i>مشاريعنا</a>
+          <a href="joinusar.html"><i class="fas fa-users"></i>انضم إلينا</a>
+          <a href="toolsar.html"><i class="fas fa-tools"></i>الأدوات</a>
+          <a href="contactar.html"><i class="fas fa-envelope"></i>اتصل بنا</a>    
+          <br></br>
+          <a href="tecar.html"><i class="fas fa-file-contract"></i>الشروط والأحكام</a>
+          <a href="indexar.html"><i class="fas fa-home"></i>الرئيسية</a>
+      
+    </div>
+
+  <main id="main">
+    <section style="width:92%;max-width:1100px;margin:12px auto 0;display:grid;grid-template-columns:1fr;gap:16px;">
+
+      <!-- RGPD collapsible card -->
+      <aside class="collapsible-card" id="rgpdCard" aria-labelledby="rgpd-title">
+        <div class="card-header" role="button" aria-expanded="false" tabindex="0">
+          <div class="title">
+            
+            <div>
+<h3 id="rgpd-title">نموذج حماية البيانات</h3>
+<div class="card-sub">طلب الحذف أو التعديل أو تقييد الوصول</div>
+</div>
+</div>
+<button class="card-arrow" aria-hidden="true">▾</button>
+</div>
+
+<div class="card-content" id="rgpdContent">
+  <div class="content-inner content-card" style="padding:18px;">
+    <form id="rgpdForm" class="form-row" onsubmit="return false;" style="display:grid;grid-template-columns:1fr;gap:10px;">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:160px">
+          <label style="font-size:13px;color:var(--primary)">موضوع الطلب</label>
+          <div class="note" style="var(--primary)">
+            يرجى توضيح موضوع طلبك بشكل دقيق وتقديم جميع المعلومات التي تساعد على تحديد القبر المعني. سيتم معالجة طلبك بعناية.
+          </div>
+          <br></br>
+          <select id="reqType" class="input" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent">
+            <option value="">اختر...</option>
+            <option value="Retrait">حذف</option>
+            <option value="Modification">تعديل</option>
+            <option value="Limitation de l'accès">تقييد الوصول</option>
+          </select>
+        </div>
+
+<div style="flex:1;min-width:160px">
+  <input id="name" class="input" type="text" placeholder="اسمك الكامل" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent">
+</div>
+</div>
+
+<div style="display:flex;gap:10px;flex-wrap:wrap;">
+  <div style="flex:1;min-width:160px">
+    <input id="email" class="input" type="email" placeholder="email@exemple.com" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent">
+  </div>
+
+  <div style="flex:1;min-width:160px">
+    <input id="subject" class="input" type="text" placeholder="الموضوع" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent">
+  </div>
+</div>
+
+<div>
+  <textarea id="message" class="input" placeholder="تفاصيل: UID، الاسم على القبر، التواريخ، الموقع، المدينة... كل المعلومات التي تساعد على تحديد القبر" required style="width:100%;padding:12px;border-radius:8px;border:1px solid rgba(215, 10, 10, 0.06);background:transparent;min-height:120px"></textarea>
+</div>
+
+<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px;">
+  <button id="generateBtn" class="btn" type="button" style="padding:10px 14px;border-radius:8px">إنشاء البريد الإلكتروني</button>
+  <button id="clearBtn" class="btn secondary" type="button" style="padding:10px 14px;border-radius:8px">مسح</button>
+</div>
+<br></br>
+</form>
+</div>
+</div>
+</aside>
+
+      <!-- Terms collapsible card -->
+      <article class="collapsible-card" id="termsCard" aria-labelledby="tc-title">
+        <div class="card-header" role="button" aria-expanded="false" tabindex="0">
+          <div class="title">
+            
+            <div>
+<h3 id="tc-title">الشروط والأحكام</h3>
+<div class="card-sub">المعلومات القانونية وسياسة معالجة البيانات</div>
+            </div>
+          </div>
+          <button class="card-arrow" aria-hidden="true">▾</button>
+        </div>
+
+        <div class="card-content" id="termsContent">
+          <div class="content-inner content-card" style="padding:18px;">
+            <div style="max-height:44vh;overflow:auto;padding-right:8px;width:100%;box-sizing:border-box;">
+              <ol style="margin-left:18px;color:var(--muted);line-height:1.45">
+<li><strong>عرض المشروع</strong>
+  <div>قبوور هي مبادرة مدنية، اجتماعية وذاكرية تهدف إلى جمع، رقمنة، تنظيم وإتاحة البيانات الجنائزية المتعلقة بالمقابر المغربية.
+
+يهدف المشروع أيضًا إلى المساهمة في التعرف على المهن المرتبطة بالأماكن الجنائزية وتنظيمها وتوحيدها.
+
+يعمل قبوور ضمن مصلحة عامة، دون غاية تجارية مباشرة، ويعتمد على التبرعات، الشراكات، العمل التطوعي والتعاون المؤسسي.</div>
+</li>
+
+<li style="margin-top:8px"><strong>نطاق التطبيق</strong>
+  <div>تحدد هذه الشروط العامة للاستخدام والإشعارات القانونية الوصول، الاطلاع واستخدام كافة الخدمات، المحتويات، الأدوات، قواعد البيانات والوظائف التي يقدمها قبوور.
+
+أي استخدام للموقع أو الخدمات يعني القبول التام والكامل لهذه الشروط.</div>
+</li>
+
+<li style="margin-top:8px"><strong>طبيعة البيانات التي يتم جمعها</strong>
+  <div>يقوم قبوور بجمع ومعالجة البيانات ذات الطابع الجنائزي والذاكري والتراثي فقط، وتشمل بشكل خاص:
+    <ul>
+      <li>الأسماء والكنيات الموجودة على القبور</li>
+      <li>التواريخ الظاهرة (الولادة، الوفاة)</li>
+      <li>النقوش الجنائزية</li>
+      <li>صور القبور والشواهد</li>
+      <li>المواقع والإحداثيات الجغرافية (GPS)</li>
+      <li>البيانات الوصفية غير الحساسة المتعلقة بحالة القبور</li>
+    </ul>
+  </div>
+</li>
+
+<li style="margin-top:8px"><strong>أهداف استخدام البيانات</strong>
+  <div>تُستخدم البيانات المجموعة حصريًا في الأطر التالية:
+    <ul>
+      <li>الحفاظ على الذاكرة الجماعية والتراث الجنائزي</li>
+      <li>الاطلاع من قبل العائلات، بما في ذلك الشتات</li>
+      <li>البحث التاريخي، الجينيالوجي، الاجتماعي أو الإقليمي</li>
+      <li>رسم الخرائط وعرض المقابر</li>
+      <li>التحليل الإحصائي المجهول</li>
+      <li>تحسين إدارة وصيانة المقابر</li>
+    </ul>
+  </div>
+</li>
+
+<li style="margin-top:8px"><strong>تحديد المسؤولية</strong>
+  <div>يبذل قبوور جهدًا جادًا لضمان دقة البيانات المجمعة. ومع ذلك، قد تحتوي المعلومات على أخطاء، نواقص أو تقريبية.
+
+لا يضمن قبوور اكتمال البيانات أو تحديثها المستمر ولا يمكن اعتباره مسؤولًا عن القرارات المتخذة بناءً على المعلومات المتاحة.
+
+لا يحل المشروع بأي حال من الأحوال محل السجلات الرسمية الإدارية أو الدينية.</div>
+</li>
+
+<li style="margin-top:8px"><strong>الصور واحترام الأماكن</strong>
+  <div>يتم التقاط الصور مع احترام كرامة الموتى والعائلات. لا يتم تصوير أي جثة أو مراسم أو عناصر خاصة.
+
+يلتزم قبوور بإزالة أو إخفاء أي محتوى يعتبر غير مناسب عند طلب مبرر.</div>
+</li>
+
+<li style="margin-top:8px"><strong>حقوق العائلات</strong>
+  <div>يمكن لأي شخص يرى أن معلومات معينة تمس ذاكرة متوفى أن يطلب تصحيحها، حذفها أو تقييد الوصول العام إلى بعض البيانات.
+
+تتم معالجة الطلبات بجدية، عدل واحترام.</div>
+</li>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <script>
+/* Sidebar toggle & language buttons & dark mode behavior (same logic as other pages) */
+const popup = null; // placeholder for compatibility pattern
+const sidebar = document.getElementById('mySidebar');
+const menuBtn = document.getElementById('menuBtn');
+const closeSidebar = document.querySelector('#mySidebar .closebtn');
+const darkModeBtns = document.querySelectorAll('#darkModeBtn');
+const langBtnFR = document.getElementById('langBtnFR');
+const langBtnMA = document.getElementById('langBtnMA');
+
+if (menuBtn) menuBtn.addEventListener('click', ()=> sidebar.classList.add('open'));
+if (closeSidebar) closeSidebar.addEventListener('click', ()=> sidebar.classList.remove('open'));
+
+function setDarkMode(enabled){
+  if (enabled) document.documentElement.classList.add('dark');
+  else document.documentElement.classList.remove('dark');
+  darkModeBtns.forEach(b=>{
+    b.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+    const icon = b.querySelector('i');
+    if (icon){
+      icon.classList.remove('fa-moon','fa-sun');
+      icon.classList.add(enabled ? 'fa-sun' : 'fa-moon');
+    }
+  });
+  try{ localStorage.setItem('quboor-dark','' + (enabled?1:0)); }catch(e){}
+}
+
+darkModeBtns.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const current = document.documentElement.classList.contains('dark');
+    setDarkMode(!current);
+    btn.focus();
+  });
+});
+
+(function initDark(){
+  let stored = null;
+  try{ stored = localStorage.getItem('quboor-dark'); }catch(e){}
+  if (stored !== null){
+    setDarkMode(stored === '1');
+  } else {
+    setDarkMode(false);
+  }
+})();
+
+if (langBtnFR) {
+  langBtnFR.addEventListener('click', () => {
+    langBtnFR.classList.add('active');
+    if (langBtnMA) langBtnMA.classList.remove('active');
+    window.location.href = 'index.html';
+  });
+}
+if (langBtnMA) {
+  langBtnMA.addEventListener('click', () => {
+    langBtnMA.classList.add('active');
+    if (langBtnFR) langBtnFR.classList.remove('active');
+    window.location.href = 'indexar.html';
+  });
+}
+
+/* GDPR form -> generate mailto: to info@quoboor.com with structured body */
+const generateBtn = document.getElementById('generateBtn');
+const clearBtn = document.getElementById('clearBtn');
+
+function buildEmailBody(data){
+  return [
+    "Demande RGPD - Quboor",
+    "",
+    "Objet de la demande: " + data.type,
+    "Nom: " + data.name,
+    "E-mail: " + data.email,
+    "Sujet: " + data.subject,
+    "",
+    "Message / Informations permettant d'identifier la sépulture:",
+    data.message,
+    "",
+    "Je confirme que les informations fournies sont exactes et que ma demande respecte les obligations légales applicables.",
+    "",
+    "Date: " + (new Date()).toLocaleString()
+  ].join("\n");
+}
+
+generateBtn.addEventListener('click', ()=>{
+  const type = document.getElementById('reqType').value.trim();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const subject = document.getElementById('subject').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  if (!type || !name || !email || !subject || !message){
+    alert('Merci de remplir tous les champs du formulaire.');
+    return;
+  }
+
+  const body = buildEmailBody({type,name,email,subject,message});
+  const mailto = `mailto:info@quoboor.com?subject=${encodeURIComponent('[RGPD] ' + subject)}&body=${encodeURIComponent(body)}`;
+
+  // open user's mail client
+  window.location.href = mailto;
+});
+
+clearBtn.addEventListener('click', ()=>{
+  document.getElementById('rgpdForm').reset();
+});
+
+/* Collapsible card behavior: toggle open/close on header click or Enter/Space key */
+function setupCollapsibles(){
+  const cards = [
+    {cardId: 'termsCard', contentId: 'termsContent'},
+    {cardId: 'rgpdCard', contentId: 'rgpdContent'}
+  ];
+
+  cards.forEach(({cardId, contentId})=>{
+    const card = document.getElementById(cardId);
+    if (!card) return;
+    const header = card.querySelector('.card-header');
+    const content = document.getElementById(contentId);
+    const arrow = header.querySelector('.card-arrow');
+    function setOpen(open){
+      if (open){
+        content.classList.add('open');
+        // allow content to expand to its scrollHeight
+        content.style.maxHeight = content.scrollHeight + 24 + 'px';
+        header.setAttribute('aria-expanded','true');
+        arrow.style.transform = 'rotate(180deg)';
+      } else {
+        content.classList.remove('open');
+        content.style.maxHeight = '0px';
+        header.setAttribute('aria-expanded','false');
+        arrow.style.transform = 'rotate(0deg)';
+      }
+    }
+    // initialize closed
+    setOpen(false);
+
+    header.addEventListener('click', ()=> {
+      const isOpen = header.getAttribute('aria-expanded') === 'true';
+      setOpen(!isOpen);
+    });
+    header.addEventListener('keydown', (e)=>{
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        header.click();
+      }
+    });
+    // when content changes size (e.g. window resize) adjust maxHeight if open
+    window.addEventListener('resize', ()=> {
+      if (header.getAttribute('aria-expanded') === 'true') {
+        content.style.maxHeight = content.scrollHeight + 24 + 'px';
+      }
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', setupCollapsibles);
+  </script>
+</body>
+</html>

@@ -1,0 +1,1065 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>أدوات - قبور</title>
+
+  <!-- fontawesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+:root{
+  /* New palette per request */
+  --blue-dark: #2C3E50;      /* base dark blue */
+  --beige-cold: #cdd4c3;     /* very light / cold beige */
+  --blue-very-pale: #eef2fe;  /* very pale blue for cards / popup backgrounds */
+  --pastel-orange: #FFFCFA;   /* near-white with an ultra-pale orange tint for tool cards (lighter) */
+
+  /* Semantic names used across the stylesheet */
+  --primary: var(--blue-dark);       /* main text/headings color in light mode */
+  --nav-bg: var(--blue-dark);        /* nav & sidebar background in light mode */
+  --card-bg: var(--blue-very-pale);  /* cards & popup content background in light mode */
+  --page-bg: var(--blue-very-pale);  /* page background subtle pale blue */
+  --muted: #6b6b6b;
+  --accent: var(--blue-dark);
+  --text-on-nav: #fffcf4;  /* text color on nav/sidebar in light mode */
+
+  /* Popup search background (a subtle blue-grey slightly lighter than card-bg) */
+  --popup-search-bg: #f7fbfd;
+
+  /* Dark mode palette variables */
+  --dm-nav-bg: #fffcf4;    /* nav background in dark mode (beige) */
+  --dm-sidebar-bg: #1b2e41;          /* darker blue-gray for sidebar in dark mode */
+  --dm-card-bg: #2C3E50;             /* darker blue tone for popups/cards in dark mode */
+  --dm-text-on-surface: #fffcf4; /* text color used across surfaces in dark mode */
+  --dm-overlay: rgba(0,0,0,0.6);
+}
+
+/* Basic reset */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+.top-nav{
+  width:92%;
+  max-width:1100px;
+  margin:18px auto;
+  height:70px; /* slightly taller so controls can sit lower */
+  background:var(--nav-bg);
+  color:var(--card-bg);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 16px; /* push inner controls a bit down */
+  border-radius:8px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+.logo{height:34px}
+.menu-btn{
+  background:none;border:0;color:#fffcf4;font-size:20px;padding:8px;border-radius:6px;cursor:pointer
+}
+/* dark mode toggle button in top nav (moon / sun icon) */
+.dark-btn{
+  background:none;
+  border:0;
+  color:#fffcf4;
+  font-size:18px;
+  padding:8px;
+  border-radius:6px;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.dark-btn i{width:20px; height:20px}
+.nav-controls{display:flex;gap:8px;align-items:center}
+
+.sidebar{
+  position:fixed;
+  left:-280px;
+  top:0;
+  height:100%;
+  width:280px;
+  background:var(--nav-bg);
+  color:var(--card-bg);
+  padding-top:20px;
+  padding-bottom:140px; /* reserve space at the bottom so language buttons have room to display */
+  transition:left .28s;
+  z-index:60;
+  /* show items in two columns */
+  display:flex;
+  flex-wrap:wrap;
+  align-content:flex-start;
+  overflow:auto;
+}
+.sidebar.open{left:0}
+/* each link takes half the sidebar width so there are two per row;
+   keep icon above title inside each link */
+.sidebar a{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:50%;
+  box-sizing:border-box;
+  gap:6px;
+  padding:12px 6px;
+  /* removed borders to eliminate button contours per request */
+  color:#fffcf4;
+  text-align:center;
+  font-size:14px;
+  min-height:72px;
+}
+.sidebar a:nth-child(odd){ /* ensure visual separation when wrapping */
+  border-right:1px solid rgba(255,255,255,0.03);
+}
+.sidebar a i{font-size:20px;display:block}
+.closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:#fffcf4;cursor:pointer}
+
+/* separator: keep spacing but remove any visible line so the close button isn't visually separated by a border */
+.sidebar-separator{
+  width:100%;
+  height:18px; /* vertical gap (kept for spacing) */
+  box-sizing:border-box;
+  margin-top:42px; /* reduced gap so the link/module buttons sit a bit higher */
+  border-top:0; /* explicitly remove any divider line */
+  opacity:0.0;
+  pointer-events:none;
+}
+
+/* language switch in sidebar - moved to bottom left and shows both flags side by side */
+.lang-switch{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%); /* center both language buttons horizontally */
+  bottom:32px; /* moved 10px higher from previous 22px */
+  z-index:70;
+  display:flex;
+  flex-direction:row; /* place language buttons side-by-side */
+  gap:10px; /* spacing between the two language buttons */
+  align-items:center;
+}
+.lang-btn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:transparent;
+  /* explicitly remove borders/outlines to eliminate contours */
+  border:none;
+  outline:none;
+  box-shadow:none;
+  color:#fffcf4;
+  padding:8px 10px;
+  font-size:15px;
+  cursor:pointer;
+  border-radius:8px;
+  line-height:1;
+  opacity:0.98;
+  min-width:0; /* let buttons size naturally side-by-side */
+  text-align:left;
+}
+/* ensure focus state also has no contour */
+.lang-btn:focus{outline:none;box-shadow:none}
+.lang-btn .flag{font-size:18px;line-height:1}
+/* hide textual labels and show only flag glyphs in the sidebar language buttons */
+.lang-btn .label{display:none}
+.lang-btn.active{
+  box-shadow:0 4px 14px rgba(0,0,0,0.12);
+  transform:translateY(-2px);
+}
+.lang-btn:active,.lang-btn:hover{transform:translateY(-2px)}
+
+/* Main layout */
+#main{
+  width:92%;
+  max-width:1100px;
+  margin:8px auto 0;
+  padding:8px 0 40px;
+  /* Fit main area to viewport so the page itself doesn't scroll;
+     keep internal overflow hidden so only popups/list-wrappers scroll. */
+  height: calc(100vh - 120px);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start; /* place cards at the top so there's no large gap before the first card */
+  justify-content: center;
+}
+.page-header{text-align:center;margin:18px 0 26px}
+.page-header h1{color:var(--primary);font-size:1.4rem;margin-bottom:6px}
+.page-header p{color:var(--muted)}
+
+/* Tools layout - force cards to be narrow columns on larger screens but
+   on narrow/mobile (and per request) make each card ~95% width centered */
+.tools-container{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  align-items:center;
+  width:100%;
+  padding:0 8px;
+}
+.tool-card{
+  width:95%;
+  max-width:980px;
+  background:#fffcf4;
+  border-radius:10px;
+  padding:14px 18px;
+  display:flex;
+  flex-direction:column; /* stack icon above title */
+  align-items:center;      /* center both icon & title */
+  gap:8px;
+  border:1px solid var(--card-border, rgba(0,0,0,0.04));
+  box-shadow:0 6px 18px rgba(0,0,0,0.04);
+  cursor:pointer;
+  text-align:center;
+  transition:transform .18s,box-shadow .18s;
+  min-height:90px; /* slightly taller to accommodate stacked layout */
+}
+.tool-card i{font-size:26px;color:var(--primary);width:auto;text-align:center}
+.tool-card h3{font-size:1rem;color:var(--primary);margin:0}
+.tool-card:active,.tool-card:hover{transform:translateY(-4px);box-shadow:0 10px 22px rgba(0,0,0,0.08)}
+
+/* Popup/modal */
+.popup{display:none;position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.45);align-items:center;justify-content:center;padding:20px;z-index:80}
+.popup[aria-hidden="false"]{display:flex}
+.popup-content{position:relative;width:100%;height:95%;max-width:1200px;background:var(--card-bg);border-radius:10px;padding:18px;box-shadow:0 8px 30px rgba(0,0,0,0.25);display:flex;flex-direction:column;overflow:hidden}
+/* Close button positioned at the top-right corner of the popup content */
+.popup-close{
+  position:absolute;
+  top:6px; /* raised a bit higher */
+  right:12px;
+  background:none;
+  border:0;
+  font-size:26px;
+  cursor:pointer;
+  z-index:6;
+}
+
+/* Popup body: search + table list
+   Make the popup body a flex column so the search row and the list
+   wrapper sit correctly; only the list-wrapper scrolls, keeping the
+   header and the search row fixed. */
+.popup-body{
+  display:flex;
+  flex-direction:column;
+  flex:1 1 auto;
+  overflow:hidden; /* keep scrolling confined to .list-wrapper */
+  padding:18px 0 0 0; /* increased top padding to create a small gap between the close button and the search module */
+  position:relative; /* to anchor absolute close button inside popup-content */
+}
+
+/* Make the search row sit under the header and stay visible while
+   only the results area scrolls. Rounded style for pop-up search bar */
+.search-row{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin:0;
+  padding:10px;
+  position:relative;
+  z-index:2;
+  background:var(--popup-search-bg); /* subtle blue-grey slightly lighter than popup background */
+  border-bottom: none;
+  border-radius:12px; /* rounded rather than rectangular */
+  box-shadow:0 2px 6px rgba(0,0,0,0.06);
+}
+/* Make the search input narrower: use 90% of the available width */
+.search-row input[type="search"]{
+  width:90%;
+  max-width:100%;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid rgba(11,77,160,0.03);
+  font-size:14px;
+  box-sizing:border-box;
+  background:transparent;
+  color:inherit;
+}
+.search-row .count{font-size:13px;color:var(--muted)}
+
+/* Scrollable table listing */
+.list-table{width:100%;border-collapse:collapse;font-size:14px}
+.list-wrapper{flex:1;overflow:auto;border-top:1px solid rgba(11,77,160,0.02);padding-top:12px /* small space after search before table */}
+.list-table th, .list-table td{padding:10px 12px;border-bottom:1px solid rgba(11,77,160,0.02);text-align:left}
+.list-table tr{cursor:pointer}
+.list-table tr:hover{background:#f7fdff}
+/* Dark mode: popup list hover should show dark grey highlight instead of white */
+.dark .list-table tr:hover{background:#2b3b3d}
+
+/* Detail popup (smaller: 85%) */
+.detail-popup .popup-content{width:100%;height:95%;max-width:900px}
+.detail-body{overflow:auto;flex:1;padding-top:6px}
+
+/* dark mode removed */
+
+ /* prevent body scrolling while a modal/popup is open */
+.no-scroll{overflow:hidden;height:100%;position:fixed;left:0;right:0}
+
+/* simple dark theme switch: replace core semantic variables when .dark is applied */
+.dark{
+  /* Keep nav/sidebar colors unchanged in dark mode per spec (no override of --nav-bg) */
+  /* Page background becomes a blue-gray matching the sidebar in dark mode */
+  --page-bg: #0b0c0f;
+
+  /* Cards and popup background become a darker blue-gray matching nav tone */
+  --card-bg: var(--dm-card-bg); /* dm-card-bg is defined above as a darker blue-gray */
+
+  /* Provide a subtle border for cards/popups in dark so frames are visible */
+  --card-border: rgba(255,255,255,0.06);
+
+  /* Primary text on cards/popups becomes the pale orange tint */
+  --primary: #fffcf4;
+  --text-on-nav: var(--text-on-nav);
+
+  /* keep pastel-orange as the pale orange for icons/text (slightly warmer for dark) */
+  --pastel-orange: #FFDAB8;
+
+  /* popup search becomes a blue-grey slightly lighter than dm-card-bg for contrast */
+  --popup-search-bg: #455b71;
+}
+
+/* make popup close button in dark mode use the pale orange and ensure search input placeholder/text is pale orange */
+.dark .popup-close {
+  color: #fffcf4;
+}
+.dark .search-row input[type="search"]{
+  color: #fffcf4;
+  border:1px solid rgba(255,255,255,0.04);
+}
+.dark .search-row input[type="search"]::placeholder{
+  color: #fffcf4;
+  opacity:0.9;
+  text-align: right;
+}
+
+/* Make audio players in detail views show a pale orange/white surface in dark mode */
+.dark .detail-body audio{
+  background: #e3e5ee;
+  border-radius:8px;
+  padding:6px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+/* In dark mode ensure sidebar text, the dark toggle and tool-card titles use the pale orange tint */
+.dark .sidebar,
+.dark .sidebar a,
+.dark .sidebar .closebtn,
+.dark .lang-btn,
+.dark .dark-btn,
+.dark .menu-btn,
+.dark .tool-card h3,
+.dark .tool-card i {
+  color: #fffcf4;
+}
+
+/* Ensure language flag glyphs are visible and well-sized in the sidebar */
+.lang-btn .flag{
+  display:inline-block;
+  font-size:18px;
+  line-height:1;
+  opacity:1;
+  filter:none;
+  -webkit-text-stroke: 0;
+}
+
+/* Make the base tool cards use the darker blue-gray surface in dark mode */
+.dark .tool-card{
+  background: var(--dm-card-bg);
+  border:1px solid var(--card-border);
+  box-shadow:none;
+}
+.dark .tool-card i,
+.dark .tool-card h3 {
+  color: #fffcf4;
+}
+
+/* Make the popup search area use the blue-gray background and pale-orange/white text in dark mode */
+.dark .search-row{
+  background: var(--popup-search-bg);
+  color: #fffcf4;
+  border-radius:12px;
+}
+.dark .search-row input[type="search"]{
+  color: #fffcf4;
+  border:1px solid rgba(255,255,255,0.04);
+}
+.dark .search-row .count{
+  color: #fffcf4;
+}
+
+/* Dark-mode scrollbar styling:
+   - track (background) darker grey
+   - thumb (indicator) lighter grey for contrast */
+.dark .list-wrapper::-webkit-scrollbar,
+.dark .sidebar::-webkit-scrollbar,
+.dark .popup-content::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.dark .list-wrapper::-webkit-scrollbar-track,
+.dark .sidebar::-webkit-scrollbar-track,
+.dark .popup-content::-webkit-scrollbar-track {
+  background: #223233; /* dark grey track */
+  border-radius: 8px;
+}
+.dark .list-wrapper::-webkit-scrollbar-thumb,
+.dark .sidebar::-webkit-scrollbar-thumb,
+.dark .popup-content::-webkit-scrollbar-thumb {
+  background: #97a0a3; /* lighter grey thumb */
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Ensure the main area never scrolls vertically */
+#main{
+  overflow:hidden !important;
+}
+
+/* Unified heading sizing for consistency across pages */
+h1, .page-header h1, .tools-container .tool-card h3, .collapsible-card .card-header h3 {
+  font-size:1.15rem;
+  line-height:1.2;
+  margin:0 0 8px 0;
+}
+.card-sub, .tool-card h3, .list-table td, .search-row .count {
+  font-size:13px;
+  line-height:1.4;
+}
+  </style>
+</head>
+<body>
+
+  <header class="top-nav">
+    <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
+    <div class="brand">
+      <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
+    </div>
+    <div class="nav-controls">
+      <button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button>
+    </div>
+  </header>
+
+  <div id="mySidebar" class="sidebar">
+        <!-- language switch (both flags shown, moved to bottom via CSS) -->
+        <div class="lang-switch" aria-label="Sélecteur de langue">
+          <button id="langBtnFR" class="lang-btn" data-lang="fr" aria-label="Français">
+            <span class="flag">الفرنسية</span>
+          </button>
+          <button id="langBtnMA" class="lang-btn" data-lang="ma" aria-label="العربية">
+            <span class="flag">العربية</span>
+          </button>
+        </div>
+
+        <span class="closebtn">&times;</span>
+        <div class="sidebar-separator" aria-hidden="true"></div>
+          <a href="searchar.html"><i class="fas fa-search"></i>بحث</a>
+          <a href="newar.html"><i class="fas fa-user-plus"></i>إضافة</a>
+          <a href="missionar.html"><i class="fas fa-tasks"></i>المهام</a>
+
+          <a href="projetsar.html"><i class="fas fa-hand-holding-heart"></i>مشاريعنا</a>
+          <a href="joinusar.html"><i class="fas fa-users"></i>انضم إلينا</a>
+          <a href="toolsar.html"><i class="fas fa-tools"></i>الأدوات</a>
+          <a href="contactar.html"><i class="fas fa-envelope"></i>اتصل بنا</a>    
+          <br></br>
+          <a href="tecar.html"><i class="fas fa-file-contract"></i>الشروط والأحكام</a>
+          <a href="indexar.html"><i class="fas fa-home"></i>الرئيسية</a>
+
+      
+    </div>
+
+  <main id="main">
+
+
+    <section class="tools-container" id="toolsContainer">
+      <button class="tool-card" data-tool="coran-audio" aria-haspopup="dialog">
+        <i class="fas fa-headphones"></i>
+        <h3>الاستماع للقرآن</h3>
+      </button>
+
+      <button class="tool-card" data-tool="coran-livre" aria-haspopup="dialog">
+        <i class="fas fa-book"></i>
+        <h3>كتاب الله</h3>
+      </button>
+
+      <button class="tool-card" data-tool="douas" aria-haspopup="dialog">
+        <i class="fas fa-praying-hands"></i>
+        <h3>دعاء</h3>
+      </button>
+    </section>
+  </main>
+
+  <!-- Generic popup modal (initially empty) -->
+  <div id="popup" class="popup" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="popup-content">
+      <button id="popupClose" class="popup-close" aria-label="close">&times;</button>
+      <div class="popup-body" id="popupBody">
+        <h2 id="popupTitle" style="display:none"></h2>
+        <!-- Content inserted by JS: search input + table list for items -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail popup (smaller 85%) -->
+  <div id="detailPopup" class="popup detail-popup" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="popup-content">
+      <button id="detailClose" class="popup-close" aria-label="close">&times;</button>
+      <div class="popup-body" id="detailBody">
+        <h2 id="detailTitle" style="display:none"></h2>
+        <!-- Filled with item detail -->
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+/* Verified: keeping existing popup/button behavior unchanged */
+const popup = document.getElementById('popup');
+const popupTitle = document.getElementById('popupTitle');
+const popupBody = document.getElementById('popupBody');
+const popupClose = document.getElementById('popupClose');
+
+const detailPopup = document.getElementById('detailPopup');
+const detailTitle = document.getElementById('detailTitle');
+const detailBody = document.getElementById('detailBody');
+const detailClose = document.getElementById('detailClose');
+
+const toolsContainer = document.getElementById('toolsContainer');
+const sidebar = document.getElementById('mySidebar');
+const menuBtn = document.getElementById('menuBtn');
+const closeSidebar = document.querySelector('#mySidebar .closebtn');
+
+// dark mode toggle button (inserted in header)
+const darkModeBtns = document.querySelectorAll('#darkModeBtn');
+
+const langBtn = document.getElementById('langBtn');
+
+if (menuBtn) menuBtn.addEventListener('click', ()=> sidebar.classList.add('open'));
+if (closeSidebar) closeSidebar.addEventListener('click', ()=> sidebar.classList.remove('open'));
+
+/* Dark mode toggle behavior: support multiple headers/pages (there can be several #darkModeBtn instances) */
+function setDarkMode(enabled){
+  if (enabled) document.documentElement.classList.add('dark');
+  else document.documentElement.classList.remove('dark');
+  // update button visuals and aria
+  darkModeBtns.forEach(b=>{
+    b.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+    const icon = b.querySelector('i');
+    if (icon){
+      icon.classList.remove('fa-moon','fa-sun');
+      icon.classList.add(enabled ? 'fa-sun' : 'fa-moon');
+    }
+  });
+  try{ localStorage.setItem('quboor-dark','' + (enabled?1:0)); }catch(e){}
+}
+
+darkModeBtns.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const current = document.documentElement.classList.contains('dark');
+    setDarkMode(!current);
+    btn.focus();
+  });
+});
+
+// initialize from user preference or system
+(function initDark(){
+  let stored = null;
+  try{ stored = localStorage.getItem('quboor-dark'); }catch(e){}
+  if (stored !== null){
+    setDarkMode(stored === '1');
+  } else {
+    // Default to light mode (do not enable dark by default)
+    setDarkMode(false);
+  }
+})();
+
+/* language buttons (show label + flag). French redirects to google.fr, Moroccan redirects to google.ma */
+const langBtnFR = document.getElementById('langBtnFR');
+const langBtnMA = document.getElementById('langBtnMA');
+
+if (langBtnFR) {
+  langBtnFR.addEventListener('click', () => {
+    // Visual feedback and redirect to french page
+    langBtnFR.classList.add('active');
+    if (langBtnMA) langBtnMA.classList.remove('active');
+    // redirect to France site
+    window.location.href = 'index.html';
+  });
+}
+if (langBtnMA) {
+  langBtnMA.addEventListener('click', () => {
+    // Visual feedback and redirect to Morocco site
+    langBtnMA.classList.add('active');
+    if (langBtnFR) langBtnFR.classList.remove('active');
+    window.location.href = 'indexar.html';
+  });
+}
+
+// Data: list of 114 sourates and 10 douas
+const sourates = [
+"الفاتحة",
+"البقرة",
+"آل عمران",
+"النساء",
+"المائدة",
+"الأنعام",
+"الأعراف",
+"الأنفال",
+"التوبة",
+"يونس",
+"هود",
+"يوسف",
+"الرعد",
+"إبراهيم",
+"الحجر",
+"النحل",
+"الإسراء",
+"الكهف",
+"مريم",
+"طه",
+"الأنبياء",
+"الحج",
+"المؤمنون",
+"النور",
+"الفرقان",
+"الشعراء",
+"النمل",
+"القصص",
+"العنكبوت",
+"الروم",
+"لقمان",
+"السجدة",
+"الأحزاب",
+"سبأ",
+"فاطر",
+"يس",
+"الصافات",
+"ص",
+"الزمر",
+"غافر",
+"فصلت",
+"الشورى",
+"الزخرف",
+"الدخان",
+"الجاثية",
+"الأحقاف",
+"محمد",
+"الفتح",
+"الحجرات",
+"ق",
+"الذاريات",
+"الطور",
+"النجم",
+"القمر",
+"الرحمن",
+"الواقعة",
+"الحديد",
+"المجادلة",
+"الحشر",
+"الممتحنة",
+"الصف",
+"الجمعة",
+"المنافقون",
+"التغابن",
+"الطلاق",
+"التحريم",
+"الملك",
+"القلم",
+"الحاقة",
+"المعارج",
+"نوح",
+"الجن",
+"المزمل",
+"المدثر",
+"القيامة",
+"الإنسان",
+"المرسلات",
+"النبأ",
+"النازعات",
+"عبس",
+"التكوير",
+"الانفطار",
+"المطففين",
+"الانشقاق",
+"البروج",
+"الطارق",
+"الأعلى",
+"الغاشية",
+"الفجر",
+"البلد",
+"الشمس",
+"الليل",
+"الضحى",
+"الشرح",
+"التين",
+"العلق",
+"القدر",
+"البينة",
+"الزلزلة",
+"العاديات",
+"القارعة",
+"التكاثر",
+"العصر",
+"الهمزة",
+"الفيل",
+"قريش",
+"الماعون",
+"الكوثر",
+"الكافرون",
+"النصر",
+"المسد",
+"الإخلاص",
+"الفلق",
+"الناس"
+];
+
+const douas = [
+{title: "دعاء للحماية", text: "اللهم إني أستعيذ بك وألتمس حمايتك..."},
+{title: "دعاء للشفاء", text: "اللهم اشفني واشف مرضانا..."},
+{title: "دعاء الصباح", text: "عند الاستيقاظ نقول..."},
+{title: "دعاء للأسرة", text: "اللهم بارك لي في أسرتي واحفظهم..."},
+{title: "دعاء للرزق", text: "يا رزاق، وسّع عليّ في رزقي..."},
+{title: "دعاء للتيسير", text: "اللهم يسّر أموري ولا تعسّرها..."},
+{title: "دعاء المساء", text: "في هذا المساء نسألك..."},
+{title: "دعاء للسفر", text: "اللهم احفظنا في سفرنا..."},
+{title: "دعاء للمغفرة", text: "ربنا اغفر لنا ذنوبنا..."},
+{title: "دعاء للهداية", text: "اهدنا الصراط المستقيم..."},
+{title: "دعاء للصبر", text: "اللهم ارزقني الصبر على البلاء..."},
+{title: "دعاء للحكمة", text: "ربّ ارزقني الحكمة وحسن التدبير..."},
+{title: "دعاء للنجاح", text: "اللهم بارك في جهدي واكتب لي التوفيق..."},
+{title: "دعاء للأبناء", text: "اللهم احفظ أبنائي واهدهم..."},
+{title: "دعاء للدراسة", text: "ربّ يسّر لي دراستي وقوِّ ذاكرتي..."},
+{title: "دعاء للطمأنينة", text: "اللهم املأ قلبي سكينةً وطمأنينة..."},
+{title: "دعاء للزواج", text: "ربّ بارك لنا في زواجنا وارزقنا المودة والرحمة..."},
+{title: "دعاء للعمل", text: "اللهم افتح لي أبواب الرزق الحلال..."},
+{title: "دعاء للأمان", text: "اللهم احفظ بيوتنا وجيراننا..."},
+{title: "دعاء للشكر", text: "ربّ أعنّي على شكرك وحسن عبادتك..."},
+{title: "دعاء للثقة", text: "اللهم زدني إيمانًا وثقةً بك..."},
+{title: "دعاء للمرضى", text: "ربّ اشفِ المرضى وارزقهم الصبر..."},
+{title: "دعاء للأيتام", text: "اللهم اكفل الأيتام واجزِ من أحسن إليهم..."},
+{title: "دعاء لقضاء الديون", text: "ربّ يسّر لي قضاء ديوني..."},
+{title: "دعاء للحماية من الشر", text: "اللهم احفظني من الشرور ومن كل سوء..."},
+{title: "دعاء للتواضع", text: "ربّ اجعلني متواضعًا عادلًا..."},
+{title: "دعاء للتوبة", text: "اللهم تقبّل توبتي وطهّر قلبي..."},
+{title: "دعاء للرحمة", text: "ربّ أنزل رحمتك علينا وعلى أحبّتنا..."},
+{title: "دعاء للقوة", text: "اللهم امنحني القوة لتجاوز ضعفي..."},
+{title: "دعاء للمجتمع", text: "ربّ وحّد مجتمعنا واحفظه على الخير..."}
+];
+
+// structured contents moved from app.js so the tool page can supply editable text per result
+window.sourateContents = {
+  /* Editable entries for sourates (first 5 prefilled with lorem ipsum) */
+"al-fatiha": {
+  short: "سورة الفاتحة هي أول سورة في القرآن الكريم، وتُعد دعاءً جامعًا يتضمن الثناء على الله وطلب الهداية.",
+  full: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ\nالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ\nالرَّحْمَٰنِ الرَّحِيمِ\nمَالِكِ يَوْمِ الدِّينِ\nإِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ\nاهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ\nصِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ"
+},
+  "al-baqara": {
+    short: "Sourate longue traitant de loi, foi et guidances communautaires.",
+    full: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elementum, risus quis pharetra dictum, lectus nunc gravida nunc, non luctus lorem ipsum at libero. Pellentesque habitant morbi tristique senectus et netus."
+  },
+  "al-imran": {
+    short: "Thèmes sur la famille d'Imrân, patience, et épreuves.",
+    full: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco."
+  },
+  "an-nisa": {
+    short: "Questions sociales et droits, particulièrement ceux des femmes et familles.",
+    full: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus feugiat, arcu non facilisis luctus, mi augue vestibulum purus, vitae cursus eros sapien non sapien. Aenean sed lorem vitae arcu tristique cursus."
+  },
+  "al-maidah": {
+    short: "Règles de vie sociale et aspects contractuels, rituels et obligations.",
+    full: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel augue vitae ipsum consequat fermentum. Vivamus ut massa vitae sapien sodales faucibus a ac nisl."
+  }
+  /* Add more sourate entries keyed by slug as needed */
+};
+
+window.douaContents = {
+  /* Editable entries for douas (first 5 prefilled with lorem ipsum) */
+  "doua-pour-la-protection": {
+    short: "Invocation pour demander protection et sécurité.",
+    full: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Integer congue, sapien nec ultricies rutrum, urna justo faucibus augue, vel facilisis mauris lorem in urna."
+  },
+  "doua-pour-la-guerison": {
+    short: "Demande de guérison et apaisement pour les malades.",
+    full: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non nibh sed orci feugiat sagittis. Suspendisse potenti. Sed id ipsum sed arcu finibus posuere."
+  },
+  "doua-du-matin": {
+    short: "Courte invocation à réciter au réveil pour la bénédiction de la journée.",
+    full: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, libero vitae pharetra interdum, sapien nisl ultricies orci, at tincidunt risus tellus sed odio."
+  },
+  "doua-pour-la-famille": {
+    short: "Prière pour la protection et la bénédiction de la famille.",
+    full: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas."
+  },
+  "doua-pour-la-subsistance": {
+    short: "Supplication pour la subsistance et la facilité des moyens de vie.",
+    full: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at urna nec tortor interdum elementum. Sed volutpat, massa at efficitur euismod, lorem erat venenatis nisl, non dictum ipsum urna id justo."
+  }
+  /* Extend doua contents as needed */
+};
+
+// Event wiring
+if (popupClose) popupClose.addEventListener('click', ()=> {
+  // If a detail panel is open, close it and return to the main popup list.
+  if (detailPopup.getAttribute('aria-hidden') === 'false') {
+    // Close only the detail view and keep the list popup visible.
+    closeDetail();
+    // ensure main popup remains visible and focused
+    popup.setAttribute('aria-hidden','false');
+    popup.style.display = 'flex';
+    popupClose.focus();
+  } else {
+    closePopup();
+  }
+});
+popup.addEventListener('click', (e)=>{ if (e.target === popup) closePopup(); });
+if (detailClose) detailClose.addEventListener('click', closeDetail);
+detailPopup.addEventListener('click', (e)=>{ if (e.target === detailPopup) closeDetail(); });
+
+document.addEventListener('keydown', (e)=>{
+  if (e.key === 'Escape') {
+    if (detailPopup.getAttribute('aria-hidden') === 'false') closeDetail();
+    else closePopup();
+  }
+});
+
+
+
+// open popup when clicking a tool card
+toolsContainer.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.tool-card');
+  if (!btn) return;
+  const tool = btn.dataset.tool || '';
+  openToolPopup(tool);
+});
+
+// Build popup content: search + table
+function buildListView(items, renderRowCallback){
+  popupBody.innerHTML = '';
+
+  const searchRow = document.createElement('div');
+  searchRow.className = 'search-row';
+  const searchInput = document.createElement('input');
+  searchInput.type = 'search';
+  searchInput.placeholder = 'بحث...';
+  searchInput.setAttribute('aria-label','بحث');
+  const countSpan = document.createElement('div');
+  countSpan.className = 'count';
+  searchRow.appendChild(searchInput);
+  searchRow.appendChild(countSpan);
+
+  const listWrapper = document.createElement('div');
+  listWrapper.className = 'list-wrapper';
+
+  const table = document.createElement('table');
+  table.className = 'list-table';
+  const thead = document.createElement('thead');
+  thead.innerHTML = '<tr><th>#</th><th>Nom</th></tr>';
+  const tbody = document.createElement('tbody');
+
+  table.appendChild(thead);
+  table.appendChild(tbody);
+  listWrapper.appendChild(table);
+
+  popupBody.appendChild(searchRow);
+  popupBody.appendChild(listWrapper);
+
+  // populate
+  function render(filter = ''){
+    tbody.innerHTML = '';
+    const q = filter.trim().toLowerCase();
+    const filtered = items.filter((it, idx)=>{
+      const name = (typeof it === 'string') ? it : (it.title || it.name || '');
+      return q === '' || name.toLowerCase().includes(q);
+    });
+    countSpan.textContent = `${filtered.length} نتائج`;
+    filtered.forEach((it, idx)=>{
+      const tr = document.createElement('tr');
+      const numTd = document.createElement('td');
+
+      // Determine the display number:
+      // - If the item is a string and starts with a number (e.g. "2 Al-Baqarah"), use that number.
+      // - Otherwise fall back to the position in the original items array (1-based) if available,
+      //   or to the filtered index + 1 as a last resort.
+      let displayNumber = '';
+      if (typeof it === 'string') {
+        const m = it.match(/^\s*(\d+)\b/);
+        if (m) displayNumber = m[1];
+      }
+      if (!displayNumber) {
+        // try to find the original index in the items array passed to buildListView
+        const origIndex = items.indexOf(it);
+        if (origIndex !== -1) displayNumber = String(origIndex + 1);
+        else displayNumber = String(idx + 1);
+      }
+      numTd.textContent = displayNumber;
+
+      const nameTd = document.createElement('td');
+      // If the string includes the leading number, strip it for the name column for clarity
+      if (typeof it === 'string') {
+        nameTd.textContent = it.replace(/^\s*\d+\s*/, '');
+      } else {
+        nameTd.textContent = (it.title || it.name || '');
+      }
+
+      tr.appendChild(numTd);
+      tr.appendChild(nameTd);
+      tr.addEventListener('click', ()=> renderRowCallback(it));
+      tbody.appendChild(tr);
+    });
+  }
+
+  // initial render all
+  render('');
+  searchInput.addEventListener('input', ()=> render(searchInput.value));
+}
+
+// Open main tool popup
+function openToolPopup(toolKey){
+  let title = '';
+  let items = [];
+  switch(toolKey){
+    case 'coran-audio': title = 'Coran — Audio'; items = sourates; break;
+    case 'coran-livre': title = 'Coran — Livre'; items = sourates; break;
+    case 'douas': title = "Dou'as & Invocations"; items = douas; break;
+    default: title = 'Outil';
+  }
+
+  // hide the popup title area for tool listing to keep header compact (per design)
+  popupTitle.textContent = title;
+  popupTitle.style.display = 'none';
+
+  buildListView(items, (selected)=>{
+    // when an item is clicked open detail popup (85%)
+    openDetail(selected, toolKey);
+  });
+
+  // prevent main page scrolling while popup is open
+  document.body.classList.add('no-scroll');
+
+  popup.setAttribute('aria-hidden','false');
+  popup.style.display = 'flex';
+  popupClose.focus();
+}
+
+function closePopup(){
+  popup.setAttribute('aria-hidden','true');
+  popup.style.display = 'none';
+  document.body.classList.remove('no-scroll');
+}
+
+// Detail popup (smaller)
+function openDetail(item, toolKey){
+  // Helper to create slug from a name (removes leading numbers, lowercases and replaces separators)
+  function makeSlug(name){
+    if (!name) return '';
+    const withoutNum = String(name).replace(/^\s*\d+\s*/,'');
+    return withoutNum.toLowerCase().replace(/[^\w\u0600-\u06FF]+/g,'-').replace(/^-+|-+$/g,'');
+  }
+
+  // Helper: fetch structured content for sourates or douas (falls back to placeholders)
+  function getStructuredContentFor(itemKey, kind){
+    if (kind === 'sourate') {
+      const slug = makeSlug(itemKey);
+      const data = window.sourateContents[slug] || window.sourateContents[slug.replace(/î|â|é|è|ê|ë/g,'i')] || {
+        short: 'Brève description non fournie. Éditez window.sourateContents dans toolsfr.html.',
+        full: 'Texte complet non fourni. Ajoutez le texte complet dans window.sourateContents["' + slug + '"].'
+      };
+      return {slug, short: data.short, full: data.full};
+    } else if (kind === 'doua') {
+      const slug = makeSlug(itemKey.title || itemKey.name || itemKey);
+      const data = window.douaContents[slug] || {
+        short: 'Brève description non fournie. Éditez window.douaContents dans toolsfr.html.',
+        full: (itemKey.text || 'Texte complet non fourni. Ajoutez le texte complet dans window.douaContents["' + slug + '"].')
+      };
+      return {slug, short: data.short, full: data.full};
+    }
+    return {slug:'', short:'', full:''};
+  }
+
+  let title = '';
+  let html = '';
+
+  if (typeof item === 'string'){
+    title = item;
+    const content = getStructuredContentFor(item, 'sourate');
+
+    if (toolKey === 'coran-audio'){
+      const audioSlug = content.slug || makeSlug(item);
+      const src = `/audio/${audioSlug}.mp3`;
+      html = `<div class="detail-body">
+        <h3>${escapeHtml(item)}</h3>
+        <div class="detail-short" style="margin-top:8px;color:var(--muted)">${escapeHtml(content.short)}</div>
+        <div style="margin-top:12px">
+          <audio controls preload="none" style="width:100%;margin-top:6px">
+            <source src="${escapeHtml(src)}" type="audio/mpeg">
+            Votre navigateur ne supporte pas l'élément audio.
+          </audio>
+        </div>
+        <hr style="margin:14px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
+        <div class="detail-full" style="white-space:pre-wrap;color:var(--primary)">${escapeHtml(content.full)}</div>
+      </div>`;
+    } else {
+      html = `<div class="detail-body">
+        <h3>${escapeHtml(item)}</h3>
+        <div class="detail-short" style="margin-top:8px;color:var(--muted)">${escapeHtml(content.short)}</div>
+        <hr style="margin:14px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
+        <div class="detail-full" style="white-space:pre-wrap;color:var(--primary)">${escapeHtml(content.full)}</div>
+      </div>`;
+    }
+
+  } else {
+    // item is an object (doua)
+    title = item.title || item.name || 'Détail';
+    const content = getStructuredContentFor(item, 'doua');
+    const audioSrc = `/audio/douas/${content.slug || makeSlug(item.title || item.name || item) }.mp3`;
+
+    html = `<div class="detail-body">
+      <h3>${escapeHtml(title)}</h3>
+      <div class="detail-short" style="margin-top:8px;color:var(--muted)">${escapeHtml(content.short)}</div>
+      <div style="margin-top:12px">
+        <audio controls preload="none" style="width:100%;margin-top:6px">
+          <source src="${escapeHtml(audioSrc)}" type="audio/mpeg">
+          Votre navigateur ne supporte pas l'élément audio.
+        </audio>
+      </div>
+      <hr style="margin:14px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
+      <div class="detail-full" style="white-space:pre-wrap;color:var(--primary)">${escapeHtml(content.full)}</div>
+    </div>`;
+  }
+
+  detailTitle.textContent = title;
+  detailBody.innerHTML = html;
+
+  // prevent main page scrolling while detail popup is open
+  document.body.classList.add('no-scroll');
+
+  detailPopup.setAttribute('aria-hidden','false');
+  detailPopup.style.display = 'flex';
+  detailClose.focus();
+}
+
+function closeDetail(){
+  // Hide detail overlay
+  detailPopup.setAttribute('aria-hidden','true');
+  detailPopup.style.display = 'none';
+
+  // If the list popup beneath is still open, keep page scroll locked and return focus to it.
+  if (popup.getAttribute('aria-hidden') === 'false') {
+    // keep no-scroll so the page doesn't scroll while popup list is visible
+    document.body.classList.add('no-scroll');
+    // focus the popup close so keyboard users can continue
+    popupClose.focus();
+  } else {
+    // otherwise remove scroll lock
+    document.body.classList.remove('no-scroll');
+  }
+}
+
+function escapeHtml(str){
+  if (!str) return '';
+  return String(str).replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; });
+}
+  </script>
+</body>
+</html>
