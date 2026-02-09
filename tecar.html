@@ -250,7 +250,7 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
   <header class="top-nav">
     <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
     <div class="brand">
-      <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
+      <img src="img/logotitrear.png" alt="Logo Quboor" class="logo">
     </div>
     <div class="nav-controls">
       <button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button>
@@ -481,14 +481,14 @@ if (langBtnFR) {
   langBtnFR.addEventListener('click', () => {
     langBtnFR.classList.add('active');
     if (langBtnMA) langBtnMA.classList.remove('active');
-    window.location.href = 'index.html';
+    window.location.href = 'tec.html';
   });
 }
 if (langBtnMA) {
   langBtnMA.addEventListener('click', () => {
     langBtnMA.classList.add('active');
     if (langBtnFR) langBtnFR.classList.remove('active');
-    window.location.href = 'indexar.html';
+    window.location.href = 'tecar.html';
   });
 }
 
@@ -498,21 +498,22 @@ const clearBtn = document.getElementById('clearBtn');
 
 function buildEmailBody(data){
   return [
-    "Demande RGPD - Quboor",
+    "طلب حماية البيانات (RGPD) - قبور",
     "",
-    "Objet de la demande: " + data.type,
-    "Nom: " + data.name,
-    "E-mail: " + data.email,
-    "Sujet: " + data.subject,
+    "نوع الطلب: " + data.type,
+    "الاسم: " + data.name,
+    "البريد الإلكتروني: " + data.email,
+    "الموضوع: " + data.subject,
     "",
-    "Message / Informations permettant d'identifier la sépulture:",
+    "الرسالة / المعلومات التي تسمح بتحديد القبر:",
     data.message,
     "",
-    "Je confirme que les informations fournies sont exactes et que ma demande respecte les obligations légales applicables.",
+    "أؤكد أن المعلومات المقدمة صحيحة وأن طلبي يلتزم بالواجبات القانونية المعمول بها.",
     "",
-    "Date: " + (new Date()).toLocaleString()
+    "التاريخ: " + (new Date()).toLocaleString()
   ].join("\n");
 }
+
 
 generateBtn.addEventListener('click', ()=>{
   const type = document.getElementById('reqType').value.trim();

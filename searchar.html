@@ -37,6 +37,16 @@
         }
 
 
+
+        .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
+.lang-btn{display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:#FFFCFA;padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn:focus{outline:none;box-shadow:none}
+.lang-btn .flag{font-size:18px;line-height:1}
+.lang-btn .label{display:none}
+.lang-btn.active{box-shadow:0 4px 14px rgba(0,0,0,0.12);transform:translateY(-2px)}
+.lang-btn:active,.lang-btn:hover{transform:translateY(-2px)}
+
+
 /* NAVBAR */
 .top-nav {
   display: flex;
@@ -914,7 +924,7 @@ body.dark-mode #volume-slider::-moz-range-thumb {
             <i class="fas fa-bars"></i>
         </button>
         <h1>
-<img src="img/logotitre.png" alt="Logo Quboor" class="logo">
+<img src="img/logotitrear.png" alt="Logo Quboor" class="logo">
         </h1>
         <div class="nav-right-controls">
             <button id="darkModeToggle" class="dark-mode-toggle-btn">
@@ -925,6 +935,17 @@ body.dark-mode #volume-slider::-moz-range-thumb {
 
 
     <div id="mySidebar" class="sidebar">
+
+                <div class="lang-switch" aria-label="Sélecteur de langue">
+          <button id="langBtnFR" class="lang-btn" data-lang="fr" aria-label="Français">
+            <span class="flag">🇫🇷</span>
+          </button>
+          <button id="langBtnMA" class="lang-btn" data-lang="ma" aria-label="العربية">
+            <span class="flag">🇲🇦</span>
+          </button>
+        </div>
+
+
         <span class="closebtn">&times;</span>
     <div class="sidebar-separator" aria-hidden="true"></div>
           <a href="searchar.html"><i class="fas fa-search"></i>بحث</a>
@@ -1025,6 +1046,24 @@ function initializeMap() {
         markerClusterGroup = L.markerClusterGroup();
         map.addLayer(markerClusterGroup);
     }
+}
+
+const langBtnFR = document.getElementById('langBtnFR');
+const langBtnMA = document.getElementById('langBtnMA');
+
+if (langBtnFR) {
+  langBtnFR.addEventListener('click', () => {
+    langBtnFR.classList.add('active');
+    if (langBtnMA) langBtnMA.classList.remove('active');
+    window.location.href = 'search.html';
+  });
+}
+if (langBtnMA) {
+  langBtnMA.addEventListener('click', () => {
+    langBtnMA.classList.add('active');
+    if (langBtnFR) langBtnFR.classList.remove('active');
+    window.location.href = 'searchar.html';
+  });
 }
 
 // Helper function to format date from YYYY-MM-DD to DD-MM-YYYY
@@ -1313,29 +1352,29 @@ function showInfo(index, event) {
     reportBtn.className = 'report-error-btn';
     reportBtn.innerHTML = `<i class="fas fa-envelope"></i> الإبلاغ عن خطأ`;
     reportBtn.onclick = () => {
-        const subject = `Erreur signalée pour ${entry.firstName} ${entry.familyName}`;
-        const body = `Bonjour,
+    const subject = `الإبلاغ عن خطأ بخصوص ${entry.firstName} ${entry.familyName}`;
+    const body = `السلام عليكم،
 
-Je signale une erreur sur le profil de ${entry.firstName} ${entry.familyName}.
+أودّ الإبلاغ عن وجود خطأ في ملف ${entry.firstName} ${entry.familyName}.
 
-Voici les informations actuelles du profil :
+فيما يلي المعلومات الحالية للملف:
 ------------------------------------------
-Nom: ${entry.familyName || 'N/A'}
-Prénom: ${entry.firstName || 'N/A'}
-Date de naissance: ${entry.dob ? formatDateToDDMMYYYY(entry.dob) : 'N/A'}
-Lieu de naissance: ${entry.birthplace || 'N/A'}
-Date de décès: ${entry.dod ? formatDateToDDMMYYYY(entry.dod) : 'N/A'}
-Lieu de décès: ${entry.deathplace || 'N/A'}
-Profession: ${entry.profession || 'N/A'}
-Description: "${entry.description || 'N/A'}"
-Cimetière: ${entry.cemetery || 'N/A'}
-Localisation: ${entry.location || 'N/A'}
+الاسم العائلي: ${entry.familyName || 'غير متوفر'}
+الاسم الشخصي: ${entry.firstName || 'غير متوفر'}
+تاريخ الميلاد: ${entry.dob ? formatDateToDDMMYYYY(entry.dob) : 'غير متوفر'}
+مكان الميلاد: ${entry.birthplace || 'غير متوفر'}
+تاريخ الوفاة: ${entry.dod ? formatDateToDDMMYYYY(entry.dod) : 'غير متوفر'}
+مكان الوفاة: ${entry.deathplace || 'غير متوفر'}
+المهنة: ${entry.profession || 'غير متوفر'}
+الوصف: "${entry.description || 'غير متوفر'}"
+المقبرة: ${entry.cemetery || 'غير متوفر'}
+الموقع: ${entry.location || 'غير متوفر'}
 ------------------------------------------
 
-Description de l'erreur:
-[Veuillez décrire l'erreur ici]
+وصف الخطأ:
+[يرجى وصف الخطأ هنا]
 
-Merci.`;
+وشكرًا لكم.`;
         window.location.href = `mailto:info@qubor.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     };
     const reportSection = document.createElement('div');

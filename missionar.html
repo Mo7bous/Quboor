@@ -92,7 +92,7 @@ h1, .hero h1, .page-header h1, .intro h1, .collapsible-card .card-header h3 {
 
   <header class="top-nav">
     <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
-    <div class="brand"><img src="img/logotitre.png" alt="Logo Quboor" class="logo"></div>
+    <div class="brand"><img src="img/logotitrear.png" alt="Logo Quboor" class="logo"></div>
     <div class="nav-controls"><button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button></div>
   </header>
 
@@ -115,7 +115,7 @@ h1, .hero h1, .page-header h1, .intro h1, .collapsible-card .card-header h3 {
     <div class="lang-switch" aria-label="Sélecteur de langue">
       <button id="langBtnFR" class="lang-btn" data-lang="fr" aria-label="Français"><span class="flag">الفرنسية</span></button>
       <button id="langBtnMA" class="lang-btn" data-lang="ma" aria-label="العربية"><span class="flag">العربية</span></button>
->    </div>
+    </div>
   </div>
 
 <main id="main">
@@ -174,7 +174,7 @@ h1, .hero h1, .page-header h1, .intro h1, .collapsible-card .card-header h3 {
     <br></br>
 
     <div class="actions">
-      <a class="btn" href="nosprojets.html#nous-supporter">ادعمنا</a>
+      <a class="btn" href="projetsar.html#nous-supporter">ادعمنا</a>
     </div>
     <br></br>
   </section>
@@ -226,14 +226,14 @@ h1, .hero h1, .page-header h1, .intro h1, .collapsible-card .card-header h3 {
     langBtnFR.addEventListener('click', () => {
       langBtnFR.classList.add('active');
       if (langBtnMA) langBtnMA.classList.remove('active');
-      window.location.href = 'https://www.google.fr';
+      window.location.href = 'mission.html';
     });
   }
   if (langBtnMA) {
     langBtnMA.addEventListener('click', () => {
       langBtnMA.classList.add('active');
       if (langBtnFR) langBtnFR.classList.remove('active');
-      window.location.href = 'https://www.google.ma';
+      window.location.href = 'missionar.html';
     });
   }
   </script>

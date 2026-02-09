@@ -250,7 +250,7 @@ textarea{min-height:100px;resize:vertical}
   <header class="top-nav">
     <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
     <div class="brand">
-      <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
+      <img src="img/logotitrear.png" alt="Logo Quboor" class="logo">
     </div>
     <div class="nav-controls">
       <button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button>
@@ -428,14 +428,14 @@ if (langBtnFR) {
   langBtnFR.addEventListener('click', () => {
     langBtnFR.classList.add('active');
     if (langBtnMA) langBtnMA.classList.remove('active');
-    window.location.href = 'index.html';
+    window.location.href = 'contact.html';
   });
 }
 if (langBtnMA) {
   langBtnMA.addEventListener('click', () => {
     langBtnMA.classList.add('active');
     if (langBtnFR) langBtnFR.classList.remove('active');
-    window.location.href = 'indexar.html';
+    window.location.href = 'contactar.html';
   });
 }
 
@@ -445,17 +445,17 @@ const clearBtn = document.getElementById('c_clearBtn');
 
 function buildContactBody(data){
   return [
-    "Contact - Quboor",
+
+    "الاسم: " + data.name,
+    "البريد الإلكتروني: " + data.email,
+    "الموضوع: " + data.subject,
     "",
-    "Nom: " + data.name,
-    "E-mail: " + data.email,
-    "Sujet: " + data.subject,
-    "",
-    "Message:",
+    "الرسالة:",
     data.message,
     "",
-    "Date: " + (new Date()).toLocaleString()
+    "التاريخ: " + (new Date()).toLocaleString()
   ].join("\n");
+
 }
 
 generateBtn.addEventListener('click', ()=>{
@@ -470,7 +470,7 @@ generateBtn.addEventListener('click', ()=>{
   }
 
   const body = buildContactBody({name,email,subject,message});
-  const mailto = `mailto:info@quboor.com?subject=${encodeURIComponent('[Contact] ' + subject)}&body=${encodeURIComponent(body)}`;
+  const mailto = `mailto:info@quboor.com?subject=${encodeURIComponent('[اتصال] ' + subject)}&body=${encodeURIComponent(body)}`;
   window.location.href = mailto;
 });
 

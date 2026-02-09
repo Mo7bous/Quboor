@@ -96,7 +96,7 @@ a{color:inherit;text-decoration:none}
 
         <a href="projets.html"><i class="fas fa-hand-holding-heart"></i>Nos projets et dons</a>
         <a href="joinus.html"><i class="fas fa-users"></i>Rejoins-nous</a>
-        <a href="tools.html"><i class="fas fa-tools"></i>Outils</a>
+        <a href="toolsfr.html"><i class="fas fa-tools"></i>Outils</a>
         <a href="contact.html"><i class="fas fa-envelope"></i>Contact</a>
       <br></br>
       <a href="tec.html"><i class="fas fa-file-contract"></i>Termes et conditions</a>
@@ -110,9 +110,10 @@ a{color:inherit;text-decoration:none}
   </div>
 
   <main id="main">
-    
+      <article class="collapsible-card">
+  <br></br>
       <h1 style="font-size:1.15rem;margin:0 0 8px 0;text-align:center">Nos projets</h1>
-      <p class="content-inner" style="display:inline-block;text-align:justify;max-width:880px;margin:0 auto;">
+      <p class="content-inner" style="display:inline-block;text-align:justify;max-width:880px;margin:0 auto;margin-left: 5%;margin-right: 5%;">
         Découvrez nos actions visant à préserver la mémoire collective et à restaurer les espaces funéraires : interventions sur le terrain, numérisation et archivage des données, sensibilisation et engagement citoyen.
       </p>
   
@@ -249,11 +250,11 @@ a{color:inherit;text-decoration:none}
 
       <h2 style="font-size:1.15rem;margin:0 0 8px 0;text-align:center">Nous supporter</h2>
 
-      <p class="content-inner" style="max-width:880px;margin:0 auto;text-align:justify;">
+      <p class="content-inner" style="max-width:880px;margin:0 auto;text-align:justify;margin-left: 5%;margin-right: 5%;">
         Soutenez Quboor via vos dons ou campagnes de financement participatif. 
       </p>
 
-            <p class="content-inner" style="max-width:880px;margin:0 auto;text-align:justify;">
+            <p class="content-inner" style="max-width:880px;margin:0 auto;text-align:justify;margin-left: 5%;margin-right: 5%;">
         Votre contribution aide à l'organisation des actions sur le terrain,couverture des frais opéerationels, achat de matériel et formation des bénévoles via une des plateformes ci-dessous.
       </p>
 
@@ -348,14 +349,14 @@ if (langBtnFR) {
   langBtnFR.addEventListener('click', () => {
     langBtnFR.classList.add('active');
     if (langBtnMA) langBtnMA.classList.remove('active');
-    window.location.href = 'index.html';
+    window.location.href = 'projets.html';
   });
 }
 if (langBtnMA) {
   langBtnMA.addEventListener('click', () => {
     langBtnMA.classList.add('active');
     if (langBtnFR) langBtnFR.classList.remove('active');
-    window.location.href = 'indexar.html';
+    window.location.href = 'projetsar.html';
   });
 }
 

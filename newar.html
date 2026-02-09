@@ -117,37 +117,6 @@
       cursor: pointer;
     }
 
-    .sidebar {
-      height: 100%;
-      width: 280px;
-      position: fixed;
-      top: 0;
-      left: -280px;
-      background-color: var(--primary-color);
-      overflow-x: hidden;
-      transition: 0.4s;
-      padding-top: 60px;
-      z-index: 1001;
-    }
-
-    .sidebar a {
-      padding: 10px 25px;
-      font-size: 18px;
-      color: var(--text-color);
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      border-bottom: 1px solid var(--primary-color);
-      transition: background-color 0.3s;
-    }
-
-    .sidebar a:hover {
-      background-color: var(--primary-color);
-    }
-
-    .sidebar a i {
-      margin-right: 15px;
-    }
 
     .closebtn {
       position: absolute;
@@ -436,6 +405,27 @@ body.mode-nuit {
       margin: 0.5em 0.3em;
     }
 
+#buttonback {
+  position: fixed;        /* reste visible même au scroll */
+  top: 7px;
+  left: 7px;
+  z-index: 9999;          /* au-dessus de tout */
+  
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.6em 0.9em;
+  font-size: 1.8em;
+  border-radius: 8px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+}
+
+
     .controls {
       text-align: center;
       margin-top: 1.5em;
@@ -678,7 +668,7 @@ body.mode-nuit {
     .popup-box {
       background: white;
       color: var(--tooltip-color);
-      padding: 2em;
+      padding: 0.5em;
       border-radius: 8px;
       width: 90%;
       max-width: 400px;
@@ -722,14 +712,10 @@ body.mode-nuit {
 <body>
 <!-- Sidebar -->
     
-<div class="sidebar" id="sideMenu">
-<ul>
-</ul>
-</div>
 <!-- Top Nav -->
 <nav class="top-nav">
 <button class="sidebar-toggle-btn" id="toggleSidebar"></button>
-<img alt="Logo Quboor" class="logo" src="img/logotitre.png"/>
+<img alt="Logo Quboor" class="logo" src="img/logotitrear.png"/>
 <button class="dark-toggle-btn" id="darkToggleBtn">
 <i class="fas fa-close-button" id="darkIcon"></i>
 </button>
@@ -751,8 +737,12 @@ body.mode-nuit {
 <h2><button id="closeSidebarBtn" style="float: right; background: none; border: none; color: ; font-size: 0.1em; cursor: pointer;">×</button></h2>
 <button class="top-close" id="closePageBtn" style="box-shadow: none;"></button>
 <div class="initial-controls">
+  <button id="buttonback">
+  <span class="icon">←</span>
+</button>
 <button id="cancelInitial">إلغاء</button>
 <button id="continueInitial">متابعة</button>
+
 </div>
 </div>
 <div id="formStages" style="display: none;">
@@ -1046,9 +1036,9 @@ document.getElementById('darkToggleBtn').addEventListener('click', () => {
         steps.forEach(s => s.classList.remove('active'));
         document.querySelector('.controls').style.display = 'none';
         stepIndicator.textContent = 'Merci !';
-        // Redirect after 3 seconds to index.html
+        // Redirect after x seconds to index.html
         setTimeout(() => {
-          window.location.href = "indexar.html";
+          window.location.href = "mission.html";
         }, 5000);
       } else {
         currentStep++;
@@ -1166,6 +1156,11 @@ alert("تحديد الموقع الجغرافي غير مدعوم.");
     }
 
     updateStepView();
+
+      document.getElementById("buttonback").addEventListener("click", function () {
+    window.location.href = "missionar.html";
+  });
+
   </script>
 </body>
 </html>
