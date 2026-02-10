@@ -14,22 +14,29 @@
     <style>
 
         :root {
-            --primary-color: #2C3E50;
-            --secondary-color: #030404;
-            --third-color: red;
-            --fourth-color: yellow;
-            --fifth-color: #2c3f53;/* Couleur du text de base en mode normal primaire fonce lighter */
-            --sixth-color: #0f151b;  /* Couleur du text de base en mode normal primaire fonce */
+            --text-color: #f1f1f1;  /* Couleur du text de base en mode normal  */
+            --background-color: #f1f1f1;
+            --accent-color: #f1f1f1;
 
-            --text-color: #f9f4ea;  /* Couleur du text de base en mode normal  */
-            --background-color: #f9f4ea;
-            --accent-color: #f9f4ea;
+            --primary-color: #2C3E50; /* Couleur principale gris bleu */
+            --secondary-color: #f1f1f1; /* Couleur principale pale orange */
+            --third-color: #ebf4f8; /* Couleur principale pale bleu */
+            --fourth-color: #000000; /* Couleur principale */
+
+            --fifth-color: #0b0c0f; /* Dark - fond gros bleu fonce*/
+            --sixth-color: #000000; /* Couleur principale  */
+            --seventh-color: #000000; /* Couleur principale  */
+            --eighth-color: #000000; /* Couleur principale  */
+
+            --ninth-color: #0056b3; /* Couleurbleu details */
+            --tenth-color: #000000; /* Couleur principale */
+
         }
 
         html, body {
             font-family: 'Inter', sans-serif;
-            color: var(--secondary-color);
-            background-color: #eef2fe;
+            color: var(--primary-color);
+            background-color: var(--third-color);
             margin: 0;
             padding: 0;
             text-align: justify;
@@ -37,7 +44,7 @@
         }
 
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
-.lang-btn{display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:#FFFCFA;padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn{display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:var(--secondary-color);padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
 .lang-btn:focus{outline:none;box-shadow:none}
 .lang-btn .flag{font-size:18px;line-height:1}
 .lang-btn .label{display:none}
@@ -118,7 +125,7 @@
 
 /* SIDEBAR */
 /* Sidebar - same layout as other pages */
-.sidebar{position:fixed;left:-280px;top:0;height:100%;width:280px;background:#2C3E50;color:#FFFCFA;padding-top:20px;padding-bottom:140px;transition:left .28s;z-index:60;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto;}
+.sidebar{position:fixed;left:-280px;top:0;height:100%;width:280px;background:var(--primary-color);color:var(--secondary-color);padding-top:20px;transition:left .28s;z-index:60;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto;}
 .sidebar.open{left:0}
 .sidebar a{display:flex;flex-direction:column;align-items:center;justify-content:center;width:50%;box-sizing:border-box;gap:6px;padding:12px 6px;color:var(--pastel-orange);text-align:center;font-size:14px;min-height:72px;  text-decoration: none;}
 .sidebar a:nth-child(odd){ border-right:none;}
@@ -141,8 +148,8 @@
 }
 
 .search-explanation {
-    background-color: #FFFCFA;
-    border-left: 4px solid #0056b3;
+    background-color: var(--secondary-color);
+    border-left: 4px solid var(--ninth-color);
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 4px;
@@ -155,7 +162,7 @@
 }
 
 .search-explanation strong {
-    color: #0056b3;
+    color: var(--ninth-color);
 }
 
 .search-container {
@@ -165,9 +172,11 @@
 #searchInput {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--primary-color);
     border-radius: 4px;
     box-sizing: border-box;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 #death-cards-container {
@@ -177,7 +186,7 @@
 }
 
 .death-card {
-    background-color: white;
+    background-color: var(--secondary-color);
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     padding: 15px;
@@ -201,10 +210,9 @@
 .card-actions button {
     background: none;
     border: none;
-    color: #777;
+    color: var(--primary-color);
     cursor: pointer;
     font-size: 16px;
-    padding: 5px;
 }
 .card-actions button:hover {
     color: #333;
@@ -214,6 +222,7 @@
 .death-card-info {
     display: flex;
     align-items: center;
+    margin-top: 5%;
 }
 
 .death-card-image {
@@ -222,30 +231,33 @@
     border-radius: 50%;
     object-fit: cover;
     margin-right: 15px;
-    border: 2px solid #eee;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+
 }
 
 .death-card-details h3 {
-    margin: 0 0 5px 0;
+    margin: 0 0 5% 0;
     font-size: 1.2em;
-    color: #333;
+    color: var(--primary-color);
 }
 
 .info-items {
     display: flex;
     gap: 15px;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
 }
 
 .info-item {
     display: flex;
     align-items: center;
-    font-size: 0.9em;
-    color: #555;
+    font-size: 0.8em;
+    color: var(--primary-color);
+    margin-bottom: 7px;
+
 }
 
 .info-item i {
-    margin-right: 5px;
+    margin-right: 7px;
     color: #777;
 }
 
@@ -282,7 +294,7 @@ mark {
 }
 
 .popup-content {
-    background-color: #fefefe;
+    background-color: var(--secondary-color);
     margin: 5% auto;
     padding: 30px;
     border-radius: 8px;
@@ -317,7 +329,6 @@ mark {
     text-align: center;
     margin-bottom: 20px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #eee;
 }
 
 .profile-image {
@@ -326,7 +337,6 @@ mark {
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 10px;
-    border: 4px solid #fff;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
@@ -341,9 +351,8 @@ mark {
     margin-top: 5px;
     margin-bottom: 15px;
     font-style: italic;
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .profile-body {
@@ -438,16 +447,27 @@ mark {
     font-weight: 700;
 }
 
+body.dark-mode .profile-gallery-section h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--secondary-color);
+    font-size: 1.1em;
+    text-align: left;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 8px;
+    font-weight: 700;
+}
 .gallery-images-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 10px;
     margin-bottom: 15px;
-    max-height: 300px; 
+    max-height: 100%; 
     overflow-y: auto;
     padding: 5px;
-    background-color: #f9f9f9;
+    background-color: var(--secondary-color);
     border-radius: 4px;
+    
 }
 
 .gallery-images-container img {
@@ -458,6 +478,8 @@ mark {
     border: 1px solid #ddd;
     cursor: pointer; 
     transition: opacity 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+
 }
 
 .gallery-images-container img:hover {
@@ -507,6 +529,13 @@ mark {
     font-weight: bold;
 }
 
+body.dark-mode .profile-uid {
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: var(--secondary-color);
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
 .profile-directions-btn {
     background-color: #007bff;
     border: none;
@@ -755,7 +784,7 @@ mark {
 
 /* --- Dark Mode Styles --- */
 body.dark-mode {
-    background-color: #0b0c0f;
+    background-color: var(--fifth-color);
     color: var(--text-color);
 }
 
@@ -771,23 +800,23 @@ body.dark-mode .sidebar a:hover {
     background-color: #1F262A;
 }
 
-body.dark-mode #map {
+body.dark-mode #map { 
 }
 
 body.dark-mode .search-explanation {
-    background-color: #2c3e50;
-    border-left-color: #3498db;
-    color: #ecf0f1;
+    background-color: var(--primary-color);
+    border-left-color: var(--secondary-color);
+    color: var(--secondary-color);
 }
 
 body.dark-mode .search-explanation strong {
-    color: #FFFCFA;
+    color: var(--secondary-color);
 }
 
 body.dark-mode #searchInput {
-    background-color: var(--text-color);
-    color: var(--primary-color);
-    border-color: var(--fifth-color);
+    background-color: var(--secondary-color);
+    color: var(--secondary-color);
+    border-color: 1px solid #444;;
 }
 
 body.dark-mode .death-card {
@@ -798,7 +827,7 @@ body.dark-mode .death-card {
 
 body.dark-mode .death-card-details h3,
 body.dark-mode .relative-name {
-    color: var(--text-color);
+    color: var(--secondary-color);
 }
 
 body.dark-mode .info-item,
@@ -811,7 +840,7 @@ body.dark-mode .info-item i {
                 }
 
 body.dark-mode mark {
-    background-color: #ffda79;
+    background-color: var(--secondary-color);
     color: var(--text-color);
 }
 
@@ -844,8 +873,8 @@ body.dark-mode .profile-description {
 }
 
 body.dark-mode .profile-section h4 {
-    color: #5dade2;
-    border-bottom-color: #5dade2;
+    color:var(--secondary-color);
+    border-bottom-color: var(--secondary-color);
 }
 
 body.dark-mode .profile-details .profile-item {
@@ -853,7 +882,7 @@ body.dark-mode .profile-details .profile-item {
 }
 
 body.dark-mode .profile-details .profile-item i {
-    color: #5dade2;
+    color: var(--secondary-color);
 }
 
 body.dark-mode .relative-card {
@@ -862,7 +891,7 @@ body.dark-mode .relative-card {
 }
 
 body.dark-mode .gallery-images-container {
-    background-color: var(--fifth-color);
+    background-color: var(--primary-color);
 }
 
 body.dark-mode .gallery-images-container img {
@@ -899,6 +928,33 @@ body.dark-mode #volume-slider::-webkit-slider-thumb {
 body.dark-mode #volume-slider::-moz-range-thumb {
     background: #e0e0e0;
 }
+
+body.dark-mode .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+}
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background:var(--secondary-color);
+    color: var(--primary-color);
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+}
+
+
+body.dark-mode .card-actions button {
+    background: none;
+    border: none;
+    color: var(--secondary-color);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+}
+body.dark-mode.card-actions button:hover {
+    color: #333;
+}
+
+
     </style>
     <script type="importmap">
     {
@@ -928,10 +984,10 @@ body.dark-mode #volume-slider::-moz-range-thumb {
 
                 <div class="lang-switch" aria-label="Sélecteur de langue">
           <button id="langBtnFR" class="lang-btn" data-lang="fr" aria-label="Français">
-            <span class="flag">🇫🇷</span>
+            <span class="text">🇫🇷</span>
           </button>
           <button id="langBtnMA" class="lang-btn" data-lang="ma" aria-label="العربية">
-            <span class="flag">🇲🇦</span>
+            <span class="text">🇲🇦</span>
           </button>
         </div>
 
@@ -954,7 +1010,7 @@ body.dark-mode #volume-slider::-moz-range-thumb {
         <div id="map"></div>
         <div class="search-explanation">
             <p><strong>Comment rechercher ?</strong> Chaque champ contenant un terme de votre recherche augmente le pourcentage de pertinence.</p>
-            <p><strong>Exemple :</strong> Taper "Mohammed Rabat 1978" trouvera les personnes nommées "Mohammed" ainsi que celles liées à "Rabat" et autres filtres.</p>
+            <p><strong>Exemple :</strong> Taper "Ali Rabat 1978" trouvera les personnes nommées "Ali" ainsi que celles liées à "Rabat" et autres filtres.</p>
         </div>
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Recherchez par nom, date ou autres détails">
@@ -987,7 +1043,7 @@ L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.9.3/dist/images/';
 
 
 const deathEntries = [
-    {uid:"5I2J8K1L",familyName:"Stouki",firstName:"Abdellah",dob:"1946",birthplace:"Marrakech",dod:"2022-07-12",deathplace:"Rabat",location:"34.02920504233782, -6.844813985431729",images:["users/users/5I2J8K1L/1.jpeg","users/users/5I2J8K1L/2.jpeg","users/users/5I2J8K1L/3.jpeg","users/users/5I2J8K1L/4.jpeg","users/users/5I2J8K1L/5.jpeg"],description:"Engagé et homme de plume, il a marqué de son empreinte la presse marocaine par son intégrité et sa passion pour la vérité",cemetery:"Chouhada - Rabat",profession:"Journaliste",relatives:[]},
+    {uid:"5I2J8K1L",familyName:"Stouki",firstName:"Abdellah",dob:"1946-01-01",birthplace:"Marrakech",dod:"2022-07-12",deathplace:"Rabat",location:"34.02920504233782, -6.844813985431729",images:["users/users/5I2J8K1L/1.jpeg","users/users/5I2J8K1L/2.jpeg","users/users/5I2J8K1L/3.jpeg","users/users/5I2J8K1L/4.jpeg","users/users/5I2J8K1L/5.jpeg"],description:"Engagé et homme de plume, il a marqué de son empreinte la presse marocaine par son intégrité et sa passion pour la vérité",cemetery:"Chouhada - Rabat",profession:"Journaliste",relatives:[]},
     {uid:"3M7N9O4P",familyName:"Choubi",firstName:"Mohamed",dob:"1963-12-01",birthplace:"Marrakech",dod:"2025-05-02",deathplace:"Rabat",location:"34.02920504233782, -6.844813985431729",images:["users/users/3M7N9O4P/1.jpeg","users/users/3M7N9O4P/2.jpeg","users/users/3M7N9O4P/3.jpeg","users/users/3M7N9O4P/4.jpeg","users/users/3M7N9O4P/5.jpeg"],description:"Intellectuel engagé",cemetery:"Cimetière Chouhada - Rabat",profession:"Acteur",relatives:[]},
     {uid:"LDUTYNO8",familyName:"Moatassim",firstName:"Mohamed",dob:"1956-01-01",birthplace:"Settat",dod:"2023-06-05",deathplace:"Rabat",location:"34.02920504233782, -6.844813985431729",images:["users/users/LDUTYNO8/1.jpeg","users/users/LDUTYNO8/2.jpeg","users/users/LDUTYNO8/3.jpeg","users/users/LDUTYNO8/4.jpeg","users/users/LDUTYNO8/5.jpeg"],description:"Universitaire notable et juriste reconnu.",cemetery:"Chouhada - Rabat",profession:"Conseiller royal",relatives:[]},
     {uid:"4LCX8KBM",familyName:"Jirari",firstName:"Abbès",dob:"1937-02-15",birthplace:"Rabat",dod:"2024-01-20",deathplace:"Rabat",location:"34.02920504233782, -6.844813985431729",images:["users/users/4LCX8KBM/1.jpeg","users/users/4LCX8KBM/2.jpeg","users/users/4LCX8KBM/3.jpeg","users/users/4LCX8KBM/4.jpeg","users/users/4LCX8KBM/5.jpeg"],description:"Intellectuel et doyen de la littérature arabe.",cemetery:"Chouhada - Rabat",profession:"Conseiller royal",relatives:[]},
@@ -1122,7 +1178,7 @@ function createCard(entry, index, searchTerms, matchPercentage) {
 
     card.innerHTML = `
         <div class="card-actions">
-            <button title="Info" class="info-btn"><i class="fas fa-info-circle"></i></button>
+            <button title="Info"; class="info-btn"><i class="fas fa-info-circle"></i></button>
         </div>
         <div class="death-card-info">
             <img src="${primaryImage}" alt="${entry.familyName} ${entry.firstName}" class="death-card-image" onerror="this.src='default_profile_image.png';">
@@ -1287,6 +1343,7 @@ function showInfo(index, event) {
             </div>
             ${entry.uid ? `<div class="profile-uid">UID: ${entry.uid}</div>` : ''}
         </div>
+        <br><br/>
         <div class="profile-body">
             <div class="profile-section">
                 <h4>Informations</h4>
