@@ -14,12 +14,12 @@
 :root{
   --blue-dark: #2C3E50;
   --beige-cold: #C3CED4;
-  --blue-very-pale: #EBF4F8;
-  --pastel-orange: #FFFCFA;
+  --blue-very-pale: #ebf4f8;
+  --pastel-orange: #fffdf6;
 
-  --primary: var(--blue-dark);
-  --nav-bg: var(--blue-dark);
-  --card-bg: #FFFCFA;
+  --primary: #2C3E50;
+  --nav-bg: #2C3E50;
+  --card-bg: #fffdf6;
   --page-bg: var(--blue-very-pale);
 }
 
@@ -38,7 +38,6 @@ a{color:inherit;text-decoration:none}
 .sidebar{position:fixed;left:-280px;top:0;height:100%;width:280px;background:var(--nav-bg);color:var(--card-bg);padding-top:20px;padding-bottom:140px;transition:left .28s;z-index:60;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto}
 .sidebar.open{left:0}
 .sidebar a{display:flex;flex-direction:column;align-items:center;justify-content:center;width:50%;box-sizing:border-box;gap:6px;padding:12px 6px;color:var(--pastel-orange);text-align:center;font-size:14px;min-height:72px}
-.sidebar a:nth-child(odd){ border-right:1px solid rgba(255,255,255,0.03);}
 .sidebar a i{font-size:20px;display:block}
 .closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:var(--pastel-orange);cursor:pointer}
 
@@ -69,7 +68,7 @@ a{color:inherit;text-decoration:none}
 /* simple dark theme switch for joinus: keep nav same, change page & card backgrounds */
 .dark{
   --page-bg: #0b0c0f; /* match other pages' dark page background */
-  --card-bg: #1f2f36; /* dark card background */
+  --card-bg: #2C3E50; /* dark card background */
   --card-border: rgba(255,255,255,0.06);
   --primary: #FFFCFA; /* pale-orange text in dark */
   --pastel-orange: #FFFCFA;
@@ -92,7 +91,7 @@ h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
 }
 
 /* Main single-column mobile-first layout */
-#main{width:100%;max-width:720px;margin:12px auto;padding:12px;height:auto;display:block}
+#main{width:92%;max-width:720px;margin:12px auto;padding:12px;height:auto;display:block}
 .hero-card{background:var(--card-bg);border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,0.04);margin-bottom:14px}
 .hero-card h1{font-size:1.15rem;margin-bottom:10px;text-align:center}
 .hero-card p{font-size:14px;line-height:1.5;color:var(--primary);text-align:justify;margin-bottom:12px}
@@ -148,8 +147,8 @@ h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
 
 
     <div class="lang-switch" aria-label="Sélecteur de langue">
-      <button id="langBtnFR" class="lang-btn" data-lang="fr" aria-label="Français"><span class="flag">🇫🇷</span></button>
-      <button id="langBtnMA" class="lang-btn" data-lang="ma" aria-label="العربية"><span class="flag">🇲🇦</span></button>
+      <button id="langBtnFR" class="lang-btn" data-lang="Français" aria-label="Français"><span class="flag">Français</span></button>
+      <button id="langBtnMA" class="lang-btn" data-lang="العربية" aria-label="العربية"><span class="flag">العربية</span></button>
     </div>
   </div>
 

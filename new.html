@@ -15,16 +15,23 @@
 
 
                 :root {
-            --primary-color: #2C3E50;
-            --secondary-color: #030404;
-            --third-color: red;
-            --fourth-color: yellow;
-            --fifth-color: #2c3f53;/* Couleur du text de base en mode normal primaire fonce lighter */
-            --sixth-color: #0f151b;  /* Couleur du text de base en mode normal primaire fonce */
+            --text-color: #fffefb;  /* Couleur du text de base en mode normal  */
+            --background-color: #fffefb;
+            --accent-color: #fffefb;
 
-            --text-color: #f9f4ea;  /* Couleur du text de base en mode normal  */
-            --background-color: #f9f4ea;
-            --accent-color: #f9f4ea;
+            --primary-color: #2C3E50; /* Couleur principale gris bleu */
+            --secondary-color: #fffdf6; /* Couleur principale pale orange */
+            --third-color: #ebf4f8; /* Couleur principale pale bleu */
+            --fifth-color: #0b0c0f; /* Dark - fond gros bleu fonce*/
+
+            --fourth-color: #000000; /* Couleur principale */
+            --sixth-color: #000000; /* Couleur principale  */
+            --seventh-color: #000000; /* Couleur principale  */
+            --eighth-color: #000000; /* Couleur principale  */
+
+            --ninth-color: #0056b3; /* Couleurbleu details */
+            --tenth-color: #cf9251; /* Couleur principale */
+
         }
 
 
@@ -61,7 +68,7 @@
   width: 91%;
   margin: 20px auto 0 auto;
   border-radius: 8px;
-  padding: 0 20px 0 32px; /* padding-left augmenté */
+  padding: 0 6% 0 32px; /* padding-left augmenté */
   box-sizing: border-box;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -213,8 +220,8 @@
     }
 
     body.dark-mode #play-pause-btn {
-      border-color: #e0e0e0;
-      color: #e0e0e0;
+      border-color: var(--secondary-color);
+      color: var(--secondary-color);
     }
 
     body.dark-mode #play-pause-btn:hover {
@@ -233,7 +240,7 @@
         }
 
     .section {
-      background-color: white;
+      background-color: var(--secondary-color);
       padding: 30px;
       border-radius: 10px;
       margin-bottom: 30px;
@@ -263,7 +270,7 @@
 
     .cta-button {
       background-color: var(--primary-color);
-      color: white;
+      color: var(--secondary-color);
       width: 90%;
       text-align: center;
       padding: 12px 25px;
@@ -286,7 +293,7 @@
     }
 
     .bank-details {
-      background-color: #f9f9f9;
+      background-color: var(--secondary-color);
       padding: 20px;
       border-radius: 6px;
       margin-top: 20px;
@@ -322,13 +329,12 @@
     body.mode-jour {
   --background-color: #EBF4F8;
   --text-color: #222222;
-  --secondary-color: #41464a;
-  --accent-color: #4A4E69;
+  --accent-color: --primary-color;
 }
 
 body.mode-nuit {
   --background-color: #121212;
-  --text-color: #eeeeee;
+  --text-color: secondary-color;
   --secondary-color: #41464a;
   --accent-color: #41464a;
 }
@@ -369,7 +375,7 @@ body.mode-nuit {
 
     .step.active {
       display: block;
-      color: white;
+      color: var(--secondary-color);
     }
 
     .form-group {
@@ -380,7 +386,7 @@ body.mode-nuit {
       display: block;
       font-weight: bold;
       margin-bottom: 0.4em;
-      color: #ece7e7;
+      color: var(--secondary-color);
     }
 
     input[type="text"],
@@ -390,18 +396,18 @@ body.mode-nuit {
       padding: 0.6em;
       border-radius: 4px;
       border: none;
-      background-color: #f2f5f7;
+      background-color: var(--secondary-color);
       color: #222;
     }
 
     input[readonly] {
-      background-color: #ccc;
+      background-color: var(--secondary-color);
       cursor: not-allowed;
     }
 
     button {
       background-color : var(--primary-color);
-      color: white;
+      color: var(--secondary-color);
       border: none;
       padding: 0.7em 0.9em;
       font-size: 1em;
@@ -412,12 +418,12 @@ body.mode-nuit {
 
 #buttonback {
   position: fixed;        /* reste visible même au scroll */
-  top: 7px;
-  left: 7px;
+  top: 1%;
+  left: 2%;
   z-index: 9999;          /* au-dessus de tout */
   
   background-color: var(--primary-color);
-  color: white;
+  color: var(--secondary-color);
   border: none;
   padding: 0.6em 0.9em;
   font-size: 1.8em;
@@ -461,7 +467,7 @@ body.mode-nuit {
       top: -5px;
       right: -5px;
       background: crimson;
-      color: white;
+      color: var(--secondary-color);
       border-radius: 50%;
       border: none;
       width: 20px;
@@ -503,7 +509,7 @@ body.mode-nuit {
   top: 10px;
   right: 20px;
   font-size: 30px;
-  color: white;
+  color: var(--secondary-color);
   background: none;
   cursor: pointer;
     }
@@ -527,7 +533,7 @@ body.mode-nuit {
     .dark-toggle-btn {
       background: none;
       border: none;
-      color: white;
+      color: var(--secondary-color);
       font-size: 1.4em;
       cursor: pointer;
     }
@@ -589,7 +595,7 @@ body.mode-nuit {
     #getLocationBtn,
     #clearLocationBtn {
       background-color: var(--accent-color);
-      color: white;
+      color: var(--secondary-color);
       border: none;
       font-size: 1em;
       padding: 0.6em;
@@ -605,7 +611,7 @@ body.mode-nuit {
     #clearLocationBtn svg {
       width: 20px;
       height: 20px;
-      fill: white;
+      fill: var(--secondary-color);
     }
 
     #localisation {
@@ -627,11 +633,11 @@ body.mode-nuit {
     }
 
     .darkIcon{
-      color: white;
+      color: var(--secondary-color);
     }
 
     .popup-box {
-      background: white;
+      background: var(--secondary-color);
       color: var(--tooltip-color);
       padding: 0.5em;
       border-radius: 8px;
@@ -654,11 +660,11 @@ body.mode-nuit {
       border: none;
       cursor: pointer;
       background: var(--accent-color);
-      color: white;
+      color: var(--secondary-color);
     }
 
     #initialStage .stage-message {
-      background-color: white;
+      background-color: var(--secondary-color);
       padding: 1.2em;
       border-radius: 10px;
       max-width: 450px;
@@ -806,14 +812,14 @@ Vous pouvez également nous envoyer une localisation par e-mail. À la fin du pr
 <div class="location-controls">
 <button id="getLocationBtn" title="Obtenir ma position">
 <svg viewbox="0 0 24 24">
-<circle cx="12" cy="12" fill="none" r="10" stroke="white" stroke-width="2"></circle>
-<circle cx="12" cy="12" fill="white" r="3"></circle>
+<circle cx="12" cy="12" fill="none" r="10" stroke="secondary-color" stroke-width="2"></circle>
+<circle cx="12" cy="12" fill="secondary-color" r="3"></circle>
 </svg>
 </button>
 <button id="clearLocationBtn" title="Effacer">
 <svg viewbox="0 0 24 24">
-<line stroke="white" stroke-width="2" x1="6" x2="18" y1="6" y2="18"></line>
-<line stroke="white" stroke-width="2" x1="6" x2="18" y1="18" y2="6"></line>
+<line stroke="secondary-color" stroke-width="2" x1="6" x2="18" y1="6" y2="18"></line>
+<line stroke="secondary-color" stroke-width="2" x1="6" x2="18" y1="18" y2="6"></line>
 </svg>
 </button>
 </div>
@@ -997,8 +1003,8 @@ document.getElementById('darkToggleBtn').addEventListener('click', () => {
         stepIndicator.textContent = 'Merci !';
         // Redirect after x seconds to index.html
         setTimeout(() => {
-          window.location.href = "missionar.html";
-        }, 3000);
+          window.location.href = "mission.html";
+        }, 5000);
       } else {
         currentStep++;
         updateStepView();

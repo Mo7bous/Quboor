@@ -15,16 +15,23 @@
 
 
                 :root {
-            --primary-color: #2C3E50;
-            --secondary-color: #030404;
-            --third-color: red;
-            --fourth-color: yellow;
-            --fifth-color: #2c3f53;/* Couleur du text de base en mode normal primaire fonce lighter */
-            --sixth-color: #0f151b;  /* Couleur du text de base en mode normal primaire fonce */
+            --text-color: #fffefb;  /* Couleur du text de base en mode normal  */
+            --background-color: #fffefb;
+            --accent-color: #fffefb;
 
-            --text-color: #f9f4ea;  /* Couleur du text de base en mode normal  */
-            --background-color: #f9f4ea;
-            --accent-color: #f9f4ea;
+            --primary-color: #2C3E50; /* Couleur principale gris bleu */
+            --secondary-color: #fffdf6; /* Couleur principale pale orange */
+            --third-color: #ebf4f8; /* Couleur principale pale bleu */
+            --fifth-color: #0b0c0f; /* Dark - fond gros bleu fonce*/
+
+            --fourth-color: #000000; /* Couleur principale */
+            --sixth-color: #000000; /* Couleur principale  */
+            --seventh-color: #000000; /* Couleur principale  */
+            --eighth-color: #000000; /* Couleur principale  */
+
+            --ninth-color: #0056b3; /* Couleurbleu details */
+            --tenth-color: #cf9251; /* Couleur principale */
+
         }
 
 
@@ -59,7 +66,7 @@
   color: var(--text-color);
   height: 60px;
   width: 91%;
-  margin: 20px auto 0 auto;
+  margin: 6% auto 0 auto;
   border-radius: 8px;
   padding: 0 20px 0 32px; /* padding-left augmenté */
   box-sizing: border-box;
@@ -228,7 +235,7 @@
         }
 
     .section {
-      background-color: white;
+      background-color: var(--secondary-color);
       padding: 30px;
       border-radius: 10px;
       margin-bottom: 30px;
@@ -258,7 +265,7 @@
 
     .cta-button {
       background-color: var(--primary-color);
-      color: white;
+      color: var(--secondary-color);
       width: 90%;
       text-align: center;
       padding: 12px 25px;
@@ -281,7 +288,7 @@
     }
 
     .bank-details {
-      background-color: #f9f9f9;
+      background-color: var(--secondary-color);
       padding: 20px;
       border-radius: 6px;
       margin-top: 20px;
@@ -317,7 +324,6 @@
     body.mode-jour {
   --background-color: #EBF4F8;
   --text-color: #222222;
-  --secondary-color: #41464a;
   --accent-color: #4A4E69;
 }
 
@@ -351,7 +357,7 @@ body.mode-nuit {
 
     .step-indicator {
       text-align: center;
-      font-size: 1.1em;
+      font-size: x-large;
       font-weight: bold; 
     }
 
@@ -364,7 +370,7 @@ body.mode-nuit {
 
     .step.active {
       display: block;
-      color: white;
+      color: var(--secondary-color);
     }
 
     .form-group {
@@ -374,8 +380,10 @@ body.mode-nuit {
     label {
       display: block;
       font-weight: bold;
+      font-size: larger;
       margin-bottom: 0.4em;
-      color: #ece7e7;
+      color: var--secondary-color;
+      text-align: right;
     }
 
     input[type="text"],
@@ -385,8 +393,9 @@ body.mode-nuit {
       padding: 0.6em;
       border-radius: 4px;
       border: none;
-      background-color: #f2f5f7;
+      background-color: var(--secondary-color);
       color: #222;
+      text-align: right;
     }
 
     input[readonly] {
@@ -396,10 +405,10 @@ body.mode-nuit {
 
     button {
       background-color : var(--primary-color);
-      color: white;
+      color: var(--secondary-color);
       border: none;
       padding: 0.7em 1.2em;
-      font-size: 1em;
+      font-size: larger;
       border-radius: 6px;
       cursor: pointer;
       margin: 0.5em 0.3em;
@@ -407,12 +416,12 @@ body.mode-nuit {
 
 #buttonback {
   position: fixed;        /* reste visible même au scroll */
-  top: 7px;
-  left: 7px;
+  top: 1%;
+  left: 2%;
   z-index: 9999;          /* au-dessus de tout */
   
   background-color: var(--primary-color);
-  color: white;
+  color: var(--secondary-color);
   border: none;
   padding: 0.6em 0.9em;
   font-size: 1.8em;
@@ -455,7 +464,7 @@ body.mode-nuit {
       top: -5px;
       right: -5px;
       background: crimson;
-      color: white;
+      color: var(--secondary-color);
       border-radius: 50%;
       border: none;
       width: 20px;
@@ -471,6 +480,9 @@ body.mode-nuit {
       padding: 1em;
       border-radius: 4px;
       margin-top: 1em;
+      text-align: right;
+      font-size: larger;
+
     }
 
     .thank-you {
@@ -497,7 +509,7 @@ body.mode-nuit {
   top: 10px;
   right: 20px;
   font-size: 30px;
-  color: white;
+  color: var(--secondary-color);
   background: none;
   cursor: pointer;
     }
@@ -521,7 +533,7 @@ body.mode-nuit {
     .dark-toggle-btn {
       background: none;
       border: none;
-      color: white;
+      color: var(--secondary-color);
       font-size: 1.4em;
       cursor: pointer;
     }
@@ -541,7 +553,7 @@ body.mode-nuit {
       bottom: 0;
       width: 250px;
       background-color: #111;
-      color: white;
+      color: var(--secondary-color);
       padding: 1em;
       transform: translateX(-100%);
       transition: transform 0.3s ease-in-out;
@@ -624,7 +636,7 @@ body.mode-nuit {
     #getLocationBtn,
     #clearLocationBtn {
       background-color: var(--accent-color);
-      color: white;
+      color: var(--secondary-color);
       border: none;
       font-size: 1em;
       padding: 0.6em;
@@ -640,7 +652,7 @@ body.mode-nuit {
     #clearLocationBtn svg {
       width: 20px;
       height: 20px;
-      fill: white;
+      fill: var(--secondary-color);
     }
 
     #localisation {
@@ -697,7 +709,7 @@ body.mode-nuit {
       padding: 1.2em;
       border-radius: 10px;
       max-width: 450px;
-      font-size: 1.1em;
+      font-size: larger;
       line-height: 1.6;
       color: var(--text-color);
       text-align: left;
@@ -1038,7 +1050,7 @@ document.getElementById('darkToggleBtn').addEventListener('click', () => {
         stepIndicator.textContent = 'Merci !';
         // Redirect after x seconds to index.html
         setTimeout(() => {
-          window.location.href = "mission.html";
+          window.location.href = "missionar.html";
         }, 5000);
       } else {
         currentStep++;

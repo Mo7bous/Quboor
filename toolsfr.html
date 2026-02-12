@@ -15,8 +15,8 @@
   /* New palette per request */
   --blue-dark: #2C3E50;      /* base dark blue */
   --beige-cold: #C3CED4;     /* very light / cold beige */
-  --blue-very-pale: #EBF4F8;  /* very pale blue for cards / popup backgrounds */
-  --pastel-orange: #FFFCFA;   /* near-white with an ultra-pale orange tint for tool cards (lighter) */
+  --blue-very-pale: #ebf4f8;  /* very pale blue for cards / popup backgrounds */
+  --pastel-orange: #fffdf6;   /* near-white with an ultra-pale orange tint for tool cards (lighter) */
 
   /* Semantic names used across the stylesheet */
   --primary: var(--blue-dark);       /* main text/headings color in light mode */
@@ -33,7 +33,7 @@
   /* Dark mode palette variables */
   --dm-nav-bg: var(--beige-cold);    /* nav background in dark mode (beige) */
   --dm-sidebar-bg: #254045;          /* darker blue-gray for sidebar in dark mode */
-  --dm-card-bg: #1f2f36;             /* darker blue tone for popups/cards in dark mode */
+  --dm-card-bg: #2C3E50;             /* darker blue tone for popups/cards in dark mode */
   --dm-text-on-surface: var(--beige-cold); /* text color used across surfaces in dark mode */
   --dm-overlay: rgba(0,0,0,0.6);
 }
@@ -131,36 +131,9 @@ a{color:inherit;text-decoration:none}
 }
 
 /* language switch in sidebar - moved to bottom left and shows both flags side by side */
-.lang-switch{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%); /* center both language buttons horizontally */
-  bottom:32px; /* moved 10px higher from previous 22px */
-  z-index:70;
-  display:flex;
-  flex-direction:row; /* place language buttons side-by-side */
-  gap:10px; /* spacing between the two language buttons */
-  align-items:center;
-}
-.lang-btn{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  background:transparent;
-  /* explicitly remove borders/outlines to eliminate contours */
-  border:none;
-  outline:none;
-  box-shadow:none;
-  color:var(--pastel-orange);
-  padding:8px 10px;
-  font-size:15px;
-  cursor:pointer;
-  border-radius:8px;
-  line-height:1;
-  opacity:0.98;
-  min-width:0; /* let buttons size naturally side-by-side */
-  text-align:left;
-}
+.lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
+.lang-btn{display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:var(--pastel-orange);padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+
 /* ensure focus state also has no contour */
 .lang-btn:focus{outline:none;box-shadow:none}
 .lang-btn .flag{font-size:18px;line-height:1}
@@ -174,7 +147,7 @@ a{color:inherit;text-decoration:none}
 
 /* Main layout */
 #main{
-  width:92%;
+  width:96%;
   max-width:1100px;
   margin:8px auto 0;
   padding:8px 0 40px;
@@ -445,10 +418,10 @@ h1, .page-header h1, .tools-container .tool-card h3, .collapsible-card .card-hea
   <div id="mySidebar" class="sidebar">
         <!-- language switch (both flags shown, moved to bottom via CSS) -->
 <div class="lang-switch" aria-label="Language selector">
-  <button id="langBtnFR" class="lang-btn" data-lang="fr" aria-label="Français">
+  <button id="langBtnFR" class="lang-btn" data-lang="Français" aria-label="Français">
     Français
   </button>
-  <button id="langBtnMA" class="lang-btn" data-lang="ma" aria-label="العربية">
+  <button id="langBtnMA" class="lang-btn" data-lang="العربية" aria-label="العربية">
     العربية
   </button>
 </div>
