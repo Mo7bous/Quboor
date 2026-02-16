@@ -52,11 +52,11 @@ a{color:inherit;text-decoration:none}
 
 /* Card styles */
 .collapsible-card{background:var(--card-bg);border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.04);overflow:hidden;margin-bottom:14px}
-.collapsible-card2{background:var(--card-bg);border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.14);overflow:hidden;margin-bottom:14px}
+.collapsible-card2{background:var(--card-bg);border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.14);overflow:hidden;margin-bottom:14px;margin-left: 5%;margin-right: 5%;}
 
-.card-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer}
+.card-header{display:flex;align-items:center;justify-content:space-between;padding:3px 16px;cursor:pointer}
 .card-header .title{display:flex;flex-direction:column}
-.card-header h3{margin:0;font-size:large}
+.card-header h3{margin:0;font-size:large;margin-bottom: 7px;}
 .card-sub{font-size:medium;color:var(--muted)}
 .card-arrow{width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;background:transparent;border:0;color:var(--primary);font-size:14px;transition:transform .22s}
 .card-content{padding:0 16px 16px 16px;max-height:0;overflow:hidden;transition:max-height .28s,padding .22s}
@@ -98,7 +98,7 @@ a{color:inherit;text-decoration:none}
         <a href="new.html"><i class="fas fa-user-plus"></i>Ajouter</a>
         <a href="mission.html"><i class="fas fa-tasks"></i>Missions</a>
 
-        <a href="projets.html"><i class="fas fa-hand-holding-heart"></i>Nos projets et dons</a>
+        <a href="projets.html"><i class="fas fa-hand-holding-heart"></i>Projets & Dons</a>
         <a href="joinus.html"><i class="fas fa-users"></i>Rejoins-nous</a>
         <a href="toolsfr.html"><i class="fas fa-tools"></i>Outils</a>
         <a href="contact.html"><i class="fas fa-envelope"></i>Contact</a>
@@ -115,20 +115,18 @@ a{color:inherit;text-decoration:none}
 
   <main id="main">
       <article class="collapsible-card">
-  <br></br>
-      <h1 style="font-size:larger;margin-bottom: 30px; margin:0 0 8px 0;text-align:center">Nos projets</h1>
+      <h1 style="font-size:larger;margin-bottom: 30px; margin:13px 0 30px 0;text-align:center">Nos projets</h1>
       <p class="content-inner" style="display:inline-block;text-align:justify;max-width:880px;margin:0 auto;margin-left: 5%;margin-right: 5%;font-size: medium;">
         Découvrez nos actions visant à préserver la mémoire collective et à restaurer les espaces funéraires : interventions sur le terrain, numérisation et archivage des données, sensibilisation et engagement citoyen.
       </p>
   
-      <br></br>
       <br></br>
 
     <!-- Project 1 -->
     <article class="collapsible-card2" id="proj1">
       <div class="card-header" role="button" aria-expanded="false" tabindex="0">
         <div class="title">
-          <h3><i class="fas fa-broom" style="margin-right:8px;color:var(--muted)"></i>Nettoyage et restauration</h3>
+          <h3><i class="fas fa-broom" style="margin-right:8px;color:var(--muted)"></i>Entretient</h3>
           <div class="card-sub">Journées d'action citoyenne</div>
         </div>
         <button class="card-arrow" aria-hidden="true">▾</button>
@@ -158,7 +156,7 @@ a{color:inherit;text-decoration:none}
     <article class="collapsible-card2" id="proj2">
       <div class="card-header" role="button" aria-expanded="false" tabindex="0">
         <div class="title">
-          <h3><i class="fas fa-database" style="margin-right:8px;color:var(--muted)"></i>Numérisations funéraires</h3>
+          <h3><i class="fas fa-database" style="margin-right:8px;color:var(--muted)"></i>Numérisation</h3>
           <div class="card-sub">Base de données sécurisée et accessible</div>
         </div>
         <button class="card-arrow" aria-hidden="true">▾</button>
@@ -276,19 +274,6 @@ a{color:inherit;text-decoration:none}
           <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
             <a href="https://google.com" target="_blank" rel="noreferrer" style="font-weight:600;color: #cf9251;">Lien</a>
             <div style="font-size:13px">Contribution ponctuelle ou récurrente via PayPal.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tipeee card -->
-      <div class="collapsible-card2" style="background:var(--card-bg);padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.04);position:relative;text-align:center;">
-        <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
-          <h4 style="margin:0 0 6px 0"><i class="fas fa-hand-holding-usd" style="margin-right:8px;color:var(--primary)"></i>Tipeee</h4>
-          <div style="font-size:13px;margin-bottom:8px">Soutien ponctuel pour nos actions.</div>
-
-          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
-            <a href="https://google.com" target="_blank" rel="noreferrer" style="font-weight:600;color: #cf9251;">Lien</a>
-            <div style="font-size:13px">Plateforme pour soutenir nos projets et actions.</div>
           </div>
         </div>
       </div>
