@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
 
   <style>
 :root{
@@ -25,7 +29,15 @@
 
 /* Reset and base */
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
+html, body {
+    height: 100%;
+    font-family: 'Cairo', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background: var(--page-bg);
+    color: var(--primary);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    direction: rtl;
+}
 a{color:inherit;text-decoration:none}
 
 /* Top nav */
@@ -37,8 +49,8 @@ a{color:inherit;text-decoration:none}
 /* Sidebar - match layout and behaviour used by other pages */
 .sidebar{position:fixed;left:-280px;top:0;height:100%;width:280px;background:var(--nav-bg);color:var(--card-bg);padding-top:20px;padding-bottom:140px;transition:left .28s;z-index:60;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto}
 .sidebar.open{left:0}
-.sidebar a{display:flex;flex-direction:column;align-items:center;justify-content:center;width:50%;box-sizing:border-box;gap:6px;padding:12px 6px;color:var(--pastel-orange);text-align:center;font-size:14px;min-height:72px}
-.sidebar a i{font-size:20px;display:block}
+.sidebar a{display:flex;flex-direction:column;align-items:center;justify-content:center;width:50%;box-sizing:border-box;gap:6px;padding:12px 6px;color:var(--pastel-orange);text-align:center;font-size:medium;min-height:72px}
+.sidebar a i{font-size:x-large;display:block}
 .closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:var(--pastel-orange);cursor:pointer}
 
 /* separator: keep spacing but remove any visible line so the close button isn't visually separated by a border */
@@ -54,7 +66,7 @@ a{color:inherit;text-decoration:none}
 
 /* language switch in sidebar - centered at bottom (no inline styles) */
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
-.lang-btn{display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:var(--pastel-orange);padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn{font-family: 'Cairo';display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:var(--pastel-orange);padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
 .lang-btn .flag{font-size:18px;line-height:1}
 
 /* hide textual labels and show only flag glyphs in the sidebar language buttons (matches other pages) */
@@ -81,28 +93,28 @@ a{color:inherit;text-decoration:none}
 
 /* Unified heading sizing for consistency across pages */
 h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
-  font-size:1.15rem;
+  font-size:larger;
   line-height:1.2;
   margin:0 0 8px 0;
 }
 .card-sub, .hero-card p, .feature-item p, .muted {
-  font-size:13px;
+  font-size:medium;
   line-height:1.4;
 }
 
 /* Main single-column mobile-first layout */
 #main{width:92%;max-width:720px;margin:12px auto;padding:12px;height:auto;display:block}
 .hero-card{background:var(--card-bg);border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,0.04);margin-bottom:14px}
-.hero-card h1{font-size:1.15rem;margin-bottom:10px;text-align:center}
-.hero-card p{font-size:14px;line-height:1.5;color:var(--primary);text-align:justify;margin-bottom:12px}
+.hero-card h1{font-size:larger;margin-bottom:30px;text-align:center}
+.hero-card p{font-size:medium;line-height:1.5;color:var(--primary);text-align:justify;margin-bottom:12px;}
 
 /* small features card (new) */
 .features-card{background:var(--card-bg);border-radius:12px;padding:14px;box-shadow:0 6px 18px rgba(0,0,0,0.04);margin-bottom:14px}
 .features-list{display:flex;flex-direction:column;gap:10px}
 .feature-item{background:transparent;border-radius:10px;padding:10px;display:flex;gap:10px;align-items:flex-start}
 .feature-item i{background:transparent;border-radius:8px;font-size:18px;width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center}
-.feature-item h4{margin:0;font-size:14px}
-.feature-item p{margin:0;font-size:13px;color:var(--muted);line-height:1.4}
+.feature-item h4{margin:0;font-size:medium}
+.feature-item p{margin:0;font-size:medium;color:var(--muted);line-height:1.4}
 
 /* Image styling: smaller and centered for phones */
 .hero-image{width:100%;display:flex;justify-content:center;margin-bottom:12px}
@@ -117,7 +129,7 @@ h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
 /* Ensure the page fits one mobile viewport nicely */
 @media(min-width:720px){
   #main{padding:18px}
-  .hero-card h1{font-size:1.25rem}
+  .hero-card h1{font-size:larger}
   .hero-card p{font-size:15px}
 }
   </style>
@@ -173,13 +185,13 @@ h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
     <!-- Call-to-action button: contact us (placed before features card) -->
 <div style="width:100%;display:flex;justify-content:center;margin:12px 0 18px 0;">
   <a href="contactar.html" class="btn" style="padding:12px 18px;border-radius:10px;font-weight:700;background:var(--nav-bg);color:#FFFCFA;text-decoration:none;">
-    <i class="fas fa-envelope" style="margin-right:8px"></i>تواصل معنا
+    <i class="fas fa-envelope" style="margin-right:8px;margin-left:8px"></i>تواصل معنا
   </a>
 </div>
 
 <!-- نص قصير تحت زر التواصل لتشجيع المستخدم -->
 <div style="width:100%;display:flex;justify-content:center;margin-bottom:8px;">
-  <p style="margin:0;color:var(--muted);font-size:13px;text-align:center;max-width:720px;">
+  <p style="margin:0;color:var(--muted);font-size:medium;text-align:center;max-width:720px;">
     لديك سؤال أو ترغب في المشاركة؟ راسلنا وسنرد عليك بسرعة.
   </p>
 </div>
@@ -187,10 +199,9 @@ h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
 <br></br>
 <!-- بطاقة ميزات النشاطات التشاركية -->
 <article class="features-card" aria-labelledby="features-title">
-  <br></br>
 
-  <h2 id="features-title" style="font-size:1.05rem;margin:0 0 10px 0;text-align:center">كيف يمكنك المساعدة</h2>
-  <br></br>
+
+  <h2 id="features-title" style="font-size:large;margin:0 0 10px 0;text-align:center">كيف يمكنك المساعدة</h2>
 
   <div class="features-list">
     <div class="feature-item">

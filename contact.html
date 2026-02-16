@@ -10,6 +10,10 @@
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
 :root{
   --blue-dark: #2C3E50;
@@ -128,13 +132,14 @@ a{color:inherit;text-decoration:none}
 
 /* Unified heading sizing for consistency across pages */
 h1, .page-header h1, .collapsible-card .card-header h3 {
-  font-size:1.15rem;
+  font-size:larger;
   line-height:1.2;
   margin:0 0 8px 0;
 }
 .card-sub, .content-inner p, .note {
-  font-size:13px;
+  font-size:large;
   line-height:1.4;
+  text-align: justify;
 }
 
 /* content card (collapsible card styles) */
@@ -164,7 +169,7 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
   width:8px;height:40px;border-radius:6px;background:var(--nav-bg);
 }
 .card-header h3{margin:0;font-size:1.05rem;color:var(--primary)}
-.card-sub{font-size:13px;color:var(--primary)}
+.card-sub{font-size:large;color:var(--primary)}
 
 /* arrow */
 .card-arrow{
@@ -193,7 +198,7 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
 .content-inner p,
 .content-inner ol,
 .content-inner li {
-  font-size:13px;
+  font-size:medium;
   line-height:1.35;
   color:var(--primary);
   text-align:justify;
@@ -209,9 +214,10 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
   border-radius:8px;
   border:1px solid rgba(0,0,0,0.06);
   background:transparent;
-  font-size:14px;
+  font-size:small;
   color:inherit;
   box-sizing:border-box;
+  font-size: small;
 }
 textarea{min-height:100px;resize:vertical}
 .form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
@@ -226,8 +232,8 @@ textarea{min-height:100px;resize:vertical}
 }
 .btn.secondary{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--primary)}
 
-.note{font-size:13px;color:var(--muted);margin-top:8px}
-
+.note{font-size:medium;color:var(--muted);margin-top:8px}
+.note2{font-size:small;color:var(--muted);margin-top:8px}
 /* dark mode */
 .dark{
   --page-bg: #0b0c0f;
@@ -298,15 +304,13 @@ textarea{min-height:100px;resize:vertical}
         </div>
 
         <!-- Description placed directly below the header so it's visually part of the card title area -->
-        <div id="contactInfoContent" class="content-inline" style="padding:12px 18px 18px 18px;">
+        <div id="contactInfoContent" class="content-inline" style="padding:0px 18px;">
           <!-- main description visible -->
-          <p style="margin-bottom:8px;color:var(--primary)">Une question, une idée ou l’envie de vous engager à nos côtés ? Contactez-nous librement pour échanger, proposer une initiative ou en savoir plus sur notre démarche autour de la mémoire collective.</p>
-          <!-- following details hidden by default -->
-          <div style="display:none">
-            <p style="margin-bottom:8px;color:var(--primary)"><strong>Partenariats, projets, événements et dons</strong><br>Nous accueillons collaborations et soutiens pour développer des projets, organiser des actions et renforcer la préservation des lieux de mémoire.</p>
-            <p style="margin-bottom:8px;color:var(--primary)"><strong>Volontariat et bénévolat pour la cause</strong><br>Rejoignez-nous comme bénévole ou volontaire et contribuez activement à un réseau solidaire et durable au service de la mémoire.</p>
-          </div>
-        </div>
+           <br></br>
+          <p style="margin-bottom:0px;color:var(--primary)">Contactez-nous librement pour échanger, proposer une initiative ou en savoir plus sur notre démarche autour de la mémoire collective.</p>
+                <p style="margin-bottom:0px;color:var(--primary)"><br>Nous accueillons collaborations et soutiens pour développer des projets, organiser des actions et renforcer la préservation des lieux de mémoire.</p>
+                <p style="margin-bottom:20px;color:var(--primary)"><br>Rejoignez-nous comme bénévole ou volontaire et contribuez activement à un réseau solidaire et durable au service de la mémoire.</p>
+</div>
       </article>
 
       <!-- Contact form card (same format as Terms form) -->
@@ -315,7 +319,7 @@ textarea{min-height:100px;resize:vertical}
           <div class="title">
             <div>
               <h3 id="cf-title">Formulaire</h3>
-<div class="card-sub">Merci d’indiquer dans le champ ci-dessous un maximum d’informations concernant votre demande afin que nous puissions vous répondre de la manière la plus précise possible.</div>
+<div class="card-sub">Merci d’indiquer dans le champ ci-dessous un maximum d’informations concernant votre demande afin que nous puissions la traiter en priorité.</div>
             </div>
           </div>
           <button class="card-arrow" aria-hidden="true">▾</button>
@@ -326,31 +330,30 @@ textarea{min-height:100px;resize:vertical}
             <form id="contactForm" class="form-row" onsubmit="return false;" style="display:grid;grid-template-columns:1fr;gap:10px;">
               <div style="display:flex;gap:10px;flex-wrap:wrap;">
                 <div style="flex:1;min-width:160px">
-                  <label style="font-size:13px;color:var(--muted)">Nom</label>
+                  <label style="font-size:medium;color:var(--muted)">Nom</label>
                   <input id="c_name" class="input" type="text" placeholder="Votre nom complet" required>
                 </div>
 
                 <div style="flex:1;min-width:160px">
-                  <label style="font-size:13px;color:var(--muted)">E-mail</label>
+                  <label style="font-size:medium;color:var(--muted)">E-mail</label>
                   <input id="c_email" class="input" type="email" placeholder="votre@exemple.com" required>
                 </div>
               </div>
 
               <div style="display:flex;gap:10px;flex-wrap:wrap;">
                 <div style="flex:1;min-width:160px">
-                  <label style="font-size:13px;color:var(--muted)">Sujet</label>
+                  <label style="font-size:medium;color:var(--muted)">Sujet</label>
                   <input id="c_subject" class="input" type="text" placeholder="Sujet du message" required>
                 </div>
               </div>
 
               <div>
-                <label style="font-size:13px;color:var(--muted)">Message</label>
-                <div class="note" style="margin-top:6px">Merci d’indiquer clairement le sujet de votre demande afin que nous puissions vous répondre au mieux.</div>
-                <br></br>
+                <label style="font-size:medium;color:var(--muted)">Message</label>
+                <div class="note2" style="margin-top:6px">Merci de bien préciser les détails de votre demande afin que nous puissions vous répondre au mieux.</div>
                 <textarea id="c_message" class="input" placeholder="Détaillez votre demande..." required style="min-height:120px"></textarea>
               </div>
 
-              <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px;">
+              <div style="gap:8px;justify-content:flex-end;margin-top:6px;">
                 <button id="c_generateBtn" class="btn" type="button">Générer l'e-mail</button>
                 <button id="c_clearBtn" class="btn secondary" type="button">Effacer</button>
               </div>

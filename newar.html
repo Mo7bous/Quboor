@@ -11,6 +11,10 @@
     }
   </script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
 
 
@@ -47,16 +51,15 @@
   box-sizing: border-box;
 }
 
-        html, body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--secondary-color);
-            background-color: var(--background-color);
-            margin: 0;
-            padding: 0;
-            text-align: justify;
-            overflow-x: hidden;
-        }
+html, body {
+    height: 100%;
+    font-family: 'Cairo', system-ui, -apple-system, BlinkMacSystemFont, 'Cairo', Arial, sans-serif;
+    background: var(--page-bg);
+    color: var(--primary);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    direction: rtl;
+}
 
 .top-nav {
   display: flex;
@@ -316,7 +319,6 @@
 
     body {
       margin: 0;
-      font-family: 'Roboto', sans-serif;
       background-color: var(--background-color);
       color: var(--text-color);
     }
@@ -412,19 +414,20 @@ body.mode-nuit {
       border-radius: 6px;
       cursor: pointer;
       margin: 0.5em 0.3em;
+      font-family: 'Cairo';
+      font-size: medium;
     }
 
 #buttonback {
-  position: fixed;        /* reste visible même au scroll */
+  position: absolute;        /* reste visible même au scroll */
   top: 1%;
   left: 2%;
   z-index: 9999;          /* au-dessus de tout */
-  
-  background-color: var(--primary-color);
+  background-color: transparent;
   color: var(--secondary-color);
   border: none;
   padding: 0.6em 0.9em;
-  font-size: 1.8em;
+  font-size: 1.6em;
   border-radius: 8px;
   cursor: pointer;
 

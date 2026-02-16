@@ -10,6 +10,10 @@
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
 :root{
   --blue-dark: #2C3E50;
@@ -81,27 +85,27 @@ a{color:inherit;text-decoration:none}
 
 /* Unified heading sizing for consistency across pages */
 h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
-  font-size:1.15rem;
+  font-size:larger;
   line-height:1.2;
   margin:0 0 8px 0;
 }
 .card-sub, .hero-card p, .feature-item p, .muted {
-  font-size:13px;
+  font-size:medium;
   line-height:1.4;
 }
 
 /* Main single-column mobile-first layout */
 #main{width:92%;max-width:720px;margin:12px auto;padding:12px;height:auto;display:block}
 .hero-card{background:var(--card-bg);border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,0.04);margin-bottom:14px}
-.hero-card h1{font-size:1.15rem;margin-bottom:10px;text-align:center}
-.hero-card p{font-size:14px;line-height:1.5;color:var(--primary);text-align:justify;margin-bottom:12px}
+.hero-card h1{font-size:larger;margin-bottom:30px;text-align:center}
+.hero-card p{font-size:medium;line-height:1.5;color:var(--primary);text-align:justify;margin-bottom:12px;}
 
 /* small features card (new) */
 .features-card{background:var(--card-bg);border-radius:12px;padding:14px;box-shadow:0 6px 18px rgba(0,0,0,0.04);margin-bottom:14px}
 .features-list{display:flex;flex-direction:column;gap:10px}
 .feature-item{background:transparent;border-radius:10px;padding:10px;display:flex;gap:10px;align-items:flex-start}
 .feature-item i{background:transparent;border-radius:8px;font-size:18px;width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center}
-.feature-item h4{margin:0;font-size:14px}
+.feature-item h4{margin:0;font-size:medium}
 .feature-item p{margin:0;font-size:13px;color:var(--muted);line-height:1.4}
 
 /* Image styling: smaller and centered for phones */
@@ -117,7 +121,7 @@ h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
 /* Ensure the page fits one mobile viewport nicely */
 @media(min-width:720px){
   #main{padding:18px}
-  .hero-card h1{font-size:1.25rem}
+  .hero-card h1{font-size:larger}
   .hero-card p{font-size:15px}
 }
   </style>
@@ -179,7 +183,7 @@ h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
 
     <!-- brief subtext under CTA to encourage contact -->
     <div style="width:100%;display:flex;justify-content:center;margin-bottom:8px;">
-      <p style="margin:0;color:var(--muted);font-size:13px;text-align:center;max-width:720px;">
+      <p style="margin:0;color:var(--muted);font-size: medium;text-align:center;max-width:720px;">
         Vous avez une question ou souhaitez participer ? Écrivez-nous — nous vous répondrons rapidement.
       </p>
     </div>
@@ -187,10 +191,8 @@ h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
     <br></br>
     <!-- New features card listing participatory activities -->
     <article class="features-card" aria-labelledby="features-title">
-          <br></br>
 
-      <h2 id="features-title" style="font-size:1.05rem;margin:0 0 10px 0;text-align:center">Comment nous aider</h2>
-          <br></br>
+      <h2 id="features-title" style="font-size:large;margin:0 0 10px 0;text-align:center">Comment nous aider</h2>
 
       <div class="features-list">
         <div class="feature-item">

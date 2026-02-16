@@ -51,6 +51,15 @@
 .lang-btn.active{box-shadow:0 4px 14px rgba(0,0,0,0.12);transform:translateY(-2px)}
 .lang-btn:active,.lang-btn:hover{transform:translateY(-2px)}
 
+.sidebar-separator{
+  width:100%;
+  height:18px; /* vertical gap (kept for spacing) */
+  box-sizing:border-box;
+  margin-top:42px; /* reduced gap so the link/module buttons sit a bit higher */
+  border-top:0; /* explicitly remove any divider line */
+  opacity:0.0;
+  pointer-events:none;
+}
 
 /* NAVBAR */
 .top-nav {
@@ -153,7 +162,7 @@
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 4px;
-    font-size: 0.9em;
+    font-size: large;
     color: var(--sixth-color);
 }
 

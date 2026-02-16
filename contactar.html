@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
 
   <style>
 :root{
@@ -32,7 +36,16 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
+html, body {
+    height: 100%;
+    font-family: 'Cairo', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background: var(--page-bg);
+    color: var(--primary);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    direction: rtl;
+}
+
 a{color:inherit;text-decoration:none}
 
 .top-nav{
@@ -97,17 +110,17 @@ a{color:inherit;text-decoration:none}
   padding:12px 6px;
   color:#FFFCFA;
   text-align:center;
-  font-size:14px;
+  font-size:medium;
   min-height:72px;
 }
 .sidebar a:nth-child(odd){ border-right:1px solid rgba(255,255,255,0.03);}
-.sidebar a i{font-size:20px;display:block}
+.sidebar a i{font-size:x-large;display:block}
 .closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:#FFFCFA;cursor:pointer}
 
 .sidebar-separator{width:100%;height:18px;box-sizing:border-box;margin-top:42px;border-top:0;opacity:0.0;pointer-events:none;}
 
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
-.lang-btn{display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:#FFFCFA;padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn{font-family: 'Cairo';display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:#FFFCFA;padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
 .lang-btn:focus{outline:none;box-shadow:none}
 .lang-btn .flag{font-size:18px;line-height:1}
 .lang-btn .label{display:none}
@@ -128,13 +141,14 @@ a{color:inherit;text-decoration:none}
 
 /* Unified heading sizing for consistency across pages */
 h1, .page-header h1, .collapsible-card .card-header h3 {
-  font-size:1.15rem;
+  font-size:larger;
   line-height:1.2;
   margin:0 0 8px 0;
 }
 .card-sub, .content-inner p, .note {
-  font-size:13px;
+  font-size:medium;
   line-height:1.4;
+  text-align: justify;
 }
 
 /* content card (collapsible card styles) */
@@ -164,7 +178,7 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
   width:8px;height:40px;border-radius:6px;background:var(--nav-bg);
 }
 .card-header h3{margin:0;font-size:1.05rem;color:var(--primary)}
-.card-sub{font-size:13px;color:var(--primary)}
+.card-sub{font-size:large;color:var(--primary);text-align: justify;}
 
 /* arrow */
 .card-arrow{
@@ -193,7 +207,7 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
 .content-inner p,
 .content-inner ol,
 .content-inner li {
-  font-size:13px;
+  font-size:medium;
   line-height:1.35;
   color:var(--primary);
   text-align:justify;
@@ -209,9 +223,10 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
   border-radius:8px;
   border:1px solid rgba(0,0,0,0.06);
   background:transparent;
-  font-size:14px;
+  font-size:small;
   color:inherit;
   box-sizing:border-box;
+  font-size: small;
 }
 textarea{min-height:100px;resize:vertical}
 .form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
@@ -226,8 +241,8 @@ textarea{min-height:100px;resize:vertical}
 }
 .btn.secondary{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--primary)}
 
-.note{font-size:13px;color:var(--muted);margin-top:8px}
-
+.note{font-size:large;color:var(--muted);margin-top:8px;text-align: justify;}
+.note2{font-size:small;color:var(--muted);margin-top:8px;text-align: justify;}
 /* dark mode */
 .dark{
   --page-bg: #0b0c0f;
@@ -300,7 +315,7 @@ textarea{min-height:100px;resize:vertical}
         </div>
 
         <!-- Description placed directly below the header so it's visually part of the card title area -->
-        <div id="contactInfoContent" class="content-inline" style="padding:12px 18px 18px 18px;">
+        <div id="contactInfoContent" class="content-inline" style="padding:0px 18px;">
           <!-- main description visible -->
 <p style="margin-bottom:8px;color:var(--primary)">
 هل لديكم سؤال، فكرة، أو رغبة في الانخراط إلى جانبنا؟
@@ -330,7 +345,9 @@ textarea{min-height:100px;resize:vertical}
       <div>
         <h3 id="cf-title">نموذج التواصل</h3>
         <div class="card-sub">
-<div class="card-sub">يرجى ذكر أكبر قدر ممكن من المعلومات في الخانة أدناه بخصوص طلبكم، حتى نتمكن من الرد عليكم بأكبر قدر من الدقة.</div>
+<div class="note" style="margin-top:6px">
+يرجى توضيح تفاصيل طلبكم بدقة حتى نتمكن من الرد عليكم بأفضل شكل ممكن.
+</div>
         </div>
       </div>
     </div>
@@ -343,34 +360,33 @@ textarea{min-height:100px;resize:vertical}
         
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
           <div style="flex:1;min-width:160px">
-            <label style="font-size:13px;color:var(--muted)">الاسم</label>
+            <label style="font-size:medium;color:var(--muted)">الاسم</label>
             <input id="c_name" class="input" type="text" placeholder="الاسم الكامل" required>
           </div>
 
           <div style="flex:1;min-width:160px">
-            <label style="font-size:13px;color:var(--muted)">البريد الإلكتروني</label>
+            <label style="font-size:medium;color:var(--muted)">البريد الإلكتروني</label>
             <input id="c_email" class="input" type="email" placeholder="example@email.com" required>
           </div>
         </div>
 
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
           <div style="flex:1;min-width:160px">
-            <label style="font-size:13px;color:var(--muted)">الموضوع</label>
+            <label style="font-size:medium;color:var(--muted)">الموضوع</label>
             <input id="c_subject" class="input" type="text" placeholder="موضوع الرسالة" required>
           </div>
         </div>
 
         <div>
-          <label style="font-size:13px;color:var(--muted)">الرسالة</label>
-          <div class="note" style="margin-top:6px">
+          <label style="font-size:medium;color:var(--muted)">الرسالة</label>
+          <div class="note2" style="margin-top:6px">
             يرجى توضيح موضوع طلبكم بشكل دقيق حتى نتمكن من الرد عليكم بأفضل شكل.
           </div>
-          <br></br>
-          <textarea id="c_message" class="input" placeholder="يرجى توضيح طلبكم بالتفصيل..." required style="min-height:120px"></textarea>
+          <textarea id="c_message" class="input" placeholder="تفصيل..." required style="min-height:120px;font-size:medium"></textarea>
         </div>
 
-        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px;">
-          <button id="c_generateBtn" class="btn" type="button">إنشاء البريد الإلكتروني</button>
+        <div style="gap:8px;justify-content:flex-end;margin-top:6px;">
+          <button id="c_generateBtn" class="btn" type="button">إنشاء</button>
           <button id="c_clearBtn" class="btn secondary" type="button">مسح</button>
         </div>
 
