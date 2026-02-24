@@ -497,7 +497,7 @@ if (langBtnMA) {
   });
 }
 
-/* GDPR form -> generate mailto: to info@quoboor.com with structured body */
+/* GDPR form -> generate mailto: to a.bouhlal@quboor.org with structured body */
 const generateBtn = document.getElementById('generateBtn');
 const clearBtn = document.getElementById('clearBtn');
 
@@ -532,7 +532,7 @@ generateBtn.addEventListener('click', ()=>{
   }
 
   const body = buildEmailBody({type,name,email,subject,message});
-  const mailto = `mailto:info@quoboor.com?subject=${encodeURIComponent('[RGPD] ' + subject)}&body=${encodeURIComponent(body)}`;
+  const mailto = `mailto:a.bouhlal@quboor.org?subject=${encodeURIComponent('[RGPD] ' + subject)}&body=${encodeURIComponent(body)}`;
 
   // open user's mail client
   window.location.href = mailto;
