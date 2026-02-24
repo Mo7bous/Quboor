@@ -426,7 +426,7 @@ if (langBtnMA) {
   });
 }
 
-/* Contact form -> generate mailto: to info@quboor.com with structured body */
+/* Contact form -> generate mailto: to a.bouhlal@quboor.org with structured body */
 const generateBtn = document.getElementById('c_generateBtn');
 const clearBtn = document.getElementById('c_clearBtn');
 
@@ -455,7 +455,7 @@ generateBtn.addEventListener('click', ()=>{
   }
 
   const body = buildContactBody({name,email,subject,message});
-  const mailto = `mailto:info@quboor.com?subject=${encodeURIComponent('[Contact] ' + subject)}&body=${encodeURIComponent(body)}`;
+  const mailto = `mailto:a.bouhlal@quboor.org?subject=${encodeURIComponent('[Contact] ' + subject)}&body=${encodeURIComponent(body)}`;
   window.location.href = mailto;
 });
 
