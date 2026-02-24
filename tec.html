@@ -114,7 +114,7 @@ a{color:inherit;text-decoration:none}
 .sidebar-separator{width:100%;height:18px;box-sizing:border-box;margin-top:42px;border-top:0;opacity:0.0;pointer-events:none;}
 
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
-.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);color:#FFFCFA;padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
 .lang-btn:focus{outline:none;box-shadow:none}
 .lang-btn .flag{font-size:18px;line-height:1}
 .lang-btn .label{display:none}
@@ -232,10 +232,10 @@ textarea{min-height:100px;resize:vertical}
 .dark{
   --page-bg: #0b0c0f;
   --card-bg: #2C3E50;
-  --card-border: rgba(255,255,255,0.06);
+  --card-border: rgba(6, 6, 6, 0.06);
   --primary: #FFFCFA;
   --pastel-orange: #FFDAB8;
-  --popup-search-bg: #274a50;
+  --popup-search-bg: #2C3E50;
 }
 .dark .top-nav{background:var(--nav-bg)} /* keep nav same */
 .dark .content-card{color:var(--primary);background:var(--card-bg)}
@@ -340,7 +340,7 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
               </div>
 
               <div>
-                <textarea id="message" class="input" placeholder="Détails : UID , nom sur la tombe, dates, emplacement, ville... Toutes informations permettant d'identifier la sépulture." required style="width:100%;padding:12px;border-radius:8px;border:1px solid rgba(215, 10, 10, 0.06);background:transparent;min-height:120px;color: #FFFCFA;"></textarea>
+                <textarea id="message" class="input" placeholder="Détails : UID , nom sur la tombe, dates, emplacement, ville... Toutes informations permettant d'identifier la sépulture." required style="width:100%;padding:12px;border-radius:8px;border:1px solid rgba(215, 10, 10, 0.06);background:transparent;min-height:120px;color:var(--primary) "></textarea>
               </div>
 
               <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px;">
@@ -497,7 +497,7 @@ if (langBtnMA) {
   });
 }
 
-/* GDPR form -> generate mailto: to a.bouhlal@quboor.org with structured body */
+/* GDPR form -> generate mailto: to info@quoboor.com with structured body */
 const generateBtn = document.getElementById('generateBtn');
 const clearBtn = document.getElementById('clearBtn');
 
@@ -532,7 +532,7 @@ generateBtn.addEventListener('click', ()=>{
   }
 
   const body = buildEmailBody({type,name,email,subject,message});
-  const mailto = `mailto:a.bouhlal@quboor.org?subject=${encodeURIComponent('[RGPD] ' + subject)}&body=${encodeURIComponent(body)}`;
+  const mailto = `mailto:info@quoboor.com?subject=${encodeURIComponent('[RGPD] ' + subject)}&body=${encodeURIComponent(body)}`;
 
   // open user's mail client
   window.location.href = mailto;
