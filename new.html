@@ -1000,7 +1000,7 @@ document.getElementById('darkToggleBtn').addEventListener('click', () => {
       if (currentStep === steps.length - 1) {
         const totalSize = images.reduce((acc, file) => acc + file.size, 0);
         if (totalSize > 25 * 1024 * 1024) {
-          alert("La taille totale des images dépasse 25 Mo. Veuillez réduire la taille ou envoyer manuellement les images à info@quoboor.com avec le UID.");
+          alert("La taille totale des images dépasse 25 Mo. Veuillez réduire la taille ou envoyer manuellement les images à a.bouhlal@quoboor.org avec le UID.");
           return;
         }
         sendEmail();
@@ -1117,7 +1117,7 @@ document.getElementById('darkToggleBtn').addEventListener('click', () => {
       ].join('%0D%0A');
 
       const subject = `Nouvelle demande - UID: ${uidInput.value}`;
-      const mailtoLink = `mailto:info@quoboor.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+      const mailtoLink = `mailto:a.bouhlal@quboor.org?subject=${encodeURIComponent(subject)}&body=${body}`;
       const mail = window.open(mailtoLink, '_blank');
       if (!mail) alert("Veuillez autoriser les popups pour envoyer l'e-mail.");
 
