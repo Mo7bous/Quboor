@@ -46,11 +46,11 @@ a{color:inherit;text-decoration:none}
 .closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:var(--pastel-orange);cursor:pointer}
 .sidebar-separator{width:100%;height:18px;box-sizing:border-box;margin-top:42px;border-top:0;opacity:0.0;pointer-events:none;}
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
-.lang-btn{display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:var(--pastel-orange);padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
-.lang-btn .flag{font-size:18px;line-height:1}
+.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn .flag{font-size:18px;line-height:1;font-family: 'Cairo'}
 
 /* Page main area scrollable */
-#main{width:92%;max-width:1100px;margin:12px auto;padding:12px;height:auto;display:block;overflow:auto}
+#main{width:98%;max-width:1100px;margin:12px auto;padding:12px;height:auto;display:block;overflow:auto}
 
 /* content blocks */
 .hero{background:var(--card-bg);padding:14px;border-radius:10px;margin-bottom:12px;box-shadow:0 6px 18px rgba(0,0,0,0.04);text-align:center}
@@ -61,11 +61,11 @@ a{color:inherit;text-decoration:none}
 .mission-card{background:var(--card-bg);padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
 .mission-title{display:flex;align-items:center;gap:12px;font-weight:700;margin-bottom:8px}
 .mission-title i{font-size:20px;color:var(--nav-bg);width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px}
-.mission-body{color:var(--primary);line-height:1.45;text-align:center;font-size:medium}
+.mission-body{color:var(--primary);line-height:1.45;text-align:center;font: size 15px;}
 
 /* Contribution section */
 .contribution{background:var(--card-bg);padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.04);text-align:center;margin-bottom:18px}
-.contribution p{color:var(--primary);line-height:1.45;font-size:medium;text-align:justify ;max-width:880px;margin:0 auto}
+.contribution p{color:var(--primary);line-height:1.6;font: size 24px;;text-align:center ;max-width:880px;margin: 0 6% 0 6% auto}
 .actions{display:flex;gap:12px;justify-content:center;margin-top:12px;flex-wrap:wrap}
 .btn{display:inline-block;padding:10px 14px;border-radius:10px;font-weight:700;background:var(--nav-bg);color:var(--card-bg);border:none;text-decoration:none}
 .btn.secondary{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--primary)}
@@ -110,9 +110,16 @@ h1, .hero h1, .page-header h1, .intro h1, .collapsible-card .card-header h3 {
   margin:0 0 8px 0;
 }
 .card-sub, .mission-body, .content-inner, .muted {
-  font-size:medium;
+  font-size:15px;
   line-height:1.4;
   text-align: justify;
+}
+
+.hero-subtitle{
+  font-size:18px;
+  font-weight:600;
+  margin-bottom:5px;
+  opacity:0.85;
 }
   </style>
 </head>
@@ -131,7 +138,7 @@ h1, .hero h1, .page-header h1, .intro h1, .collapsible-card .card-header h3 {
         <a href="new.html"><i class="fas fa-user-plus"></i>Ajouter</a>
         <a href="mission.html"><i class="fas fa-tasks"></i>Missions</a>
 
-        <a href="projets.html"><i class="fas fa-hand-holding-heart"></i>Nos projets et dons</a>
+        <a href="projets.html"><i class="fas fa-hand-holding-heart"></i>Projets & Dons</a>
         <a href="joinus.html"><i class="fas fa-users"></i>Rejoins-nous</a>
         <a href="toolsfr.html"><i class="fas fa-tools"></i>Outils</a>
         <a href="contact.html"><i class="fas fa-envelope"></i>Contact</a>
@@ -148,17 +155,16 @@ h1, .hero h1, .page-header h1, .intro h1, .collapsible-card .card-header h3 {
 
   <main id="main">
     <section class="hero" aria-hidden="false">
-      <h1 style="font-size:larger;margin:0 0 30px 0;text-align:center;">Nos Missions</h1>
+    <h1 style="margin-top: 30px;font-size:30px;text-align:center;margin-bottom: 3%;">Nos Missions</h1>
+<p class="hero-subtitle">Préserver la mémoire.</p>
+<p class="hero-subtitle">Structurer l’avenir.</p>
 
-      <p style="max-width:880px;font-size: medium;margin:0 auto;text-align:justify;color:var(--primary)">
-Quboor digitalise les données funéraires pour créer une base géolocalisée dédiée à la mémoire et à la recherche, tout en structurant les corps de métiers existants des cimetières via des contrats déclarés et des conditions de travail dignes.
+      <p style="max-width:880px;font-size: medium;margin:10% 6% 10% 6%;line-height: 1.6;text-align:center;color:var(--primary)">
+Quboor digitalise les données funéraires et structure les métiers des cimetières pour bâtir un modèle digne, transparent et durable à l’échelle nationale.
       </p>
 
       <img src="img/img2.jpeg" alt="Cimetières - illustration" style="margin-top: 5%;margin-bottom: 5%;"/>
 
-      <p style="max-width:880px;font-size: medium;margin:0 auto;text-align:justify;color:var(--primary)">
-        Ce projet, financé par des dons et des partenariats, a pour objectif d’améliorer la qualité des services funéraires tout en valorisant un patrimoine humain, mémoriel et historique trop souvent négligé. Cette phase pilote à Rabat servira de base pour structurer le modèle, tester les outils et méthodes, et préparer un déploiement progressif à l’échelle nationale.
-      </p>
       <br></br>
 
     </section>
@@ -166,7 +172,7 @@ Quboor digitalise les données funéraires pour créer une base géolocalisée d
     <section class="missions-grid" aria-label="Missions principales">
       <article class="mission-card">
         <div class="mission-title"><i class="fas fa-map-marked-alt"></i><div>Recensement &amp; Digitalisation</div></div>
-        <div class="mission-body">Collecte et structuration des données funéraires : noms, dates, emplacements, inscriptions. Création d'une base de données fiable et accessible pour la mémoire collective et les recherches historiques.</div>
+        <div class="mission-body">Collecte et structuration des données funéraires , noms, dates, emplacements, inscriptions. Création d'une base de données fiable et accessible pour la mémoire collective.</div>
       </article>
 
       <article class="mission-card">
@@ -182,23 +188,15 @@ Quboor digitalise les données funéraires pour créer une base géolocalisée d
     <section class="contribution" aria-label="Votre contribution">
       <br></br>
 
-      <h2 style="margin:0 0 8px 0;text-align:center;font-size: large;margin-left: 5%;margin-right: 5%;">Votre contribution</h2>
+      <h2 style="margin:0 8% 8px 8%;text-align:center;font-size: 24px;margin-left: 5%;margin-right: 5%;">Contribuer au projet</h2>
       <p>
-        Quboor est une initiative citoyenne et sociale qui repose sur l'engagement collectif. Si vous partagez notre vision, vous pouvez nous aider de différentes manières : en rejoignant nos équipes de bénévoles sur le terrain, en mettant à disposition vos compétences. Chaque contribution permet de renforcer la qualité de nos services et d’offrir une reconnaissance digne à des métiers essentiels mais oubliés.
+Quboor est une initiative citoyenne et sociale reposant sur l’engagement collectif. Chaque contribution renforce la structuration du secteur et la préservation du patrimoine mémoriel.
       </p>
 <br></br>
 
       <div class="actions">
         <a class="btn" href="joinus.html">Rejoindre l'équipe bénévole</a>
       </div>
-<br></br>
-      <div style="margin-top:12px;text-align:left;max-width:880px;margin-left:auto;margin-right:auto;">
-        <div class="mission-card" style="margin-top:12px">
-          <h4 style="margin:0 0 8px 0;text-align:center;font-size: large;">Votre soutien financier</h4>
-          <div class="mission-body">Votre soutien financier est essentiel pour la mise en œuvre de nos missions : structuration des métiers funéraires, digitalisation des données, achat d'équipements, encadrement, accompagnement. Grâce à vos dons, nous pouvons proposer des contrats déclarés, former des intervenants, et bâtir un modèle durable de préservation du patrimoine.</div>
-        </div>
-      </div>
-<br></br>
             <div class="actions">
         <a class="btn" href="projets.html#nous-supporter">Nous soutenir</a>
       </div>

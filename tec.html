@@ -25,9 +25,9 @@
   --nav-bg: var(--blue-dark);
   --card-bg: #fffdf6;
   --page-bg: var(--blue-very-pale);
-  --muted: #6b6b6b;
+  --muted: #1c1fb9;
   --text-on-nav: var(--beige-cold);
-  --popup-search-bg: #f7fbfd;
+  --popup-search-bg: #fffdf6;
 
   --dm-nav-bg: var(--beige-cold);
   --dm-sidebar-bg: #254045;
@@ -54,6 +54,8 @@ a{color:inherit;text-decoration:none}
   border-radius:8px;
   box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
+
+
 .logo{height:34px}
 .menu-btn{
   background:none;border:0;color:#FFFCFA;font-size:20px;padding:8px;border-radius:6px;cursor:pointer
@@ -112,7 +114,7 @@ a{color:inherit;text-decoration:none}
 .sidebar-separator{width:100%;height:18px;box-sizing:border-box;margin-top:42px;border-top:0;opacity:0.0;pointer-events:none;}
 
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
-.lang-btn{display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:#FFFCFA;padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
 .lang-btn:focus{outline:none;box-shadow:none}
 .lang-btn .flag{font-size:18px;line-height:1}
 .lang-btn .label{display:none}
@@ -202,9 +204,14 @@ a{color:inherit;text-decoration:none}
   border-radius:8px;
   border:1px solid rgba(0,0,0,0.06);
   background:transparent;
-  font-size:14px;
   color:inherit;
   box-sizing:border-box;
+}
+
+.input::placeholder,
+textarea::placeholder {
+  color: var(--primary);
+  font-family: 'inter';
 }
 textarea{min-height:100px;resize:vertical}
 .form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
@@ -219,7 +226,7 @@ textarea{min-height:100px;resize:vertical}
 }
 .btn.secondary{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--primary)}
 
-.note{font-size:medium;color:var(--primary);margin-top:8px;text-align:justify}
+.note{font-size:medium;color:var(--primary);margin-top:8px;text-align:justify;    margin: 0 -8% 0% -8%;}
 
 /* dark mode */
 .dark{
@@ -243,7 +250,7 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
   margin:0 0 8px 0;
 }
 .card-sub, .content-inner p {
-  font-size:large;
+  font-size:medium;
   line-height:1.4;
 }
   </style>
@@ -276,7 +283,7 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
         <a href="new.html"><i class="fas fa-user-plus"></i>Ajouter</a>
         <a href="mission.html"><i class="fas fa-tasks"></i>Missions</a>
 
-        <a href="projets.html"><i class="fas fa-hand-holding-heart"></i>Nos projets et dons</a>
+        <a href="projets.html"><i class="fas fa-hand-holding-heart"></i>Projets & Dons</a>
         <a href="joinus.html"><i class="fas fa-users"></i>Rejoins-nous</a>
         <a href="toolsfr.html"><i class="fas fa-tools"></i>Outils</a>
         <a href="contact.html"><i class="fas fa-envelope"></i>Contact</a>
@@ -307,10 +314,9 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
             <form id="rgpdForm" class="form-row" onsubmit="return false;" style="display:grid;grid-template-columns:1fr;gap:10px;">
               <div style="display:flex;gap:10px;flex-wrap:wrap;">
                 <div style="flex:1;min-width:160px">
-                  <label style="font-size:13px;color:var(--primary)">Objet de la demande</label>
                   <div class="note" style="var(--primary)">Merci d’indiquer clairement l’objet de votre demande et toutes les informations permettant d’identifier la sépulture concernée. Votre demande sera traitée avec attention.</div>
                   <br></br>
-                  <select id="reqType" class="input" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent">
+                  <select id="reqType" class="input" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:var(--popup-search-bg)">
                     <option value="">Sélectionner...</option>
                     <option value="Retrait">Retrait</option>
                     <option value="Modification">Modification</option>
@@ -334,7 +340,7 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
               </div>
 
               <div>
-                <textarea id="message" class="input" placeholder="Détails : UID , nom sur la tombe, dates, emplacement, ville... Toutes informations permettant d'identifier la sépulture" required style="width:100%;padding:12px;border-radius:8px;border:1px solid rgba(215, 10, 10, 0.06);background:transparent;min-height:120px;color: #FFFCFA;"></textarea>
+                <textarea id="message" class="input" placeholder="Détails : UID , nom sur la tombe, dates, emplacement, ville... Toutes informations permettant d'identifier la sépulture." required style="width:100%;padding:12px;border-radius:8px;border:1px solid rgba(215, 10, 10, 0.06);background:transparent;min-height:120px;color: #FFFCFA;"></textarea>
               </div>
 
               <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px;">

@@ -66,7 +66,7 @@ a{color:inherit;text-decoration:none}
 
 /* language switch in sidebar - centered at bottom (no inline styles) */
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
-.lang-btn{font-family: 'Cairo';display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:var(--pastel-orange);padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
 .lang-btn .flag{font-size:18px;line-height:1}
 
 /* hide textual labels and show only flag glyphs in the sidebar language buttons (matches other pages) */
@@ -98,23 +98,32 @@ h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
   margin:0 0 8px 0;
 }
 .card-sub, .hero-card p, .feature-item p, .muted {
-  font-size:medium;
+  font: size 13px;;
   line-height:1.4;
 }
 
+.hero-subtitle{
+  font-size:18px;
+  font-weight:600;
+  margin-bottom:5px;
+  opacity:0.85;
+  margin: 5% 15% 10% 15%;
+  text-align: center;
+}
+
 /* Main single-column mobile-first layout */
-#main{width:92%;max-width:720px;margin:12px auto;padding:12px;height:auto;display:block}
+#main{width:98%;max-width:720px;margin:12px auto;padding:12px;height:auto;display:block}
 .hero-card{background:var(--card-bg);border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,0.04);margin-bottom:14px}
 .hero-card h1{font-size:larger;margin-bottom:30px;text-align:center}
-.hero-card p{font-size:medium;line-height:1.5;color:var(--primary);text-align:justify;margin-bottom:12px;}
+.hero-card p{font-size:medium;line-height:1.5;color:var(--primary);text-align:center;    margin: 10% 6% 10% 6%;}
 
 /* small features card (new) */
 .features-card{background:var(--card-bg);border-radius:12px;padding:14px;box-shadow:0 6px 18px rgba(0,0,0,0.04);margin-bottom:14px}
 .features-list{display:flex;flex-direction:column;gap:10px}
 .feature-item{background:transparent;border-radius:10px;padding:10px;display:flex;gap:10px;align-items:flex-start}
 .feature-item i{background:transparent;border-radius:8px;font-size:18px;width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center}
-.feature-item h4{margin:0;font-size:medium}
-.feature-item p{margin:0;font-size:medium;color:var(--muted);line-height:1.4}
+.feature-item h4{margin:0;font-size:large}
+.feature-item p{margin:0;font-size:13px;color:var(--muted);line-height:1.4}
 
 /* Image styling: smaller and centered for phones */
 .hero-image{width:100%;display:flex;justify-content:center;margin-bottom:12px}
@@ -167,19 +176,17 @@ h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
   <main id="main">
     <!-- Single hero card with text first, then image, no CTAs or actions -->
     <article class="hero-card" aria-labelledby="join-title">
-<h1 id="join-title">انضموا إلى مغامرة قبور</h1>
+<h1 style="margin-top: 30px;font-size:30px;text-align:center;margin-bottom: 3%;" id="join-title">انضم إلينا</h1>
+<p class="hero-subtitle">ساهموا في الحفاظ على ذاكرتنا الجماعية</p>
 
 <p>
-  مشروع قبور هو مبادرة مواطنة وتضامنية مخصصة للحفاظ على الذاكرة الجماعية — من خلال رسم الخرائط، الرقمنة، وتعزيز قيمة المقابر المغربية. مهمتنا التجريبية تجري حالياً في مقبرة الشهداء بالرباط، حيث نقوم بتحديد مواقع القبور، التقاط الصور، تسجيل النقوش الظاهرة، وتحديد الموقع الجغرافي بدقة للمدافن.
-</p>
+قُبور هي مبادرة مواطِنة مخصّصة لرسم خرائط المقابر المغربية ورقمنتها.
+تهدف مهمتنا التجريبية في الرباط إلى إنشاء قاعدة بيانات مفتوحة، أخلاقية ومتاحة لعائلات الوطن ولأفراد الجالية في الخارج.</p>
 
 <div class="hero-image" aria-hidden="false">
   <img src="img/img3.jpeg" alt="تفاصيل حجر قبر">
 </div>
 
-<p class="muted">
-  هدفنا هو إنشاء قاعدة بيانات مفتوحة، أخلاقية ومتاحة لجميع العائلات، داخل المغرب وخارجه. هذا العمل يساعد على الحفاظ على آثار الذاكرة، التعرف على القبور المهجورة، وتعزيز الروابط بين الأجيال. لا تتطلب أي مهارات تقنية: إرادتك للمساهمة تكفي. الانضمام إلى قبور يعني المشاركة في عمل جماعي للذاكرة، الاحترام، والنقل للأجيال القادمة.
-</p>
     </article>
     <br></br>
     <!-- Call-to-action button: contact us (placed before features card) -->
@@ -201,7 +208,7 @@ h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
 <article class="features-card" aria-labelledby="features-title">
 
 
-  <h2 id="features-title" style="font-size:large;margin:0 0 10px 0;text-align:center">كيف يمكنك المساعدة</h2>
+  <h2 id="features-title" style="font-size:24px;margin:10% 0 10px 0;text-align:center">كيف يمكنك المساعدة</h2>
 
   <div class="features-list">
     <div class="feature-item">

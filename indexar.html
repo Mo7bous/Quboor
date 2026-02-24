@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenue sur Quboor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+        
 
         :root {
             --primary-color: #2C3E50;
@@ -25,15 +24,14 @@
             --accent-color: #686f74;
         }
 
-html, body {
-    height: 100%;
-    font-family: 'Cairo', system-ui, -apple-system, BlinkMacSystemFont, 'C airo', Arial, sans-serif;
-    background: var(--page-bg);
-    color: var(--primary);
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    direction: rtl;
-}
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-color);
+            overflow: hidden;
+        }
 
         .landing-container {
             height: 100vh;
@@ -61,15 +59,18 @@ html, body {
         }
 
         p {
-            font-size: larger;
+            font-size: 1.2rem;
+            font-family: 'Cairo';
             max-width: 600px;
             margin-bottom: 30px;
             animation: fadeInUp 1.5s ease-out 1s both;
+                        margin: 0% 10% 0% 10%;
+
         }
 
         .enter-btn {
             padding: 15px 20px;
-            font-size: large;
+            font-size: 1.2rem;
             background-color: var(--accent-color);
             color: #f9f4ea;
             border: none;
@@ -79,7 +80,8 @@ html, body {
             animation: fadeInUp 1.5s ease-out 1.5s both;
             position: relative;
             z-index: 10;
-            font-family: 'Cairo';
+                        font-family: 'Cairo';
+
         }
 
         .enter-btn:hover {
@@ -153,11 +155,11 @@ html, body {
 </head>
 <body>
     <div class="landing-container">
-        <img src="img/logotitrear.png" alt="Logo" class="logo">
+        <img src="img/logotitre.png" alt="Logo" class="logo">
         <br><br/>
         <p>اكتشف التاريخ وقدم التحية لأحبائك الراحلين. تعرف على الأماكن واحتفظ بذكراهم.</p>
         <br><br/>
-        <button class="enter-btn" onclick="window.location.href='missionar.html'">دخول</button>
+        <button class="enter-btn" onclick="window.location.href='missionar.html'">الدخول</button>
         <div class="particles"></div>
     </div>
 

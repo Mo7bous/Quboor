@@ -131,7 +131,7 @@ a{color:inherit;text-decoration:none}
 /* language switch in sidebar - moved to bottom left and shows both flags side by side */
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
 
-.lang-btn{display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:var(--pastel-orange);padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
 
 /* ensure focus state also has no contour */
 .lang-btn:focus{outline:none;box-shadow:none}
@@ -183,7 +183,7 @@ a{color:inherit;text-decoration:none}
   align-items:center;      /* center both icon & title */
   gap:8px;
   border:1px solid var(--card-border, rgba(0,0,0,0.04));
-  box-shadow:0 6px 18px rgba(0,0,0,0.04);
+  box-shadow:0 6px 18px rgba(0,0,0,0.14);
   cursor:pointer;
   text-align:center;
   transition:transform .18s,box-shadow .18s;
@@ -244,7 +244,7 @@ a{color:inherit;text-decoration:none}
   padding:10px 12px;
   border-radius:8px;
   border:1px solid rgba(11,77,160,0.03);
-  font-size:x-large;
+  font-size:large;
   text-align: right;
   box-sizing:border-box;
   background:transparent;
@@ -254,7 +254,7 @@ a{color:inherit;text-decoration:none}
 .search-row .count{font-size:large;color:var(--muted);font-family: 'Cairo';}
 
 /* Scrollable table listing */
-.list-table{width:100%;border-collapse:collapse;font-size:x-large}
+.list-table{width:100%;border-collapse:collapse;font-size:large}
 .list-wrapper{flex:1;overflow:auto;border-top:1px solid rgba(11,77,160,0.02);padding-top:12px /* small space after search before table */}
 .list-table th{padding:10px 12px;border-bottom:1px solid rgba(11,77,160,0.02);text-align:right;font-family: 'Cairo';}
 .list-table td{padding:10px 12px;border-bottom:1px solid rgba(11,77,160,0.02);text-align:right;font-family: 'Cairo';}
@@ -301,7 +301,7 @@ a{color:inherit;text-decoration:none}
 }
 .dark .search-row input[type="search"]{
   color: var(--pastel-orange);
-  border:1px solid rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.14);
 }
 .dark .search-row input[type="search"]::placeholder{
   color: var(--pastel-orange);
@@ -355,7 +355,7 @@ a{color:inherit;text-decoration:none}
 }
 .dark .search-row input[type="search"]{
   color: var(--pastel-orange);
-  border:1px solid rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.14);
 }
 .dark .search-row .count{
   color: var(--pastel-orange);

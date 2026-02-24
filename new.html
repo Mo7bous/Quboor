@@ -389,6 +389,7 @@ body.mode-nuit {
     label {
       display: block;
       font-weight: bold;
+      font-size: large;
       margin-bottom: 0.4em;
       color: var(--secondary-color);
     }
@@ -402,10 +403,11 @@ body.mode-nuit {
       border: none;
       background-color: var(--secondary-color);
       color: #222;
+      font-size: medium;
     }
 
     input[readonly] {
-      background-color: var(--secondary-color);
+      background-color: #ccc;
       cursor: not-allowed;
     }
 
@@ -422,15 +424,14 @@ body.mode-nuit {
 
 #buttonback {
   position: fixed;        /* reste visible même au scroll */
-  top: 1%;
-  left: 2%;
+  bottom: 1%;
   z-index: 9999;          /* au-dessus de tout */
   
   background-color: var(--primary-color);
   color: var(--secondary-color);
   border: none;
   padding: 0.6em 0.9em;
-  font-size: 1.8em;
+  font-size: 1em;
   border-radius: 8px;
   cursor: pointer;
 
@@ -487,6 +488,8 @@ body.mode-nuit {
       padding: 1em;
       border-radius: 4px;
       margin-top: 1em;
+      font-size: 16px;
+
     }
 
     .thank-you {
@@ -598,7 +601,7 @@ body.mode-nuit {
 
     #getLocationBtn,
     #clearLocationBtn {
-      background-color: var(--accent-color);
+      background-color: #4a4e69;
       color: var(--secondary-color);
       border: none;
       font-size: 1em;
@@ -663,7 +666,7 @@ body.mode-nuit {
       font-size: 1em;
       border: none;
       cursor: pointer;
-      background: var(--accent-color);
+      background: var(--primary-color);
       color: var(--secondary-color);
     }
 
@@ -713,7 +716,7 @@ body.mode-nuit {
   <button class="top-close" id="closePageBtn" style="box-shadow: none;"></button>
 <div class="initial-controls">
 <button id="buttonback">
-  <span class="icon">←</span>
+  <span class="icon">Retours à la plateforme</span>
 </button><button id="cancelInitial">Annuler</button>
 <button id="continueInitial">Continuer</button>
 </div>
@@ -807,7 +810,7 @@ body.mode-nuit {
 
 <div class="note">
 📌 Astuce : Indiquez une localisation aussi précise que possible afin de faciliter le repérage de la tombe.
-Vous pouvez également nous envoyer une localisation par e-mail. À la fin du processus d'inscription, un e-mail sera géneré. Veuillez nous y indiquer manuellement les positions GPS. </div>
+Vous pouvez également ajouter manuellement la localisation. À la fin du processus d'inscription, un e-mail sera géneré. Veuillez nous y indiquer manuellement les positions GPS. </div>
 <br/><br>
 <div class="form-group">
 <label>Localisation actuelle</label>
@@ -816,14 +819,14 @@ Vous pouvez également nous envoyer une localisation par e-mail. À la fin du pr
 <div class="location-controls">
 <button id="getLocationBtn" title="Obtenir ma position">
 <svg viewbox="0 0 24 24">
-<circle cx="12" cy="12" fill="none" r="10" stroke="secondary-color" stroke-width="2"></circle>
-<circle cx="12" cy="12" fill="secondary-color" r="3"></circle>
+<circle cx="12" cy="12" fill="none" r="10" stroke="white" stroke-width="2"></circle>
+<circle cx="12" cy="12" fill="white" r="3"></circle>
 </svg>
 </button>
 <button id="clearLocationBtn" title="Effacer">
 <svg viewbox="0 0 24 24">
-<line stroke="secondary-color" stroke-width="2" x1="6" x2="18" y1="6" y2="18"></line>
-<line stroke="secondary-color" stroke-width="2" x1="6" x2="18" y1="18" y2="6"></line>
+<line stroke="white" stroke-width="2" x1="6" x2="18" y1="6" y2="18"></line>
+<line stroke="white" stroke-width="2" x1="6" x2="18" y1="18" y2="6"></line>
 </svg>
 </button>
 </div>

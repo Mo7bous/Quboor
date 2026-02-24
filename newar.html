@@ -4,7 +4,8 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>قبور – تسجيل</title>
 <script type="importmap">
-    {
+    
+  {
       "imports": {
         "leaflet": "https://cdn.skypack.dev/leaflet"
       }
@@ -382,7 +383,7 @@ body.mode-nuit {
     label {
       display: block;
       font-weight: bold;
-      font-size: larger;
+      font-size: large;
       margin-bottom: 0.4em;
       color: var--secondary-color;
       text-align: right;
@@ -398,6 +399,7 @@ body.mode-nuit {
       background-color: var(--secondary-color);
       color: #222;
       text-align: right;
+      font-size: medium;
     }
 
     input[readonly] {
@@ -420,17 +422,15 @@ body.mode-nuit {
 
 #buttonback {
   position: absolute;        /* reste visible même au scroll */
-  top: 1%;
-  left: 2%;
+  bottom: 1%;
   z-index: 9999;          /* au-dessus de tout */
-  background-color: transparent;
+  background-color: var(--primary-color);
   color: var(--secondary-color);
   border: none;
   padding: 0.6em 0.9em;
-  font-size: 1.6em;
+  font-size: 1em;
   border-radius: 8px;
   cursor: pointer;
-
   display: flex;
   align-items: center;
   gap: 8px;
@@ -484,7 +484,7 @@ body.mode-nuit {
       border-radius: 4px;
       margin-top: 1em;
       text-align: right;
-      font-size: larger;
+      font-size: 15px;
 
     }
 
@@ -703,8 +703,8 @@ body.mode-nuit {
       font-size: 1em;
       border: none;
       cursor: pointer;
-      background: var(--accent-color);
-      color: white;
+      background: var(--primary-color);
+      color: var(--secondary-color);
     }
 
     #initialStage .stage-message {
@@ -753,7 +753,7 @@ body.mode-nuit {
 <button class="top-close" id="closePageBtn" style="box-shadow: none;"></button>
 <div class="initial-controls">
   <button id="buttonback">
-  <span class="icon">←</span>
+  <span class="icon">العودة إلى المنصة</span>
 </button>
 <button id="cancelInitial">إلغاء</button>
 <button id="continueInitial">متابعة</button>
@@ -849,9 +849,8 @@ body.mode-nuit {
       <div class="step-indicator" id="stepIndicator">تحديد الموقع الجغرافي</div>
 
 <div class="note">
-📌 نصيحة: يرجى تحديد موقع بدقة قدر الإمكان لتسهيل العثور على القبر.
-يمكنك أيضًا إرسال الموقع عبر البريد الإلكتروني. في نهاية عملية التسجيل، سيتم إنشاء بريد إلكتروني. يرجى إدخال إحداثيات GPS يدويًا فيه.
-</div>
+📌 نصيحة: يُرجى تحديد موقع دقيق قدر الإمكان لتسهيل العثور على القبر.
+ يمكنكم أيضًا إضافة الموقع يدويًا. في نهاية عملية التسجيل، سيتم إنشاء بريد إلكتروني. يُرجى تزويدنا بإحداثيات GPS يدويًا عبر ذلك البريد.</div>
 <br/><br>
 <div class="form-group">
 <label>الموقع الحالي</label>

@@ -55,11 +55,11 @@ a{color:inherit;text-decoration:none}
 .closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:var(--pastel-orange);cursor:pointer}
 .sidebar-separator{width:100%;height:18px;box-sizing:border-box;margin-top:42px;border-top:0;opacity:0.0;pointer-events:none;}
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
-.lang-btn{font-family: 'Cairo';display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:var(--pastel-orange);padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
 .lang-btn .flag{font-size:18px;line-height:1}
 
 /* Page main area scrollable */
-#main{width:92%;max-width:1100px;margin:12px auto;padding:12px;height:auto;display:block;overflow:auto}
+#main{width:98%;max-width:1100px;margin:12px auto;padding:12px;height:auto;display:block;overflow:auto}
 
 /* content blocks */
 .hero{background:var(--card-bg);padding:14px;border-radius:10px;margin-bottom:12px;box-shadow:0 6px 18px rgba(0,0,0,0.04);text-align:center}
@@ -74,7 +74,7 @@ a{color:inherit;text-decoration:none}
 
 /* Contribution section */
 .contribution{background:var(--card-bg);padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.04);text-align:center;margin-bottom:18px}
-.contribution p{color:var(--muted);line-height:1.45;text-align:justify;font-size:medium;max-width:880px;margin:0 auto}
+.contribution p{color:var(--primary);line-height:1.6;font: size 24px;;text-align:center ;max-width:880px;margin: 0 6% 0 6% auto}
 .actions{display:flex;gap:12px;justify-content:center;margin-top:12px;flex-wrap:wrap}
 .btn{display:inline-block;padding:10px 14px;border-radius:10px;font-weight:700;background:var(--nav-bg);color:var(--card-bg);border:none;text-decoration:none}
 .btn.secondary{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--primary)}
@@ -124,6 +124,12 @@ h1, .hero h1, .page-header h1, .intro h1, .collapsible-card .card-header h3 {
   line-height:1.4;
   text-align: justify;
 }
+
+.hero-subtitle{
+  font-size:18px;
+  font-weight:600;
+  opacity:0.85;
+}
   </style>
 </head>
 <body>
@@ -160,17 +166,15 @@ h1, .hero h1, .page-header h1, .intro h1, .collapsible-card .card-header h3 {
 
 <main id="main">
   <section class="hero" aria-hidden="false">
-    <h1 style="font-size:larger;margin:0 0 8px 0;text-align:center;margin-bottom: 30px;">مهامنا</h1>
-
-      <p style="max-width:880px;font-size: medium;margin:0 auto;text-align:justify;color:var(--primary)">
-تعمل قُبور على رقمنة البيانات الجنائزية لإنشاء قاعدة بيانات جغرافية مخصّصة للذاكرة والبحث، مع هيكلة المهن القائمة داخل المقابر عبر عقود مُصرّح بها وظروف عمل لائقة.
+        <h1 style="margin-top: 30px;font-size:30px;text-align:center;margin-bottom: 3%;">مهامنا</h1>
+<p class="hero-subtitle">حفظ الذاكرة.</p>
+<p class="hero-subtitle">. تنظيم المستقبل</p>
+      <p style="max-width:880px;font-size: medium;margin:10% 6% 10% 6%;line-height: 1.6;text-align:center;color:var(--primary)">
+تعمل Quboor على رقمنة البيانات الجنائزية وتنظيم مهن المقابر لبناء نموذج كريم وشفاف ومستدام على المستوى الوطني.
     </p>
 
     <img src="img/img2.jpeg" alt="المقابر - توضيح" style="margin-top: 5%;margin-bottom: 5%;"/>
 
-      <p style="max-width:880px;font-size: medium; margin:0 auto;text-align:justify;color:var(--primary)">
-      يمول هذا المشروع من خلال التبرعات والشراكات، ويهدف إلى تحسين جودة الخدمات الجنائزية مع تعزيز قيمة التراث الإنساني والذاكري والتاريخي الذي غالباً ما يُهمل. هذه المرحلة التجريبية في الرباط ستشكل أساسًا لتنظيم النموذج، اختبار الأدوات والأساليب، والتحضير للتوسع التدريجي على المستوى الوطني.
-    </p>
     <br></br>
   </section>
 
@@ -192,26 +196,17 @@ h1, .hero h1, .page-header h1, .intro h1, .collapsible-card .card-header h3 {
   </section>
 
   <section class="contribution" aria-label="مساهمتك">
-      <br></br>
 
-    <h2 style="margin:0 0 8px 0;text-align:center;font-size: large;">مساهمتك</h2>
+      <h2 style="margin:0 8% 8px 8%;text-align:center;font-size: 24px;margin-left: 5%;margin-right: 5%;">مساهمتك</h2>
     <p>
-      قبور هي مبادرة مواطنة واجتماعية تعتمد على الالتزام الجماعي. إذا كنت تشاركنا الرؤية، يمكنك المساعدة بطرق مختلفة: الانضمام إلى فرقنا التطوعية على الأرض، أو تقديم مهاراتك وخبراتك. كل مساهمة تعزز جودة خدماتنا وتمنح تقديراً لائقاً لمهن أساسية لكنها غالباً منسية.
+Quboor هي مبادرة مواطِنة واجتماعية تقوم على الالتزام الجماعي. كل مساهمة تعزّز هيكلة القطاع والحفاظ على التراث التذكاري.
     </p>
     <br></br>
 
     <div class="actions">
       <a class="btn" href="joinus.html">انضم إلى فريق المتطوعين</a>
     </div>
-    <br></br>
 
-    <div style="margin-top:12px;text-align:left;max-width:880px;margin-left:auto;margin-right:auto;">
-      <div class="mission-card" style="margin-top:12px">
-        <h4 style="margin:0 0 8px 0;text-align:center;font-size: large;">دعمك المالي</h4>
-        <div class="mission-body">دعمك المالي ضروري لتنفيذ مهامنا: تنظيم المهن الجنائزية، رقمنة البيانات، توفير المعدات، الإشراف، والمتابعة... بفضل تبرعاتكم يمكننا تقديم عقود رسمية، تدريب المشاركين، وبناء نموذج مستدام للحفاظ على التراث.</div>
-      </div>
-    </div>
-    <br></br>
 
     <div class="actions">
       <a class="btn" href="projetsar.html#nous-supporter">ادعمنا</a>

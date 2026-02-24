@@ -120,7 +120,7 @@ a{color:inherit;text-decoration:none}
 .sidebar-separator{width:100%;height:18px;box-sizing:border-box;margin-top:42px;border-top:0;opacity:0.0;pointer-events:none;}
 
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
-.lang-btn{font-family: 'Cairo';display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:#FFFCFA;padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
 .lang-btn:focus{outline:none;box-shadow:none}
 .lang-btn .flag{font-size:18px;line-height:1}
 .lang-btn .label{display:none}
@@ -178,7 +178,7 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
   width:8px;height:40px;border-radius:6px;background:var(--nav-bg);
 }
 .card-header h3{margin:0;font-size:1.05rem;color:var(--primary)}
-.card-sub{font-size:large;color:var(--primary);text-align: justify;}
+.card-sub{font-size:medium;color:var(--primary);text-align: justify;}
 
 /* arrow */
 .card-arrow{
@@ -207,13 +207,19 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
 .content-inner p,
 .content-inner ol,
 .content-inner li {
-  font-size:medium;
+  font-size:14px;
   line-height:1.35;
   color:var(--primary);
   text-align:justify;
 }
 .content-card ol{margin-left:18px;color:var(--muted);margin-bottom:12px}
 .content-card li{margin:8px 0}
+
+.input::placeholder,
+textarea::placeholder {
+  color: var(--primary);
+}
+
 
 /* Contact form */
 .form-row{display:flex;flex-direction:column;gap:8px;margin-top:12px}
@@ -346,7 +352,7 @@ textarea{min-height:100px;resize:vertical}
         <h3 id="cf-title">نموذج التواصل</h3>
         <div class="card-sub">
 <div class="note" style="margin-top:6px">
-يرجى توضيح تفاصيل طلبكم بدقة حتى نتمكن من الرد عليكم بأفضل شكل ممكن.
+يرجى توضيح تفاصيل طلبكم بدقة حتى نتمكن من الرد عليكم بأفضل شكل ممكن
 </div>
         </div>
       </div>
@@ -355,8 +361,8 @@ textarea{min-height:100px;resize:vertical}
   </div>
 
   <div class="card-content open" id="contactFormContent">
-    <div class="content-inner content-card" style="padding:18px;">
-      <form id="contactForm" class="form-row" onsubmit="return false;" style="display:grid;grid-template-columns:1fr;gap:10px;">
+    <div class="content-inner content-card" style="padding:18px">
+      <form id="contactForm" class="form-row" onsubmit="return false;" style="display:grid;grid-template-columns:1fr;gap:10px">
         
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
           <div style="flex:1;min-width:160px">
@@ -379,7 +385,7 @@ textarea{min-height:100px;resize:vertical}
 
         <div>
           <label style="font-size:medium;color:var(--muted)">الرسالة</label>
-          <div class="note2" style="margin-top:6px">
+          <div class="note2" style="margin-top:10%;margin-bottom:10%">
             يرجى توضيح موضوع طلبكم بشكل دقيق حتى نتمكن من الرد عليكم بأفضل شكل.
           </div>
           <textarea id="c_message" class="input" placeholder="تفصيل..." required style="min-height:120px;font-size:medium"></textarea>
