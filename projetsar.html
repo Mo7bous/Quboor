@@ -53,29 +53,29 @@ a{color:inherit;text-decoration:none}
 .closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:var(--pastel-orange);cursor:pointer}
 .sidebar-separator{width:100%;height:18px;box-sizing:border-box;margin-top:42px;border-top:0;opacity:0.0;pointer-events:none;}
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
-.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
 .lang-btn .flag{font-size:18px;line-height:1}
 
 /* Page main area scrollable like contact us */
 #main{width:98%;max-width:1100px;margin:12px auto;padding:12px;height:auto;display:block;overflow:auto}
 
 /* Card styles */
-.collapsible-card{background:var(--card-bg);border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.14);overflow:hidden;margin-bottom:14px}
-.collapsible-card2{background:var(--card-bg);border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.14);overflow:hidden;margin-bottom:14px;margin-left: 5%;margin-right: 5%}
+.collapsible-card{background:var(--card-bg);border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.25);overflow:hidden;margin-bottom:14px}
+.collapsible-card2{background:var(--card-bg);border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.25);overflow:hidden;margin-bottom:14px;margin-left: 5%;margin-right: 5%}
 
 .card-header{display:flex;align-items:center;justify-content:space-between;padding:3px 16px;cursor:pointer}
 .card-header .title{display:flex;flex-direction:column}
-.card-header h3{margin:0;font-size:large}
+.card-header h3{    margin-top: 8%;;font-size:large}
 .card-sub{font-size:14px;color:var(--muted)}
 .card-arrow{width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;background:transparent;border:0;color:var(--primary);font-size:14px;transition:transform .22s}
-.card-content{padding:0 16px 16px 16px;max-height:0;overflow:hidden;transition:max-height .28s,padding .22s}
+.card-content{padding:12px 16px 16px 16px;max-height:0;overflow:hidden;transition:max-height .28s,padding .22s}
 .card-content.open{padding:12px 16px 16px 16px}
 
 /* content text */
-.content-inner p{font-size:14px;line-height:1.45;color:var(--primary);text-align:justify}
+.content-inner p{ margin: 5% 5% 10% 5%;font-size:14px;line-height:1.45;color:var(--primary);text-align:justify}
 
 /* ensure comfortable spacing for intro */
-.intro{background:var(--card-bg);padding:14px;border-radius:10px;margin-bottom:12px;box-shadow:0 6px 18px rgba(0,0,0,0.14);margin-left: 5%;margin-right: 5%;}
+.intro{background:var(--card-bg);padding:14px;border-radius:10px;margin-bottom:12px;box-shadow:0 6px 14px rgba(0,0,0,0.14);margin-left: 5%;margin-right: 5%;}
   /* Dark mode support for nosprojets page */
   .dark{
     --page-bg: #0b0c0f;
@@ -140,21 +140,20 @@ a{color:inherit;text-decoration:none}
       <button class="card-arrow" aria-hidden="true">▾</button>
     </div>
     <div class="card-content" id="proj1Content">
-      <br></br>
       <div class="content-inner">
         <p>حملات ميدانية منظمة لترميم المقابر المتدهورة وتعزيز قيمتها، تشمل أعمال قصيرة (يوم إلى يومين) ومتابعات ربع سنوية.</p>
 
-        <h4 style="margin:10px 0 6px 0">الأهداف</h4>
-        <ul style="margin:6px 0 10px 18px;color:var(--primary);font-size: small;">
+        <h4 style="margin:10px 0 6px 0;text-align: center;">الأهداف</h4>
+        <ul style="margin:6px 24px 10px 18px;color:var(--primary);font-size: small;">
           <li>تنظيف 5 مواقع تجريبية خلال السنة الأولى</li>
           <li>تعبئة 200 متطوع</li>
           <li>تقليل الفوضى وتحديد 100 قبر ذو أولوية</li>
         </ul>
 
-        <h4 style="margin:10px 0 6px 0">الوسائل</h4>
+        <h4 style="margin:10px 0 6px 0;text-align: center;">الوسائل</h4>
         <p>توفير المعدات (قفازات، أكياس، فراشي)، التنسيق اللوجستي، فرق ميدانية وشراكات محلية. التقدير: 12 فريقًا تطوعيًا، 2 منسقين ميدانيين.</p>
 
-        <h4 style="margin:10px 0 6px 0">الميزانية: 60,000 درهم</h4>
+        <h4 style="margin:10px 0 6px 0;text-align: center;">الميزانية: 60,000 درهم</h4>
       </div>
     </div>
   </article>
@@ -169,21 +168,20 @@ a{color:inherit;text-decoration:none}
       <button class="card-arrow" aria-hidden="true">▾</button>
     </div>
     <div class="card-content" id="proj2Content">
-      <br></br>
       <div class="content-inner">
         <p>إنشاء مرجع رقمي يضم الصور، النصوص، وإحداثيات GPS لكل قبر مدرج في القاعدة.</p>
 
-        <h4 style="margin:10px 0 6px 0">الأهداف</h4>
-        <ul style="margin:6px 0 10px 18px;color:var(--primary);font-size: small;">
+        <h4 style="margin:10px 0 6px 0;text-align: center">الأهداف</h4>
+        <ul style="margin:6px 24px 10px 18px;color:var(--primary);font-size: small;">
           <li>توثيق 2,000 قبر خلال 18 شهرًا</li>
           <li>إتاحة 80% من الملفات للعرض عبر الإنترنت</li>
           <li>ضمان البيانات الوصفية وقابلية التتبع</li>
         </ul>
 
-        <h4 style="margin:10px 0 6px 0">الوسائل</h4>
+        <h4 style="margin:10px 0 6px 0;text-align: center">الوسائل</h4>
         <p>فريق إدخال البيانات، خوادم آمنة، واجهة ويب، تدريب لتوحيد تسجيل البيانات. التقدير: 4 مراكز إدخال، 1 مدير خادم.</p>
 
-        <h4 style="margin:10px 0 6px 0">الميزانية: 160,000 درهم</h4>
+        <h4 style="margin:10px 0 6px 0;text-align: center">الميزانية: 160,000 درهم</h4>
       </div>
     </div>
   </article>
@@ -198,21 +196,20 @@ a{color:inherit;text-decoration:none}
       <button class="card-arrow" aria-hidden="true">▾</button>
     </div>
     <div class="card-content" id="proj3Content">
-      <br></br>
       <div class="content-inner">
         <p>برنامج ورش عمل لتوعية المشاركين باحترام الأماكن، الممارسات الصحيحة للتصوير، ومنهجيات تسجيل البيانات.</p>
 
-        <h4 style="margin:10px 0 6px 0">الأهداف</h4>
-        <ul style="margin:6px 0 10px 18px;color:var(--primary);font-size: small;">
+        <h4 style="margin:10px 0 6px 0;text-align: center">الأهداف</h4>
+        <ul style="margin:6px 24px 10px 18px;color:var(--primary);font-size: small;">
           <li>تدريب 150 متطوع خلال 12 شهرًا</li>
           <li>توحيد طريقة تسجيل الصور والنصوص</li>
           <li>إنشاء دليل عملي متاح للجميع</li>
         </ul>
 
-        <h4 style="margin:10px 0 6px 0">الوسائل</h4>
+        <h4 style="margin:10px 0 6px 0;text-align: center">الوسائل</h4>
         <p>جلسات محلية، وحدات تعليمية على الإنترنت، مواد مطبوعة، وفرق تدريبية (3 مدربين رئيسيين).</p>
 
-        <h4 style="margin:10px 0 6px 0">الميزانية: 70,000 درهم</h4>
+        <h4 style="margin:10px 0 6px 0;text-align: center">الميزانية: 70,000 درهم</h4>
       </div>
     </div>
   </article>
@@ -227,21 +224,20 @@ a{color:inherit;text-decoration:none}
       <button class="card-arrow" aria-hidden="true">▾</button>
     </div>
     <div class="card-content" id="proj4Content">
-      <br></br>
       <div class="content-inner">
         <p>تعزيز الروابط المؤسساتية لتأمين الوصول للمواقع، الحصول على التصاريح، وتنسيق الأنشطة المستدامة محليًا.</p>
 
-        <h4 style="margin:10px 0 6px 0">الأهداف</h4>
-        <ul style="margin:6px 0 10px 18px;color:var(--primary);font-size: small;">
+        <h4 style="margin:10px 0 6px 0;text-align: center">الأهداف</h4>
+        <ul style="margin:6px 24px 10px 18px;color:var(--primary);font-size: small;">
           <li>تفعيل 6 شراكات محلية رسمية</li>
           <li>تأمين الدعم اللوجستي والتصاريح الرسمية</li>
           <li>وضع بروتوكولات للحفظ المشترك</li>
         </ul>
 
-        <h4 style="margin:10px 0 6px 0">الوسائل</h4>
+        <h4 style="margin:10px 0 6px 0;text-align: center">الوسائل</h4>
         <p>اجتماعات مؤسساتية، اتفاقيات، توثيق قانوني، وتنسيق المشروع (1 مسؤول شراكات).</p>
 
-        <h4 style="margin:10px 0 6px 0">الميزانية: 50,000 درهم</h4>
+        <h4 style="margin:10px 0 6px 0;text-align: center">الميزانية: 50,000 درهم</h4>
       </div>
     </div>
   </article>
@@ -262,13 +258,13 @@ a{color:inherit;text-decoration:none}
 
   <div class="support-grid" style="display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:18px;">
     <!-- PayPal card -->
-    <div class="support-card" style="background:var(--card-bg);padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.14);position:relative;text-align:center;margin-left: 5%;margin-right: 5%;">
+    <div class="support-card" style="background:var(--card-bg);padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.25);position:relative;text-align:center;margin-left: 5%;margin-right: 5%;">
       <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
         <h4 style="margin:0 0 6px 0"><i class="fab fa-paypal" style="margin-left:10px;color:var(--primary)"></i>Paypal</h4>
         <div style="font-size:13px;margin-bottom:8px">تبرع سريع وآمن عبر بايبال.</div>
         <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
           <br></br>
-          <a href="https://www.paypal.com/ncp/payment/CVUNYDNC38HMN" target="_blank" rel="noreferrer" style="font-weight:600;color: #cf9251;">المساهمة</a>
+          <a href="https://www.paypal.com/ncp/payment/KU3EQMWY4E3G2" target="_blank" rel="noreferrer" style="font-weight:600;color: #cf9251;">المساهمة</a>
           <div style="font-size:13px">مساهمة لمرة واحدة أو دورية عبر بايبال.</div>
         </div>
       </div>
@@ -276,7 +272,7 @@ a{color:inherit;text-decoration:none}
 
 
     <!-- Kickstarter card -->
-    <div class="support-card" style="background:var(--card-bg);padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.14);position:relative;text-align:center;margin-left: 5%;margin-right: 5%;">
+    <div class="support-card" style="background:var(--card-bg);padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.25);position:relative;text-align:center;margin-left: 5%;margin-right: 5%;">
       <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
         <h4 style="margin:0 0 6px 0"><i class="fas fa-rocket" style="margin-left:10px;color:var(--primary)"></i>Kickstarter</h4>
         <div style="font-size:13px;margin-bottom:8px">حملات تمويل للمشاريع.</div>
