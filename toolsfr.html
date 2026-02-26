@@ -56,7 +56,7 @@ a{color:inherit;text-decoration:none}
   justify-content:space-between;
   padding:8px 16px; /* push inner controls a bit down */
   border-radius:8px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
 }
 .logo{height:34px}
 .menu-btn{
@@ -133,7 +133,7 @@ a{color:inherit;text-decoration:none}
 
 /* language switch in sidebar - moved to bottom left and shows both flags side by side */
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
-.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
 
 /* ensure focus state also has no contour */
 .lang-btn:focus{outline:none;box-shadow:none}
@@ -141,7 +141,7 @@ a{color:inherit;text-decoration:none}
 /* hide textual labels and show only flag glyphs in the sidebar language buttons */
 .lang-btn .label{display:none}
 .lang-btn.active{
-  box-shadow:0 4px 14px rgba(0,0,0,0.12);
+  box-shadow:0 4px 14px rgba(0,0,0,0.15);
   transform:translateY(-2px);
 }
 .lang-btn:active,.lang-btn:hover{transform:translateY(-2px)}
@@ -185,7 +185,7 @@ a{color:inherit;text-decoration:none}
   align-items:center;      /* center both icon & title */
   gap:8px;
   border:1px solid var(--card-border, rgba(0,0,0,0.04));
-  box-shadow:0 6px 18px rgba(0,0,0,0.14);
+  box-shadow:0 6px 14px rgba(0,0,0,0.15);
   cursor:pointer;
   text-align:center;
   transition:transform .18s,box-shadow .18s;
@@ -193,12 +193,12 @@ a{color:inherit;text-decoration:none}
 }
 .tool-card i{font-size:26px;color:var(--primary);width:auto;text-align:center}
 .tool-card h3{font-size:1rem;color:var(--primary);margin:0}
-.tool-card:active,.tool-card:hover{transform:translateY(-4px);box-shadow:0 10px 22px rgba(0,0,0,0.08)}
+.tool-card:active,.tool-card:hover{transform:translateY(-4px);box-shadow:0 10px 22px rgba(0,0,0,0.15)}
 
 /* Popup/modal */
 .popup{display:none;position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.45);align-items:center;justify-content:center;padding:20px;z-index:80}
 .popup[aria-hidden="false"]{display:flex}
-.popup-content{position:relative;width:100%;height:95%;max-width:1200px;background:var(--card-bg);border-radius:10px;padding:18px;box-shadow:0 8px 30px rgba(0,0,0,0.25);display:flex;flex-direction:column;overflow:hidden}
+.popup-content{position:relative;width:100%;height:95%;max-width:1200px;background:var(--card-bg);border-radius:10px;padding:18px;box-shadow:0 8px 30px rgba(0,0,0,0.15);display:flex;flex-direction:column;overflow:hidden}
 /* Close button positioned at the top-right corner of the popup content */
 .popup-close{
   position:absolute;
@@ -237,7 +237,7 @@ a{color:inherit;text-decoration:none}
   background:var(--popup-search-bg); /* subtle blue-grey slightly lighter than popup background */
   border-bottom: none;
   border-radius:12px; /* rounded rather than rectangular */
-  box-shadow:0 2px 6px rgba(0,0,0,0.06);
+  box-shadow:0 2px 6px rgba(0,0,0,0.15);
 }
 /* Make the search input narrower: use 90% of the available width */
 .search-row input[type="search"]{
@@ -246,7 +246,7 @@ a{color:inherit;text-decoration:none}
   padding:10px 12px;
   border-radius:8px;
   border:1px solid rgba(11,77,160,0.03);
-  font-size:larger;
+  font-size:large;
   box-sizing:border-box;
   background:transparent;
   color:inherit;
@@ -254,7 +254,7 @@ a{color:inherit;text-decoration:none}
 .search-row .count{font-size:13px;color:var(--muted)}
 
 /* Scrollable table listing */
-.list-table{width:100%;border-collapse:collapse;font-size:medium}
+.list-table{width:100%;border-collapse:collapse;font-size:larger}
 .list-wrapper{flex:1;overflow:auto;border-top:1px solid rgba(11,77,160,0.02);padding-top:12px /* small space after search before table */}
 .list-table th{padding:10px 12px;border-bottom:1px solid rgba(11,77,160,0.02);text-align:left;}
 .list-table td{padding:10px 12px;border-bottom:1px solid rgba(11,77,160,0.02);text-align:left;}
@@ -1169,6 +1169,12 @@ const douas = [
   {"title": "Doua du pardon du défunt",text: "Ô Allah, pardonne-lui, fais-lui miséricorde, accorde-lui la santé et le pardon. Honore son accueil, élargis son entrée, lave-le avec l’eau, la neige et la grêle, purifie-le de ses fautes comme on purifie le vêtement blanc de la saleté. Remplace sa demeure par une demeure meilleure, sa famille par une famille meilleure et son épouse par une épouse meilleure. Fais-le entrer au Paradis et protège-le du châtiment de la tombe et du châtiment du Feu."},
   {"title": "Doua des vivants et des morts",text: "Ô Allah, pardonne à nos vivants et à nos morts, à ceux qui sont présents parmi nous et à ceux qui sont absents, à nos jeunes et à nos vieux, à nos hommes et à nos femmes. Ô Allah, celui que Tu maintiens en vie parmi nous, fais-le vivre dans l’islam, et celui que Tu rappelles à Toi, fais-le mourir dans la foi. Ô Allah, ne nous prive pas de sa récompense et ne nous égare pas après lui."},
   {"title": "Doua de protection du défunt",text: "Ô Allah, untel fils d’untel est sous Ta protection et sous Ta garantie. Préserve-le de l’épreuve de la tombe et du châtiment du Feu. Tu es le Digne de loyauté et de vérité. Pardonne-lui et fais-lui miséricorde. Certes, Tu es Le Pardonneur, Le Très Miséricordieux."},
+
+  {"title": "صلاة على موتانا الأعزاء",text: " اللهم ارحم موتانا وموت المسلمين"},
+  {"title": "طلب الثواب والمغفرة",text: " اللهم ارحم موتانا وموت المسلمين"},
+  {"title": "الرجاء والرحمة للميت",text: "اللهم يمن كتابه ويسر حسابه وثقل بالحسنات ميزانه وثبت على الصراط أقدامه وأسكنه في أعلى الجنة بجوار حبيبك ومصطفاك صلى الله عليه وسلم"},
+
+
 ];
 
 window.douaContents = {
