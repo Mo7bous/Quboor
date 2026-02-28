@@ -63,18 +63,19 @@
         }
 
 .top-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: var(--primary-color);
-  color: var(--text-color);
-  height: 60px;
-  width: 91%;
-  margin: 20px auto 0 auto;
-  border-radius: 8px;
-  padding: 0 6% 0 32px; /* padding-left augmenté */
+    width: 92%;
+    max-width: 1100px;
+    margin: 18px auto;
+    height: 70px;
+    background: var(--nav-bg);
+    color: var(--card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+        border-radius: 8px;
   box-sizing: border-box;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .top-nav h1 {
@@ -88,7 +89,7 @@
 }
 
     .logo {
-      height: 40px;
+      height: 34px;
       width: auto;
     }
 
@@ -285,8 +286,10 @@
     }
 
     h222{
-    font-size: 1em;
-    color: var(--primary-color);
+    color: #fae6c6;
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     margin-bottom: 20px;
     display: block;
     text-align: justify;
@@ -325,8 +328,7 @@
 
     body {
       margin: 0;
-      font-family: 'Roboto', sans-serif;
-      background-color: var(--background-color);
+            font-family: 'Inter', sans-serif;      background-color: var(--background-color);
       color: var(--text-color);
     }
 
@@ -357,10 +359,9 @@ body.mode-nuit {
 
     main {
       max-width: 900px;
-      margin: 2em auto;
       display: flex;
       flex-direction: column;
-      gap: 1.5em;
+      gap: 0.5em;
       padding: 1em;
     }
 
@@ -368,6 +369,7 @@ body.mode-nuit {
       text-align: center;
       font-size: 1.1em;
       font-weight: bold; 
+      color: var(--secondary-color);
     }
 
     .step {
@@ -388,9 +390,7 @@ body.mode-nuit {
 
     label {
       display: block;
-      font-weight: bold;
       font-size: large;
-      margin-bottom: 0.4em;
       color: var(--secondary-color);
     }
 
@@ -424,11 +424,11 @@ body.mode-nuit {
 
 #buttonback {
   position: fixed;        /* reste visible même au scroll */
-  bottom: 1%;
+  top: 4%;
+  left: 5%;
   z-index: 9999;          /* au-dessus de tout */
   
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
+  color: #c89d57;
   border: none;
   padding: 0.6em 0.9em;
   font-size: 1em;
@@ -481,16 +481,30 @@ body.mode-nuit {
       cursor: pointer;
     }
 
-    .note {
-      font-size: 0.9em;
-      background-color: #5a4646;
-      color: #ffeb3b;
-      padding: 1em;
-      border-radius: 4px;
-      margin-top: 1em;
-      font-size: 16px;
+.note {
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 1em 1.2em;
+  margin-top: 1em;
 
-    }
+  /* Couleurs harmonisées */
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.03)
+  );
+
+  color: #fae6c6; /* orange doux */
+  
+  border-radius: 12px;
+
+  /* Effet fondu dans l'entourage */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+}
 
     .thank-you {
       text-align: center;
@@ -528,13 +542,15 @@ body.mode-nuit {
   background-color: var(--primary-color);
   color: var(--text-color);
   height: 70px;
-  width: 91%;
+  width: 92%;
   position: relative;
   box-sizing: border-box;
     }
 
     nav.top-nav img.logo {
-      height: 40px;
+      height: 34px;
+          margin-left: 5%;
+    margin-bottom: 1%;
     }
 
     .dark-toggle-btn {
@@ -671,19 +687,58 @@ body.mode-nuit {
     }
 
     #initialStage .stage-message {
-      background-color: var(--secondary-color);
-      padding: 1.2em;
+    background: linear-gradient(to bottom, rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 1));;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);  
+    padding: 1.2em;
       border-radius: 10px;
       max-width: 450px;
       font-size: 1.1em;
       line-height: 1.6;
-      color: var(--text-color);
+      color: #fae6c6;
       text-align: left;
     }
 
     .bullet-list {
-  color: var(--primary-color);
+  color: #fae6c6;
   text-align: center;
+  
+}
+
+.home-btn {
+  position: fixed;
+  top: 4%;
+  left: 5%;
+  z-index: 9999;
+
+  color: #c89d57;
+  border: none;
+  padding: 0.6em 0.9em;
+  font-size: 1em;
+  border-radius: 8px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+   animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.30);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Pour que le SVG suive la taille du texte */
+.home-btn svg {
+  width: 1.7em;
+  height: 1.7em;
 }
   </style>
 </head>
@@ -705,7 +760,7 @@ body.mode-nuit {
 
 <div class="stage initial-stage" id="initialStage">
 <div class="stage-message">
-    <h222> 📌 Astuce : Pour une géolocalisation précise, inscrivez vous lorsque vous êtes physiquement près de la tombe. Munissez-vous des informations suivantes avant de commencer : </h222>
+    <h222> 📌 Astuce : Pour une localisation précise, inscrivez vous lorsque vous êtes physiquement près de la tombe. Munissez-vous des informations suivantes avant de commencer : </h222>
 <div class="bullet-list">
   <div class="bullet-item">  ▸ Coordonnées du déclarant</div>
   <div class="bullet-item"> ▸ Détails sur défunt(e)</div>
@@ -716,8 +771,13 @@ body.mode-nuit {
   <button class="top-close" id="closePageBtn" style="box-shadow: none;"></button>
 <div class="initial-controls">
 <button id="buttonback">
-  <span class="icon">Retours à la plateforme</span>
-</button><button id="cancelInitial">Annuler</button>
+<a href="index.html" class="home-btn" title="Accueil">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="#fffdf6">
+    <path d="M12 3l9 8h-3v9h-4v-6H10v6H6v-9H3z"/>
+  </svg>
+</a>
+</button>
+<button id="cancelInitial">Annuler</button>
 <button id="continueInitial">Continuer</button>
 </div>
 </div>
@@ -1117,7 +1177,7 @@ document.getElementById('darkToggleBtn').addEventListener('click', () => {
       ].join('%0D%0A');
 
       const subject = `Nouvelle demande - UID: ${uidInput.value}`;
-      const mailtoLink = `mailto:info@quoboor.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+      const mailtoLink = `mailto:a.bouhlal@quoboor.org?subject=${encodeURIComponent(subject)}&body=${body}`;
       const mail = window.open(mailtoLink, '_blank');
       if (!mail) alert("Veuillez autoriser les popups pour envoyer l'e-mail.");
 

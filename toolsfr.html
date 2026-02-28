@@ -56,11 +56,23 @@ a{color:inherit;text-decoration:none}
   justify-content:space-between;
   padding:8px 16px; /* push inner controls a bit down */
   border-radius:8px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+  box-shadow:0 4px 12px rgba(0,0,0,0.25);
 }
 .logo{height:34px}
 .menu-btn{
-  background:none;border:0;color:#FFFCFA;font-size:20px;padding:8px;border-radius:6px;cursor:pointer
+  background:none;border:0;color:#FFFCFA;font-size:20px;padding:8px;border-radius:6px;cursor:pointer;    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.30);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 /* dark mode toggle button in top nav (moon / sun icon) */
 .dark-btn{
@@ -133,7 +145,8 @@ a{color:inherit;text-decoration:none}
 
 /* language switch in sidebar - moved to bottom left and shows both flags side by side */
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
-.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;
+box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
 
 /* ensure focus state also has no contour */
 .lang-btn:focus{outline:none;box-shadow:none}
@@ -198,7 +211,8 @@ a{color:inherit;text-decoration:none}
 /* Popup/modal */
 .popup{display:none;position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.45);align-items:center;justify-content:center;padding:20px;z-index:80}
 .popup[aria-hidden="false"]{display:flex}
-.popup-content{position:relative;width:100%;height:95%;max-width:1200px;background:var(--card-bg);border-radius:10px;padding:18px;box-shadow:0 8px 30px rgba(0,0,0,0.15);display:flex;flex-direction:column;overflow:hidden}
+.popup-content{position:relative;width:100%;height:95%;max-width:1200px;background:var(--card-bg);border-radius:10px;padding:18px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.15);display:flex;flex-direction:column;overflow:hidden}
 /* Close button positioned at the top-right corner of the popup content */
 .popup-close{
   position:absolute;

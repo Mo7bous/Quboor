@@ -48,7 +48,8 @@
         }
 
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
-.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;
+box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
 .lang-btn:focus{outline:none;box-shadow:none}
 .lang-btn .flag{font-size:18px;line-height:1}
 .lang-btn .label{display:none}
@@ -85,12 +86,12 @@ p2 {
   background-color: var(--primary-color);
   color: var(--text-color);
   height: 70px;
-  width: 91%;
+  width: 92%;
   margin: 18px auto 0 auto;
   border-radius: 8px;
-  padding: 0 20px 0 32px; /* padding-left augmenté */
+  padding:8px 16px; /* padding-left augmenté */
   box-sizing: border-box;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .top-nav h1 {
@@ -104,17 +105,32 @@ p2 {
 }
 
 .logo {
+margin-top: -8px;
+margin-left: 1px;
   height: 34px;
-  width: auto;
 }
 
 .menu-btn {
-  font-size: 24px;
-  background: none;
-  border: none;
-  color: var(--text-color);
-  cursor: pointer;
-  z-index: 1; /* Ensure it's clickable */
+    margin-top: -2px;
+    background: none;
+    border: 0;
+    color: var(--pastel-orange);
+    font-size: 20px;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.30);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .container {
@@ -126,8 +142,10 @@ p2 {
         
 
 .dark-mode-toggle-btn {
+        margin-left: 3px;
+    margin-bottom: 0;
     position: relative; /* important: plus de absolute */
-    font-size: 22px;
+    font-size: 18px;
     background: none;
     border: none;
     color: var(--text-color);
