@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenue sur Quboor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+              <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+        
 
         :root {
             --primary-color: #2C3E50;
@@ -43,9 +46,10 @@
         }
 
         .logo {
-            width: 300px;
+            width: 250px;
             height: auto;
             margin-bottom: 10px;
+            margin-top: 30%;
             animation: fadeInDown 1.5s ease-out;
         }
 
@@ -65,7 +69,7 @@
         }
 
         .enter-btn {
-            padding: 15px 20px;
+            padding: 10px 20px;
             font-size: 1.2rem;
             background-color: var(--accent-color);
             color: #f9f4ea;
@@ -76,6 +80,7 @@
             animation: fadeInUp 1.5s ease-out 1.5s both;
             position: relative;
             z-index: 10;
+            margin-bottom: 40%;
         }
 
         .enter-btn:hover {
@@ -84,6 +89,17 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
 
+        .enter-btn2
+{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;
+box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);
+padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:center;            animation: fadeInUp 1.5s ease-out 1.5s both;
+}
+
+        .enter-btn2:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
 
 
         @keyframes fadeInDown {
@@ -154,6 +170,10 @@
         <p>Explorez l'histoire et rendez hommage à vos proches disparus. Découvrez les lieux et préservez leur mémoire.</p>
         <br><br/>
         <button class="enter-btn" onclick="window.location.href='search.html'">Entrer</button>
+
+                <button class="enter-btn2" onclick="window.location.href='indexar.html'">العربية</button>
+
+
         <div class="particles"></div>
     </div>
 
