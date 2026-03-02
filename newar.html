@@ -283,6 +283,7 @@ html, body {
     h222{
     color: #fae6c6;
     margin-bottom: 20px;
+    font-size: 13px;
     display: block;
     text-align: justify;
     direction: rtl;
@@ -376,6 +377,7 @@ body.mode-nuit {
     .step.active {
       display: block;
       color: var(--secondary-color);
+      font-size: 14px;
     }
 
     .form-group {
@@ -477,7 +479,7 @@ body.mode-nuit {
     }
 
  .note {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5;
   padding: 1em 1.2em;
   margin-top: 1em;
@@ -489,7 +491,7 @@ body.mode-nuit {
     rgba(255,255,255,0.03)
   );
 
-  color: #FFD28A; /* orange doux */
+  color: #fae6c6; /* orange doux */
   
   border-radius: 12px;
 
@@ -504,6 +506,7 @@ body.mode-nuit {
     .thank-you {
       text-align: center;
       display: none;
+      color: var(--primary-color);
     }
 
     .thank-you.active {
@@ -552,6 +555,8 @@ body.mode-nuit {
       color: var(--secondary-color);
       font-size: 1.4em;
       cursor: pointer;
+            z-index: -5;
+
     }
 
     .sidebar-toggle-btn {
@@ -560,6 +565,7 @@ body.mode-nuit {
       color: var(--text-color);
       font-size: 1.4em;
       cursor: pointer;
+      z-index: -5;
     }
 
     .sidebar {
@@ -735,6 +741,8 @@ body.mode-nuit {
     .bullet-list {
   color: #fae6c6;
   text-align: center;
+        font-size: medium;
+
 }
 
 .home-btn {
@@ -773,6 +781,8 @@ body.mode-nuit {
   width: 1.75em;
   height: 1.75em;
 }
+
+
   </style>
 </head>
 <body>
@@ -795,9 +805,9 @@ body.mode-nuit {
 <div class="stage-message">
 <h222> 📌 نصيحة: للحصول على تحديد موقع دقيق، قم بالتسجيل عندما تكون قريبًا من القبر فعليًا. جهز المعلومات التالية قبل البدء: </h222>
 <div class="bullet-list">
-  <div class="bullet-item"> ▸ بيانات المبلغ</div>
-  <div class="bullet-item"> ▸ معلومات عن المتوفى/المتوفاة</div>
-  <div class="bullet-item"> ▸ صور المتوفى/المتوفاة والقبر </div>
+  <div class="bullet-item">بيانات المبلغ</div>
+  <div class="bullet-item">معلومات عن المتوفى/المتوفاة</div>
+  <div class="bullet-item">صور المتوفى/المتوفاة والقبر </div>
 </div>
 </div>
 <h2><button id="closeSidebarBtn" style="float: right; background: none; border: none; color: ; font-size: 0.1em; cursor: pointer;">×</button></h2>
@@ -1096,7 +1106,7 @@ document.getElementById('darkToggleBtn').addEventListener('click', () => {
       if (currentStep === steps.length - 1) {
         const totalSize = images.reduce((acc, file) => acc + file.size, 0);
         if (totalSize > 25 * 1024 * 1024) {
-          alert("La taille totale des images dépasse 25 Mo. Veuillez réduire la taille ou envoyer manuellement les images à info@quoboor.com avec le UID.");
+          alert("La taille totale des images dépasse 25 Mo. Veuillez réduire la taille ou envoyer manuellement les images à a.bouhlal@quboor.org avec le UID.");
           return;
         }
         sendEmail();

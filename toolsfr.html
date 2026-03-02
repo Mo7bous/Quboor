@@ -245,22 +245,23 @@ box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8p
   gap:8px;
   align-items:center;
   margin:0;
-  padding:10px;
+  padding:5px;
   position:relative;
   z-index:2;
   background:var(--popup-search-bg); /* subtle blue-grey slightly lighter than popup background */
   border-bottom: none;
   border-radius:12px; /* rounded rather than rectangular */
   box-shadow:0 2px 6px rgba(0,0,0,0.15);
+      justify-content: space-between;
 }
 /* Make the search input narrower: use 90% of the available width */
 .search-row input[type="search"]{
   width:90%;
-  max-width:100%;
+  max-width:50%;
   padding:10px 12px;
   border-radius:8px;
   border:1px solid rgba(11,77,160,0.03);
-  font-size:large;
+  font-size:15px;
   box-sizing:border-box;
   background:transparent;
   color:inherit;
@@ -268,7 +269,7 @@ box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8p
 .search-row .count{font-size:13px;color:var(--muted)}
 
 /* Scrollable table listing */
-.list-table{width:100%;border-collapse:collapse;font-size:larger}
+.list-table{width:100%;border-collapse:collapse;font-size:larger;margin-top: 10%;}
 .list-wrapper{flex:1;overflow:auto;border-top:1px solid rgba(11,77,160,0.02);padding-top:12px /* small space after search before table */}
 .list-table th{padding:10px 12px;border-bottom:1px solid rgba(11,77,160,0.02);text-align:left;}
 .list-table td{padding:10px 12px;border-bottom:1px solid rgba(11,77,160,0.02);text-align:left;}
@@ -319,6 +320,7 @@ box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8p
 }
 .dark .search-row input[type="search"]::placeholder{
   color: var(--pastel-orange);
+  background-color: #3d4b4d;
   opacity:0.9;
 }
 
@@ -418,11 +420,11 @@ h4 {
     margin-inline-end: 0px;
     font-weight: bold;
     unicode-bidi: isolate;
-    text-align: left;
+    text-align: center;
     font-family: 'Amiri';
 }
 .card-sub, .tool-card h3, .list-table td, .search-row .count {
-  font-size : 14px;
+  font-size : 16px;
   line-height:1.1;
 }
 
@@ -476,17 +478,12 @@ h4 {
     <section class="tools-container" id="toolsContainer">
       <button class="tool-card" data-tool="coran-audio" aria-haspopup="dialog">
         <i class="fas fa-headphones"></i>
-        <h3>Coran — Audio</h3>
-      </button>
-
-      <button class="tool-card" data-tool="coran-livre" aria-haspopup="dialog">
-        <i class="fas fa-book"></i>
-        <h3>Coran — Livre</h3>
+        <h3>Le Saint Coran</h3>
       </button>
 
       <button class="tool-card" data-tool="douas" aria-haspopup="dialog">
         <i class="fas fa-praying-hands"></i>
-        <h3>Dou'as & Invocations</h3>
+        <h3>Dou'as</h3>
       </button>
     </section>
   </main>
@@ -1269,7 +1266,7 @@ function buildListView(items, renderRowCallback){
         const name = (typeof it === 'string') ? it : (it.title || it.name || '');
         return q === '' || name.toLowerCase().includes(q);
       });
-      countSpan.textContent = `${filtered.length} résultat(s)`;
+      countSpan.textContent = `${filtered.length} Résultat(s)`;
       filtered.forEach((it, idx)=>{
         const tr = document.createElement('tr');
         const numTd = document.createElement('td');
@@ -1317,7 +1314,6 @@ function buildListView(items, renderRowCallback){
     let items = [];
     switch(toolKey){
       case 'coran-audio': title = 'Coran — Audio'; items = sourates; break;
-      case 'coran-livre': title = 'Coran — Livre'; items = sourates; break;
       case 'douas': title = "Dou'as & Invocations"; items = douas; break;
       default: title = 'Outil';
     }
@@ -1396,7 +1392,7 @@ function makeSlug(name){
   html = `<div class="detail-body">
     <h4>${escapeHtml(item)}</h4>
 
-    <div class="detail-short" style="margin-top:8px;font-size: large">
+    <div class="detail-short" style="text-align: center;margin-top:8px;margin-bottom:8px;font-size: large">
       ${escapeHtml(content.short)}
     </div>
 
@@ -1411,7 +1407,7 @@ function makeSlug(name){
   </div>
 
   <div style="margin-top:0px; display:flex; align-items:center; gap:0px;">
-    <div style="min-width:110px; font-weight:600;">
+    <div style="min-width:110px; font-weight:600;font-family: 'Cairo';">
       🎧 العربية
     </div>
     <audio controls preload="none" style="flex:1;">
@@ -1423,17 +1419,17 @@ function makeSlug(name){
     <hr style="margin:6px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
 
     <div class="detail-full"
-        style="text-align: justify;white-space:pre-wrap;color:var(--primary);font-size: large;  font-family: 'Amiri';">
+        style="text-align: center;white-space:pre-wrap;color:var(--primary);font-size: x-large;  font-family: 'Amiri';">
       ${escapeHtml(content.full)}
     </div>
   </div>`;
 
       } else {
-        html = `<div class="detail-body">
+        html = `<div class="detail-body" >
           <h3>${escapeHtml(item)}</h3>
-          <div class="detail-short" style="margin-top:8px">${escapeHtml(content.short)}</div>
+          <div class="detail-short"style="text-align: center;margin-top:8px">${escapeHtml(content.short)}</div>
           <hr style="margin:14px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
-          <div class="detail-full" style="text-align: justify;white-space:pre-wrap;color:var(--primary)";font-size: large;  font-family: 'Amiri';>${escapeHtml(content.full)}</div>
+          <div class="detail-full" style="text-align: center;white-space:pre-wrap;color:var(--primary)";font-size: x-large;  font-family: 'Amiri';>${escapeHtml(content.full)}</div>
         </div>`;
       }
 
@@ -1443,16 +1439,21 @@ function makeSlug(name){
       const content = getStructuredContentFor(item, 'doua');
       const audioSrc = `audio/${content.slug || makeSlug(item.title || item.name || item) }.mp3`;
 
-      html = `<div class="detail-body">
+      html = `<div class="detail-body" style="text-align: center;margin-top:8px;margin-bottom:8px;font-size: x-large">
         <h3>${escapeHtml(title)}</h3>
         <div style="margin-top:12px">
+            <div style="margin-top:0px; display:flex; align-items:center; gap:0px;">
+    <div style="min-width:110px; font-weight:600;font-family: 'Cairo';font-size: medium ">
+      🎧 العربية
+    </div>
+
           <audio controls preload="none" style="width:100%;margin-top:6px">
             <source src="${escapeHtml(audioSrc)}" type="audio/mpeg">
             Votre navigateur ne supporte pas l'élément audio.
           </audio>
         </div>
         <hr style="margin:14px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
-        <div class="detail-full" style="text-align: justify;white-space:pre-wrap;color:var(--primary);font-size: large;  font-family: 'Amiri';">${escapeHtml(content.full)}</div>
+        <div class="detail-full" style="text-align: center;white-space:pre-wrap;color:var(--primary);font-size: x-large;  font-family: 'Amiri';">${escapeHtml(content.full)}</div>
       </div>`;
     }
 

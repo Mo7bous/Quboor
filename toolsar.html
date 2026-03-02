@@ -249,25 +249,24 @@ a{color:inherit;text-decoration:none}
   border-bottom: none;
   border-radius:12px; /* rounded rather than rectangular */
   box-shadow:0 2px 6px rgba(0,0,0,0.15);
+      justify-content: space-between;
 }
 /* Make the search input narrower: use 90% of the available width */
 .search-row input[type="search"]{
   width:90%;
-  max-width:100%;
-  padding:10px 12px;
+  max-width:50%;
+  padding:5px;
   border-radius:8px;
   border:1px solid rgba(11,77,160,0.03);
-  font-size:large;
-  text-align: right;
+  font-size:17px;
   box-sizing:border-box;
   background:transparent;
   color:inherit;
-  font-family: 'Cairo';
 }
 .search-row .count{font-size:large;color:var(--muted);font-family: 'Cairo';}
 
 /* Scrollable table listing */
-.list-table{width:100%;border-collapse:collapse;font-size:larger}
+.list-table{width:100%;border-collapse:collapse;font-size:larger;margin-top: 10%}
 .list-wrapper{flex:1;overflow:auto;border-top:1px solid rgba(11,77,160,0.02);padding-top:12px /* small space after search before table */}
 .list-table th{padding:10px 12px;border-bottom:1px solid rgba(11,77,160,0.02);text-align:right;font-family: 'Cairo';}
 .list-table td{padding:10px 12px;border-bottom:1px solid rgba(11,77,160,0.02);text-align:right;font-family: 'Cairo';}
@@ -411,10 +410,11 @@ h1, .page-header h1, .tools-container .tool-card h3, .collapsible-card .card-hea
   text-align: right;
 }
 .card-sub, .tool-card h3, .list-table td, .search-row .count {
-  font-size:large;
+  font-size : 18px;
   line-height:1.1;
   text-align: right;
 }
+
 
 h3 {
     display: block;
@@ -423,7 +423,7 @@ h3 {
     margin-inline-end: 0px;
     font-weight: bold;
     unicode-bidi: isolate;
-    text-align: right;
+    text-align: center;
 }
 
 h4 {
@@ -433,7 +433,7 @@ h4 {
     margin-inline-end: 0px;
     font-weight: bold;
     unicode-bidi: isolate;
-    text-align: right;
+    text-align: center;
 }
   </style>
 </head>
@@ -483,12 +483,7 @@ h4 {
     <section class="tools-container" id="toolsContainer">
       <button class="tool-card" data-tool="coran-audio" aria-haspopup="dialog">
         <i class="fas fa-headphones"></i> 
-        <h3>التلاوة</h3>
-      </button>
-
-      <button class="tool-card" data-tool="coran-livre" aria-haspopup="dialog">
-        <i class="fas fa-book"></i>
-        <h3>القراءات</h3>
+        <h3>القرآن الكريم</h3>
       </button>
 
       <button class="tool-card" data-tool="douas" aria-haspopup="dialog">
@@ -1240,7 +1235,7 @@ function buildListView(items, renderRowCallback){
   searchRow.className = 'search-row';
     const searchInput = document.createElement('input');
     searchInput.type = 'search';
-    searchInput.placeholder = '...بحث';
+    searchInput.placeholder = 'بحث...';
     searchInput.setAttribute('aria-label','بحث');
     const countSpan = document.createElement('div');
     countSpan.className = 'count';
@@ -1391,7 +1386,7 @@ function buildListView(items, renderRowCallback){
   html = `<div class="detail-body">
     <h4>${escapeHtml(item)}</h4>
 
-    <div class="detail-short" style="font-size:large; margin-top:8px;text-align: right;margin-bottom:5%">
+    <div class="detail-short" style="text-align: center;margin-top:8px;margin-bottom:8px;font-size: large">
       ${escapeHtml(content.short)}
     </div>
 
@@ -1409,7 +1404,7 @@ function buildListView(items, renderRowCallback){
     <hr style="margin:6px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
 
     <div class="detail-full"
-        style="text-align: justify;white-space:pre-wrap;color:var(--primary);font-size: x-large">
+        style="text-align: center;white-space:pre-wrap;color:var(--primary);font-size: 28px;  font-family: 'Amiri';">
       ${escapeHtml(content.full)}
     </div>
   </div>`;
@@ -1417,9 +1412,9 @@ function buildListView(items, renderRowCallback){
       } else {
         html = `<div class="detail-body">
           <h3>${escapeHtml(item)}</h3>
-          <div class="detail-short" style="margin-top:8px;text-align: right",>${escapeHtml(content.short)}</div>
+          <div class="detail-short" style="margin-top:8px;text-align: center",>${escapeHtml(content.short)}</div>
           <hr style="margin:14px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
-          <div class="detail-full" style="margin-top:10%;font-size: x-large;text-align: justify;white-space:pre-wrap;color:var(--primary)">${escapeHtml(content.full)}</div>
+          <div class="detail-full" style="text-align: center;white-space:pre-wrap;color:var(--primary)";font-size: x-large;  font-family: 'Amiri';>${escapeHtml(content.full)}</div>
         </div>`;
       }
 
@@ -1429,16 +1424,21 @@ function buildListView(items, renderRowCallback){
       const content = getStructuredContentFor(item, 'doua');
       const audioSrc = `audio/${content.slug || makeSlug(item.title || item.name || item) }.mp3`;
 
-      html = `<div class="detail-body">
+      html = `<div class="detail-body" style="text-align: center;margin-top:8px;margin-bottom:8px;font-size: x-large">
         <h3>${escapeHtml(title)}</h3>
         <div style="margin-top:12px">
+            <div style="margin-top:0px; display:flex; align-items:center; gap:0px;">
+    <div style="min-width:110px; font-weight:600;font-family: 'Cairo';font-size: medium ">
+      🎧 العربية
+    </div>
+
           <audio controls preload="none" style="width:100%;margin-top:6px">
             <source src="${escapeHtml(audioSrc)}" type="audio/mpeg">
             Votre navigateur ne supporte pas l'élément audio.
           </audio>
         </div>
         <hr style="margin:14px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
-        <div class="detail-full" style="margin-top:10%;font-size:x-large;white-space:pre-wrap;color:var(--primary)">${escapeHtml(content.full)}</div>
+        <div class="detail-full" style="text-align: center;white-space:pre-wrap;color:var(--primary);font-size: x-large;  font-family: 'Amiri';">${escapeHtml(content.full)}</div>
       </div>`;
     }
 

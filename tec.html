@@ -238,7 +238,7 @@ textarea{min-height:100px;resize:vertical}
 }
 .btn.secondary{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--primary)}
 
-.note{font-size:medium;color:var(--primary);margin-top:8px;text-align:justify;    margin: 0 -8% 0% -8%;}
+.note{font-size:13px;color:var(--primary);margin-top:8px;text-align:left;    margin: 0 0% 0% 0%;}
 
 /* dark mode */
 .dark{
@@ -544,7 +544,7 @@ generateBtn.addEventListener('click', ()=>{
   }
 
   const body = buildEmailBody({type,name,email,subject,message});
-  const mailto = `mailto:info@quoboor.com?subject=${encodeURIComponent('[RGPD] ' + subject)}&body=${encodeURIComponent(body)}`;
+  const mailto = `mailto:a.bouhlal@quboor.org?subject=${encodeURIComponent('[RGPD] ' + subject)}&body=${encodeURIComponent(body)}`;
 
   // open user's mail client
   window.location.href = mailto;

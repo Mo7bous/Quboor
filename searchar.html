@@ -228,8 +228,33 @@ margin-left: 1px;
     font-size: medium;
     text-align: right;
         font-family: 'Cairo';
+}
+
+.dark-mode #searchInput {
+            width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border-color: var(--secondary-color);
+    box-sizing: border-box;
+    font-size: medium;
+    text-align: right;
+        font-family: 'Cairo';
+            background-color: var(--primary-color);
 
 }
+
+::placeholder {
+    width: 100%;
+    color: var(--primary-color);
+}
+
+.dark-mode ::placeholder {
+    background-color: #2C3E50;
+    color: var(--secondary-color);
+    width: 100%;
+}
+
+
 
 
 #death-cards-container {
@@ -355,7 +380,7 @@ mark {
 }
 
 .popup-content {
-    background-color: var(--secondary-color);
+    background: linear-gradient(135deg, #ebf4f8, #fbf4ec);
     margin: 5% auto;
     padding: 30px;
     border-radius: 8px;
@@ -905,11 +930,7 @@ body.dark-mode .search-explanation strong {
     color: var(--tenth-color);
 }
 
-body.dark-mode #searchInput {
-    background-color: var(--third-color);
-    color: var(--secondary-color);
-    border-color: 1px solid #444;;
-}
+
 
 body.dark-mode .death-card {
     background-color: var(--primary-color);
@@ -937,7 +958,7 @@ body.dark-mode mark {
 }
 
 body.dark-mode .popup-content {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, #2C3E50, #7b5833);
     color: var(--text-color);
 }
 
@@ -987,7 +1008,7 @@ body.dark-mode .relative-card {
 }
 
 body.dark-mode .gallery-images-container {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, #2C3E50, #7b5833);
 }
 
 body.dark-mode .gallery-images-container img {
@@ -1026,15 +1047,20 @@ body.dark-mode #volume-slider::-moz-range-thumb {
 }
 
 body.dark-mode .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-    background: var(--primary-color);
-    color: var(--secondary-color);
-    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.15);
+
+
+color: var(--primary-color);
+background: linear-gradient(135deg, #80b4cb, #2C3E50,);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
 }
 
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-    background:var(--secondary-color);
-    color: var(--primary-color);
-    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.15);
+background: linear-gradient(135deg, #80b4cb, #ebf4f8);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
 }
 
 
@@ -1063,6 +1089,8 @@ body.dark-mode.leaflet-popup-close-button {
     text-decoration: none;
     background: transparent;
 }
+
+
 
     </style>
     <script type="importmap">
@@ -1587,7 +1615,7 @@ function showInfo(index, event) {
 [يرجى وصف الخطأ هنا]
 
 وشكرًا لكم.`;
-        window.location.href = `mailto:info@qubor.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = `mailto:a.bouhlal@quboor.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     };
     const reportSection = document.createElement('div');
     reportSection.className = 'profile-section report-section';

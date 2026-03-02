@@ -293,6 +293,7 @@
     margin-bottom: 20px;
     display: block;
     text-align: justify;
+    font-size: 13px;
     }
 
     .cta-button:hover {
@@ -382,6 +383,7 @@ body.mode-nuit {
     .step.active {
       display: block;
       color: var(--secondary-color);
+      font-size: 14px;
     }
 
     .form-group {
@@ -390,9 +392,10 @@ body.mode-nuit {
 
     label {
       display: block;
-      font-size: large;
+      font-size: 18px;
       color: var(--secondary-color);
     }
+    
 
     input[type="text"],
     input[type="date"],
@@ -482,7 +485,7 @@ body.mode-nuit {
     }
 
 .note {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5;
   padding: 1em 1.2em;
   margin-top: 1em;
@@ -509,6 +512,7 @@ body.mode-nuit {
     .thank-you {
       text-align: center;
       display: none;
+      color: var(--primary-color);
     }
 
     .thank-you.active {
@@ -533,6 +537,8 @@ body.mode-nuit {
   color: var(--secondary-color);
   background: none;
   cursor: pointer;
+        z-index: -5;
+
     }
 
     /* New: Nav Bar and Sidebar Styles */
@@ -559,6 +565,8 @@ body.mode-nuit {
       color: var(--secondary-color);
       font-size: 1.4em;
       cursor: pointer;
+            z-index: -5;
+
     }
 
 
@@ -701,7 +709,7 @@ body.mode-nuit {
     .bullet-list {
   color: #fae6c6;
   text-align: center;
-  
+      font-size: medium;
 }
 
 .home-btn {
@@ -762,9 +770,9 @@ body.mode-nuit {
 <div class="stage-message">
     <h222> 📌 Astuce : Pour une localisation précise, inscrivez vous lorsque vous êtes physiquement près de la tombe. Munissez-vous des informations suivantes avant de commencer : </h222>
 <div class="bullet-list">
-  <div class="bullet-item">  ▸ Coordonnées du déclarant</div>
-  <div class="bullet-item"> ▸ Détails sur défunt(e)</div>
-  <div class="bullet-item"> ▸ Photos défunt(e) et tombe </div>
+  <div class="bullet-item">Coordonnées du déclarant</div>
+  <div class="bullet-item">Détails sur défunt(e)</div>
+  <div class="bullet-item">Photos défunt(e) et tombe </div>
 </div>
 </div>
   <h2><button id="closeSidebarBtn" style="float: right; background: none; border: none; color: ; font-size: 0.1em; cursor: pointer;">×</button></h2>
@@ -893,10 +901,6 @@ Vous pouvez également ajouter manuellement la localisation. À la fin du proces
 </div>
 </div>
 
-<div class="form-group">
-<label>Adresse</label>
-<span id="address">--</span>
-</div>
 <div class="form-group">
 <label>Dernière mise à jour</label>
 <span id="timestamp">--</span>
@@ -1060,7 +1064,7 @@ document.getElementById('darkToggleBtn').addEventListener('click', () => {
       if (currentStep === steps.length - 1) {
         const totalSize = images.reduce((acc, file) => acc + file.size, 0);
         if (totalSize > 25 * 1024 * 1024) {
-          alert("La taille totale des images dépasse 25 Mo. Veuillez réduire la taille ou envoyer manuellement les images à info@quoboor.com avec le UID.");
+          alert("La taille totale des images dépasse 25 Mo. Veuillez réduire la taille ou envoyer manuellement les images à a.bouhlal@quboor.org avec le UID.");
           return;
         }
         sendEmail();
@@ -1172,7 +1176,6 @@ document.getElementById('darkToggleBtn').addEventListener('click', () => {
         '',
         '--- Étape 3: Localisation ---',
         `Localisation : ${localisationInput.value || 'n/a'}`,
-        `Adresse : ${address.textContent || 'n/a'}`,
         `Dernière mise à jour : ${timestamp.textContent || 'n/a'}`
       ].join('%0D%0A');
 
