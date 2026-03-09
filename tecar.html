@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -10,9 +10,8 @@
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
 
   <style>
 :root{
@@ -26,9 +25,9 @@
   --nav-bg: var(--blue-dark);
   --card-bg: #fffdf6;
   --page-bg: var(--blue-very-pale);
-  --muted: #6b6b6b;
+  --muted: #1c1fb9;
   --text-on-nav: var(--beige-cold);
-  --popup-search-bg: #f7fbfd;
+  --popup-search-bg: #fffdf6;
 
   --dm-nav-bg: var(--beige-cold);
   --dm-sidebar-bg: #254045;
@@ -38,36 +37,72 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-html, body {
-    height: 100%;
-    font-family: 'Cairo', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-    background: var(--page-bg);
-    color: var(--primary);
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    direction: rtl;
-}
+html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 
-.top-nav{
-  width:92%;
-  max-width:1100px;
-  margin:18px auto;
-  height:70px;
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:30px;
+  background:#ebf4f8;
+  z-index:900;
+}
+
+.dark body::before{
+  background: #0b0c0f;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  top:0px; /* navbar (70px) + margin (18px) */
+  left:0;
+  height: 15%;
+  width: 90%;
+  margin-top: 5%;
+  margin-left: 5%;
+  margin-right : 5%;
+  background:linear-gradient(
+    to bottom,
+    #ebf4f8 0%,
+    rgba(235,244,248,0) 100%
+  );
+  pointer-events:none;
+  z-index:999;
+  
+}
+
+.dark body::after{
+  background:linear-gradient( to bottom,#0b0c0f 0%,transparent 100%);
+}
+
+/* Top nav */
+.top-nav{  position: fixed;
+  top: 18px;
+  width: 90%;
+  height: 10%;
+  margin-left: 5%;
+  margin-right : 5%;
   background:var(--nav-bg);
   color:var(--card-bg);
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:8px 16px;
-  border-radius:8px;
+  border-radius:20px;
   box-shadow:0 4px 12px rgba(0,0,0,0.25);
-}
+  z-index:1000;}
+
+
 .logo {
   height: 47px;
-  margin-right: 3px;
-  margin-top: 12px;
-}.menu-btn{
+  margin-right: -2px;
+  margin-top: 4px;
+}
+.menu-btn{
   background:none;border:0;color:#FFFCFA;font-size:20px;padding:8px;border-radius:6px;cursor:pointer;    animation: pulse 2s infinite ease-in-out;
 }
 
@@ -97,23 +132,9 @@ a{color:inherit;text-decoration:none}
 .dark-btn i{width:20px; height:20px}
 .nav-controls{display:flex;gap:8px;align-items:center}
 
-.sidebar{
-  position:fixed;
-  left:-280px;
-  top:0;
-  height:100%;
-  width:280px;
-  background:var(--nav-bg);
-  color:var(--card-bg);
-  padding-top:20px;
-  padding-bottom:140px;
-  transition:left .28s;
-  z-index:60;
-  display:flex;
-  flex-wrap:wrap;
-  align-content:flex-start;
-  overflow:auto;
-}
+.sidebar{z-index: 1000; position:fixed;left:-280px;top:0;height:100%;width:280px;background:var(--nav-bg);color:var(--card-bg);padding-top:20px;padding-bottom:140px;transition:left .28s;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto}
+
+
 .sidebar.open{left:0}
 .sidebar a{
   display:flex;
@@ -126,17 +147,17 @@ a{color:inherit;text-decoration:none}
   padding:12px 6px;
   color:#FFFCFA;
   text-align:center;
-  font-size:medium;
+  font-size:14px;
   min-height:72px;
 }
 .sidebar a:nth-child(odd){ border-right:1px solid rgba(255,255,255,0.03);}
-.sidebar a i{font-size:x-large;display:block}
+.sidebar a i{font-size:20px;display:block}
 .closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:#FFFCFA;cursor:pointer}
 
 .sidebar-separator{width:100%;height:18px;box-sizing:border-box;margin-top:42px;border-top:0;opacity:0.0;pointer-events:none;}
 
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
-.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);color:#FFFCFA;padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:#FFFCFA;padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
 .lang-btn:focus{outline:none;box-shadow:none}
 .lang-btn .flag{font-size:18px;line-height:1}
 .lang-btn .label{display:none}
@@ -144,9 +165,12 @@ a{color:inherit;text-decoration:none}
 .lang-btn:active,.lang-btn:hover{transform:translateY(-2px)}
 
 #main{
-  width:92%;
+  width:100%;
+      margin-left: 2%;
+    margin-right: 2%;
   max-width:1100px;
-  margin:8px auto 0;
+  margin:110px auto 0;
+
   padding:8px 0 40px;
   height: calc(100vh - 120px);
   overflow: auto; /* allow page scrolling so expanded cards are fully viewable */
@@ -159,7 +183,7 @@ a{color:inherit;text-decoration:none}
 .content-card, .collapsible-card{
   background:var(--card-bg);
   border-radius:10px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.15);
+  box-shadow:0 6px 14px rgba(0,0,0,0.15);
   color:var(--primary);
   overflow: hidden;
 }
@@ -226,10 +250,10 @@ a{color:inherit;text-decoration:none}
   border-radius:8px;
   border:1px solid rgba(0,0,0,0.06);
   background:transparent;
-  font-size:14px;
   color:inherit;
   box-sizing:border-box;
 }
+
 .input::placeholder,
 textarea::placeholder {
   color: var(--primary);
@@ -248,13 +272,13 @@ textarea{min-height:100px;resize:vertical}
 }
 .btn.secondary{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--primary)}
 
-.note{font-size:13px;color:var(--primary);margin-top:8px;text-align:right;    margin: 0 0% 0% 0%;}
+.note{font-size:13px;color:var(--primary);margin-top:8px;text-align:left;    margin: 0 0% 0% 0%;}
 
 /* dark mode */
 .dark{
   --page-bg: #0b0c0f;
   --card-bg: #2C3E50;
-  --card-border: rgba(255,255,255,0.06);
+  --card-border: rgba(6, 6, 6, 0.06);
   --primary: #FFFCFA;
   --pastel-orange: #FFDAB8;
   --popup-search-bg: #2C3E50;
@@ -269,7 +293,7 @@ textarea{min-height:100px;resize:vertical}
 h1, .page-header h1, .collapsible-card .card-header h3 {
   font-size:larger;
   line-height:1.2;
-  margin:0 0 8px 0;
+  margin:8px 0 8px 0;
 }
 .card-sub, .content-inner p {
   font-size:medium;
@@ -282,7 +306,7 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
   <header class="top-nav">
     <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
     <div class="brand">
-      <img src="img/logotitrear.png" alt="Logo Quboor" class="logo">
+      <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
     </div>
     <div class="nav-controls">
       <button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button>
@@ -292,31 +316,29 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
   <div id="mySidebar" class="sidebar">
         <div class="lang-switch" aria-label="Sélecteur de langue">
           <button id="langBtnFR" class="lang-btn" data-lang="fr" aria-label="Français">
-            <span class="flag">Français</span>
+            Français</span>
           </button>
           <button id="langBtnMA" class="lang-btn" data-lang="ma" aria-label="العربية">
-            <span class="flag">العربية</span>
+            العربية</span>
           </button>
         </div>
 
         <span class="closebtn">&times;</span>
         <div class="sidebar-separator" aria-hidden="true"></div>
-          <a href="searchar.html"><i class="fas fa-search"></i>بحث</a>
-          <a href="newar.html"><i class="fas fa-user-plus"></i>إضافة</a>
-          <a href="missionar.html"><i class="fas fa-tasks"></i>المهام</a>
-
-          <a href="projetsar.html"><i class="fas fa-hand-holding-heart"></i>مشاريعنا</a>
-          <a href="joinusar.html"><i class="fas fa-users"></i>انضم إلينا</a>
-          <a href="toolsar.html"><i class="fas fa-tools"></i>الأدوات</a>
-          <a href="contactar.html"><i class="fas fa-envelope"></i>اتصل بنا</a>    
-          <br></br>
-          <a href="tecar.html"><i class="fas fa-file-contract"></i>الشروط والأحكام</a>
-          <a href="indexar.html"><i class="fas fa-home"></i>الرئيسية</a>
-      
+        <a href="searchar.html"><i class="fas fa-search"></i>بحث</a>
+        <a href="newar.html"><i class="fas fa-user-plus"></i>إضافة</a>
+        <a href="missionar.html"><i class="fas fa-tasks"></i>مهام</a>
+        <a href="projetsar.html"><i class="fas fa-hand-holding-heart"></i>المشاريع والتبرعات</a>
+        <a href="eventsar.html"><i class="fas fa-calendar-alt"></i>الفعاليات</a>
+        <a href="joinusar.html"><i class="fas fa-users"></i>انضم إلينا</a>
+        <a href="toolsar.html"><i class="fas fa-tools"></i>الأدوات</a>
+        <a href="contactar.html"><i class="fas fa-envelope"></i>اتصل بنا</a>
+        <a href="tecar.html"><i class="fas fa-file-contract"></i>الشروط والأحكام</a>
+        <a href="indexar.html"><i class="fas fa-home"></i>الرئيسية</a>
     </div>
 
   <main id="main">
-    <section style="width:92%;max-width:1100px;margin:12px auto 0;display:grid;grid-template-columns:1fr;gap:16px;">
+    <section style="width:90%;max-width:1100px;margin:-10px auto 0;display:grid;grid-template-columns:1fr;gap:16px;">
 
       <!-- RGPD collapsible card -->
       <aside class="collapsible-card" id="rgpdCard" aria-labelledby="rgpd-title">
@@ -326,57 +348,53 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
             <div>
 <h3 id="rgpd-title">نموذج حماية البيانات</h3>
 <div class="card-sub">طلب الحذف أو التعديل أو تقييد الوصول</div>
-</div>
-</div>
-<button class="card-arrow" aria-hidden="true">▾</button>
-</div>
-
-<div class="card-content" id="rgpdContent">
-  <div class="content-inner content-card" style="padding:18px;">
-    <form id="rgpdForm" class="form-row" onsubmit="return false;" style="display:grid;grid-template-columns:1fr;gap:10px;">
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <div style="flex:1;min-width:160px">
-          <label style="font-size:medium;color:var(--primary)">موضوع الطلب</label>
-          <div class="note" style="var(--primary)">
-            يرجى توضيح موضوع طلبك بشكل دقيق وتقديم جميع المعلومات التي تساعد على تحديد القبر المعني. سيتم معالجة طلبك بعناية.
+            </div>
           </div>
-          <br></br>
+          <button class="card-arrow" aria-hidden="true">▾</button>
+        </div>
+
+        <div class="card-content" id="rgpdContent">
+          <div class="content-inner content-card" style="padding:18px;">
+            <form id="rgpdForm" class="form-row" onsubmit="return false;" style="display:grid;grid-template-columns:1fr;gap:10px;">
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <div style="flex:1;min-width:160px">
+                  <div class="note" style="var(--primary)"> يرجى توضيح موضوع طلبك بشكل دقيق وتقديم جميع المعلومات التي تساعد على تحديد القبر المعني. سيتم معالجة طلبك بعناية.</div>
+                  <br></br>
                   <select id="reqType" class="input" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:var(--popup-search-bg)">
             <option value="">اختر...</option>
             <option value="Retrait">حذف</option>
             <option value="Modification">تعديل</option>
             <option value="Limitation de l'accès">تقييد الوصول</option>
-          </select>
-        </div>
+                  </select>
+                </div>
 
-<div style="flex:1;min-width:160px">
+                <div style="flex:1;min-width:160px">
   <input id="name" class="input" type="text" placeholder="اسمك الكامل" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent">
-</div>
-</div>
+                </div>
+              </div>
 
-<div style="display:flex;gap:10px;flex-wrap:wrap;">
-  <div style="flex:1;min-width:160px">
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <div style="flex:1;min-width:160px">
     <input id="email" class="input" type="email" placeholder="email@exemple.com" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent">
-  </div>
+                </div>
 
-  <div style="flex:1;min-width:160px">
+                <div style="flex:1;min-width:160px">
     <input id="subject" class="input" type="text" placeholder="الموضوع" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent">
-  </div>
-</div>
+                </div>
+              </div>
 
-<div>
+              <div>
   <textarea id="message" class="input" placeholder="تفاصيل: UID، الاسم على القبر، التواريخ، الموقع، المدينة... كل المعلومات التي تساعد على تحديد القبر" required style="width:100%;padding:12px;border-radius:8px;border:1px solid rgba(215, 10, 10, 0.06);background:transparent;min-height:120px;color:var(--primary)"></textarea>
-</div>
+              </div>
 
-<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px;">
-  <button id="generateBtn" class="btn" type="button" style="padding:10px 14px;border-radius:8px">إنشاء البريد الإلكتروني</button>
-  <button id="clearBtn" class="btn secondary" type="button" style="padding:10px 14px;border-radius:8px">مسح</button>
-</div>
-<br></br>
-</form>
-</div>
-</div>
-</aside>
+              <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px;">
+                <button id="generateBtn" class="btn" type="button" style="padding:10px 14px;border-radius:8px">إنشاء البريد الإلكتروني</button>
+                <button id="clearBtn" class="btn secondary" type="button" style="padding:10px 14px;border-radius:8px">مسح</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </aside>
 
       <!-- Terms collapsible card -->
       <article class="collapsible-card" id="termsCard" aria-labelledby="tc-title">
@@ -555,7 +573,7 @@ generateBtn.addEventListener('click', ()=>{
   const message = document.getElementById('message').value.trim();
 
   if (!type || !name || !email || !subject || !message){
-    alert('Merci de remplir tous les champs du formulaire.');
+    alert('يرجى ملء جميع حقول النموذج.');
     return;
   }
 

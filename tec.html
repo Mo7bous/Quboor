@@ -40,20 +40,61 @@
 html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 
-.top-nav{
-  width:92%;
-  max-width:1100px;
-  margin:18px auto;
-  height:70px;
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:30px;
+  background:#ebf4f8;
+  z-index:900;
+}
+
+.dark body::before{
+  background: #0b0c0f;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  top:0px; /* navbar (70px) + margin (18px) */
+  left:0;
+  height: 15%;
+  width: 90%;
+  margin-top: 5%;
+  margin-left: 5%;
+  margin-right : 5%;
+  background:linear-gradient(
+    to bottom,
+    #ebf4f8 0%,
+    rgba(235,244,248,0) 100%
+  );
+  pointer-events:none;
+  z-index:999;
+  
+}
+
+.dark body::after{
+  background:linear-gradient( to bottom,#0b0c0f 0%,transparent 100%);
+}
+
+/* Top nav */
+.top-nav{  position: fixed;
+  top: 18px;
+  width: 90%;
+  height: 10%;
+  margin-left: 5%;
+  margin-right : 5%;
   background:var(--nav-bg);
   color:var(--card-bg);
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:8px 16px;
-  border-radius:8px;
+  border-radius:20px;
   box-shadow:0 4px 12px rgba(0,0,0,0.25);
-}
+  z-index:1000;}
 
 
 .logo {
@@ -91,23 +132,9 @@ a{color:inherit;text-decoration:none}
 .dark-btn i{width:20px; height:20px}
 .nav-controls{display:flex;gap:8px;align-items:center}
 
-.sidebar{
-  position:fixed;
-  left:-280px;
-  top:0;
-  height:100%;
-  width:280px;
-  background:var(--nav-bg);
-  color:var(--card-bg);
-  padding-top:20px;
-  padding-bottom:140px;
-  transition:left .28s;
-  z-index:60;
-  display:flex;
-  flex-wrap:wrap;
-  align-content:flex-start;
-  overflow:auto;
-}
+.sidebar{z-index: 1000; position:fixed;left:-280px;top:0;height:100%;width:280px;background:var(--nav-bg);color:var(--card-bg);padding-top:20px;padding-bottom:140px;transition:left .28s;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto}
+
+
 .sidebar.open{left:0}
 .sidebar a{
   display:flex;
@@ -138,9 +165,12 @@ a{color:inherit;text-decoration:none}
 .lang-btn:active,.lang-btn:hover{transform:translateY(-2px)}
 
 #main{
-  width:92%;
+  width:100%;
+      margin-left: 2%;
+    margin-right: 2%;
   max-width:1100px;
-  margin:8px auto 0;
+  margin:110px auto 0;
+
   padding:8px 0 40px;
   height: calc(100vh - 120px);
   overflow: auto; /* allow page scrolling so expanded cards are fully viewable */
@@ -263,7 +293,7 @@ textarea{min-height:100px;resize:vertical}
 h1, .page-header h1, .collapsible-card .card-header h3 {
   font-size:larger;
   line-height:1.2;
-  margin:0 0 8px 0;
+  margin:8px 0 8px 0;
 }
 .card-sub, .content-inner p {
   font-size:medium;
@@ -298,19 +328,17 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
         <a href="search.html"><i class="fas fa-search"></i>Recherche</a>
         <a href="new.html"><i class="fas fa-user-plus"></i>Ajouter</a>
         <a href="mission.html"><i class="fas fa-tasks"></i>Missions</a>
-
         <a href="projets.html"><i class="fas fa-hand-holding-heart"></i>Projets & Dons</a>
+        <a href="events.html"><i class="fas fa-calendar-alt"></i>Événements</a>
         <a href="joinus.html"><i class="fas fa-users"></i>Rejoins-nous</a>
         <a href="toolsfr.html"><i class="fas fa-tools"></i>Outils</a>
         <a href="contact.html"><i class="fas fa-envelope"></i>Contact</a>
-      <br></br>
-      <a href="tec.html"><i class="fas fa-file-contract"></i>T&C</a>
-      <a href="index.html"><i class="fas fa-home"></i>Accueil</a>
-      
+        <a href="tec.html"><i class="fas fa-file-contract"></i>T&C</a>
+        <a href="index.html"><i class="fas fa-home"></i>Accueil</a>      
     </div>
 
   <main id="main">
-    <section style="width:92%;max-width:1100px;margin:12px auto 0;display:grid;grid-template-columns:1fr;gap:16px;">
+    <section style="width:90%;max-width:1100px;margin:-10px auto 0;display:grid;grid-template-columns:1fr;gap:16px;">
 
       <!-- RGPD collapsible card -->
       <aside class="collapsible-card" id="rgpdCard" aria-labelledby="rgpd-title">

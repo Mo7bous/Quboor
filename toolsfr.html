@@ -43,21 +43,62 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:30px;
+  background:#ebf4f8;
+  z-index:900;
+}
 
-.top-nav{
-  width:92%;
-  max-width:1100px;
-  margin:18px auto;
-  height:70px; /* slightly taller so controls can sit lower */
+.dark body::before{
+  background: #0b0c0f;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  top:0px; /* navbar (70px) + margin (18px) */
+  left:0;
+  height: 15%;
+  width: 90%;
+  margin-top: 5%;
+  margin-left: 5%;
+  margin-right : 5%;
+  background:linear-gradient(
+    to bottom,
+    #ebf4f8 0%,
+    rgba(235,244,248,0) 100%
+  );
+  pointer-events:none;
+  z-index:999;
+  
+}
+
+.dark body::after{
+  background:linear-gradient( to bottom,#0b0c0f 0%,transparent 100%);
+}
+
+/* Top nav */
+.top-nav{  position: fixed;
+  top: 18px;
+  width: 90%;
+  height: 10%;
+  margin-left: 5%;
+  margin-right : 5%;
   background:var(--nav-bg);
   color:var(--card-bg);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:8px 16px; /* push inner controls a bit down */
-  border-radius:8px;
+  padding:8px 16px;
+  border-radius:20px;
   box-shadow:0 4px 12px rgba(0,0,0,0.25);
-}
+  z-index:1000;}
+  
 .logo {
   height: 47px;
   margin-right: -1px;
@@ -94,24 +135,8 @@ a{color:inherit;text-decoration:none}
 .dark-btn i{width:20px; height:20px}
 .nav-controls{display:flex;gap:8px;align-items:center}
 
-.sidebar{
-  position:fixed;
-  left:-280px;
-  top:0;
-  height:100%;
-  width:280px;
-  background:var(--nav-bg);
-  color:var(--card-bg);
-  padding-top:20px;
-  padding-bottom:140px; /* reserve space at the bottom so language buttons have room to display */
-  transition:left .28s;
-  z-index:60;
-  /* show items in two columns */
-  display:flex;
-  flex-wrap:wrap;
-  align-content:flex-start;
-  overflow:auto;
-}
+.sidebar{z-index: 1000; position:fixed;left:-280px;top:0;height:100%;width:280px;background:var(--nav-bg);color:var(--card-bg);padding-top:20px;padding-bottom:140px;transition:left .28s;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto}
+
 .sidebar.open{left:0}
 /* each link takes half the sidebar width so there are two per row;
    keep icon above title inside each link */
@@ -165,9 +190,9 @@ box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8p
 
 /* Main layout */
 #main{
-  width:96%;
+  width:92%;
   max-width:1100px;
-  margin:8px auto 0;
+  margin:110px auto 0;
   padding:8px 0 40px;
   /* Fit main area to viewport so the page itself doesn't scroll;
      keep internal overflow hidden so only popups/list-wrappers scroll. */
@@ -190,9 +215,10 @@ box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8p
   align-items:center;
   width:100%;
   padding:0 8px;
+  margin-top: -5px;
 }
 .tool-card{
-  width:95%;
+  width:98%;
   max-width:980px;
   background:#FFFCFA;
   border-radius:10px;
@@ -213,7 +239,7 @@ box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8p
 .tool-card:active,.tool-card:hover{transform:translateY(-4px);box-shadow:0 10px 22px rgba(0,0,0,0.15)}
 
 /* Popup/modal */
-.popup{display:none;position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.45);align-items:center;justify-content:center;padding:20px;z-index:80}
+.popup{display:none;position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.45);align-items:center;justify-content:center;padding:20px;z-index:1003}
 .popup[aria-hidden="false"]{display:flex}
 .popup-content{position:relative;width:100%;height:95%;max-width:1200px;background:var(--card-bg);border-radius:10px;padding:18px;
   box-shadow:0 8px 30px rgba(0,0,0,0.15);display:flex;flex-direction:column;overflow:hidden}
@@ -444,7 +470,7 @@ h4 {
       <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
     </div>
     <div class="nav-controls">
-      <button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button>
+      <button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon" style="margin-top: 2px;" ></i></button>
     </div>
   </header>
 
@@ -465,15 +491,13 @@ h4 {
         <a href="search.html"><i class="fas fa-search"></i>Recherche</a>
         <a href="new.html"><i class="fas fa-user-plus"></i>Ajouter</a>
         <a href="mission.html"><i class="fas fa-tasks"></i>Missions</a>
-
         <a href="projets.html"><i class="fas fa-hand-holding-heart"></i>Projets & Dons</a>
+        <a href="events.html"><i class="fas fa-calendar-alt"></i>Événements</a>
         <a href="joinus.html"><i class="fas fa-users"></i>Rejoins-nous</a>
         <a href="toolsfr.html"><i class="fas fa-tools"></i>Outils</a>
-        <a href="contact.html"><i class="fas fa-envelope"></i>Contact</a>    
-      <br></br>
-      <a href="tec.html"><i class="fas fa-file-contract"></i>T&C</a>
-      <a href="index.html"><i class="fas fa-home"></i>Accueil</a>
-      
+        <a href="contact.html"><i class="fas fa-envelope"></i>Contact</a>
+        <a href="tec.html"><i class="fas fa-file-contract"></i>T&C</a>
+        <a href="index.html"><i class="fas fa-home"></i>Accueil</a>      
     </div>
 
   <main id="main">

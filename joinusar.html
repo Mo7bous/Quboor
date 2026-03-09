@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
-
 
   <style>
 :root{
@@ -21,32 +21,79 @@
   --blue-very-pale: #ebf4f8;
   --pastel-orange: #fffdf6;
 
-  --primary: var(--blue-dark);
-  --nav-bg: var(--blue-dark);
+  --primary: #2C3E50;
+  --nav-bg: #2C3E50;
   --card-bg: #fffdf6;
   --page-bg: var(--blue-very-pale);
 }
 
 /* Reset and base */
 *{box-sizing:border-box;margin:0;padding:0}
-html, body {
-    height: 100%;
-    font-family: 'Cairo', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-    background: var(--page-bg);
-    color: var(--primary);
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    direction: rtl;
-}
+html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:30px;
+  background:#ebf4f8;
+  z-index:900;
+}
+
+.dark body::before{
+  background: #0b0c0f;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  top:0px; /* navbar (70px) + margin (18px) */
+  left:0;
+  height: 15%;
+  width: 90%;
+  margin-top: 5%;
+  margin-left: 5%;
+  margin-right : 5%;
+  background:linear-gradient(
+    to bottom,
+    #ebf4f8 0%,
+    rgba(235,244,248,0) 100%
+  );
+  pointer-events:none;
+  z-index:999;
+  
+}
+
+.dark body::after{
+  background:linear-gradient( to bottom,#0b0c0f 0%,transparent 100%);
+}
+
 /* Top nav */
-.top-nav{width:92%;max-width:1100px;margin:18px auto;height:70px;background:var(--nav-bg);color:var(--card-bg);display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.25)}
-.logo {
+.top-nav{  position: fixed;
+  top: 18px;
+  width: 90%;
+  height: 10%;
+  margin-left: 5%;
+  margin-right : 5%;
+  background:var(--nav-bg);
+  color:var(--card-bg);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 16px;
+  border-radius:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.25);
+  z-index:1000;}
+
+  .logo {
   height: 47px;
-  margin-right: 1px;
-  margin-top: 12px;
-}.menu-btn{background:none;border:0;color:var(--pastel-orange);font-size:20px;padding:8px;border-radius:6px;cursor:pointer;    animation: pulse 2s infinite ease-in-out;
+  margin-right: -3px;
+  margin-top: 4px;
+}
+.menu-btn{background:none;border:0;color:var(--pastel-orange);font-size:20px;padding:8px;border-radius:6px;cursor:pointer;    animation: pulse 2s infinite ease-in-out;
 }
 
 @keyframes pulse {
@@ -60,13 +107,13 @@ a{color:inherit;text-decoration:none}
         transform: scale(1);
     }
 }
-.dark-btn{background:none;border:0;color:var(--pastel-orange);font-size:18px;padding:8px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.dark-btn{margin-top: -2px;margin-left: 1px  ;background:none;border:0;color:var(--pastel-orange);font-size:18px;padding:8px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
 
 /* Sidebar - match layout and behaviour used by other pages */
-.sidebar{position:fixed;left:-280px;top:0;height:100%;width:280px;background:var(--nav-bg);color:var(--card-bg);padding-top:20px;padding-bottom:140px;transition:left .28s;z-index:60;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto}
+.sidebar{z-index: 1000; position:fixed;left:-280px;top:0;height:100%;width:280px;background:var(--nav-bg);color:var(--card-bg);padding-top:20px;padding-bottom:140px;transition:left .28s;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto}
 .sidebar.open{left:0}
-.sidebar a{display:flex;flex-direction:column;align-items:center;justify-content:center;width:50%;box-sizing:border-box;gap:6px;padding:12px 6px;color:var(--pastel-orange);text-align:center;font-size:medium;min-height:72px}
-.sidebar a i{font-size:x-large;display:block}
+.sidebar a{display:flex;flex-direction:column;align-items:center;justify-content:center;width:50%;box-sizing:border-box;gap:6px;padding:12px 6px;color:var(--pastel-orange);text-align:center;font-size:14px;min-height:72px}
+.sidebar a i{font-size:20px;display:block}
 .closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:var(--pastel-orange);cursor:pointer}
 
 /* separator: keep spacing but remove any visible line so the close button isn't visually separated by a border */
@@ -82,8 +129,8 @@ a{color:inherit;text-decoration:none}
 
 /* language switch in sidebar - centered at bottom (no inline styles) */
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
-.lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
-.lang-btn .flag{font-size:18px;line-height:1}
+.lang-btn{display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow:none;color:var(--pastel-orange);padding:8px 10px;font-size:15px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
+.lang-btn .flag{ font-family: 'cairo';font-size:18px;line-height:1}
 
 /* hide textual labels and show only flag glyphs in the sidebar language buttons (matches other pages) */
 .lang-btn .label{display:none}
@@ -114,7 +161,7 @@ h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
   margin:0 0 8px 0;
 }
 .card-sub, .hero-card p, .feature-item p, .muted {
-  font: size 13px;;
+  font-size:13;
   line-height:1.4;
 }
 
@@ -124,20 +171,31 @@ h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
   margin-bottom:5px;
   opacity:0.85;
   margin: 5% 15% 10% 15%;
-  text-align: center;
+    text-align: center;
+
+}
+
+.hero-subtitle2{
+    font-size: medium;
+    line-height: 1.5;
+    color: var(--primary);
+    text-align: center;
+    margin: 10% 6% 10% 6%;
 }
 
 /* Main single-column mobile-first layout */
-#main{width:98%;max-width:720px;margin:12px auto;padding:12px;height:auto;display:block}
-.hero-card{background:var(--card-bg);border-radius:12px;padding:16px;box-shadow:0 6px 14px rgba(0,0,0,0.15);margin-bottom:14px}
+#main{  width:100%;
+  max-width:1100px;
+  margin:98px auto 0;padding:12px;height:auto;display:block}
+.hero-card{margin-left: 2%;margin-right: 2%; background:var(--card-bg);border-radius:12px;padding:16px 0 0 0;box-shadow:0 6px 14px rgba(0,0,0,0.15);margin-bottom:14px}
 .hero-card h1{font-size:larger;margin-bottom:30px;text-align:center}
-.hero-card p{font-size:medium;line-height:1.5;color:var(--primary);text-align:center;    margin: 10% 6% 10% 6%;}
+.hero-card p{font: size 18px;;line-height:1.5;color:var(--primary);text-align:center;    margin: 10% 6% 10% 6%;;}
 
 /* small features card (new) */
 .features-card{background:var(--card-bg);border-radius:12px;padding:14px;box-shadow:0 6px 14px rgba(0,0,0,0.15);margin-bottom:14px}
 .features-list{display:flex;flex-direction:column;gap:10px}
 .feature-item{background:transparent;border-radius:10px;padding:10px;display:flex;gap:10px;align-items:flex-start}
-.feature-item i{margin: 0 0 0 6px;background:transparent;border-radius:8px;font-size:18px;width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center}
+.feature-item i{background:transparent;border-radius:8px;font-size:18px;width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center}
 .feature-item h4{margin:0 0 0 15px;font-size:large}
 .feature-item p{margin:0 0 0 15px;font-size:13px;color:var(--muted);line-height:1.4}
 
@@ -156,6 +214,7 @@ h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
   #main{padding:18px}
   .hero-card h1{font-size:larger}
   .hero-card p{font-size:15px}
+
 }
   </style>
 </head>
@@ -163,24 +222,23 @@ h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
 
   <header class="top-nav">
     <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
-    <div class="brand"><img src="img/logotitrear.png" alt="Logo Quboor" class="logo"></div>
+    <div class="brand"><img src="img/logotitre.png" alt="Logo Quboor" class="logo"></div>
     <div class="nav-controls"><button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button></div>
   </header>
 
   <div id="mySidebar" class="sidebar">
     <span class="closebtn">&times;</span>
     <div class="sidebar-separator" aria-hidden="true"></div>
-          <a href="searchar.html"><i class="fas fa-search"></i>بحث</a>
-          <a href="newar.html"><i class="fas fa-user-plus"></i>إضافة</a>
-          <a href="missionar.html"><i class="fas fa-tasks"></i>المهام</a>
-
-          <a href="projetsar.html"><i class="fas fa-hand-holding-heart"></i>مشاريعنا</a>
-          <a href="joinusar.html"><i class="fas fa-users"></i>انضم إلينا</a>
-          <a href="toolsar.html"><i class="fas fa-tools"></i>الأدوات</a>
-          <a href="contactar.html"><i class="fas fa-envelope"></i>اتصل بنا</a>    
-          <br></br>
-          <a href="tecar.html"><i class="fas fa-file-contract"></i>الشروط والأحكام</a>
-          <a href="indexar.html"><i class="fas fa-home"></i>الرئيسية</a>
+        <a href="searchar.html"><i class="fas fa-search"></i>بحث</a>
+        <a href="newar.html"><i class="fas fa-user-plus"></i>إضافة</a>
+        <a href="missionar.html"><i class="fas fa-tasks"></i>مهام</a>
+        <a href="projetsar.html"><i class="fas fa-hand-holding-heart"></i>المشاريع والتبرعات</a>
+        <a href="eventsar.html"><i class="fas fa-calendar-alt"></i>الفعاليات</a>
+        <a href="joinusar.html"><i class="fas fa-users"></i>انضم إلينا</a>
+        <a href="toolsar.html"><i class="fas fa-tools"></i>الأدوات</a>
+        <a href="contactar.html"><i class="fas fa-envelope"></i>اتصل بنا</a>
+        <a href="tecar.html"><i class="fas fa-file-contract"></i>الشروط والأحكام</a>
+        <a href="indexar.html"><i class="fas fa-home"></i>الرئيسية</a>
 
 
     <div class="lang-switch" aria-label="Sélecteur de langue">
@@ -194,64 +252,59 @@ h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
     <article class="hero-card" aria-labelledby="join-title">
 <h1 style="margin-top: 30px;font-size:30px;text-align:center;margin-bottom: 3%;" id="join-title">انضم إلينا</h1>
 <p class="hero-subtitle">ساهموا في الحفاظ على ذاكرتنا الجماعية</p>
+<p class="hero-subtitle2">قُبور هي مبادرة مواطِنة مخصّصة لرسم خرائط المقابر المغربية ورقمنتها.
+تهدف مهمتنا التجريبية في الرباط إلى إنشاء قاعدة بيانات مفتوحة، أخلاقية ومتاحة لعائلات الوطن ولأفراد الجالية في الخارج.
+</p>
 
-<p>
-قُبور هي مبادرة مواطِنة مخصّصة لرسم خرائط المقابر المغربية ورقمنتها.
-تهدف مهمتنا التجريبية في الرباط إلى إنشاء قاعدة بيانات مفتوحة، أخلاقية ومتاحة لعائلات الوطن ولأفراد الجالية في الخارج.</p>
 
-<div class="hero-image" aria-hidden="false">
-  <img src="img/img3.jpeg" alt="تفاصيل حجر قبر">
-</div>
+      <div class="hero-image" aria-hidden="false">
+        <img src="img/img3.jpeg" alt="Détails d'une pierre tombale">
+      </div>
 
     </article>
     <br></br>
     <!-- Call-to-action button: contact us (placed before features card) -->
-<div style="width:100%;display:flex;justify-content:center;margin:12px 0 18px 0;">
-  <a href="contactar.html" class="btn" style="padding:12px 18px;border-radius:10px;font-weight:700;background:var(--nav-bg);color:#FFFCFA;text-decoration:none;">
+    <div style="width:100%;display:flex;justify-content:center;margin:12px 0 18px 0;">
+      <a href="contact.html" class="btn" style="padding:12px 18px;border-radius:10px;font-weight:700;background:var(--nav-bg);color:#FFFCFA;text-decoration:none;">
     <i class="fas fa-envelope" style="margin-right:8px;margin-left:8px"></i>تواصل معنا
-  </a>
-</div>
+      </a>
+    </div>
 
-<!-- نص قصير تحت زر التواصل لتشجيع المستخدم -->
-<div style="width:100%;display:flex;justify-content:center;margin-bottom:8px;">
-  <p style="margin:0;color:var(--muted);font-size:medium;text-align:center;max-width:720px;">
+    <!-- brief subtext under CTA to encourage contact -->
+    <div style="width:100%;display:flex;justify-content:center;margin-bottom:8px;">
+      <p style="margin:0;color:var(--muted);font-size: medium;text-align:center;max-width:720px;">
     لديك سؤال أو ترغب في المشاركة؟ راسلنا وسنرد عليك بسرعة.
-  </p>
-</div>
+      </p>
+    </div>
 
-<br></br>
-<!-- بطاقة ميزات النشاطات التشاركية -->
-<article class="features-card" aria-labelledby="features-title">
-
+    <br></br>
+    <!-- New features card listing participatory activities -->
+    <article class="features-card" aria-labelledby="features-title">
 
   <h2 id="features-title" style="font-size:24px;margin:10% 0 10px 0;text-align:center">كيف يمكنك المساعدة</h2>
 
-  <div class="features-list">
-    <div class="feature-item">
-      <i class="fas fa-broom" aria-hidden="true"></i>
-      <div>
+      <div class="features-list">
+        <div class="feature-item">
+          <i class="fas fa-broom" aria-hidden="true"></i>
+          <div>
         <h4>تنظيف</h4>
         <p>شارك في صيانة وتنظيف القبور والممرات.</p>
-      </div>
-    </div>
+          </div>
+        </div>
 
-    <div class="feature-item">
-      <i class="fas fa-camera" aria-hidden="true"></i>
-      <div>
+        <div class="feature-item">
+          <i class="fas fa-camera" aria-hidden="true"></i>
+          <div>
         <h4>التصوير</h4>
         <p>التقط صورًا للحجارة والنقوش واللوحات والعلامات.</p>
-      </div>
-    </div>
+          </div>
+        </div>
 
-    <div class="feature-item">
-      <i class="fas fa-keyboard" aria-hidden="true"></i>
-      <div>
+        <div class="feature-item">
+          <i class="fas fa-keyboard" aria-hidden="true"></i>
+          <div>
         <h4>التسجيل والرقمنة</h4>
         <p>قم بكتابة الأسماء والبيانات التي تم جمعها في قاعدة بياناتنا.</p>
-      </div>
-    </div>
-  </div>
-</article>
           </div>
         </div>
       </div>
