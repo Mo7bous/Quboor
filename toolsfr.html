@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Outils - Quboor</title>
 
-  <!-- fontawesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -13,29 +12,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
   <style>
 :root{
-  /* New palette per request */
-  --blue-dark: #2C3E50;      /* base dark blue */
-  --beige-cold: #C3CED4;     /* very light / cold beige */
-  --blue-very-pale: #ebf4f8;  /* very pale blue for cards / popup backgrounds */
-  --pastel-orange: #fffdf6;   /* near-white with an ultra-pale orange tint for tool cards (lighter) */
 
-  /* Semantic names used across the stylesheet */
-  --primary: var(--blue-dark);       /* main text/headings color in light mode */
-  --nav-bg: var(--blue-dark);        /* nav & sidebar background in light mode */
-  --card-bg: var(--blue-very-pale);  /* cards & popup content background in light mode */
-  --page-bg: var(--blue-very-pale);  /* page background subtle pale blue */
+    --light-gradient: linear-gradient(180deg,#FFFCFA,rgba(245,251,255,0.95));
+  --dark-gradient: linear-gradient(180deg,#2C3E50,#FFFCFA);
+
+  --blue-dark: #2C3E50;      
+  --beige-cold: #C3CED4;     
+  --blue-very-pale: #ebf4f8;  
+  --pastel-orange: #fffdf6;   
+  --primary: var(--blue-dark);       
+  --nav-bg: var(--blue-dark);        
+  --card-bg: var(--blue-very-pale);  
+  --page-bg: var(--blue-very-pale); 
   --muted: #6b6b6b;
   --accent: var(--blue-dark);
-  --text-on-nav: var(--beige-cold);  /* text color on nav/sidebar in light mode */
+  --text-on-nav: var(--beige-cold); 
 
-  /* Popup search background (a subtle blue-grey slightly lighter than card-bg) */
   --popup-search-bg: #f7fbfd;
 
-  /* Dark mode palette variables */
-  --dm-nav-bg: var(--beige-cold);    /* nav background in dark mode (beige) */
-  --dm-sidebar-bg: #254045;          /* darker blue-gray for sidebar in dark mode */
-  --dm-card-bg: #2C3E50;             /* darker blue tone for popups/cards in dark mode */
-  --dm-text-on-surface: var(--beige-cold); /* text color used across surfaces in dark mode */
+  --dm-nav-bg: var(--beige-cold);    
+  --dm-sidebar-bg: #254045;         
+  --dm-card-bg: #2C3E50;             
+  --dm-text-on-surface: var(--beige-cold);
   --dm-overlay: rgba(0,0,0,0.6);
 }
 
@@ -61,7 +59,7 @@ body::before{
 body::after{
   content:"";
   position:fixed;
-  top:0px; /* navbar (70px) + margin (18px) */
+  top:0px; 
   left:0;
   height: 15%;
   width: 90%;
@@ -82,7 +80,7 @@ body::after{
   background:linear-gradient( to bottom,#0b0c0f 0%,transparent 100%);
 }
 
-/* Top nav */
+
 .top-nav{  position: fixed;
   top: 18px;
   width: 90%;
@@ -119,7 +117,7 @@ body::after{
         transform: scale(1);
     }
 }
-/* dark mode toggle button in top nav (moon / sun icon) */
+
 .dark-btn{
   background:none;
   color: var(--pastel-orange);
@@ -138,8 +136,7 @@ body::after{
 .sidebar{z-index: 1000; position:fixed;left:-280px;top:0;height:100%;width:280px;background:var(--nav-bg);color:var(--card-bg);padding-top:20px;padding-bottom:140px;transition:left .28s;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto}
 
 .sidebar.open{left:0}
-/* each link takes half the sidebar width so there are two per row;
-   keep icon above title inside each link */
+
 .sidebar a{
   display:flex;
   flex-direction:column;
@@ -149,38 +146,33 @@ body::after{
   box-sizing:border-box;
   gap:6px;
   padding:12px 6px;
-  /* removed borders to eliminate button contours per request */
+
   color:#FFFCFA;
   text-align:center;
   font-size:14px;
   min-height:72px;
 }
-.sidebar a:nth-child(odd){ /* ensure visual separation when wrapping */
+.sidebar a:nth-child(odd){ 
   border-right:1px solid rgba(255,255,255,0.03);
 }
 .sidebar a i{font-size:20px;display:block}
 .closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:#FFFCFA;cursor:pointer}
 
-/* separator: keep spacing but remove any visible line so the close button isn't visually separated by a border */
 .sidebar-separator{
   width:100%;
-  height:18px; /* vertical gap (kept for spacing) */
+  height:18px; 
   box-sizing:border-box;
-  margin-top:42px; /* reduced gap so the link/module buttons sit a bit higher */
-  border-top:0; /* explicitly remove any divider line */
+  margin-top:42px; 
   opacity:0.0;
   pointer-events:none;
 }
 
-/* language switch in sidebar - moved to bottom left and shows both flags side by side */
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
 .lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;
 box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
 
-/* ensure focus state also has no contour */
 .lang-btn:focus{outline:none;box-shadow:none}
 .lang-btn .flag{font-size:18px;line-height:1}
-/* hide textual labels and show only flag glyphs in the sidebar language buttons */
 .lang-btn .label{display:none}
 .lang-btn.active{
   box-shadow:0 4px 14px rgba(0,0,0,0.15);
@@ -188,26 +180,28 @@ box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8p
 }
 .lang-btn:active,.lang-btn:hover{transform:translateY(-2px)}
 
-/* Main layout */
+
 #main{
   width:92%;
   max-width:1100px;
   margin:110px auto 0;
   padding:8px 0 40px;
-  /* Fit main area to viewport so the page itself doesn't scroll;
-     keep internal overflow hidden so only popups/list-wrappers scroll. */
-  height: calc(100vh - 120px);
+  height: calc(100vh);
   overflow: hidden;
   display: flex;
-  align-items: flex-start; /* place cards at the top so there's no large gap before the first card */
+  align-items: flex-start;
   justify-content: center;
+  flex-direction: column ;
+flex-wrap: nowrap;
+align-content: normal;
+justify-content: flex-start;
+align-items: flex-start;
 }
+
 .page-header{text-align:center;margin:18px 0 26px}
 .page-header h1{color:var(--primary);font-size:1.4rem;margin-bottom:6px}
 .page-header p{color:var(--muted)}
 
-/* Tools layout - force cards to be narrow columns on larger screens but
-   on narrow/mobile (and per request) make each card ~95% width centered */
 .tools-container{
   display:flex;
   flex-direction:column;
@@ -224,52 +218,68 @@ box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8p
   border-radius:10px;
   padding:14px 18px;
   display:flex;
-  flex-direction:column; /* stack icon above title */
-  align-items:center;      /* center both icon & title */
+  flex-direction:column; 
+  align-items:center;     
   gap:8px;
   border:1px solid var(--card-border, rgba(0,0,0,0.04));
   box-shadow:0 6px 14px rgba(0,0,0,0.15);
   cursor:pointer;
   text-align:center;
   transition:transform .18s,box-shadow .18s;
-  min-height:90px; /* slightly taller to accommodate stacked layout */
+  min-height:90px; 
 }
 .tool-card i{font-size:26px;color:var(--primary);width:auto;text-align:center}
 .tool-card h3{font-size:1rem;color:var(--primary);margin:0}
 .tool-card:active,.tool-card:hover{transform:translateY(-4px);box-shadow:0 10px 22px rgba(0,0,0,0.15)}
 
-/* Popup/modal */
+
 .popup{display:none;position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.45);align-items:center;justify-content:center;padding:20px;z-index:1003}
 .popup[aria-hidden="false"]{display:flex}
-.popup-content{position:relative;width:100%;height:95%;max-width:1200px;background:var(--card-bg);border-radius:10px;padding:18px;
+.popup-content{position:relative;width:100%;height:95%;max-width:1200px;
+  background:var(--card-bg);    
+  background: linear-gradient(180deg, #FFFCFA, rgba(245, 251, 255, 0.95));border-radius:10px;padding:18px;
   box-shadow:0 8px 30px rgba(0,0,0,0.15);display:flex;flex-direction:column;overflow:hidden}
-/* Close button positioned at the top-right corner of the popup content */
+
+
+  .dark .popup-content,
+.dark .popup-body,
+.dark .modal-panel,
+.dark .card-desc {
+  background: #2C3E50;
+  color: #d1d1d1;
+}
+
+
+
+.dark .result-box .big {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: whitesmoke;
+}
+
+
+
 .popup-close{
   position:absolute;
-  top:6px; /* raised a bit higher */
+  top:6px;
   right:12px;
   background:none;
   border:0;
   font-size:26px;
   cursor:pointer;
   z-index:6;
+  margin-bottom: 15px;
 }
 
-/* Popup body: search + table list
-   Make the popup body a flex column so the search row and the list
-   wrapper sit correctly; only the list-wrapper scrolls, keeping the
-   header and the search row fixed. */
 .popup-body{
   display:flex;
   flex-direction:column;
   flex:1 1 auto;
-  overflow:hidden; /* keep scrolling confined to .list-wrapper */
-  padding:18px 0 0 0; /* increased top padding to create a small gap between the close button and the search module */
-  position:relative; /* to anchor absolute close button inside popup-content */
+  overflow:hidden; 
+  padding:18px 0 0 0; 
+  position:relative;
 }
 
-/* Make the search row sit under the header and stay visible while
-   only the results area scrolls. Rounded style for pop-up search bar */
 .search-row{
   display:flex;
   gap:8px;
@@ -278,19 +288,19 @@ box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8p
   padding:5px;
   position:relative;
   z-index:2;
-  background:var(--popup-search-bg); /* subtle blue-grey slightly lighter than popup background */
+  background:var(--popup-search-bg); 
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(250, 250, 250, 0.95));
   border-bottom: none;
-  border-radius:12px; /* rounded rather than rectangular */
+  border-radius:12px; 
   box-shadow:0 2px 6px rgba(0,0,0,0.15);
       justify-content: space-between;
 }
-/* Make the search input narrower: use 90% of the available width */
 .search-row input[type="search"]{
   width:90%;
   max-width:50%;
   padding:10px 12px;
   border-radius:8px;
-  border:1px solid rgba(11,77,160,0.03);
+  border:transparent;
   font-size:15px;
   box-sizing:border-box;
   background:transparent;
@@ -298,55 +308,38 @@ box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8p
 }
 .search-row .count{font-size:13px;color:var(--muted)}
 
-/* Scrollable table listing */
 .list-table{width:100%;border-collapse:collapse;font-size:larger;margin-top: 10%;}
 .list-wrapper{flex:1;overflow:auto;border-top:1px solid rgba(11,77,160,0.02);padding-top:12px /* small space after search before table */}
 .list-table th{padding:10px 12px;border-bottom:1px solid rgba(11,77,160,0.02);text-align:left;}
 .list-table td{padding:10px 12px;border-bottom:1px solid rgba(11,77,160,0.02);text-align:left;}
 .list-table tr{cursor:pointer}
 .list-table tr:hover{background:#f7fdff}
-/* Dark mode: popup list hover should show dark grey highlight instead of white */
 .dark .list-table tr:hover{background:#2b3b3d}
 
-/* Detail popup (smaller: 85%) */
 .detail-popup .popup-content{width:100%;height:95%;max-width:900px}
 .detail-body{overflow:auto;flex:1;padding-top:6px;  font-family: 'Amiri';}
 
-/* dark mode removed */
 
- /* prevent body scrolling while a modal/popup is open */
 .no-scroll{overflow:hidden;height:100%;position:fixed;left:0;right:0}
 
-/* simple dark theme switch: replace core semantic variables when .dark is applied */
 .dark{
-  /* Keep nav/sidebar colors unchanged in dark mode per spec (no override of --nav-bg) */
-  /* Page background becomes a blue-gray matching the sidebar in dark mode */
   --page-bg: #0b0c0f;
 
-  /* Cards and popup background become a darker blue-gray matching nav tone */
-  --card-bg: #2C3E50; /* dm-card-bg is defined above as a darker blue-gray */
-
-  /* Provide a subtle border for cards/popups in dark so frames are visible */
+  --card-bg: #2C3E50; 
   --card-border: rgba(255,255,255,0.06);
-
-  /* Primary text on cards/popups becomes the pale orange tint */
   --primary: #FFFCFA;
   --text-on-nav: var(--text-on-nav);
 
-  /* keep pastel-orange as the pale orange for icons/text (slightly warmer for dark) */
   --pastel-orange: #FFFCFA;
 
-  /* popup search becomes a blue-grey slightly lighter than dm-card-bg for contrast */
   --popup-search-bg: #3d4b4d;
 }
 
-/* make popup close button in dark mode use the pale orange and ensure search input placeholder/text is pale orange */
 .dark .popup-close {
   color: var(--pastel-orange);
 }
 .dark .search-row input[type="search"]{
   color: var(--pastel-orange);
-  border:1px solid rgba(255,255,255,0.14);
 }
 .dark .search-row input[type="search"]::placeholder{
   color: var(--pastel-orange);
@@ -354,13 +347,11 @@ box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8p
   opacity:0.9;
 }
 
-/* Make audio players in detail views show a pale orange/white surface in dark mode */
 .dark .detail-body audio{
   border-radius:8px;
   padding:6px;
 }
 
-/* In dark mode ensure sidebar text, the dark toggle and tool-card titles use the pale orange tint */
 .dark .sidebar,
 .dark .sidebar a,
 .dark .sidebar .closebtn,
@@ -372,7 +363,6 @@ box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8p
   color: var(--pastel-orange);
 }
 
-/* Ensure language flag glyphs are visible and well-sized in the sidebar */
 .lang-btn .flag{
   display:inline-block;
   font-size:18px;
@@ -382,7 +372,6 @@ box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8p
   -webkit-text-stroke: 0;
 }
 
-/* Make the base tool cards use the darker blue-gray surface in dark mode */
 .dark .tool-card{
   background: #2C3E50;
   border:1px solid var(--card-border);
@@ -393,7 +382,6 @@ box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8p
   color: var(--pastel-orange);
 }
 
-/* Make the popup search area use the blue-gray background and pale-orange/white text in dark mode */
 .dark .search-row{
   background: var(--popup-search-bg);
   color: var(--pastel-orange);
@@ -401,15 +389,11 @@ box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8p
 }
 .dark .search-row input[type="search"]{
   color: var(--pastel-orange);
-  border:1px solid rgba(255,255,255,0.14);
 }
 .dark .search-row .count{
   color: var(--pastel-orange);
 }
 
-/* Dark-mode scrollbar styling:
-   - track (background) darker grey
-   - thumb (indicator) lighter grey for contrast */
 .dark .list-wrapper::-webkit-scrollbar,
 .dark .sidebar::-webkit-scrollbar,
 .dark .popup-content::-webkit-scrollbar {
@@ -419,24 +403,35 @@ box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8p
 .dark .list-wrapper::-webkit-scrollbar-track,
 .dark .sidebar::-webkit-scrollbar-track,
 .dark .popup-content::-webkit-scrollbar-track {
-  background: #223233; /* dark grey track */
+  background: #223233; 
   border-radius: 8px;
 }
 .dark .list-wrapper::-webkit-scrollbar-thumb,
 .dark .sidebar::-webkit-scrollbar-thumb,
 .dark .popup-content::-webkit-scrollbar-thumb {
-  background: #97a0a3; /* lighter grey thumb */
+  background: #97a0a3; 
   border-radius: 8px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
+    .info-popup
+      
+      {display:none;margin-top:12px;padding:14px;border-radius:14px;background:#f6f1f1;color:var(--primary);
+}
 
-/* Ensure the main area never scrolls vertically */
+
+
+      .dark .info-popup
+      
+      {display:none;margin-top:12px;padding:14px;border-radius:14px;background:linear-gradient(180deg, #2C3E50 , #202020 );color:whitesmoke;
+}
+
+
+
 #main{
   overflow:hidden !important;
 }
 
-/* Unified heading sizing for consistency across pages */
 h1, .page-header h1, .tools-container .tool-card h3, .collapsible-card .card-header h3 {
   font-size:large;
   line-height:1.2;
@@ -456,8 +451,118 @@ h4 {
 .card-sub, .tool-card h3, .list-table td, .search-row .count {
   font-size : 16px;
   line-height:1.1;
+  margin-right: 5px;
+  margin-top: 2px;
 }
 
+.modal{display:none;position:fixed;inset:0;z-index:2000;pointer-events:none}
+.modal[aria-hidden="false"]{display:block;pointer-events:auto}
+.modal-overlay{position:absolute;inset:0;background:rgba(3,6,10,0.45);backdrop-filter:blur(4px)}
+.modal-panel{
+  position:absolute;
+  left:5%;right:5%;top:5%;bottom:5%;
+  background:linear-gradient(180deg, #FFFCFA, rgba(245, 251, 255, 0.95));
+  border-radius:18px;padding:22px;overflow:auto;
+  box-shadow:0 30px 70px rgba(15,20,30,0.45);display:flex;flex-direction:column;border:1px solid rgba(44,62,80,0.06);
+  backdrop-filter: blur(6px);
+}
+
+.dark.modal-panel{
+  position:absolute;
+  left:5%;right:5%;top:5%;bottom:5%;
+  background:linear-gradient(180deg, #2C3E50 , rgba(245, 251, 255, 0.95));
+  border-radius:18px;padding:22px;overflow:auto;
+  box-shadow:0 30px 70px rgba(15,20,30,0.45);display:flex;flex-direction:column;border:1px solid rgba(44,62,80,0.06);
+  backdrop-filter: blur(6px);
+}
+.modal-close{    position: absolute;
+    right: 8px;
+    top: -5px;
+    background: none;
+    border: 0;
+    font-size: 26px;
+    color: var(--primary);
+    cursor: pointer;
+    padding: 9px;
+    border-radius: 8px;}
+    
+.modal-content{max-width:960px;margin:20px auto 40px;color:var(--primary);background:transparent;padding:8px 6px}
+.modal-content h2{margin:0 0 10px;font-size:large;text-align:center}
+.modal-content p{margin:8px 0;color:var(--muted)}
+.dark .modal-content p {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.modal-content .example{font-style:italic;color:#fff}
+
+.dark .modal-content .example{font-style:italic;color:var(--muted)}
+.tool-action{background:var(--primary);color:#fff;border:0;padding:10px 14px;border-radius:10px;cursor:pointer}
+.dark .tool-action{background:#fff;color:#2C3E50;border:0;padding:10px 14px;border-radius:10px;cursor:pointer}
+
+
+/* Info icon button shown next to modal intro — primary BG in normal, secondary in dark mode */
+.info-toggle{
+  margin-left:8px;
+  border:0;
+  color:var(--primary);
+  width:36px;
+  height:36px;
+  border-radius:10px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 6px 14px rgba(0,0,0,0.12);
+}
+.info-toggle i{font-size:16px}
+.dark .info-toggle{
+  color:#2C3E50 ;
+    margin-left:8px;
+  border:0;
+  width:36px;
+  height:36px;
+  border-radius:10px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 6px 14px rgba(0,0,0,0.12);
+}
+
+@media (max-width:640px){
+  .modal-panel{left:3%;right:3%;top:3%;bottom:3%;padding:14px;border-radius:10px}
+  .modal-content h2{font-size:x-large}
+}
+
+
+.card-desc{font-size:0.86rem;color:var(--muted);margin-top:4px}
+.calc-form{display:grid;gap:10px;margin-top:12px}
+.row{display:flex;gap:10px;align-items:center}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:0.85rem;color:var(--primary);font-weight:600}
+.field input[type="number"], .field input[type="text"], .field select, .field textarea{
+  padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);background:transparent;color:var(--primary);outline:none;
+  box-shadow:inset 0 -1px 0 rgba(0,0,0,0.02);
+}
+.field input:focus, .field select:focus, .field textarea:focus{border-color:rgba(44,62,80,0.28);box-shadow:0 6px 18px rgba(44,62,80,0.06)}
+.result-box{margin-top:14px;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));border:1px solid rgba(0,0,0,0.04);display:flex;flex-direction:column;gap:8px}
+.dark .result-box{margin-top:14px;padding:12px;border-radius:10px;background:linear-gradient(180deg, #2C3E50 , #202020 );border:1px solid #2C3E50 ;display:flex;flex-direction:column;gap:8px}
+.result-box .big{font-size:1.25rem;font-weight:700;color:var(--primary)}
+.info-line{font-size:0.9rem;color:var(--muted);display:flex;gap:8px;align-items:center}
+.dark .info-line{font-size:0.9rem;color:whitesmoke;display:flex;gap:8px;align-items:center}
+
+.small-muted{font-size:0.85rem;color:var(--muted)}
+.dark .small-muted{font-size:0.85rem;color: #d1d1d1}
+.calc-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.btn-ghost{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:8px 12px;border-radius:10px;cursor:pointer}
+.dark .btn-ghost{background:whitesmoke;border:1px solid rgba(0,0,0,0.06);padding:8px 12px;border-radius:10px;cursor:pointer}
+
+.icon-tip{width:18px;height:18px;border-radius:50%;background:var(--primary);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px}
+@media (max-width:640px){
+  .row{flex-direction:column;align-items:stretch}
+  .modal-content{padding:6px}
+}
 
 
   </style>
@@ -475,7 +580,6 @@ h4 {
   </header>
 
   <div id="mySidebar" class="sidebar">
-        <!-- language switch (both flags shown, moved to bottom via CSS) -->
 <div class="lang-switch" aria-label="Language selector">
   <button id="langBtnFR" class="lang-btn" data-lang="Français" aria-label="Français">
     Français
@@ -503,43 +607,87 @@ h4 {
   <main id="main">
 
 
-    <section class="tools-container" id="toolsContainer">
-      <button class="tool-card" data-tool="coran-audio" aria-haspopup="dialog">
-        <i class="fas fa-headphones"></i>
-        <h3>Le Saint Coran</h3>
-      </button>
+<section class="tools-container" id="toolsContainer">
+  <button class="tool-card" data-tool="coran-audio" aria-haspopup="dialog">
+    <i class="fas fa-headphones"></i>
+    <h3>Le Saint Coran</h3>
+    <div class="card-desc">
+      Écoutez et méditez sur le Saint Coran avec récitations précises.
+    </div>
+  </button>
 
-      <button class="tool-card" data-tool="douas" aria-haspopup="dialog">
-        <i class="fas fa-praying-hands"></i>
-        <h3>Dou'as</h3>
-      </button>
-    </section>
+  <button class="tool-card" data-tool="douas" aria-haspopup="dialog">
+    <i class="fas fa-praying-hands"></i>
+    <h3>Dou'as</h3>
+    <div class="card-desc">
+      Accédez à des Dou’as essentielles pour la vie quotidienne.
+    </div>
+  </button>
+
+
+    <button class="tool-card" data-tool="zakat-fitr" aria-describedby="desc-zf">
+      <i class="fas fa-calculator" aria-hidden="true"></i>
+      <div>
+        <h3>Zakat al-Fitr</h3>
+        <div id="desc-zf" class="card-desc">Simulateur de Zakat du Ramadan (kg & valeur)</div>
+      </div>
+    </button>
+
+    <button class="tool-card" data-tool="zakat-annuelle" aria-describedby="desc-zm">
+      <i class="fas fa-piggy-bank" aria-hidden="true"></i>
+      <div>
+        <h3>Zakat al-Mal</h3>
+        <div id="desc-zm" class="card-desc">Simulateur complet pour la Zakat annuelle (nisab, catégories)</div>
+      </div>
+    </button>
+
+    <button class="tool-card" data-tool="sadaqa-jaria" aria-describedby="desc-sj">
+      <i class="fas fa-seedling" aria-hidden="true"></i>
+      <div>
+        <h3>Sadaqa Jaria</h3>
+        <div id="desc-sj" class="card-desc">Estimation pédagogique pour projets durables</div>
+      </div>
+</section>
+
+      
+  <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-panel" role="document" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Fermer la fenêtre">&times;</button>
+      <div class="modal-content" id="modalContent">
+        <h2 id="modalTitle"></h2>
+        <p id="modalIntro"></p>
+        <p id="modalExample" class="example"></p>
+        <div style="margin-top:18px;">
+          <button id="modalAction" class="tool-action">Continuer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
   </main>
 
-  <!-- Generic popup modal (initially empty) -->
   <div id="popup" class="popup" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="popup-content">
       <button id="popupClose" class="popup-close" aria-label="close">&times;</button>
       <div class="popup-body" id="popupBody">
         <h2 id="popupTitle" style="display:none"></h2>
-        <!-- Content inserted by JS: search input + table list for items -->
-      </div>
+            </div>
     </div>
   </div>
 
-  <!-- Detail popup (smaller 85%) -->
   <div id="detailPopup" class="popup detail-popup" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="popup-content">
       <button id="detailClose" class="popup-close" aria-label="close">&times;</button>
       <div class="popup-body" id="detailBody">
         <h2 id="detailTitle" style="display:none"></h2>
-        <!-- Filled with item detail -->
       </div>
     </div>
   </div>
 
   <script type="module">
-/* Verified: keeping existing popup/button behavior unchanged */
 const popup = document.getElementById('popup');
 const popupTitle = document.getElementById('popupTitle');
 const popupBody = document.getElementById('popupBody');
@@ -555,7 +703,6 @@ const sidebar = document.getElementById('mySidebar');
 const menuBtn = document.getElementById('menuBtn');
 const closeSidebar = document.querySelector('#mySidebar .closebtn');
 
-// dark mode toggle button (inserted in header)
 const darkModeBtns = document.querySelectorAll('#darkModeBtn');
 
 const langBtn = document.getElementById('langBtn');
@@ -563,11 +710,9 @@ const langBtn = document.getElementById('langBtn');
 if (menuBtn) menuBtn.addEventListener('click', ()=> sidebar.classList.add('open'));
 if (closeSidebar) closeSidebar.addEventListener('click', ()=> sidebar.classList.remove('open'));
 
-/* Dark mode toggle behavior: support multiple headers/pages (there can be several #darkModeBtn instances) */
 function setDarkMode(enabled){
   if (enabled) document.documentElement.classList.add('dark');
   else document.documentElement.classList.remove('dark');
-  // update button visuals and aria
   darkModeBtns.forEach(b=>{
     b.setAttribute('aria-pressed', enabled ? 'true' : 'false');
     const icon = b.querySelector('i');
@@ -587,41 +732,34 @@ darkModeBtns.forEach(btn=>{
   });
 });
 
-// initialize from user preference or system
 (function initDark(){
   let stored = null;
   try{ stored = localStorage.getItem('quboor-dark'); }catch(e){}
   if (stored !== null){
     setDarkMode(stored === '1');
   } else {
-    // Default to light mode (do not enable dark by default)
     setDarkMode(false);
   }
 })();
 
-/* language buttons (show label + flag). French redirects to google.fr, Moroccan redirects to google.ma */
 const langBtnFR = document.getElementById('langBtnFR');
 const langBtnMA = document.getElementById('langBtnMA');
 
 if (langBtnFR) {
   langBtnFR.addEventListener('click', () => {
-    // Visual feedback and redirect to french page
     langBtnFR.classList.add('active');
     if (langBtnMA) langBtnMA.classList.remove('active');
-    // redirect to France site
     window.location.href = 'toolsfr.html';
   });
 }
 if (langBtnMA) {
   langBtnMA.addEventListener('click', () => {
-    // Visual feedback and redirect to Morocco site
     langBtnMA.classList.add('active');
     if (langBtnFR) langBtnFR.classList.remove('active');
     window.location.href = 'toolsar.html';
   });
 }
 
-// Data: list of sourates
 const sourates = [
 "Al-Fatiha",
 "Al-Baqara",
@@ -740,7 +878,7 @@ const sourates = [
 ];
 
 window.sourateContents = {
-  /* Editable entries for sourates (first 5 prefilled with lorem ipsum) */
+
   "al-fatiha": {
     short: "Ouverture et invocation brève, essentielle pour la récitation quotidienne.",
     full: "1 Au nom d'Allah, le Tout Miséricordieux, le Très Miséricordieux. 2 Louange à Allah, Seigneur de l'univers. 3 Le Tout Miséricordieux, le Très Miséricordieux, 4 Maître du Jour de la rétribution. 5 C'est Toi [Seul] que nous adorons, et c'est Toi [Seul] dont nous implorons secours. 6 Guide-nous dans le droit chemin, 7 le chemin de ceux que Tu as comblés de faveurs, non pas de ceux qui ont encouru Ta colère, ni des égarés."
@@ -1200,7 +1338,6 @@ window.sourateContents = {
 
 };
 
-// Data: list of douas
 
 const douas = [
   {"title": "Formule de condoléances", text: "Qu’Allah augmente ta récompense, améliore (ou apaise) ta consolation et pardonne à ton défunt."},
@@ -1209,30 +1346,32 @@ const douas = [
   {"title": "Doua des vivants et des morts",text: "Ô Allah, pardonne à nos vivants et à nos morts, à ceux qui sont présents parmi nous et à ceux qui sont absents, à nos jeunes et à nos vieux, à nos hommes et à nos femmes. Ô Allah, celui que Tu maintiens en vie parmi nous, fais-le vivre dans l’islam, et celui que Tu rappelles à Toi, fais-le mourir dans la foi. Ô Allah, ne nous prive pas de sa récompense et ne nous égare pas après lui."},
   {"title": "Doua de protection du défunt",text: "Ô Allah, untel fils d’untel est sous Ta protection et sous Ta garantie. Préserve-le de l’épreuve de la tombe et du châtiment du Feu. Tu es le Digne de loyauté et de vérité. Pardonne-lui et fais-lui miséricorde. Certes, Tu es Le Pardonneur, Le Très Miséricordieux."},
 
-  {"title": "صلاة على موتانا الأعزاء",text: " اللهم ارحم موتانا وموت المسلمين"},
-  {"title": "طلب الثواب والمغفرة",text: " اللهم ارحم موتانا وموت المسلمين"},
-  {"title": "الرجاء والرحمة للميت",text: "اللهم يمن كتابه ويسر حسابه وثقل بالحسنات ميزانه وثبت على الصراط أقدامه وأسكنه في أعلى الجنة بجوار حبيبك ومصطفاك صلى الله عليه وسلم"},
 
 
 ];
 
 window.douaContents = {
+  "formule-de-condoleances": {
+    short: "Doua de condoléances et réconfort.",
+    full: "Qu’Allah augmente ta récompense, améliore (ou apaise) ta consolation et pardonne à ton défunt."
+  },
+  "formule-de-condoleances-ii": {
+    short: "Formule alternative de condoléances.",
+    full: "À Allah appartient ce qu’Il a repris et à Lui appartient ce qu’Il a donné. Toute chose auprès de Lui a un terme fixé. Fais preuve de patience et espère la récompense (auprès d’Allah)."
+  },
+  "doua-du-pardon-du-defunt": {
+    short: "Invocation pour le pardon du défunt.",
+    full: "Ô Allah, pardonne-lui, fais-lui miséricorde, accorde-lui la santé et le pardon. Honore son accueil, élargis son entrée, lave-le avec l’eau, la neige et la grêle, purifie-le de ses fautes comme on purifie le vêtement blanc de la saleté. Remplace sa demeure par une demeure meilleure, sa famille par une famille meilleure et son épouse par une épouse meilleure. Fais-le entrer au Paradis et protège-le du châtiment de la tombe et du châtiment du Feu."
+  }
 };
 
 
-// Event wiring
 if (popupClose) popupClose.addEventListener('click', ()=> {
-  // If a detail panel is open, close it and return to the main popup list.
+  // Always close any open detail then close the list popup itself.
   if (detailPopup.getAttribute('aria-hidden') === 'false') {
-    // Close only the detail view and keep the list popup visible.
     closeDetail();
-    // ensure main popup remains visible and focused
-    popup.setAttribute('aria-hidden','false');
-    popup.style.display = 'flex';
-    popupClose.focus();
-  } else {
-    closePopup();
   }
+  closePopup();
 });
 popup.addEventListener('click', (e)=>{ if (e.target === popup) closePopup(); });
 if (detailClose) detailClose.addEventListener('click', closeDetail);
@@ -1246,8 +1385,6 @@ document.addEventListener('keydown', (e)=>{
 });
 
 
-
-// open popup when clicking a tool card
 toolsContainer.addEventListener('click', (e)=>{
   const btn = e.target.closest('.tool-card');
   if (!btn) return;
@@ -1255,7 +1392,6 @@ toolsContainer.addEventListener('click', (e)=>{
   openToolPopup(tool);
 });
 
-// Build popup content: search + table
 function buildListView(items, renderRowCallback){
   popupBody.innerHTML = '';
 
@@ -1286,7 +1422,6 @@ function buildListView(items, renderRowCallback){
     popupBody.appendChild(searchRow);
     popupBody.appendChild(listWrapper);
 
-    // populate
     function render(filter = ''){
       tbody.innerHTML = '';
       const q = filter.trim().toLowerCase();
@@ -1299,17 +1434,12 @@ function buildListView(items, renderRowCallback){
         const tr = document.createElement('tr');
         const numTd = document.createElement('td');
 
-        // Determine the display number:
-        // - If the item is a string and starts with a number (e.g. "2 Al-Baqarah"), use that number.
-        // - Otherwise fall back to the position in the original items array (1-based) if available,
-        //   or to the filtered index + 1 as a last resort.
         let displayNumber = '';
         if (typeof it === 'string') {
           const m = it.match(/^\s*(\d+)\b/);
           if (m) displayNumber = m[1];
         }
         if (!displayNumber) {
-          // try to find the original index in the items array passed to buildListView
           const origIndex = items.indexOf(it);
           if (origIndex !== -1) displayNumber = String(origIndex + 1);
           else displayNumber = String(idx + 1);
@@ -1317,7 +1447,6 @@ function buildListView(items, renderRowCallback){
         numTd.textContent = displayNumber;
 
         const nameTd = document.createElement('td');
-        // If the string includes the leading number, strip it for the name column for clarity
         if (typeof it === 'string') {
           nameTd.textContent = it.replace(/^\s*\d+\s*/, '');
         } else {
@@ -1331,12 +1460,10 @@ function buildListView(items, renderRowCallback){
       });
     }
 
-    // initial render all
     render('');
     searchInput.addEventListener('input', ()=> render(searchInput.value));
   }
 
-  // Open main tool popup
   function openToolPopup(toolKey){
     let title = '';
     let items = [];
@@ -1346,16 +1473,13 @@ function buildListView(items, renderRowCallback){
       default: title = 'Outil';
     }
 
-    // hide the popup title area for tool listing to keep header compact (per design)
     popupTitle.textContent = title;
     popupTitle.style.display = 'none';
 
     buildListView(items, (selected)=>{
-      // when an item is clicked open detail popup (85%)
       openDetail(selected, toolKey);
     });
 
-    // prevent main page scrolling while popup is open
     document.body.classList.add('no-scroll');
 
     popup.setAttribute('aria-hidden','false');
@@ -1369,22 +1493,19 @@ function buildListView(items, renderRowCallback){
     document.body.classList.remove('no-scroll');
   }
 
-  // Detail popup (smaller)
   function openDetail(item, toolKey){
-    // Helper to create slug from a name (removes leading numbers, lowercases and replaces separators)
 function makeSlug(name){
   if (!name) return '';
   
   const withoutNum = String(name).replace(/^\s*\d+\s*/,'');
 
   return withoutNum
-    .normalize("NFC") // garde les accents mais uniformise Unicode
+    .normalize("NFC") 
     .toLowerCase()
-    .replace(/[^\p{L}\p{N}\u0600-\u06FF]+/gu, '-') // garde toutes les lettres Unicode
+    .replace(/[^\p{L}\p{N}\u0600-\u06FF]+/gu, '-') 
     .replace(/^-+|-+$/g,'');
 }
 
-    // Helper: fetch structured content for sourates or douas (falls back to placeholders)
     function getStructuredContentFor(itemKey, kind){
       if (kind === 'sourate') {
         const slug = makeSlug(itemKey);
@@ -1517,6 +1638,456 @@ function makeSlug(name){
     if (!str) return '';
     return String(str).replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; });
   }
+
+  const modal = document.getElementById('modal');
+const modalOverlay = document.getElementById('modalOverlay');
+const modalClose = document.getElementById('modalClose');
+const modalTitle = document.getElementById('modalTitle');
+const modalIntro = document.getElementById('modalIntro');
+const modalExample = document.getElementById('modalExample');
+const modalAction = document.getElementById('modalAction');
+
+const toolData = {
+  'zakat-fitr': {
+    id:'zakat-fitr',
+    title: 'Zakaat al Fitr',
+    intro: "Zakaat al-Fitr purifie le jeûne et doit être donnée avant la prière de l'Aïd ; le calcul se fait en nourriture (1 sa’ ≈ 2.5 kg) ou équivalent monétaire.",
+    example: "Ex: 4 personnes × 2.5 kg = 10 kg total",
+    actionLabel: "Calculer"
+  },
+  'zakat-annuelle': {
+    id:'zakat-annuelle',
+    title: 'Zakaat al-Mal (annuelle)',
+    intro: "Zakaat al-Mal est due si votre richesse dépasse le nisab et après un cycle d'une année lunaire (hawl). Il s'agit de 2.5% sur la base nette.",
+    example: "Ex: Somme totale 10 000€ - dettes 1 000€ = base nette 9 000€ → zakat 225€",
+    actionLabel: "Calculer"
+  },
+  'sadaqa-jaria': {
+    id:'sadaqa-jaria',
+    title: 'Sadaqa Jaria (charité continue)',
+    intro: "Sadaqa Jaria est volontaire et n'a pas de taux fixe ; ce simulateur vous aide à estimer impact, budget et répartition de projets durables.",
+    example: "Ex: Budget 2 000€ pour un puits → estimation et conseils de répartition",
+    actionLabel: "Estimer"
+  }
+};
+
+function openModalFor(toolId){
+  const data = toolData[toolId] || {};
+  const skipTools = ['douas','coran-audio'];
+if(skipTools.includes(toolId)) return;
+  modalTitle.textContent = data.title || '';
+  
+  const htmlByTool = {
+    'zakat-fitr': `
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px">
+        <p class="small-muted" style="text-align:center;margin:0;font-weight:600">${data.intro}</p>
+        <button type="button" class="info-toggle" aria-expanded="false" title="Info"><i class="fas fa-info-circle" aria-hidden="true"></i></button>
+      </div>
+
+      <div class="info-popup">
+        <strong>Qu'est-ce que la Zakat al-Fitr ?</strong>
+        <p class="small-muted" style="margin:8px 0 0">Zakat al-Fitr est versée en fin de Ramadan pour purifier le jeûne et aider les familles à célébrer l'Aïd. Traditionnellement on donne une quantité de nourriture par personne appelée "sa’".</p>
+        <p class="small-muted" style="margin:6px 0 0"><em>Définition — sa’ :</em> Le sa’ est une unité traditionnelle équivalente à environ 3 mesures de la main; en pratique on retient souvent ≈ 2.5 kg de céréales (riz/blé).</p>
+        <p class="small-muted" style="margin:8px 0 0"><em>Méthodologie :</em> Multipliez le nombre de personnes par la quantité (sa’) pour obtenir le total en kg. Si vous ne pouvez pas donner de nourriture, utilisez le prix local au kg pour convertir en monnaie (MAD).</p>
+      </div>
+
+      <form id="zf-form" class="calc-form" onsubmit="return false;">
+        <div class="small-muted">Astuce: offrez la valeur monétaire si la distribution de nourriture n'est pas possible localement.</div>
+
+        <div class="row">
+          <div class="field" style="flex:1">
+            <label for="zf-adults">Nombre d'adultes</label>
+            <input id="zf-adults" type="number" min="0" value="2">
+          </div>
+          <div class="field" style="flex:1">
+            <label for="zf-children">Nombre d'enfants</label>
+            <input id="zf-children" type="number" min="0" value="1">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field" style="flex:1">
+            <label for="zf-type">Type de nourriture</label>
+            <select id="zf-type">
+              <option value="riz">Riz</option>
+              <option value="blé">Blé</option>
+              <option value="dattes">Dattes</option>
+              <option value="orge">Orge</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+          <div class="field" style="flex:1">
+            <label for="zf-qty">Quantité par personne (kg)</label>
+            <input id="zf-qty" type="number" min="0" step="0.1" value="2.5">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="zf-price">Prix local par kg (MAD)</label>
+          <input id="zf-price" type="number" min="0" step="0.01" value="12.00">
+        </div>
+
+        <div class="result-box" id="zf-result" aria-live="polite">
+          <div class="info-line small-muted">Total personnes: <strong id="zf-total-people">—</strong></div>
+          <div class="info-line">Total nourriture: <span class="big" id="zf-total-kg">—</span> kg</div>
+          <div class="info-line">Valeur estimée: <span class="big" id="zf-total-eur">—</span> MAD</div>
+          <div class="small-muted">Le montant en nourriture est recommandé ; l'équivalent monétaire est fourni pour commodité.</div>
+        </div>
+
+        <div class="calc-actions">
+          <button id="zf-reset" type="button" class="btn-ghost">Réinitialiser</button>
+          <button id="zf-calc" class="tool-action">Dons Via Quboor</button>
+        </div>
+      </form>
+    `,
+    'zakat-annuelle': `
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px">
+        <p class="small-muted" style="text-align:center;margin:0;font-weight:600">${data.intro}</p>
+        <button type="button" class="info-toggle" aria-expanded="false" title="Info"><i class="fas fa-info-circle" aria-hidden="true"></i></button>
+      </div>
+
+      <div class="info-popup">
+        <strong>Qu'est-ce que la Zakat al-Mal ?</strong>
+        <p class="small-muted" style="margin:8px 0 0">
+          La Zakat al‑Mal est l’aumône annuelle obligatoire due lorsque vos richesses nettes atteignent ou dépassent le nisab et qu’elles sont conservées pendant un cycle lunaire (hawl). C’est une purification financière destinée à redistribuer une part des richesses.
+        </p>
+        <p class="small-muted" style="margin:8px 0 0">
+          Définition — nisab : le seuil minimal (souvent exprimé en valeur d’or ou d’argent) au‑delà duquel la zakat devient due ; vérifiez la valeur locale actuelle du nisab pour être exact.
+        </p>
+        <p class="small-muted" style="margin:6px 0 0"><em>Méthodologie :</em> Additionnez les actifs liquides (argent, comptes bancaires, actions, inventaire commercial) et la valeur estimée d’or/argent, ajoutez la valeur des récoltes/bétail si pertinent, puis soustrayez les dettes exigibles. Si la base nette est ≥ nisab, la zakat est de 2.5% de cette base.</p>
+        <p class="small-muted" style="margin:6px 0 0">Exemple : 10 000 MAD en actifs − 1 000 MAD de dettes = 9 000 MAD → zakat = 9 000 × 2.5% = 225 MAD.</p>
+        <p class="small-muted" style="margin:6px 0 0">Conseil : conservez la date de départ du cycle lunaire, utilisez valeurs locales (MAD) et documentez vos calculs.</p>
+      </div>
+
+      <form id="zm-form" class="calc-form" onsubmit="return false;">
+        <div class="small-muted">Astuce: conservez des preuves et notez la date de départ du cycle lunaire avant de calculer.</div>
+
+        <div class="field">
+          <label for="zm-cash">Argent liquide / comptes (MAD)</label>
+          <input id="zm-cash" type="number" min="0" step="0.01" value="0">
+        </div>
+        <div class="field">
+          <label for="zm-gold">Or / Argent (valeur estimée MAD)</label>
+          <input id="zm-gold" type="number" min="0" step="0.01" value="0">
+        </div>
+        <div class="field">
+          <label for="zm-assets">Actions / biens liquides (MAD)</label>
+          <input id="zm-assets" type="number" min="0" step="0.01" value="0">
+        </div>
+        <div class="field">
+          <label for="zm-inventory">Marchandises destiné à la vente (MAD)</label>
+          <input id="zm-inventory" type="number" min="0" step="0.01" value="0">
+        </div>
+        <div class="field">
+          <label for="zm-debt">Dettes exigibles à court terme (MAD)</label>
+          <input id="zm-debt" type="number" min="0" step="0.01" value="0">
+        </div>
+
+        <details style="margin-top:6px">
+          <summary class="small-muted">Options avancées (bétail/récoltes)</summary>
+          <div class="field">
+            <label for="zm-harvest">Récoltes (valeur MAD)</label>
+            <input id="zm-harvest" type="number" min="0" step="0.01" value="0">
+            <label class="small-muted" style="margin-top:6px">Irriguée ?</label>
+            <select id="zm-harvest-type">
+              <option value="auto">Naturelle (10%)</option>
+              <option value="irr">Irriguée (5%)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="zm-livestock">Bétail (valeur estimée MAD)</label>
+            <input id="zm-livestock" type="number" min="0" step="0.01" value="0">
+            <div class="small-muted" style="margin-top:6px">Note: pour bétail important, utiliser barème spécifique (non détaillé ici).</div>
+          </div>
+        </details>
+
+        <div class="result-box" id="zm-result" aria-live="polite">
+          <div class="info-line">Somme totale: <strong id="zm-total-sum">—</strong> MAD</div>
+          <div class="info-line">Dettes à soustraire: <strong id="zm-debts">—</strong> MAD</div>
+          <div class="info-line">Base nette: <span class="big" id="zm-base-net">—</span> MAD</div>
+          <div class="info-line">Zakat (2.5%): <span class="big" id="zm-zakat">—</span> MAD</div>
+          <div class="small-muted">Si la base nette est inférieure au nisab, la zakat n'est pas due ; vérifiez le nisab local.</div>
+        </div>
+
+        <div class="calc-actions">
+          <button id="zm-reset" type="button" class="btn-ghost">Réinitialiser</button>
+          <button id="zm-calc" class="tool-action">Dons Via Quboor</button>
+        </div>
+      </form>
+    `,
+    'sadaqa-jaria': `
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px">
+        <p class="small-muted" style="text-align:center;margin:0;font-weight:600">${data.intro}</p>
+        <button type="button" class="info-toggle" aria-expanded="false" title="Info"><i class="fas fa-info-circle" aria-hidden="true"></i></button>
+      </div>
+
+      <div class="info-popup">
+        <strong>Qu'est-ce que la Sadaqa Jaria ?</strong>
+        <p class="small-muted" style="margin:8px 0 0">
+          La Sadaqa Jaria est une charité continue dont les bénéfices se prolongent après la contribution : travaux d’eau, éducation, publications, construction d’infrastructures, etc. Elle vise un impact durable et réparateur pour de nombreuses personnes.
+        </p>
+        <p class="small-muted" style="margin:8px 0 0"><em>Méthodologie :</em> Choisissez le type de projet, indiquez le budget mensuel que vous pouvez allouer et la durée prévue (années). Multipliez le budget mensuel par 12 × nombre d’années pour obtenir le coût total estimé, et prévoyez un pourcentage pour maintenance annuelle.</p>
+        <p class="small-muted" style="margin:6px 0 0">Exemple : Budget 500 MAD/mois × 12 × 2 ans = 12 000 MAD total ; ajoutez 10% pour maintenance si nécessaire.</p>
+        <p class="small-muted" style="margin:6px 0 0">Conseil : privilégiez la pérennité (entretien, formation, gouvernance locale) pour maximiser l’impact spirituel et social de la sadaqa.</p>
+      </div>
+
+      <form id="sj-form" class="calc-form" onsubmit="return false;">
+        <div class="small-muted">Astuce: priorisez la maintenance et la durabilité pour maximiser l'impact continu.</div>
+
+        <div class="field">
+          <label for="sj-type">Type d'oeuvre</label>
+          <select id="sj-type">
+            <option value="puits">Puits</option>
+            <option value="ecole">École / Formation</option>
+            <option value="mosquee">Mosquée</option>
+            <option value="publication">Publication / Livre</option>
+            <option value="sanitaire">Équipement sanitaire</option>
+            <option value="projets-quboor">Projets Quboor</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="sj-budget">Budget mensuel disponible (MAD)</label>
+          <input id="sj-budget" type="number" min="0" step="0.01" value="500">
+        </div>
+        <div class="field">
+          <label for="sj-years">Durée prévue (années)</label>
+          <input id="sj-years" type="number" min="1" step="1" value="1">
+        </div>
+
+        <div class="result-box" id="sj-result" aria-live="polite">
+          <div class="info-line">Budget alloué (mensuel): <span class="big" id="sj-budget-out">—</span> MAD</div>
+          <div class="info-line">Coût total (sur durée): <span class="big" id="sj-total-cost">—</span> MAD</div>
+          <div class="info-line small-muted" id="sj-advice">Conseil: —</div>
+          <div class="small-muted">Estimation pédagogique du bénéfice spirituel affichée ci-dessous (symbolique).</div>
+        </div>
+
+        <div class="calc-actions">
+          <button id="sj-reset" type="button" class="btn-ghost">Réinitialiser</button>
+          <button id="sj-calc" class="tool-action">Dons Via Quboor</button>
+        </div>
+      </form>
+    `
+  };
+
+  modalIntro.textContent = '';
+  modalExample.textContent = '';
+  modalAction.textContent = data.actionLabel || 'Continuer';
+  const content = document.getElementById('modalContent');
+  content.querySelectorAll('*:not(#modalTitle):not(.modal-close)').forEach(n=>{
+  });
+  const insertAt = content;
+  insertAt.querySelector('#modalIntro')?.remove?.();
+  insertAt.querySelector('#modalExample')?.remove?.();
+if(htmlByTool[toolId]){
+    document.getElementById('modalContent').innerHTML = `<h2 id="modalTitle">${data.title}</h2>` + htmlByTool[toolId];
+} else {
+    document.getElementById('modalContent').innerHTML = `<h2 id="modalTitle">${data.title}</h2>`; // rien si pas de HTML
+}
+  modal.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+  setTimeout(()=> attachCalculatorHandlers(toolId), 40);
+  modalClose.focus();
+}
+
+function closeModal(){
+  modal.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
+
+
+function attachCalculatorHandlers(toolId){
+  if(toolId === 'zakat-fitr'){
+    const adults = document.getElementById('zf-adults');
+    const children = document.getElementById('zf-children');
+    const qty = document.getElementById('zf-qty');
+    const price = document.getElementById('zf-price');
+    const totalPeople = document.getElementById('zf-total-people');
+    const totalKg = document.getElementById('zf-total-kg');
+    const totalEur = document.getElementById('zf-total-eur');
+    const calc = document.getElementById('zf-calc');
+    const reset = document.getElementById('zf-reset');
+
+    function computeZF(){
+      const a = Math.max(0, Number(adults.value)||0);
+      const c = Math.max(0, Number(children.value)||0);
+      const q = Math.max(0, Number(qty.value)||0);
+      const p = Math.max(0, Number(price.value)||0);
+      const people = a + c;
+      const kg = +(people * q).toFixed(2);
+      const eur = +(kg * p).toFixed(2);
+      totalPeople.textContent = people;
+      totalKg.textContent = kg;
+      totalEur.textContent = eur;
+    }
+    [adults,children,qty,price].forEach(i=> i.addEventListener('input', computeZF));
+    calc.addEventListener('click', (e)=>{ e.preventDefault(); showToast('Redirection vers Dons Quboor'); window.open('#/donate', '_blank'); });
+    reset.addEventListener('click', ()=>{
+      adults.value = 2; children.value = 1; qty.value = 2.5; price.value = 1.2;
+      computeZF();
+    });
+    computeZF();
+
+    // info popup toggles inside the modal
+    document.querySelectorAll('.info-toggle').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const popup = btn.closest('.modal-panel')?.querySelector('.info-popup');
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        if(popup) popup.style.display = expanded ? 'none' : 'block';
+      });
+    });
+  }
+
+  if(toolId === 'zakat-annuelle'){
+    const cash = document.getElementById('zm-cash');
+    const gold = document.getElementById('zm-gold');
+    const assets = document.getElementById('zm-assets');
+    const inventory = document.getElementById('zm-inventory');
+    const debt = document.getElementById('zm-debt');
+    const harvest = document.getElementById('zm-harvest');
+    const harvestType = document.getElementById('zm-harvest-type');
+    const livestock = document.getElementById('zm-livestock');
+    const totalSum = document.getElementById('zm-total-sum');
+    const debtsOut = document.getElementById('zm-debts');
+    const baseNet = document.getElementById('zm-base-net');
+    const zakatOut = document.getElementById('zm-zakat');
+    const calc = document.getElementById('zm-calc');
+    const reset = document.getElementById('zm-reset');
+
+    function computeZM(){
+      const vals = [
+        Number(cash.value)||0,
+        Number(gold.value)||0,
+        Number(assets.value)||0,
+        Number(inventory.value)||0,
+        Number(harvest.value)||0,
+        Number(livestock.value)||0
+      ];
+      const harvestVal = Number(harvest.value)||0;
+      const harvestRate = harvestType.value === 'irr' ? 0.05 : 0.10;
+      const harvestZakat = +(harvestVal * harvestRate).toFixed(2);
+      const sum = vals.reduce((a,b)=>a+b,0);
+      const d = Number(debt.value)||0;
+      const base = +(sum - d).toFixed(2);
+      const zak = base > 0 ? +((base * 0.025)).toFixed(2) : 0;
+      totalSum.textContent = sum.toLocaleString();
+      debtsOut.textContent = d.toLocaleString();
+      baseNet.textContent = base.toLocaleString();
+      zakatOut.textContent = zak.toLocaleString();
+    }
+    [cash,gold,assets,inventory,harvest,harvestType,livestock,debt].forEach(i=> i.addEventListener('input', computeZM));
+    calc.addEventListener('click', (e)=>{ e.preventDefault(); showToast('Redirection vers Dons Quboor'); window.open('#/donate', '_blank'); });
+    reset.addEventListener('click', ()=>{
+      [cash,gold,assets,inventory,harvest,livestock,debt].forEach(i=> i.value = 0);
+      harvestType.value = 'auto';
+      computeZM();
+    });
+    computeZM();
+
+    // info popup toggles inside the modal (same behavior as ZF)
+    document.querySelectorAll('.info-toggle').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const popup = btn.closest('.modal-panel')?.querySelector('.info-popup');
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        if(popup) popup.style.display = expanded ? 'none' : 'block';
+      });
+    });
+  }
+
+  if(toolId === 'sadaqa-jaria'){
+    const type = document.getElementById('sj-type');
+    const budget = document.getElementById('sj-budget');
+    const years = document.getElementById('sj-years');
+    const outBudget = document.getElementById('sj-budget-out');
+    const totalCost = document.getElementById('sj-total-cost');
+    const advice = document.getElementById('sj-advice');
+    const calc = document.getElementById('sj-calc');
+    const reset = document.getElementById('sj-reset');
+
+    function computeSJ(){
+      const b = +(Number(budget.value)||0);
+      const y = Math.max(1, Number(years.value)||1);
+      const monthly = b;
+      const total = +(monthly * 12 * y).toFixed(2);
+      outBudget.textContent = monthly.toLocaleString();
+      totalCost.textContent = total.toLocaleString();
+      let adv = 'Choisissez un projet durable : les infrastructures et l’éducation offrent un bénéfice continu.';
+      if(type.value === 'puits') adv = 'Puits : prévoyez coûts d’entretien annuels ; répartissez budget pour pompe et forage.';
+      if(type.value === 'publication') adv = 'Publication : prévoyez impression, distribution et maintenance numérique.';
+      if(type.value === 'ecole') adv = 'Éducation : prévoir frais de fonctionnement et pérennité des enseignants.';
+      advice.textContent = adv;
+    }
+    [type,budget,years].forEach(i=> i.addEventListener('input', computeSJ));
+    calc.addEventListener('click', (e)=>{ e.preventDefault(); showToast('Redirection vers Dons Quboor'); window.open('#/donate', '_blank'); });
+    reset.addEventListener('click', ()=>{
+      type.value='puits'; budget.value=500; years.value=1; computeSJ();
+    });
+    computeSJ();
+
+    // info popup toggles inside the modal (same behavior as ZF)
+    document.querySelectorAll('.info-toggle').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const popup = btn.closest('.modal-panel')?.querySelector('.info-popup');
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        if(popup) popup.style.display = expanded ? 'none' : 'block';
+      });
+    });
+  }
+}
+
+document.querySelectorAll('.tool-card').forEach((btn)=>{
+  btn.setAttribute('role','button');
+  btn.tabIndex = 0;
+  btn.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' ') btn.click();
+  });
+
+  // Decide whether to open the modal (calculators) or the list/detail popup
+  btn.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    btn.animate([{transform:'scale(0.995)'},{transform:'scale(1)'}],{duration:160,easing:'ease-out'});
+    const toolId = btn.dataset.tool;
+
+    // Tools that should open the full modal calculator
+    const modalTools = ['zakat-fitr','zakat-annuelle','sadaqa-jaria'];
+
+    if (modalTools.includes(toolId)) {
+      openModalFor(toolId);
+    } else {
+      // For coran-audio and douas open the list/detail popup flow
+      openToolPopup(toolId);
+    }
+  });
+});
+
+modalClose?.addEventListener('click', closeModal);
+modalOverlay?.addEventListener('click', closeModal);
+modalAction?.addEventListener('click', ()=>{
+  showToast(modalAction.textContent || 'Action');
+  closeModal();
+});
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal();
+});
+
+function showToast(text){
+  let t = document.getElementById('qub-toast');
+  if(!t){
+    t = document.createElement('div');
+    t.id = 'qub-toast';
+    Object.assign(t.style,{
+      position:'fixed',left:'50%',transform:'translateX(-50%)',bottom:'18px',padding:'10px 14px',background:'rgba(0,0,0,0.8)',color:'#fff',borderRadius:'10px',zIndex:2000,fontSize:'14px'
+    });
+    document.body.appendChild(t);
+  }
+  t.textContent = text;
+  t.style.opacity = '1';
+  clearTimeout(t._hide);
+  t._hide = setTimeout(()=> t.style.opacity = '0', 1400);
+}
     </script>
   </body>
   </html>
