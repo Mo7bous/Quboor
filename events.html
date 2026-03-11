@@ -28,7 +28,7 @@
 
 /* Reset and base */
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
+html,body{height:auto;font-family:Inter,system-ui,Arial,sans-serif;background: linear-gradient(0deg, #edf2f5, #f5f4f0);color:var(--primary);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 
 
@@ -43,7 +43,7 @@ body::before{
   z-index:1000;
 }
 html.dark body::before{
-  background: #0b0c0f;
+  background: #2C3E50;
 }
 
 html.body::after{
@@ -67,7 +67,7 @@ html.body::after{
 }
 
 html.dark body::after{
-  background:linear-gradient( to bottom,#0b0c0f 0%,transparent 100%);
+  background:linear-gradient( to bottom,#2C3E50 0%,transparent 100%);
 }
 
 
@@ -81,13 +81,36 @@ html.dark body::after{
     margin-right: 5%;
     border-radius: 20px;
     background: var(--nav-bg);
-    color: var(--card-bg);
+    background: linear-gradient(135deg, #2C3E50, #0b0c0f);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 8px 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     z-index: 1000;}
+
+    .top-nav{
+    animation: floatNav 6s ease-in-out infinite;
+}
+
+@keyframes floatNav{
+    0%{ transform: translateY(0px); }
+    50%{ transform: translateY(-3px); }
+    100%{ transform: translateY(0px); }
+}
+
+body.dark-mode .top-nav {     background-color: var(--primary-color);
+}
+
+.page {
+    opacity: 1;
+    transition: opacity 0.35s ease;
+}
+
+.page.fade-out {
+    opacity: 0;
+}
+
 .logo {
   height: 47px;
   margin-right: 1px;
@@ -121,11 +144,13 @@ html.dark body::after{
 .lang-btn .flag{font-size:18px;line-height:1}
 
 /* Page main area scrollable like contact us */
-#main{width:90%;max-width:1100px;margin:3px 1px 2px 20px;padding:100px 0 0 0;height:auto;display:block;overflow:auto}
+#main{width:90%;max-width:1100px;margin:3px 1px 2px 20px;padding:100px 0 0 0;height:auto;display:block;overflow:auto;background: linear-gradient(0deg, #edf2f5, #f5f4f0)}
+
+.dark #main{background: #2C3E50}
 
 /* Card styles */
-.collapsible-card{background:var(--card-bg);border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15);overflow:hidden;margin-bottom:14px}
-.collapsible-card2{background:var(--card-bg);border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15);overflow:hidden;margin-bottom:14px;margin-left: 5%;margin-right: 5%;}
+.collapsible-card{background: #f6f1f1;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15);overflow:hidden;margin-bottom:14px}
+.collapsible-card2{background: linear-gradient(0deg, #edf2f5, #f5f4f0);border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15);overflow:hidden;margin-bottom:14px;margin-left: 5%;margin-right: 5%;}
 
 .card-header{display:flex;align-items:center;justify-content:space-between;padding:3px 16px;cursor:pointer;position: relative;}
 .card-header::after {
@@ -154,8 +179,9 @@ html.dark body::after{
     --muted: #cfcfcf;
     --nav-bg: #2C3E50;
   }
-  .dark body, .dark html { background: var(--page-bg); }
-  .dark .intro, .dark .collapsible-card, .dark .support-card { background: var(--card-bg); color: var(--primary); box-shadow:  0 6px 14px rgba(0, 0, 0, 0.15); }
+  .dark body, .dark html { background: #2C3E50; }
+   .dark .collapsible-card { background: #2C3E50; color: var(--primary); box-shadow:  0 6px 14px rgba(0, 0, 0, 0.15); }
+   .dark .collapsible-card2 { background: linear-gradient(135deg, #2C3E50, #0b0c0f); color: var(--primary); box-shadow:  0 6px 14px rgba(0, 0, 0, 0.15); }
   .dark .card-sub, .dark .content-inner, .dark .support-card div { color: var(--primary); }
   .dark .card-arrow { color: var(--primary); }
   .dark .support-card a { color: var(--primary); }
@@ -232,7 +258,7 @@ html.dark body::after{
 
   <header class="top-nav">
     <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
-    <div class="brand"><img src="img/logotitre.png" alt="Logo Quboor" class="logo"></div>
+    <div class="brand"><img src="img/logo/logotitre.png" alt="Logo Quboor" class="logo"></div>
     <div class="nav-controls"><button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button></div>
   </header>
 
@@ -425,12 +451,12 @@ Votre contribution permet de financer les actions terrain, la numérisation et l
 
     <div class="support-grid" style="display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:18px;">
       <!-- PayPal card -->
-      <div class="collapsible-card2" style="background:var(--card-bg);padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.20);position:relative;text-align:center;">
+      <div class="collapsible-card2" style="padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.20);position:relative;text-align:center;">
         <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
           <h4 style="margin:10px 0 6px 0"><i class="fab fa-paypal" style="margin-right:8px;color:var(--primary)"></i>PayPal</h4>
           <div style="font-size:13px;margin-bottom:8px">Don rapide et sécurisé via PayPal.</div>
 
-                  <img src="img/qr-paypal.jpeg" alt="Soutenir Quboor" style="width:75%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);">
+                  <img src="img/qr/qr-paypal.jpeg" alt="Soutenir Quboor" style="width:75%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);">
 
 
           <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
@@ -440,12 +466,27 @@ Votre contribution permet de financer les actions terrain, la numérisation et l
         </div>
       </div>
 
-      <div class="collapsible-card2" style="background:var(--card-bg);padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.20);position:relative;text-align:center;">
+
+                <div class="collapsible-card2" style="padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.20);position:relative;text-align:center;">
+        <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
+          <h4 style="margin:10px 0 6px 0"><i class="fa fa-credit-card" style="margin-right:8px;color:var(--primary)"></i>Crédit Agricole du Maroc</h4>
+          <div style="font-size:13px;margin-bottom:8px">Don rapide et sécurisé via E-Banking.</div>
+
+                  <img src="img/qr/qr-ca.jpeg" alt="Soutenir Quboor" style="width:75%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);">
+
+
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
+            <div style="font-size:13px">Contribution ponctuelle ou récurrente.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapsible-card2" style="padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.20);position:relative;text-align:center;">
         <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
           <h4 style="margin:10px 0 6px 0"><i class="fa-brands fa-instagram" style="margin-right:8px;color:var(--primary)"></i>Quboor - قبور</h4>
           <div style="font-size:13px;margin-bottom:8px">Campagnes media pour nos projets.</div>
 
-        <img src="img/qr-insta.jpeg" alt="Soutenir Quboor" style="width:75%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);">
+        <img src="img/qr/qr-insta.jpeg" alt="Soutenir Quboor" style="width:75%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);">
 
           <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
             <a href="https://www.instagram.com/quboor_?igsh=M21nd29zaGVsMHR5" target="_blank" rel="noreferrer" style="font-weight:600;color: #cf9251;text-decoration: underline solid #cf9251 2 px;">S'abonner</a>

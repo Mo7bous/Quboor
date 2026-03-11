@@ -38,6 +38,8 @@
 
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
+.dark html, .dark body{background:#2C3E50}
+
 a{color:inherit;text-decoration:none}
 
 body::before{
@@ -52,7 +54,7 @@ body::before{
 }
 
 .dark body::before{
-  background: #0b0c0f;
+  background: #2C3E50;
 }
 
 body::after{
@@ -76,7 +78,7 @@ body::after{
 }
 
 .dark body::after{
-  background:linear-gradient( to bottom,#0b0c0f 0%,transparent 100%);
+  background:linear-gradient( to bottom,#2C3E50 0%,transparent 100%);
 }
 
 /* Top nav */
@@ -86,7 +88,7 @@ body::after{
   height: 10%;
   margin-left: 5%;
   margin-right : 5%;
-  background:var(--nav-bg);
+  background: linear-gradient(135deg, #2C3E50, #0b0c0f);
   color:var(--card-bg);
   display:flex;
   align-items:center;
@@ -96,6 +98,27 @@ body::after{
   box-shadow:0 4px 12px rgba(0,0,0,0.25);
   z-index:1000;}
 
+.top-nav{
+    animation: floatNav 6s ease-in-out infinite;
+}
+
+@keyframes floatNav{
+    0%{ transform: translateY(0px); }
+    50%{ transform: translateY(-3px); }
+    100%{ transform: translateY(0px); }
+}
+
+body.dark-mode .top-nav {background: linear-gradient(135deg, #2C3E50, #0b0c0f);
+}
+
+.page {
+    opacity: 1;
+    transition: opacity 0.35s ease;
+}
+
+.page.fade-out {
+    opacity: 0;
+}
 
 .logo {
   height: 47px;
@@ -179,9 +202,22 @@ body::after{
   gap:16px;
 }
 
+.dark #main{
+background: #2C3E50;
+}
+
 /* content card (collapsible card styles) */
 .content-card, .collapsible-card{
-  background:var(--card-bg);
+  background: linear-gradient(0deg, #edf2f5, #f5f4f0);
+  border-radius:10px;
+  box-shadow:0 6px 14px rgba(0,0,0,0.15);
+  color:var(--primary);
+  overflow: hidden;
+}
+
+.dark .content-card, .dark .collapsible-card{
+    background: linear-gradient(135deg, #314457, #212121);
+;
   border-radius:10px;
   box-shadow:0 6px 14px rgba(0,0,0,0.15);
   color:var(--primary);
@@ -217,7 +253,7 @@ body::after{
 
 /* card content collapsible area */
 .card-content{
-  padding:0 18px 18px 18px;
+  padding:-1px 18px 18px 18px;
   max-height:0;
   overflow:hidden;
   transition:max-height .28s ease, padding .22s ease;
@@ -276,15 +312,14 @@ textarea{min-height:100px;resize:vertical}
 
 /* dark mode */
 .dark{
-  --page-bg: #0b0c0f;
+  --page-bg: #2C3E50;
   --card-bg: #2C3E50;
   --card-border: rgba(6, 6, 6, 0.06);
   --primary: #FFFCFA;
   --pastel-orange: #FFDAB8;
   --popup-search-bg: #2C3E50;
 }
-.dark .top-nav{background:var(--nav-bg)} /* keep nav same */
-.dark .content-card{color:var(--primary);background:var(--card-bg)}
+.dark .content-card{background: linear-gradient(135deg, #2C3E50, #0b0c0f)}
 .dark .btn{background:#0b0c0f;color:#FFFCFA}
 .dark .input,.dark textarea,.dark select{border:1px solid rgba(255,255,255,0.04);color:#FFFCFA;background:transparent}
 .dark .note{color:#FFFCFA}
@@ -306,7 +341,7 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
   <header class="top-nav">
     <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
     <div class="brand">
-      <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
+      <img src="img/logo/logotitre.png" alt="Logo Quboor" class="logo">
     </div>
     <div class="nav-controls">
       <button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button>

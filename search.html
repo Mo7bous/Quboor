@@ -10,7 +10,7 @@
     <style>
 
 :root {--text-color: #fffefb;--background-color: #fffefb;--accent-color: #fffefb;--primary-color: #2C3E50;--secondary-color: #fffdf6; --third-color: #ebf4f8;--fifth-color: #0b0c0f;--fourth-color: #000000;--sixth-color: #000000;--seventh-color: #000000; --eighth-color: #000000;--ninth-color: #0056b3;--tenth-color: #cf9251; }
-html, body {font-family: 'Inter', sans-serif;color: var(--primary-color);background-color: var(--third-color);margin: 0;padding: 0;text-align: justify;overflow-x: hidden;}
+html, body {font-family: 'Inter', sans-serif;color: var(--primary-color);    background: linear-gradient(135deg, #edf2f5, #f5f4f0);margin: 0;padding: 0;text-align: left;overflow-x: hidden;}
        
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
 .lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;
@@ -24,19 +24,48 @@ padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;o
 
 .sidebar-separator{width:100%;height:18px; box-sizing:border-box;margin-top:42px; border-top:0; opacity:0.0;pointer-events:none;}
 
-body::before{content:"";position:fixed;top:0;left:0;width:100%;height:20px;background:var(--third-color);z-index:1000;}
-body.dark-mode::before{background:var(--fifth-color);}
+body::before{content:"";position:fixed;top:0;left:0;width:100%;height:20px;background: linear-gradient(0deg, #edf2f5, #f5f4f0);z-index:1000;}
+body.dark-mode::before{background:var(--primary-color);}
 body::after{content:"";position:fixed;top:0px; left:0;height: 15%;width: 90%;margin-top: 5%;margin-left: 5%;margin-right : 5%;background:linear-gradient(to bottom,#ebf4f8 0%,rgba(235,244,248,0) 100%);pointer-events:none;z-index:1000;}
-body.dark-mode::after{background:linear-gradient( to bottom,#0b0c0f 0%,transparent 100%);}
+body.dark-mode::after{background:linear-gradient( to bottom,#2C3E50 0%,transparent 100%);}
 
-.top-nav {z-index: 1001;position: fixed;display: flex;align-items: center;justify-content: space-between;background-color: var(--primary-color);color: var(--text-color);height: 10%;width: 90%;margin-top: 5%;margin-left: 5%;margin-right : 5%;border-radius: 20px;padding:8px 16px; box-sizing: border-box;box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);}
+.top-nav {z-index: 1001;position: fixed;display: flex;align-items: center;justify-content: space-between;        
+    background: linear-gradient(135deg, #2C3E50, #0b0c0f);color: #fffefb;
+    height: 10%;width: 90%;margin-top: 5%;margin-left: 5%;margin-right : 5%;border-radius: 20px;
+    
+    padding:8px 16px; box-sizing: border-box;box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25); 
+}
+
+.top-nav{
+    animation: floatNav 6s ease-in-out infinite;
+}
+
+@keyframes floatNav{
+    0%{ transform: translateY(0px); }
+    50%{ transform: translateY(-3px); }
+    100%{ transform: translateY(0px); }
+}
+
+body.dark-mode .top-nav {     background-color: var(--primary-color);
+}
+
+.page {
+    opacity: 1;
+    transition: opacity 0.35s ease;
+}
+
+.page.fade-out {
+    opacity: 0;
+}
+
 .top-nav h1 {flex-grow: 0;position: absolute;left: 50%;transform: translateX(-50%);margin: 0;display: flex;align-items: center;}
 
 .logo {height: 47px;margin-right: 1px;margin-bottom: 0px;}
 
 .menu-btn{margin-top: -2px;background:none;border:0;color:var(--pastel-orange);font-size:20px;padding:8px;border-radius:6px;cursor:pointer;
 animation: pulse 2s infinite ease-in-out;
-} @keyframes pulse {    0% {        transform: scale(1);    }    50% {        transform: scale(1.30);    }    100% {        transform: scale(1);    }}
+} @keyframes pulse {    0% {        transform: scale(1);    }    50% {        transform: scale(1.30);    }    100% {        transform: scale(1);    }
+}
 
 .container {max-width: 1100px;margin: 0 auto;padding: 20px;}
 
@@ -65,6 +94,22 @@ animation: pulse 2s infinite ease-in-out;
 
 }
 
+.logo-container{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.character{
+    width:0px;
+    height:0px;
+    transition: transform 0.3s;
+}
+
+.character:hover{
+    transform: scale(1.1);
+}
+
 .sidebar{position:fixed;left:-280px;top:0;height:100%;width:280px;background:var(--primary-color);color:var(--secondary-color);padding-top:20px;transition:left .28s;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto;z-index: 1002;}
 .sidebar.open{left:0}
 .sidebar a{display:flex;flex-direction:column;align-items:center;justify-content:center;width:50%;box-sizing:border-box;gap:6px;padding:12px 6px;color:var(--pastel-orange);text-align:center;font-size:14px;min-height:72px;  text-decoration: none;}
@@ -78,6 +123,13 @@ animation: pulse 2s infinite ease-in-out;
     margin-top: 10px; 
 }
 
+.dark-mode #main {
+    padding: 100px 20px 80px;
+    margin-top: 10px; 
+        background: linear-gradient(135deg, #2C3E50, #0b0c0f);
+
+}
+
 #map {
     height: 250px;
     width: 100%;
@@ -88,7 +140,7 @@ animation: pulse 2s infinite ease-in-out;
 }
 
 .search-explanation {
-    background-color: var(--secondary-color);
+    background-color: #f6f1f1;
     border-left: 4px solid var(--ninth-color);
     padding: 15px;
     margin-bottom: 20px;
@@ -99,6 +151,7 @@ animation: pulse 2s infinite ease-in-out;
 
 .search-explanation p {
     margin: 5px 0;
+    text-align: justify
 }
 
 .search-explanation strong {
@@ -118,7 +171,7 @@ animation: pulse 2s infinite ease-in-out;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     font-size: small;
-    text-align: lef;
+    text-align: justify;
         font-family: 'Inter';
 }
 
@@ -129,9 +182,10 @@ animation: pulse 2s infinite ease-in-out;
     border-color: var(--secondary-color);
     box-sizing: border-box;
     font-size: small;
-    text-align: lef;
+    text-align: justify;
         font-family: 'Inter';
-            background-color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
 
 }
 
@@ -153,13 +207,13 @@ animation: pulse 2s infinite ease-in-out;
 }
 
 .death-card {
-    background-color: var(--secondary-color);
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    background: linear-gradient(135deg, #edf2f5, #f5f4f0);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
     padding: 15px;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
     position: relative;
+    border-radius: 8px;
 }
 
 .death-card:hover {
@@ -205,7 +259,7 @@ animation: pulse 2s infinite ease-in-out;
 }
 
 .death-card-details h3 {
-    margin: 0 0 5% 0;
+    margin: 2% 0 5% 0;
     font-size: 1.2em;
     color: var(--primary-color);
     text-align: left;
@@ -371,7 +425,6 @@ mark {
     border-radius: 8px;
     text-align: center;
     padding: 10px;
-    border: 1px solid #eee;
     cursor: pointer;
     transition: box-shadow 0.2s, transform 0.2s;
 }
@@ -387,7 +440,6 @@ mark {
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 8px;
-    border: 2px solid #ddd;
 }
 
 .relative-name {
@@ -431,8 +483,7 @@ body.dark-mode .profile-gallery-section h4 {
     max-height: 100%; 
     overflow-y: auto;
     padding: 5px;
-    background-color: var(--secondary-color);
-    border-radius: 4px;
+    background: #f9f9f9;    border-radius: 4px;
     
 }
 
@@ -441,7 +492,6 @@ body.dark-mode .profile-gallery-section h4 {
     height: 100px;
     object-fit: cover;
     border-radius: 4px;
-    border: 1px solid #ddd;
     cursor: pointer; 
     transition: opacity 0.2s;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
@@ -747,9 +797,7 @@ body.dark-mode {
     color: var(--text-color);
 }
 
-body.dark-mode .top-nav {
-    background-color: var(--primary-color);
-}
+
 
 body.dark-mode .sidebar {
     background-color: var(--primary-color);
@@ -759,11 +807,11 @@ body.dark-mode .sidebar a:hover {
     background-color: #1F262A;
 }
 
-body.dark-mode #map { 
+.dark-mode #map { 
 }
 
 body.dark-mode .search-explanation {
-    background-color: var(--primary-color);
+    background: #1f262a;
     border-left-color: var(--tenth-color);
     color: var(--secondary-color);
 }
@@ -773,9 +821,8 @@ body.dark-mode .search-explanation strong {
 }
 
 body.dark-mode .death-card {
-    background-color: var(--primary-color);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-    border: 1px solid #444;
+    background: linear-gradient(135deg, #314457, #212121);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
 }
 
 body.dark-mode .death-card-details h3,
@@ -793,13 +840,13 @@ body.dark-mode .info-item i {
                 }
 
 body.dark-mode mark {
-    background-color: var(--secondary-color);
-    color: var(--text-color);
+    background-color: #f5db99;
+    color: #2C3E50;
 }
 
 body.dark-mode .popup-content {
-    background: linear-gradient(135deg, #2C3E50, #7b5833);
-    color: var(--text-color);
+    background: linear-gradient(135deg, #2C3E50, #120d07);
+        color: var(--text-color);
 }
 
 body.dark-mode .popup-close {
@@ -834,10 +881,10 @@ body.dark-mode .profile-details .profile-item {color: var(--text-color);
 body.dark-mode .profile-details .profile-item i {color: var(--secondary-color);
 }
 
-body.dark-mode .relative-card {background-color: var(--fith-color);border-color: var(--primary-color);
+body.dark-mode .relative-card {background:#1f262a;border-color: var(--primary-color);
 }
 
-body.dark-mode .gallery-images-container {background: linear-gradient(135deg, #77593a, #7b5833);
+body.dark-mode .gallery-images-container {background: #1f262a;;
 }
 
 body.dark-mode .gallery-images-container img {color: #5dade2;
@@ -869,20 +916,37 @@ body.dark-mode #volume-slider::-moz-range-thumb {
 }
 
 body.dark-mode .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-color: var(--primary-color);
-background: linear-gradient(135deg, #80b4cb, #2C3E50,);
-  backdrop-filter: blur(15px);
+color: var(--secondary-color);
+    background: linear-gradient(135deg, #314457, #212121);      backdrop-filter: blur(15px);
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.1);
 }
 
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-background: linear-gradient(135deg, #80b4cb, #ebf4f8);
-  backdrop-filter: blur(15px);
+    background: linear-gradient(135deg, #edf2f5, #f5f4f0);
+      backdrop-filter: blur(15px);
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.1);
 }
 
+
+.leaflet-container a.leaflet-popup-close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    text-align: left;
+    width: 24px;
+    height: 24px;
+    font: 20px / 34px Tahoma, Verdana, sans-serif;
+    color: #2C3E50;
+    text-decoration: none;
+    background: transparent;
+}
+
+.dark-mode .leaflet-container a.leaflet-popup-close-button {
+    color: var(--secondary-color);
+}
 .leaflet-popup-pane {margin-top: 20px;}
 
 body.dark-mode .card-actions button {background: none;border: none;color: var(--secondary-color);cursor: pointer;font-size: 16px;padding: 5px;}
@@ -894,6 +958,73 @@ body.dark-mode.card-actions button:hover {color: #333;}
 
 element.style {opacity: 1;transform: translate3d(161px, 91px, 0px);bottom: -25px;left: -123px;}
 
+.news-links a{
+display:flex;
+align-items:center;
+gap:8px;
+margin-bottom:6px;
+text-decoration:none;
+color:#333;
+}
+
+.dark-mode .news-links a{
+display:flex;
+align-items:center;
+gap:8px;
+margin-bottom:6px;
+text-decoration:none;
+color:var(--secondary-color);
+}
+.news-icon{
+width:18px;
+height:18px;
+}
+
+.news-category{
+
+margin-bottom:8px;
+
+}
+
+.news-category-header{
+
+cursor:pointer;
+font-weight:bold;
+padding:4px 0;
+
+}
+
+.news-category-list{
+
+padding-left:15px;
+margin-top:4px;
+
+}
+
+.dark-mode .news-category-list{
+
+padding-left:15px;
+margin-top:4px;
+color: var(--secondary-color);
+
+}
+
+.news-category-list a{
+
+display:block;
+text-decoration:none;
+color:#333;
+margin-bottom:3px;
+font-size: 14px;
+
+}
+
+.news-category-list a:hover{
+
+text-decoration:underline;
+
+}
+
     </style>
     <script type="importmap">
     {
@@ -904,12 +1035,17 @@ element.style {opacity: 1;transform: translate3d(161px, 91px, 0px);bottom: -25px
     </script>
 </head>
 <body>
+
+    <div class="logo-container">
+    <img src="img/avatar/character_idle.gif" class="character">
+</div>
+
     <div class="top-nav">
         <button class="menu-btn">
             <i class="fas fa-bars"></i>
         </button>
         <h1>
-<img src="img/logotitre.png" alt="Logo Quboor" class="logo">
+<img src="img/logo/logotitre.png" alt="Logo Quboor" class="logo">
         </h1>
         <div class="nav-right-controls">
             <button id="darkModeToggle" class="dark-mode-toggle-btn">
@@ -930,6 +1066,8 @@ element.style {opacity: 1;transform: translate3d(161px, 91px, 0px);bottom: -25px
 
         <span class="closebtn">&times;</span>
     <div class="sidebar-separator" aria-hidden="true"></div>
+
+    
         <a href="search.html"><i class="fas fa-search"></i>Recherche</a>
         <a href="new.html"><i class="fas fa-user-plus"></i>Ajouter</a>
         <a href="mission.html"><i class="fas fa-tasks"></i>Missions</a>
@@ -957,6 +1095,12 @@ element.style {opacity: 1;transform: translate3d(161px, 91px, 0px);bottom: -25px
             <span class="popup-close">&times;</span>
             <div id="profileContent">
             </div>
+
+            <div id="profileNewsSection" class="profile-section" style="display:none;">
+<h4>Articles & Médias</h4>
+<div id="profileNewsLinks" class="news-links"></div>
+</div>
+
             <div class="profile-gallery-section">
                 <h4>Galerie d'images</h4>
                 <div id="profileGalleryImages" class="gallery-images-container">
@@ -1038,7 +1182,7 @@ const deathEntries = [
 {uid:"K8D3W6S2",familyName:"El Maâiri",firstName:"Khadouj",dob:"Inconnu",birthplace:"Inconnu",dod:"Inconnu",deathplace:"Rabat",location:"34.02827694262254, -6.840148961818245",images:["users/users/K8D3W6S2/1.jpeg","users/users/K8D3W6S2/2.jpeg","users/users/K8D3W6S2/3.jpeg","users/users/K8D3W6S2/4.jpeg","users/users/K8D3W6S2/5.jpeg"],description:"Son souvenir demeure parfumé dans le cœur de ses proches.",cemetery:"Chouhada - Rabat",profession:"Inconnu",relatives:[]},
 {uid:"URU136EV",familyName:"Lhrizi",firstName:"Mahjouba",dob:"n/a",birthplace:"n/a",dod:"n/a",deathplace:"Salé",location:"34.03076153229848, -6.8387874054214155",images:["users/users/URU136EV/1.jpeg","users/users/URU136EV/2.jpeg","users/users/URU136EV/3.jpeg","users/users/URU136EV/4.jpeg","users/users/URU136EV/5.jpeg","users/users/URU136EV/6.jpeg"],description:"Ô Allah, fais-lui miséricorde et accorde-lui une vaste place dans Tes paradis.",cemetery:"Chouhada - Rabat",profession:"n/a",relatives:["P9I7Q1RD","6Q1R5S2T","X8G2TQ7K","WET7HU7N","78AS1YP9","ALN875QS"]},
 {uid:"P9I7Q1RD",familyName:"Bouhlal",firstName:"Abdel Karim",dob:"n/a",birthplace:"n/a",dod:"n/a",deathplace:"Salé",location:"34.03077574369565, -6.838867787876438",images:["users/users/P9I7Q1RD/1.jpeg","users/users/P9I7Q1RD/2.jpeg","users/users/P9I7Q1RD/3.jpeg","users/users/P9I7Q1RD/4.jpeg","users/users/P9I7Q1RD/5.jpeg","users/users/P9I7Q1RD/6.jpeg"],description:"Ô Allah, fais-lui miséricorde et accorde-lui une vaste place dans Tes paradis.",cemetery:"Chouhada - Rabat",profession:"n/a",relatives:["URU136EV","6Q1R5S2T","X8G2TQ7K","WET7HU7N","78AS1YP9","ALN875QS"]},
-{uid:"6Q1R5S2T",familyName:"Bouhlal",firstName:"Mohsine",dob:"1970-04-22",birthplace:"Rabat",dod:"2025-04-05",deathplace:"Rabat",location:"34.03035867959946, -6.843429048160808",images:["users/users/6Q1R5S2T/1.jpeg","users/users/6Q1R5S2T/2.jpeg","users/users/6Q1R5S2T/3.jpeg","users/users/6Q1R5S2T/10.jpeg","users/users/6Q1R5S2T/9.jpeg","users/users/6Q1R5S2T/6.jpeg","users/users/6Q1R5S2T/7.jpeg","users/users/6Q1R5S2T/8.jpeg","users/users/6Q1R5S2T/5.jpeg","users/users/6Q1R5S2T/4.jpeg"],description:"Leader d’une génération, il a laissé une empreinte dans le football marocain par son talent, sa vision et son engagement sur et en dehors du terrain.",cemetery:"Chouhada - Rabat",profession:"Sportif",relatives:["URU136EV","P9I7Q1RD","X8G2TQ7K","WET7HU7N","78AS1YP9","ALN875QS"]},
+{uid:"6Q1R5S2T",familyName:"Bouhlal",firstName:"Mohcine",dob:"1970-04-22",birthplace:"Rabat",dod:"2025-04-05",deathplace:"Rabat",location:"34.03035867959946, -6.843429048160808",images:["users/users/6Q1R5S2T/1.jpeg","users/users/6Q1R5S2T/2.jpeg","users/users/6Q1R5S2T/3.jpeg","users/users/6Q1R5S2T/10.jpeg","users/users/6Q1R5S2T/9.jpeg","users/users/6Q1R5S2T/6.jpeg","users/users/6Q1R5S2T/7.jpeg","users/users/6Q1R5S2T/8.jpeg","users/users/6Q1R5S2T/5.jpeg","users/users/6Q1R5S2T/4.jpeg"],description:"Leader d’une génération, il a laissé une empreinte dans le football marocain par son talent, sa vision et son engagement sur et en dehors du terrain.",cemetery:"Chouhada - Rabat",profession:"Sportif",relatives:["URU136EV","P9I7Q1RD","X8G2TQ7K","WET7HU7N","78AS1YP9","ALN875QS"]},
 {uid:"X8G2TQ7K",familyName:"Bouhlal",firstName:"Abdel Fattah",dob:"n/a",birthplace:"n/a",dod:"n/a",deathplace:"Rabat",location:"34.03065405853028, -6.838245091791529",images:["users/users/X8G2TQ7K/1.jpeg","users/users/X8G2TQ7K/2.jpeg","users/users/X8G2TQ7K/3.jpeg","users/users/X8G2TQ7K/4.jpeg","users/users/X8G2TQ7K/5.jpeg"],description:"Ô Allah, fais-lui miséricorde et accorde-lui une vaste place dans Tes paradis.",cemetery:"Chouhada - Rabat",profession:"n/a",relatives:["URU136EV","P9I7Q1RD","6Q1R5S2T","WET7HU7N","78AS1YP9","ALN875QS"]},
 {uid:"WET7HU7N",familyName:"Bouhlal",firstName:"Thami",dob:"n/a",birthplace:"n/a",dod:"n/a",deathplace:"Paris",location:"34.02920504233782, -6.844813985431729",images:["users/users/WET7HU7N/1.jpeg","users/users/WET7HU7N/2.jpeg","users/users/WET7HU7N/3.jpeg","users/users/WET7HU7N/4.jpeg","users/users/WET7HU7N/5.jpeg"],description:"Ô Allah, fais-lui miséricorde et accorde-lui une vaste place dans Tes paradis.",cemetery:"Chouhada - Rabat",profession:"n/a",relatives:["URU136EV","P9I7Q1RD","6Q1R5S2T","X8G2TQ7K","78AS1YP9","ALN875QS"]},
 {uid:"78AS1YP9",familyName:"Bouhlal",firstName:"Saadia",dob:"n/a",birthplace:"n/a",dod:"n/a",deathplace:"Rabat",location:"34.02920504233782, -6.844813985431729",images:["users/users/78AS1YP9/1.jpeg","users/users/78AS1YP9/2.jpeg","users/users/78AS1YP9/3.jpeg","users/users/78AS1YP9/4.jpeg","users/users/78AS1YP9/5.jpeg"],description:"Ô Allah, fais-lui miséricorde et accorde-lui une vaste place dans Tes paradis.",cemetery:"Chouhada - Rabat",profession:"n/a",relatives:["URU136EV","P9I7Q1RD","6Q1R5S2T","X8G2TQ7K","WET7HU7N","ALN875QS"]},
@@ -1050,6 +1194,24 @@ const deathEntries = [
 {uid:"HDKMLMKL",familyName:"Bensalem",firstName:"Hassan",dob:"n/a",birthplace:"n/a",dod:"n/a",deathplace:"Salé",location:"34.03089883028951, -6.841257164662843",images:["users/users/HDKMLMKL/1.jpeg","users/users/HDKMLMKL/2.jpeg","users/users/HDKMLMKL/3.jpeg","users/users/HDKMLMKL/4.jpeg","users/users/HDKMLMKL/5.jpeg"],description:"Ô Allah, fais-lui miséricorde et accorde-lui une vaste place dans Tes paradis.",cemetery:"Chouhada - Rabat",profession:"n/a",relatives:["QP74SX45","LL78QA12","4LMKHDKM","HDKMLMKL"]},
 {uid:"R2L9V5X7",familyName:"Bent Seddik",firstName:"Roqaya",dob:"Inconnu",birthplace:"Inconnu",dod:"Inconnu",deathplace:"Rabat",location:"34.02929381276314, -6.839765774475957",images:["users/users/R2L9V5X7/1.jpeg","users/users/R2L9V5X7/2.jpeg","users/users/R2L9V5X7/3.jpeg","users/users/R2L9V5X7/4.jpeg","users/users/R2L9V5X7/5.jpeg"],description:"Que Dieu lui accorde le paradis et apaise le cœur de ses proches.",cemetery:"Chouhada - Rabat",profession:"Inconnu",relatives:[]},
 ];
+
+const news = {
+
+"A4AA9709":{
+videos:[{title:"Sultan Mohammed V en visite d'état en France en juin 1945",url:"https://www.youtube.com/watch?v=2pCU59gon84"},{title:"Visite du sultan Mohammed V à Meknès en 1941",url:"https://www.youtube.com/watch?v=lBxc1pGnjgw"}],
+presse:[{title:"Mohammed V, le sultan devenu roi du Maroc",url:"https://www.radiofrance.fr/franceculture/podcasts/le-cours-de-l-histoire/mohammed-v-le-sultan-devenu-roi-du-maroc-3713149"},{title:"Le roi Mohammed V et la liberté retrouvée à Oualidia",url:"https://www.jeuneafrique.com/1455610/politique/le-roi-mohammed-v-et-la-liberte-retrouvee-a-oualidia/"}],
+web:[{title:"Wikipédia",url:"https://fr.wikipedia.org/wiki/Mohammed_V_(roi_du_Maroc)"}]},
+"A3AA9729":{
+videos:[{title:"Hassan II - Invité Spécial - 2 mai 1996",url:"https://www.youtube.com/watch?v=TwBU_2e7WFc"},{title:"Hassan II du Maroc invité de L'Heure de Vérité",url:"https://www.youtube.com/watch?v=7tu15CD6qT0"},{title:"Hassan II du Maroc succède à son père (1961)",url:"https://www.youtube.com/watch?v=L-nLtIAsOvU"}],
+presse:[{title:"Hassan II, un règne de 38 ans sur le Maroc",url:"https://www.jeuneafrique.com/135423/politique/hassan-ii-un-regne-de-38-ans-sur-le-maroc/"},{title:"Hassan II, bâtisseur du Maroc moderne",url:"https://www.lemonde.fr/archives/article/1999/07/24/hassan-ii-batisseur-du-maroc-moderne_3566653_1819218.html"}],
+web:[{title:"Wikipédia",url:"https://fr.wikipedia.org/wiki/Hassan_II"}]},
+
+"6Q1R5S2T":{
+videos:[{title:"Archives : Parcours footbalistique",url:"https://www.youtube.com/watch?v=FC-2lWCrX9c&t=5s"},{title:"Invité Spécial -M24TV- 7 mai 2020",url:"https://www.youtube.com/watch?v=aeFtCDRUc_0"},{title:"Archives As FAR Interview avant match 14 janv. 2019",url:"https://www.youtube.com/watch?v=g3oRGOVxZ8A"}],
+presse:[{title:"Décès de l'ancien international marocain Mouhcine Bouhlal",url:"https://www.libe.ma/Deces-de-l-ancien-international-marocain-Mouhcine-Bouhlal_a152448.html"},{title:"Mouhcine Bouhlal s’éteint, le football marocain en deuil",url:"https://www.lebrief.ma/mouhcine-bouhlal-seteint-le-football-marocain-en-deuil-100087004/"}],
+web:[{title:"Wikipédia",url:"https://en.wikipedia.org/wiki/Mouhcine_Bouhlal"}]},
+
+};
 
 
 const favoriteEntries = []; 
@@ -1091,6 +1253,21 @@ if (langBtnMA) {
 }
 
 
+const actions = [
+"img/avatar/character_pray.gif",
+"img/avatar/character_search.gif",
+"img/avatar/character_read.gif",
+"img/avatar/character_listen.gif"
+];
+
+let char = document.querySelector(".character");
+
+setInterval(()=>{
+    let random = Math.floor(Math.random()*actions.length);
+    char.src = actions[random];
+},5000);
+
+
 function formatDateToDDMMYYYY(dateString) {
     if (!dateString || typeof dateString !== 'string') return 'N/A';
     const parts = dateString.split('-');
@@ -1115,6 +1292,22 @@ function highlightText(text, searchTerms) {
     const regex = new RegExp(`(${searchTerms.join('|').replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
     return text.replace(regex, '<mark>$1</mark>');
 }
+
+
+let lastScroll = 0;
+
+window.addEventListener("scroll", () => {
+    let nav = document.querySelector(".top-nav");
+    let currentScroll = window.pageYOffset;
+
+    if(currentScroll > lastScroll){
+        nav.classList.add("hide");
+    } else {
+        nav.classList.remove("hide");
+    }
+
+    lastScroll = currentScroll;
+});
 
 function calculateMatchPercentage(entry, searchTerms) {
     if (searchTerms.length === 0) return 0;
@@ -1200,6 +1393,8 @@ card.addEventListener('click', (event) => {
     return card;
 }
 
+
+
 function filterCards() {
     const searchInput = searchInputDOM.value.toLowerCase();
     const searchTerms = searchInput.split(' ').filter(term => term.trim() !== '');
@@ -1278,10 +1473,117 @@ function renderProfileGallery(images) {
     }
 }
 
+
+function getNewsIcon(type){
+
+switch(type){
+
+case "youtube":
+return "https://cdn-icons-png.flaticon.com/512/1384/1384060.png";
+
+case "presse":
+return "https://cdn-icons-png.flaticon.com/512/2965/2965879.png";
+
+case "web":
+return "https://cdn-icons-png.flaticon.com/512/1006/1006771.png";
+
+default:
+return "https://cdn-icons-png.flaticon.com/512/1828/1828919.png";
+
+}
+
+}
+
+function getCategoryIcon(cat){
+
+switch(cat){
+
+case "videos":
+return "📺";
+
+case "press":
+return "📰";
+
+case "web":
+return "🌐";
+
+default:
+return "🔗";
+
+}
+
+}
+
 function showInfo(index, event) {
     if (event) event.stopPropagation();
     currentProfileIndex = index; 
     const entry = deathEntries[index];
+const newsSection = document.getElementById("profileNewsSection");
+const newsLinks = document.getElementById("profileNewsLinks");
+
+newsLinks.innerHTML="";
+
+if(entry.uid && news[entry.uid]){
+
+newsSection.style.display="block";
+
+const categories = news[entry.uid];
+
+Object.keys(categories).forEach(cat=>{
+
+const articles = categories[cat];
+
+const container = document.createElement("div");
+container.className="news-category";
+
+const header = document.createElement("div");
+header.className="news-category-header";
+
+header.innerHTML = "▶ " + getCategoryIcon(cat) + " " + cat.toUpperCase() + " ("+articles.length+")";
+
+const list = document.createElement("div");
+list.className="news-category-list";
+list.style.display="none";
+
+articles.forEach(article=>{
+
+const a=document.createElement("a");
+a.href=article.url;
+a.target="_blank";
+a.textContent="🔗 "+article.title;
+
+list.appendChild(a);
+
+});
+
+header.onclick = () => {
+
+if(list.style.display==="none"){
+
+list.style.display="block";
+header.innerHTML = "▼ " + getCategoryIcon(cat) + " " + cat.toUpperCase() + " ("+articles.length+")";
+
+}else{
+
+list.style.display="none";
+header.innerHTML = "▶ " + cat.toUpperCase() + " ("+articles.length+")";
+
+}
+
+};
+
+container.appendChild(header);
+container.appendChild(list);
+
+newsLinks.appendChild(container);
+
+});
+
+}else{
+
+newsSection.style.display="none";
+
+}
     if (!entry) return;
 
     const existingReportSection = document.querySelector('#profilePopup .popup-content .report-section');

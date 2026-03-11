@@ -30,8 +30,8 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
+html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background: linear-gradient(135deg, #edf2f5, #f5f4f0);color:var(--primary);-webkit-font-smoothing:antialiased}
+.dark .html {background:#2C3E50}
 
 body::before{
   content:"";
@@ -44,7 +44,7 @@ body::before{
   z-index:999;
 }
 .dark body::before{
-  background: var(--fifth-color);
+  background: #2C3E50;
 }
 
 body::after{
@@ -67,9 +67,8 @@ body::after{
   
 }
 
-.dark body::after{
-  background:linear-gradient( to bottom,#0b0c0f 0%,transparent 100%);
-}
+.dark body::after{background:linear-gradient( to bottom,#2C3E50 0%,transparent 100%);}
+
 
 .top-nav{
   position: fixed;
@@ -80,7 +79,7 @@ body::after{
   margin-left: 5%;
   margin-right : 5%;
   border-radius: 20px;
-  background:var(--nav-bg);
+ background: linear-gradient(135deg, #2C3E50, #0b0c0f);
   color:var(--card-bg);
   display:flex;
   align-items:center;
@@ -88,6 +87,30 @@ body::after{
   padding:8px 16px;
   box-shadow:0 4px 12px rgba(0,0,0,0.25);
   z-index:1000;
+}
+
+
+
+.top-nav{
+    animation: floatNav 6s ease-in-out infinite;
+}
+
+@keyframes floatNav{
+    0%{ transform: translateY(0px); }
+    50%{ transform: translateY(-3px); }
+    100%{ transform: translateY(0px); }
+}
+
+body.dark-mode .top-nav {     background-color: var(--primary-color);
+}
+
+.page {
+    opacity: 1;
+    transition: opacity 0.35s ease;
+}
+
+.page.fade-out {
+    opacity: 0;
 }
 .logo {
   height: 47px;
@@ -111,7 +134,7 @@ body::after{
 .dark-btn{background:none;border:0;color:var(--pastel-orange);font-size:18px;padding:8px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
 .sidebar{z-index: 1001; position:fixed;left:-280px;top:0;height:100%;width:280px;background:var(--nav-bg);color:var(--card-bg);padding-top:20px;padding-bottom:140px;transition:left .28s;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto}
 .sidebar.open{left:0}
-.sidebar a{display:flex;flex-direction:column;align-items:center;justify-content:center;width:50%;box-sizing:border-box;gap:6px;padding:12px 6px;color:var(--pastel-orange);text-align:center;font-size:14px;min-height:72px}
+.sidebar a{text-decoration: none;display:flex;flex-direction:column;align-items:center;justify-content:center;width:50%;box-sizing:border-box;gap:6px;padding:12px 6px;color:var(--pastel-orange);text-align:center;font-size:14px;min-height:72px}
 .sidebar a i{font-size:20px;display:block}
 .closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:var(--pastel-orange);cursor:pointer}
 .sidebar-separator{width:100%;height:18px;box-sizing:border-box;margin-top:42px;border-top:0;opacity:0.0;pointer-events:none;}
@@ -119,14 +142,20 @@ body::after{
 .lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
 .lang-btn .flag{font-size:18px;line-height:1;font-family: 'Cairo'}
 #main{ margin:8px auto 0;padding:12px;height:auto;display:block;overflow:auto}
-.hero{margin-left: 2%;margin-right: 2%;background:var(--card-bg);padding:14px ;padding-bottom: 0% ;border-radius:10px;margin-bottom:9px;margin-top: 27%;box-shadow:0 6px 14px rgba(0,0,0,0.15);text-align:center}
+.dark #main{ background: #2C3E50}
+.hero{margin-left: 2%;margin-right: 2%;background: linear-gradient(0deg, #edf2f5, #f5f4f0);padding:14px ;padding-bottom: 0% ;border-radius:10px;margin-bottom:9px;margin-top: 27%;box-shadow:0 6px 14px rgba(0,0,0,0.15);text-align:center}
+.dark .hero{background: linear-gradient(135deg, #2C3E50, #0b0c0f)}
+
 .hero img{width:92%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);margin:10px auto;display:block}
 .missions-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:16px}
-.mission-card{margin-left: 2%;margin-right: 2% ;background:var(--card-bg);padding:14px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15)}
+.mission-card{border-radius: 8px;margin-left: 2%;margin-right: 2% ;background: linear-gradient(0deg, #edf2f5, #f5f4f0);padding:14px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15)}
+.dark .mission-card{background: linear-gradient(135deg, #2C3E50, #0b0c0f)}
+
 .mission-title{display:flex;align-items:center;gap:12px;font-weight:700;margin-bottom:8px}
 .mission-title i{margin-left: 10%;font-size:20px;color:var(--nav-bg);width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px}
 .mission-body{color:var(--primary);line-height:1.45;text-align:center;font: size 15px;}
-.contribution{background:var(--card-bg);padding:14px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15);text-align:center;margin-bottom:18px}
+.contribution{background: linear-gradient(0deg, #edf2f5, #f5f4f0);padding:14px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15);text-align:center;margin-bottom:18px}
+.dark .contribution{background: linear-gradient(135deg, #2C3E50, #0b0c0f)}
 .contribution p{color:var(--primary);line-height:1.6;font: size 24px;;text-align:center ;max-width:880px;margin: 0 6% 0 6% auto}
 .actions{display:flex;gap:12px;justify-content:center;margin-top:12px;flex-wrap:wrap}
 .btn{display:inline-block;padding:10px 14px;border-radius:10px;font-weight:700;background:var(--nav-bg);color:var(--card-bg);border:none;text-decoration:none}
@@ -188,7 +217,7 @@ h1, .hero h1, .page-header h1, .intro h1, .collapsible-card .card-header h3 {
 
   <header class="top-nav">
     <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
-    <div class="brand"><img src="img/logotitre.png" alt="Logo Quboor" class="logo"></div>
+    <div class="brand"><img src="img/logo/logotitre.png" alt="Logo Quboor" class="logo"></div>
     <div class="nav-controls"><button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button></div>
   </header>
 
@@ -222,7 +251,7 @@ h1, .hero h1, .page-header h1, .intro h1, .collapsible-card .card-header h3 {
 Quboor digitalise les données funéraires et structure les métiers des cimetières pour bâtir un modèle digne, transparent et durable à l’échelle nationale.
       </p>
 
-      <img src="img/img2.jpeg" alt="Cimetières - illustration" style="margin-top: 5%;margin-bottom: 0%;"/>
+      <img src="img/pictures/img2.jpeg" alt="Cimetières - illustration" style="margin-top: 5%;margin-bottom: 0%;"/>
 
       <br></br>
 

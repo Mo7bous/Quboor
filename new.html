@@ -52,12 +52,57 @@
   box-sizing: border-box;
 }
 
+.top-nav{
+  position: fixed;
+  max-width:1100px;
+
+  width: 90%;
+  height: 10%;
+  margin-top: 5%;
+  margin-left: 5%;
+  margin-right : 5%;
+  border-radius: 20px;
+
+background: linear-gradient(135deg, #2C3E50, #0b0c0f);
+  color:var(--card-bg);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 16px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.25);
+  z-index:1000;
+}
+.top-nav{
+    animation: floatNav 6s ease-in-out infinite;
+}
+
+@keyframes floatNav{
+    0%{ transform: translateY(0px); }
+    50%{ transform: translateY(-3px); }
+    100%{ transform: translateY(0px); }
+}
+
+
+.page {
+    opacity: 1;
+    transition: opacity 0.35s ease;
+}
+
+.page.fade-out {
+    opacity: 0;
+}
+
+    body.dark-mode .top-nav,
+    body.dark-mode .sidebar {
+      background-color: var(--primary-color);
+    }
+
 
         html, body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: var(--secondary-color);
-            background-color: var(--background-color);
+            background: linear-gradient(0deg, #edf2f5, #f5f4f0);
             margin: 0;
             padding: 0;
             text-align: justify;
@@ -71,8 +116,7 @@ body::before{
   left:0;
   width:100%;
   height:35px;
-  background:var(--third-color);
-  z-index:999;
+background: linear-gradient(0deg, #edf2f5, #f5f4f0);  z-index:999;
 }
 
 
@@ -80,26 +124,7 @@ body::before{
 
 
 /* Top nav (copied structure used elsewhere) */
-.top-nav{
-  position: fixed;
-  max-width:1100px;
 
-  width: 90%;
-  height: 10%;
-  margin-top: 5%;
-  margin-left: 5%;
-  margin-right : 5%;
-  border-radius: 20px;
-
-  background:var(--nav-bg);
-  color:var(--card-bg);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:8px 16px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.25);
-  z-index:1000;
-}
 
 .top-nav h1 {
   position: fixed;
@@ -157,7 +182,7 @@ body::before{
     }
 
     .dark-mode-toggle-btn {
-      font-size: 22px;
+      font-size: 0px;
       background: none;
       border: none;
       color: var(--text-color);
@@ -246,10 +271,6 @@ body::before{
       color: var(--primary-color);
     }
 
-    body.dark-mode .top-nav,
-    body.dark-mode .sidebar {
-      background-color: var(--primary-color);
-    }
 
     body.dark-mode .sidebar a:hover {
       background-color: #333;
@@ -369,7 +390,7 @@ body::before{
     }
 
     body.mode-jour {
-  --background-color: #EBF4F8;
+  --background: linear-gradient(0deg, #edf2f5, #f5f4f0);
   --text-color: #222222;
   --accent-color: --primary-color;
 }
@@ -412,8 +433,7 @@ body.mode-nuit {
 
     .step {
       display: none;
-      background-color: var(--primary-color);
-      padding: 1em;
+background: linear-gradient(135deg, #2C3E50, #0b0c0f);      padding: 1em;
       border-radius: 10px;
     }
 
@@ -454,7 +474,7 @@ body.mode-nuit {
     }
 
     button {
-      background-color : var(--primary-color);
+     background: #263545;
       color: var(--secondary-color);
       border: none;
       padding: 0.7em 0.9em;
@@ -530,14 +550,9 @@ body.mode-nuit {
   padding: 1em 1.2em;
   margin-top: 1em;
 
-  /* Couleurs harmonisées */
-  background: linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.08),
-    rgba(255,255,255,0.03)
-  );
+  background: #f6f1f1;
 
-  color: var(--secondary-color); /* orange doux */
+  color: #cf9251; /* orange doux */
   
   border-radius: 12px;
 
@@ -603,8 +618,7 @@ body.mode-nuit {
     .dark-toggle-btn {
       background: none;
       border: none;
-      color: var(--secondary-color);
-      font-size: 1.4em;
+      font-size: 0px;
       cursor: pointer;
             z-index: 5000;
 
@@ -736,7 +750,7 @@ body.mode-nuit {
     }
 
     #initialStage .stage-message {
-    background: linear-gradient(to bottom, rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 1));;
+    background: linear-gradient(135deg, #2C3E50, #0b0c0f);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);  
     padding: 1.2em;
       border-radius: 10px;
@@ -796,7 +810,7 @@ body.mode-nuit {
 <!-- Top Nav -->
 <nav class="top-nav">
 <button class="sidebar-toggle-btn" id="toggleSidebar"></button>
-<img alt="Logo Quboor" class="logo" src="img/logotitre.png"/>
+<img alt="Logo Quboor" class="logo" src="img/logo/logotitre.png"/>
 <button class="dark-toggle-btn" id="darkToggleBtn">
 <i class="fas fa-close-button" id="darkIcon"></i>
 </button>
@@ -1188,6 +1202,19 @@ document.getElementById('darkToggleBtn').addEventListener('click', () => {
       timestamp.textContent = '--';
     });
 
+
+    document.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", function(e){
+        e.preventDefault();
+
+        document.querySelector(".page").classList.add("fade-out");
+
+        setTimeout(() => {
+            window.location = this.href;
+        }, 350);
+    });
+});
+
     function sendEmail() {
       const getVal = id => {
         const el = document.getElementById(id);
@@ -1236,6 +1263,5 @@ document.getElementById('darkToggleBtn').addEventListener('click', () => {
   });
 </script>
 
-  </script>
 </body>
 </html>
