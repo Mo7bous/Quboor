@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>تواصلوا معنا</title>
 
+  <!-- fontawesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -35,8 +36,10 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
+html,body{height:130%;font-family:'Cairo',system-ui,Arial,sans-serif;background: linear-gradient(0deg, #edf2f5, #f5f4f0);color:var(--primary);-webkit-font-smoothing:antialiased}
+.dark body{
+  background: #2C3E50;
+}a{color:inherit;text-decoration:none}
 
 body::before{
   content:"";
@@ -44,19 +47,18 @@ body::before{
   top:0;
   left:0;
   width:100%;
-  height:30px;
-  background:#ebf4f8;
-  z-index:900;
+  height:111px;
+background: linear-gradient(0deg, #edf2f5, #f5f4f0);  z-index:900;
 }
 
 .dark body::before{
-  background: #0b0c0f;
+  background: #2C3E50;
 }
 
 body::after{
   content:"";
   position:fixed;
-  top:0px; 
+  top:0px; /* navbar (70px) + margin (18px) */
   left:0;
   height: 15%;
   width: 90%;
@@ -74,7 +76,7 @@ body::after{
 }
 
 .dark body::after{
-  background:linear-gradient( to bottom,#0b0c0f 0%,transparent 100%);
+  background:linear-gradient( to bottom,#2C3E50 0%,transparent 100%);
 }
 
 /* Top nav */
@@ -84,8 +86,7 @@ body::after{
   height: 10%;
   margin-left: 5%;
   margin-right : 5%;
-  background:var(--nav-bg);
-  color:var(--card-bg);
+background: linear-gradient(135deg, #2C3E50, #0b0c0f) ; color:var(--card-bg);
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -93,6 +94,28 @@ body::after{
   border-radius:20px;
   box-shadow:0 4px 12px rgba(0,0,0,0.25);
   z-index:1000;}
+
+  .top-nav{
+    animation: floatNav 6s ease-in-out infinite;
+}
+
+@keyframes floatNav{
+    0%{ transform: translateY(0px); }
+    50%{ transform: translateY(-3px); }
+    100%{ transform: translateY(0px); }
+}
+
+body.dark-mode .top-nav {     background-color: var(--primary-color);
+}
+
+.page {
+    opacity: 1;
+    transition: opacity 0.35s ease;
+}
+
+.page.fade-out {
+    opacity: 0;
+}
 
 .logo {
   height: 47px;
@@ -142,7 +165,7 @@ body::after{
   padding-top:20px;
   padding-bottom:140px;
   transition:left .28s;
-  z-index:60;
+  z-index:1500;
   display:flex;
   flex-wrap:wrap;
   align-content:flex-start;
@@ -182,13 +205,14 @@ body::after{
   max-width:1100px;
  margin:110px auto 0;
   padding:8px 0 40px;
-  height: auto; 
-  overflow: auto; 
+  height: auto; /* allow page to grow naturally */
+  overflow: auto; /* enable vertical scrolling so expanded cards and the form are fully reachable */
   display: flex;
   flex-direction:column;
   gap:16px;
 }
 
+/* Unified heading sizing for consistency across pages */
 h1, .page-header h1, .collapsible-card .card-header h3 {
   font-size:larger;
   line-height:1.2;
@@ -200,13 +224,23 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
   text-align: justify;
 }
 
+/* content card (collapsible card styles) */
 .content-card, .collapsible-card{
-  background:var(--card-bg);
+  background: linear-gradient(0deg, #edf2f5, #f5f4f0);
   border-radius:10px;
   box-shadow:0 6px 14px rgba(0,0,0,0.15);
   color:var(--primary);
   overflow: hidden;
 }
+
+.dark .content-card, .dark .collapsible-card{
+  background:linear-gradient(135deg, #2C3E50, #0b0c0f);
+  border-radius:10px;
+  box-shadow:0 6px 14px rgba(0,0,0,0.15);
+  color:var(--primary);
+  overflow: hidden;
+}
+
 .collapsible-card{border-radius:10px}
 .card-header{
   display:flex;
@@ -228,14 +262,16 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
 .card-header h3{margin:0;font-size:1.05rem;color:var(--primary)}
 .card-sub{font-size:medium;color:var(--primary)}
 
+/* arrow */
 .card-arrow{
   width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;
   background:transparent;border:0;color:var(--primary);font-size:14px;
   transition:transform .22s ease;
 }
 
+/* card content collapsible area */
 .card-content{
-  padding:0 18px 18px 18px;
+  padding:-1px 18px 18px 18px;
   max-height:0;
   overflow:hidden;
   transition:max-height .28s ease, padding .22s ease;
@@ -244,8 +280,10 @@ h1, .page-header h1, .collapsible-card .card-header h3 {
   padding:12px 18px 18px 18px;
 }
 
+/* content interior */
 .content-inner{padding-top:6px}
 .content-card h1{font-size:1.2rem;margin-bottom:10px}
+/* Reduce paragraph/list text size inside contact/terms cards for denser display */
 .content-inline p,
 .content-card .card-sub,
 .content-inner p,
@@ -264,13 +302,14 @@ textarea::placeholder {
   color: var(--primary);
 }
 
+/* Contact form */
 .form-row{display:flex;flex-direction:column;gap:8px;margin-top:12px}
 .input, textarea, select{
   width:100%;
   padding:10px 12px;
   border-radius:8px;
   border:1px solid rgba(0,0,0,0.06);
-  background:transparent;
+  background:white;
   font-size:small;
   color:inherit;
   box-sizing:border-box;
@@ -291,6 +330,7 @@ textarea{min-height:100px;resize:vertical}
 
 .note{font-size:medium;color:var(--muted);margin-top:8px}
 .note2{font-size:small;color:var(--muted);margin-top:8px}
+/* dark mode */
 .dark{
   --page-bg: #0b0c0f;
   --card-bg: var(--dm-card-bg);
@@ -301,8 +341,8 @@ textarea{min-height:100px;resize:vertical}
 }
 .dark .top-nav{background:var(--nav-bg)}
 .dark .content-card{color:var(--primary);background:var(--card-bg)}
-.dark .btn{background: #0b0c0f;color:#FFFCFA}
-.dark .input,.dark textarea,.dark select{border:1px solid rgba(255,255,255,0.15);color:#FFFCFA;background:transparent}
+.dark .btn{background: white;color: #2C3E50 }
+.dark .input,.dark textarea,.dark select{color:#FFFCFA;background:#3d4b4d}
 .dark .note{color:#FFFCFA}
   </style>
 </head>
@@ -311,7 +351,7 @@ textarea{min-height:100px;resize:vertical}
   <header class="top-nav">
     <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
     <div class="brand">
-      <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
+      <img src="img/logo/logotitrear.png" alt="Logo Quboor" class="logo">
     </div>
     <div class="nav-controls">
       <button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button>
@@ -343,46 +383,37 @@ textarea{min-height:100px;resize:vertical}
       
     </div>
 
-  <main id="main">
+  <main id="main"> 
     <section style="width:98%;max-width:1100px;margin:-10px auto 0;display:grid;grid-template-columns:1fr;gap:16px;">
 
+      <!-- Contact information card (description moved directly under title, not in a separate content block) -->
       <article class="collapsible-card" id="contactInfoCard" aria-labelledby="ci-title">
         <div class="card-header" role="button" aria-expanded="true" tabindex="0">
           <div class="title">
             <div>
-              <h3 id="ci-title">تواصلوا معنا</h3>
-              <div class="card-sub">هل لديكم سؤال أو فكرة؟ أو ترغبون في الانخراط معنا؟</div>
+              <h3 id="ci-title">اتصل بنا</h3>
+              <div class="card-sub">هل لديك سؤال، فكرة أو رغبة في المشاركة؟</div>
             </div>
           </div>
           <button class="card-arrow" aria-hidden="true">▾</button>
         </div>
 
-
-
-
-<div id="contactInfoContent" class="content-inline" style="padding:0px 18px;">
-<p style="margin-bottom:0px;color:var(--primary)">لا تترددوا في التواصل معنا لتبادل الأفكار، أو اقتراح مبادرة، أو لمعرفة المزيد عن نهجنا المتعلق بالذاكرة الجماعية.</p>
-<p style="margin-bottom:0px;color:var(--primary)"><br>نرحّب بالتعاون والدعم من أجل تطوير المشاريع، وتنظيم الأنشطة، وتعزيز الحفاظ على أماكن الذاكرة.</p>
-<p style="margin-bottom:20px;color:var(--primary)"><br>انضموا إلينا كمتطوعين وساهموا بفعالية في شبكة تضامنية ومستدامة في خدمة الذاكرة.</p>
-
-<div style="display:none">
-  <p style="margin-bottom:8px;color:var(--primary)">
-    <strong>الشراكات، المشاريع، الفعاليات والتبرعات</strong><br>
-    نرحب بجميع أشكال التعاون والدعم من أجل تطوير المشاريع، تنظيم الأنشطة، وتعزيز حماية وصون أماكن الذاكرة.
-  </p>
-
-  <p style="margin-bottom:8px;color:var(--primary)">
-    <strong>التطوع والعمل التطوعي من أجل القضية</strong><br>
-    انضموا إلينا كمتطوعين أو داعمين، وساهموا بفعالية في بناء شبكة تضامنية ومستدامة في خدمة الذاكرة.
-  </p></div>
+        <!-- Description placed directly below the header so it's visually part of the card title area -->
+        <div id="contactInfoContent" class="content-inline" style="padding:0px 18px;">
+          <!-- main description visible -->
+          <p style="margin-bottom:0px;color:var(--primary)">تواصلوا معنا بحرية لتبادل الأفكار، اقتراح مبادرة أو لمعرفة المزيد حول نهجنا المتعلق بالذاكرة الجماعية.</p>
+                <p style="margin-bottom:0px;color:var(--primary)"><br>نرحب بالتعاون والدعم من أجل تطوير المشاريع، تنظيم الأنشطة وتعزيز الحفاظ على أماكن الذاكرة.</p>
+                <p style="margin-bottom:20px;color:var(--primary)"><br>انضموا إلينا كمتطوعين وساهموا بفعالية في شبكة تضامن مستدامة في خدمة الذاكرة.</p>
+</div>
       </article>
 
+      <!-- Contact form card (same format as Terms form) -->
       <aside class="collapsible-card" id="contactFormCard" aria-labelledby="cf-title">
         <div class="card-header" role="button" aria-expanded="true" tabindex="0">
           <div class="title">
             <div>
-        <h3 id="cf-title">نموذج التواصل</h3>
-<div class="card-sub">يرجى توضيح تفاصيل طلبكم بدقة حتى نتمكن من الرد عليكم بأفضل شكل ممكن</div>
+              <h3 id="cf-title">نموذج</h3>
+<div class="card-sub">يرجى إدخال أكبر قدر ممكن من المعلومات في الحقل أدناه بخصوص طلبكم حتى نتمكن من معالجته في أقرب وقت.</div>
             </div>
           </div>
           <button class="card-arrow" aria-hidden="true">▾</button>
@@ -394,33 +425,31 @@ textarea{min-height:100px;resize:vertical}
               <div style="display:flex;gap:10px;flex-wrap:wrap;">
                 <div style="flex:1;min-width:160px">
                   <label style="font-size:medium;color:var(--muted)">الاسم</label>
-            <input id="c_name" class="input" type="text" placeholder="الاسم الكامل" required>
+                  <input id="c_name" class="input" type="text" placeholder="اسمك الكامل" required>
                 </div>
 
                 <div style="flex:1;min-width:160px">
-            <label style="font-size:medium;color:var(--muted)">البريد الإلكتروني</label>
-            <input id="c_email" class="input" type="email" placeholder="example@email.com" required>
+                  <label style="font-size:medium;color:var(--muted)">البريد الإلكتروني</label>
+                  <input id="c_email" class="input" type="email" placeholder="your@example.com" required>
                 </div>
               </div>
 
               <div style="display:flex;gap:10px;flex-wrap:wrap;">
                 <div style="flex:1;min-width:160px">
-            <label style="font-size:medium;color:var(--muted)">الموضوع</label>
-            <input id="c_subject" class="input" type="text" placeholder="موضوع الرسالة" required>
+                  <label style="font-size:medium;color:var(--muted)">الموضوع</label>
+                  <input id="c_subject" class="input" type="text" placeholder="موضوع الرسالة" required>
                 </div>
               </div>
 
-        <div>
-          <label style="font-size:medium;color:var(--muted)">الرسالة</label>
-          <div class="note2" style="margin-top:10%;margin-bottom:10%">
-            يرجى توضيح موضوع طلبكم بشكل دقيق حتى نتمكن من الرد عليكم بأفضل شكل.
-          </div>
-          <textarea id="c_message" class="input" placeholder="تفاصيل الرسالة..." required style="min-height:120px;font-size:medium"></textarea>
-        </div>
+              <div>
+                <label style="font-size:medium;color:var(--muted)">الرسالة</label>
+                <div class="note2" style="margin-top:10%;margin-bottom: 10%;">يرجى توضيح تفاصيل طلبكم حتى نتمكن من الرد عليكم بأفضل شكل ممكن.</div>
+                <textarea id="c_message" class="input" placeholder="اشرح طلبك بالتفصيل..." required style="min-height:120px"></textarea>
+              </div>
 
               <div style="gap:8px;justify-content:flex-end;margin-top:6px;">
-          <button id="c_generateBtn" class="btn" type="button">إنشاء</button>
-          <button id="c_clearBtn" class="btn secondary" type="button">مسح</button>
+                <button id="c_generateBtn" class="btn" type="button">إنشاء البريد الإلكتروني</button>
+                <button id="c_clearBtn" class="btn secondary" type="button">مسح</button>
               </div>
             </form>
           </div>
@@ -431,6 +460,7 @@ textarea{min-height:100px;resize:vertical}
   </main>
 
   <script>
+/* Sidebar toggle & language buttons & dark mode behavior (same logic as other pages) */
 const sidebar = document.getElementById('mySidebar');
 const menuBtn = document.getElementById('menuBtn');
 const closeSidebar = document.querySelector('#mySidebar .closebtn');
@@ -464,6 +494,8 @@ darkModeBtns.forEach(btn=>{
 });
 
 (function initDark(){
+  // Force the contact page to always open in light (normal) mode regardless of previous preference.
+  // This ensures contact.html is displayed in "écran normal" by default.
   try{ localStorage.setItem('quboor-dark','0'); }catch(e){}
   setDarkMode(false);
 })();
@@ -483,19 +515,20 @@ if (langBtnMA) {
   });
 }
 
+/* Contact form -> generate mailto: to info@quboor.com with structured body */
 const generateBtn = document.getElementById('c_generateBtn');
 const clearBtn = document.getElementById('c_clearBtn');
 
 function buildContactBody(data){
   return [
-    "الاسم: " + data.name,
-    "البريد الإلكتروني: " + data.email,
-    "الموضوع: " + data.subject,
+    "Nom: " + data.name,
+    "E-mail: " + data.email,
+    "Sujet: " + data.subject,
     "",
-    "الرسالة:",
+    "Message:",
     data.message,
     "",
-    "التاريخ: " + (new Date()).toLocaleString()
+    "Date: " + (new Date()).toLocaleString()
   ].join("\n");
 }
 
@@ -505,12 +538,13 @@ generateBtn.addEventListener('click', ()=>{
   const subject = document.getElementById('c_subject').value.trim();
   const message = document.getElementById('c_message').value.trim();
 
-  if (!name || !email || !subject || !message){alert('يرجى ملء جميع حقول النموذج.');
+  if (!name || !email || !subject || !message){
+    alert('Merci de remplir tous les champs du formulaire.');
     return;
   }
 
   const body = buildContactBody({name,email,subject,message});
-  const mailto = `mailto:a.bouhlal@quboor.org?subject=${encodeURIComponent('[اتصال] ' + subject)}&body=${encodeURIComponent(body)}`;
+  const mailto = `mailto:a.bouhlal@quboor.org?subject=${encodeURIComponent('[Contact] ' + subject)}&body=${encodeURIComponent(body)}`;
   window.location.href = mailto;
 });
 
@@ -518,6 +552,7 @@ clearBtn.addEventListener('click', ()=>{
   document.getElementById('contactForm').reset();
 });
 
+/* Collapsible card behavior: contact info stays visible, contact form is closed by default */
 function setupCollapsibles(){
   const cards = [
     {cardId: 'contactInfoCard', contentId: 'contactInfoContent', defaultOpen: true},
@@ -543,6 +578,7 @@ function setupCollapsibles(){
       header.setAttribute('aria-expanded', open ? 'true' : 'false');
       arrow.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
     }
+    // initialize per defaultOpen flag
     setOpen(Boolean(defaultOpen));
 
     header.addEventListener('click', ()=> {

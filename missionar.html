@@ -19,9 +19,8 @@
   --blue-very-pale: #ebf4f8;
   --pastel-orange: #fffdf6;
   --secondary-color: #fffdf6;
-  --third-color: #ebf4f8;
-  --fifth-color: #0b0c0f; 
-
+  --third-color: #ebf4f8; 
+  --fifth-color: #0b0c0f;
 
   --primary: #2C3E50;
   --nav-bg: #2C3E50;
@@ -30,10 +29,9 @@
   --muted: #6b6b6b;
 }
 
-
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
+html,body{height:100%;font-family:'Cairo',system-ui,Arial,sans-serif;background: linear-gradient(135deg, #edf2f5, #f5f4f0);color:var(--primary);-webkit-font-smoothing:antialiased}
+.dark .html {background:#2C3E50}
 
 body::before{
   content:"";
@@ -46,13 +44,13 @@ body::before{
   z-index:999;
 }
 .dark body::before{
-  background: var(--fifth-color);
+  background: #2C3E50;
 }
 
 body::after{
   content:"";
   position:fixed;
-  top:0px; 
+  top:0px;
   left:0;
   height: 15%;
   width: 90%;
@@ -69,22 +67,19 @@ body::after{
   
 }
 
-.dark body::after{
-  background:linear-gradient( to bottom,#0b0c0f 0%,transparent 100%);
-}
+.dark body::after{background:linear-gradient( to bottom,#2C3E50 0%,transparent 100%);}
+
 
 .top-nav{
   position: fixed;
   max-width:1100px;
-
   width: 90%;
   height: 10%;
-  margin-top: 3%;
+  margin-top: 10px;
   margin-left: 5%;
   margin-right : 5%;
   border-radius: 20px;
-
-  background:var(--nav-bg);
+ background: linear-gradient(135deg, #2C3E50, #0b0c0f);
   color:var(--card-bg);
   display:flex;
   align-items:center;
@@ -92,6 +87,30 @@ body::after{
   padding:8px 16px;
   box-shadow:0 4px 12px rgba(0,0,0,0.25);
   z-index:1000;
+}
+
+
+
+.top-nav{
+    animation: floatNav 6s ease-in-out infinite;
+}
+
+@keyframes floatNav{
+    0%{ transform: translateY(0px); }
+    50%{ transform: translateY(-3px); }
+    100%{ transform: translateY(0px); }
+}
+
+body.dark-mode .top-nav {     background-color: var(--primary-color);
+}
+
+.page {
+    opacity: 1;
+    transition: opacity 0.35s ease;
+}
+
+.page.fade-out {
+    opacity: 0;
 }
 .logo {
   height: 47px;
@@ -115,7 +134,7 @@ body::after{
 .dark-btn{background:none;border:0;color:var(--pastel-orange);font-size:18px;padding:8px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
 .sidebar{z-index: 1001; position:fixed;left:-280px;top:0;height:100%;width:280px;background:var(--nav-bg);color:var(--card-bg);padding-top:20px;padding-bottom:140px;transition:left .28s;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto}
 .sidebar.open{left:0}
-.sidebar a{display:flex;flex-direction:column;align-items:center;justify-content:center;width:50%;box-sizing:border-box;gap:6px;padding:12px 6px;color:var(--pastel-orange);text-align:center;font-size:14px;min-height:72px}
+.sidebar a{text-decoration: none;display:flex;flex-direction:column;align-items:center;justify-content:center;width:50%;box-sizing:border-box;gap:6px;padding:12px 6px;color:var(--pastel-orange);text-align:center;font-size:14px;min-height:72px}
 .sidebar a i{font-size:20px;display:block}
 .closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:var(--pastel-orange);cursor:pointer}
 .sidebar-separator{width:100%;height:18px;box-sizing:border-box;margin-top:42px;border-top:0;opacity:0.0;pointer-events:none;}
@@ -123,19 +142,26 @@ body::after{
 .lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8px 10px;font-size:18px;cursor:pointer;border-radius:8px;line-height:1;opacity:0.98;min-width:0;text-align:left;}
 .lang-btn .flag{font-size:18px;line-height:1;font-family: 'Cairo'}
 #main{ margin:8px auto 0;padding:12px;height:auto;display:block;overflow:auto}
-.hero{margin-left: 2%;margin-right: 2%;background:var(--card-bg);padding:14px ;padding-bottom: 0% ;border-radius:10px;margin-bottom:9px;margin-top: 27%;box-shadow:0 6px 14px rgba(0,0,0,0.15);text-align:center}
+.dark #main{ background: #2C3E50}
+.hero{margin-left: 2%;margin-right: 2%;background: linear-gradient(0deg, #edf2f5, #f5f4f0);padding:14px ;padding-bottom: 0% ;border-radius:10px;margin-bottom:9px;margin-top: 27%;box-shadow:0 6px 14px rgba(0,0,0,0.15);text-align:center}
+.dark .hero{background: linear-gradient(135deg, #2C3E50, #0b0c0f)}
+
 .hero img{width:92%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);margin:10px auto;display:block}
 .missions-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:16px}
-.mission-card{margin-left: 2%;margin-right: 2% ;background:var(--card-bg);padding:14px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15)}
+.mission-card{border-radius: 8px;margin-left: 2%;margin-right: 2% ;background: linear-gradient(0deg, #edf2f5, #f5f4f0);padding:14px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15)}
+.dark .mission-card{background: linear-gradient(135deg, #2C3E50, #0b0c0f)}
+
 .mission-title{display:flex;align-items:center;gap:12px;font-weight:700;margin-bottom:8px}
-.mission-title i{margin-right: 10%;font-size:20px;color:var(--nav-bg);width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px}
+.mission-title i{margin-left: 10%;font-size:20px;color:var(--nav-bg);width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px}
 .mission-body{color:var(--primary);line-height:1.45;text-align:center;font: size 15px;}
-.contribution{background:var(--card-bg);padding:14px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15);text-align:center;margin-bottom:18px}
+.contribution{background: linear-gradient(0deg, #edf2f5, #f5f4f0);padding:14px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15);text-align:center;margin-bottom:18px}
+.dark .contribution{background: linear-gradient(135deg, #2C3E50, #0b0c0f)}
 .contribution p{color:var(--primary);line-height:1.6;font: size 24px;;text-align:center ;max-width:880px;margin: 0 6% 0 6% auto}
 .actions{display:flex;gap:12px;justify-content:center;margin-top:12px;flex-wrap:wrap}
 .btn{display:inline-block;padding:10px 14px;border-radius:10px;font-weight:700;background:var(--nav-bg);color:var(--card-bg);border:none;text-decoration:none}
 .btn2{display:inline-block;padding:10px 14px;border-radius:10px;font-weight:700;background:#cf9251;color:var(--pastel-orange);border:none;text-decoration:none}
 .btn.secondary{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--primary)}
+
 .dark{
   --page-bg:#0b0c0f;
   --card-bg:#2C3E50;
@@ -163,7 +189,6 @@ body::after{
     width: 36px;
     height: 36px;
     display: inline-flex;
-    margin-right: 20%;
     align-items: center;
     justify-content: center;
     border-radius: 8px;
@@ -192,7 +217,7 @@ h1, .hero h1, .page-header h1, .intro h1, .collapsible-card .card-header h3 {
 
   <header class="top-nav">
     <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
-    <div class="brand"><img src="img/logotitre.png" alt="Logo Quboor" class="logo"></div>
+    <div class="brand"><img src="img/logo/logotitrear.png" alt="Logo Quboor" class="logo"></div>
     <div class="nav-controls"><button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button></div>
   </header>
 
@@ -216,56 +241,53 @@ h1, .hero h1, .page-header h1, .intro h1, .collapsible-card .card-header h3 {
     </div>
   </div>
 
-  <main id="main">
+<main id="main">
     <section class="hero" aria-hidden="false">
     <h1 style="margin-top: 30px;font-size:30px;text-align:center;margin-bottom: 3%;">مهامنا</h1>
-<p class="hero-subtitle">حفظ الذاكرة.</p>
-<p class="hero-subtitle">تنظيم المستقبل. </p>
+<p class="hero-subtitle">الحفاظ على الذاكرة.</p>
+<p class="hero-subtitle">بناء المستقبل.</p>
 
       <p style="max-width:880px;font-size: medium;margin:10% 6% 10% 6%;line-height: 1.6;text-align:center;color:var(--primary)">
-تعمل Quboor على رقمنة البيانات الجنائزية وتنظيم مهن المقابر لبناء نموذج كريم وشفاف ومستدام على المستوى الوطني.
+قبور تقوم برقمنة البيانات الجنائزية وتنظيم المهن المرتبطة بالمقابر من أجل بناء نموذج كريم وشفاف ومستدام على المستوى الوطني.
       </p>
 
-      <img src="img/img2.jpeg" alt="المقابر - توضيح"  style="margin-top: 5%;margin-bottom: 0%;"/>
+      <img src="img/pictures/img2.jpeg" alt="المقابر - توضيح" style="margin-top: 5%;margin-bottom: 0%;"/>
 
       <br></br>
 
     </section>
 
-  <section class="missions-grid" aria-label="المهام الرئيسية">
-    <article class="mission-card">
-      <div class="mission-title"><i class="fas fa-map-marked-alt"></i><div>الجرد والرقمنة</div></div>
-      <div class="mission-body">جمع وتنظيم بيانات القبور: الأسماء، التواريخ، المواقع، النقوش. إنشاء قاعدة بيانات موثوقة ومتاحة للذاكرة الجماعية والأبحاث التاريخية.</div>
-    </article>
+    <section class="missions-grid" aria-label="المهام الرئيسية">
+      <article class="mission-card">
+        <div class="mission-title"><i class="fas fa-map-marked-alt"></i><div>السجل والرقمنة</div></div>
+        <div class="mission-body">جمع وتنظيم البيانات الجنائزية: الأسماء، التواريخ، المواقع، والنقوش. إنشاء قاعدة بيانات موثوقة ومتاحة للحفاظ على الذاكرة الجماعية.</div>
+      </article>
 
-    <article class="mission-card">
-      <div class="mission-title"><i class="fas fa-chart-line"></i><div>التحليل والتقارير</div></div>
-      <div class="mission-body">إنتاج إحصائيات ديموغرافية، رسم خرائط للقبور، وتقديم تقارير تحليلية للعائلات، الباحثين، المؤسسات، والجماعات المحلية.</div>
-    </article>
+      <article class="mission-card">
+        <div class="mission-title"><i class="fas fa-chart-line"></i><div>التحليل والتقارير</div></div>
+        <div class="mission-body">إنتاج إحصاءات ديموغرافية، خرائط للقبور، وتقارير تحليلية لفائدة العائلات والباحثين والمؤسسات والجماعات المحلية.</div>
+      </article>
 
-    <article class="mission-card">
-      <div class="mission-title"><i class="fas fa-users-cog"></i><div>دمج المهن</div></div>
-      <div class="mission-body">تنظيم رسمي لخمسة مجالات مهنية مرتبطة بالمقابر (القراءة القرآنية، الحفر، الصيانة، الاستقبال، البيع). توفير عقود رسمية وتغطية اجتماعية.</div>
-    </article>
-  </section>
+      <article class="mission-card">
+        <div class="mission-title"><i class="fas fa-users-cog"></i><div>تنظيم المهن</div></div>
+        <div class="mission-body">تنظيم خمسة مجالات مهنية مرتبطة بالمقابر (تلاوة القرآن، الحفر، الصيانة، الاستقبال، البيع). وضع عقود مصرح بها وتوفير التغطية الاجتماعية.</div>
+      </article>
+    </section>
 
-  <section class="contribution" aria-label="مساهمتك">
-
+    <section class="contribution" aria-label="مساهمتكم">
       <br></br>
 
-      <h2 style="margin:0 8% 8px 8%;text-align:center;font-size: 24px;margin-left: 5%;margin-right: 5%;">مساهمتك</h2>
+      <h2 style="margin:0 8% 8px 8%;text-align:center;font-size: 24px;margin-left: 5%;margin-right: 5%;">المساهمة في المشروع</h2>
       <p>
-Quboor هي مبادرة مواطِنة واجتماعية تقوم على الالتزام الجماعي. كل مساهمة تعزّز هيكلة القطاع والحفاظ على التراث التذكاري.
+قبور هي مبادرة مدنية واجتماعية تعتمد على الالتزام الجماعي. كل مساهمة تعزز تنظيم هذا المجال والحفاظ على التراث المرتبط بالذاكرة.
       </p>
 <br></br>
 
-    <div class="actions">
-      <a class="btn" href="joinusar.html">انضم إلى فريق المتطوعين</a>
-    </div>
-
-
-    <div class="actions">
-      <a class="btn2" href="projetsar.html#nous-supporter">ادعمنا</a>
+      <div class="actions">
+        <a class="btn" href="joinusar.html">الانضمام إلى فريق المتطوعين</a>
+      </div>
+      <div class="actions">
+        <a class="btn2" href="projetsar.html#nous-supporter">دعمنا</a>
       </div>
 <br></br>
 

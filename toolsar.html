@@ -3,8 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>الأدوات – قُبور</title>
-
+<title>الأدوات – قبور </title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -37,9 +36,13 @@
   --dm-overlay: rgba(0,0,0,0.6);
 }
 
+
+
 /* Basic reset */
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
+html,body{height:100%;font-family:Inter,system-ui,'Cairo',sans-serif;background: linear-gradient(135deg, #edf2f5, #f5f4f0);color:var(--primary);-webkit-font-smoothing:antialiased}
+.dark html, .dark body{background: #2C3E50}
+
 a{color:inherit;text-decoration:none}
 body::before{
   content:"";
@@ -47,14 +50,13 @@ body::before{
   top:0;
   left:0;
   width:100%;
-  height:30px;
-  background:#ebf4f8;
+  height:110px;
+ background: linear-gradient(0deg, #edf2f5, #f5f4f0);
   z-index:900;
 }
 
 .dark body::before{
-  background: #0b0c0f;
-}
+    background: #2C3E50;}
 
 body::after{
   content:"";
@@ -69,7 +71,7 @@ body::after{
   background:linear-gradient(
     to bottom,
     #ebf4f8 0%,
-    rgba(235,244,248,0) 100%
+    rgba(161, 8, 8, 0) 100%
   );
   pointer-events:none;
   z-index:999;
@@ -77,8 +79,11 @@ body::after{
 }
 
 .dark body::after{
-  background:linear-gradient( to bottom,#0b0c0f 0%,transparent 100%);
-}
+  background:linear-gradient(
+    to bottom,
+    #2C3E50 0%,
+    rgba(161, 8, 8, 0) 100%
+  );}
 
 
 .top-nav{  position: fixed;
@@ -87,15 +92,23 @@ body::after{
   height: 10%;
   margin-left: 5%;
   margin-right : 5%;
-  background:var(--nav-bg);
-  color:var(--card-bg);
-  display:flex;
+background: linear-gradient(135deg, #2C3E50, #0b0c0f);color: #fffefb;  display:flex;
   align-items:center;
   justify-content:space-between;
   padding:8px 16px;
   border-radius:20px;
   box-shadow:0 4px 12px rgba(0,0,0,0.25);
   z-index:1000;}
+
+  .top-nav{
+    animation: floatNav 6s ease-in-out infinite;
+}
+
+@keyframes floatNav{
+    0%{ transform: translateY(0px); }
+    50%{ transform: translateY(-3px); }
+    100%{ transform: translateY(0px); }
+}
   
 .logo {
   height: 47px;
@@ -116,6 +129,16 @@ body::after{
     100% {
         transform: scale(1);
     }
+}
+
+
+.page {
+    opacity: 1;
+    transition: opacity 0.35s ease;
+}
+
+.page.fade-out {
+    opacity: 0;
 }
 
 .dark-btn{
@@ -146,12 +169,12 @@ body::after{
   box-sizing:border-box;
   gap:6px;
   padding:12px 6px;
-
   color:#FFFCFA;
   text-align:center;
   font-size:14px;
   min-height:72px;
-  font-family: 'Cairo';
+  border-right: 1px solid rgba(255, 255, 255, 0.03);
+  font-family: 'Cairo'
 }
 .sidebar a:nth-child(odd){ 
   border-right:1px solid rgba(255,255,255,0.03);
@@ -187,7 +210,7 @@ box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);color:var(--pastel-orange);padding:8p
   max-width:1100px;
   margin:110px auto 0;
   padding:8px 0 40px;
-  height: calc(100vh);
+  height: 100%;
   overflow: hidden;
   display: flex;
   align-items: flex-start;
@@ -197,7 +220,12 @@ flex-wrap: nowrap;
 align-content: normal;
 justify-content: flex-start;
 align-items: flex-start;
-font-family: 'Cairo';
+font-family: 'Cairo'
+}
+
+.dark #main {
+        background: #2C3E50;
+
 }
 
 .page-header{text-align:center;margin:18px 0 26px}
@@ -216,7 +244,7 @@ font-family: 'Cairo';
 .tool-card{
   width:98%;
   max-width:980px;
-  background:#FFFCFA;
+  background: linear-gradient(135deg, #edf2f5, #f5f4f0);
   border-radius:10px;
   padding:14px 18px;
   display:flex;
@@ -231,7 +259,7 @@ font-family: 'Cairo';
   min-height:90px; 
 }
 .tool-card i{font-size:26px;color:var(--primary);width:auto;text-align:center}
-.tool-card h3{font-size:1rem;color:var(--primary);margin:0;font-family: 'Cairo';}
+.tool-card h3{font-size:1rem;color:var(--primary);margin:0;font-family: 'Cairo'}
 .tool-card:active,.tool-card:hover{transform:translateY(-4px);box-shadow:0 10px 22px rgba(0,0,0,0.15)}
 
 
@@ -239,16 +267,21 @@ font-family: 'Cairo';
 .popup[aria-hidden="false"]{display:flex}
 .popup-content{position:relative;width:100%;height:95%;max-width:1200px;
   background:var(--card-bg);    
-  background: linear-gradient(180deg, #FFFCFA, rgba(245, 251, 255, 0.95));border-radius:10px;padding:18px;
+  background: linear-gradient(135deg, #edf2f5, #f5f4f0);border-radius:10px;padding:18px;
   box-shadow:0 8px 30px rgba(0,0,0,0.15);display:flex;flex-direction:column;overflow:hidden}
 
 
   .dark .popup-content,
 .dark .popup-body,
-.dark .modal-panel,
+.dark .modal-panel {
+    background: linear-gradient(135deg, #2C3E50, #120d07);  color: #d1d1d1;
+}
+
 .dark .card-desc {
-  background: #2C3E50;
-  color: #d1d1d1;
+    background: transparent;  color: #d1d1d1;
+}
+.dark .card-desc2 {
+    background: transparent;  color: #d1d1d1;
 }
 
 
@@ -280,7 +313,6 @@ font-family: 'Cairo';
   overflow:hidden; 
   padding:18px 0 0 0; 
   position:relative;
-  direction: ltr;
 }
 
 .search-row{
@@ -296,28 +328,28 @@ font-family: 'Cairo';
   border-bottom: none;
   border-radius:12px; 
   box-shadow:0 2px 6px rgba(0,0,0,0.15);
-      justify-content: space-between;
-      direction: rtl;
-      font-family: 'Cairo';
+  justify-content: space-between;
+  font-family: 'Cairo'
 }
 .search-row input[type="search"]{
   width:90%;
-  max-width:70%;
+  max-width:50%;
   padding:10px 12px;
   border-radius:8px;
   border:transparent;
-  font-size:17px;
+  font-size:15px;
   box-sizing:border-box;
   background:transparent;
   color:inherit;
   font-family: 'Cairo';
+  direction:rtl
 }
-.search-row .count{font-size:17px;font-family: 'Cairo';color:var(--muted)}
+.search-row .count{font: size 13px;color:var(--muted);font-family: 'Cairo'}
 
-.list-table{width:100%;border-collapse:collapse;font-size:x-large;margin-top: 10%;direction: rtl;}
+.list-table{width:100%;border-collapse:collapse;font-size:larger;margin-top: 10%;}
 .list-wrapper{flex:1;overflow:auto;border-top:1px solid rgba(11,77,160,0.02);padding-top:12px /* small space after search before table */}
-.list-table th{padding:10px 12px;border-bottom:1px solid rgba(11,77,160,0.02);text-align:right; font-size: x-large;font-family: 'Cairo';}
-.list-table td{padding:10px 12px;border-bottom:1px solid rgba(11,77,160,0.02);text-align:right; direction: rtl;font-size: 18px;font-family: 'Cairo';}
+.list-table th{padding:10px 12px;border-bottom:1px solid rgba(11,77,160,0.02);text-align:right;font-family: 'Cairo'}
+.list-table td{padding:10px 12px;border-bottom:1px solid rgba(11,77,160,0.02);text-align:right;font-family: 'Cairo'}
 .list-table tr{cursor:pointer}
 .list-table tr:hover{background:#f7fdff}
 .dark .list-table tr:hover{background:#2b3b3d}
@@ -379,8 +411,7 @@ font-family: 'Cairo';
 }
 
 .dark .tool-card{
-  background: #2C3E50;
-  border:1px solid var(--card-border);
+    background: linear-gradient(135deg, #2C3E50, #120d07);  border:1px solid var(--card-border);
   box-shadow:none;
 }
 .dark .tool-card i,
@@ -393,6 +424,12 @@ font-family: 'Cairo';
   color: var(--pastel-orange);
   border-radius:12px;
 }
+
+input {
+direction: rtl;
+text-align: right;
+}
+
 .dark .search-row input[type="search"]{
   color: var(--pastel-orange);
 }
@@ -429,7 +466,7 @@ font-family: 'Cairo';
 
       .dark .info-popup
       
-      {display:none;margin-top:12px;padding:14px;border-radius:14px;background:linear-gradient(180deg, #2C3E50 , #202020 );color:whitesmoke;
+      {display:none;margin-top:12px;padding:14px;border-radius:14px;background:#1f262a;color:whitesmoke;
 }
 
 
@@ -439,10 +476,10 @@ font-family: 'Cairo';
 }
 
 h1, .page-header h1, .tools-container .tool-card h3, .collapsible-card .card-header h3 {
-  font-size:x-large;
+  font-size:large;
   line-height:1.2;
   margin:0 0 8px 0;
-  font-family: 'Cairo';
+  font-family: 'Cairo'
 }
 
 h4 {
@@ -456,8 +493,9 @@ h4 {
     font-family: 'Amiri';
 }
 .card-sub, .tool-card h3, .list-table td, .search-row .count {
+  font-size : 16px;
   line-height:1.1;
-  margin-right: 5px;
+  margin-left: 5px;
   margin-top: 2px;
 }
 
@@ -481,7 +519,7 @@ h4 {
   box-shadow:0 30px 70px rgba(15,20,30,0.45);display:flex;flex-direction:column;border:1px solid rgba(44,62,80,0.06);
   backdrop-filter: blur(6px);
 }
-.modal-close{    position: absolute;
+.modal-close{    position: fixed;
     right: 8px;
     top: -5px;
     background: none;
@@ -519,10 +557,12 @@ h4 {
   align-items:center;
   justify-content:center;
   cursor:pointer;
+  box-shadow:0 6px 14px rgba(0,0,0,0.12);
+  background-color: transparent;
 }
 .info-toggle i{font-size:16px}
 .dark .info-toggle{
-  color:#2C3E50 ;
+  color:#fffdf6;
     margin-left:8px;
   border:0;
   width:36px;
@@ -533,6 +573,7 @@ h4 {
   justify-content:center;
   cursor:pointer;
   box-shadow:0 6px 14px rgba(0,0,0,0.12);
+  background-color: transparent;
 }
 
 @media (max-width:640px){
@@ -541,16 +582,32 @@ h4 {
 }
 
 
-.card-desc{font-size: 15px;;color:var(--muted);margin-top:4px;font-family: 'Cairo';}
-.calc-form{display:grid;gap:10px;margin-top:12px}
+.card-desc{font-size:0.86rem;color:var(--muted);margin-top:4px;font-family: 'Cairo'}
+.card-desc2{font-size:0.86rem;color:var(--muted);margin-top:4px;font-family: 'Cairo'}
+.calc-form{display:grid;gap:10px;margin-top:30px}
 .row{display:flex;gap:10px;align-items:center}
 .field{display:flex;flex-direction:column;gap:6px}
 .field label{font-size:0.85rem;color:var(--primary);font-weight:600}
 .field input[type="number"], .field input[type="text"], .field select, .field textarea{
-  padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);background:transparent;color:var(--primary);outline:none;
-  box-shadow:inset 0 -1px 0 rgba(0,0,0,0.02);
+  padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);background:white;color:var(--primary);outline:none;
+  box-shadow:inset 0 -1px 0 rgba(0,0,0,0.02);direction: rtl;
 }
-.field input:focus, .field select:focus, .field textarea:focus{border-color:rgba(44,62,80,0.28);box-shadow:0 6px 18px rgba(44,62,80,0.06)}
+
+ .dark  .field select{ background-color:var(--popup-search-bg) ;
+
+}
+
+.field input[type="text"], .field select, .field textarea{
+  padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);background: white  ;color:var(--primary);outline:none;
+  box-shadow:inset 0 -1px 0 rgba(0,0,0,0.02);direction: rtl;
+}
+
+.dark .field input[type="number"]{
+  padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);background: #3d4b4d  ;color:var(--primary);outline:none;
+  box-shadow:inset 0 -1px 0 rgba(0,0,0,0.02);direction: rtl;
+}
+
+.field input:focus, .field select:focus, .field textarea:focus{border-color:rgba(44,62,80,0.28);box-shadow:0 6px 18px rgba(44,62,80,0.06);direction: rtl;}
 .result-box{margin-top:14px;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));border:1px solid rgba(0,0,0,0.04);display:flex;flex-direction:column;gap:8px}
 .dark .result-box{margin-top:14px;padding:12px;border-radius:10px;background:linear-gradient(180deg, #2C3E50 , #202020 );border:1px solid #2C3E50 ;display:flex;flex-direction:column;gap:8px}
 .result-box .big{font-size:1.25rem;font-weight:700;color:var(--primary)}
@@ -570,6 +627,7 @@ h4 {
 }
 
 
+
   </style>
 </head>
 <body>
@@ -577,7 +635,7 @@ h4 {
   <header class="top-nav">
     <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
     <div class="brand">
-      <img src="img/logotitre.png" alt="Logo Quboor" class="logo">
+      <img src="img/logo/logotitrear.png" alt="Logo Quboor" class="logo">
     </div>
     <div class="nav-controls">
       <button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon" style="margin-top: 2px;" ></i></button>
@@ -616,7 +674,7 @@ h4 {
   <button class="tool-card" data-tool="coran-audio" aria-haspopup="dialog">
     <i class="fas fa-headphones"></i>
         <h3>القرآن الكريم</h3>
-    <div class="card-desc">
+    <div class="card-desc2">
      استمع إلى القرآن الكريم وتدبّره بتلاوات دقيقة.
     </div>
   </button>
@@ -624,50 +682,52 @@ h4 {
   <button class="tool-card" data-tool="douas" aria-haspopup="dialog">
     <i class="fas fa-praying-hands"></i>
         <h3>دعاء</h3>
-    <div class="card-desc">
+    <div class="card-desc2">
      اطلع على الأدعية الأساسية للحياة اليومية.
     </div>
   </button>
 
 
-<button class="tool-card" data-tool="zakat-fitr" aria-describedby="desc-zf">
-  <i class="fas fa-calculator" aria-hidden="true"></i>
-  <div>
+    <button class="tool-card" data-tool="zakat-fitr" aria-describedby="desc-zf">
+      <i class="fas fa-calculator" aria-hidden="true"></i>
+      <div>
     <h3>زكاة الفطر</h3>
     <div id="desc-zf" class="card-desc">محاكي زكاة رمضان (بالكيلوغرام والقيمة)</div>
-  </div>
-</button>
+      </div>
+    </button>
 
-<button class="tool-card" data-tool="zakat-annuelle" aria-describedby="desc-zm">
-  <i class="fas fa-piggy-bank" aria-hidden="true"></i>
-  <div>
+    <button class="tool-card" data-tool="zakat-annuelle" aria-describedby="desc-zm">
+      <i class="fas fa-piggy-bank" aria-hidden="true"></i>
+      <div>
     <h3>زكاة المال</h3>
     <div id="desc-zm" class="card-desc">محاكي شامل لحساب الزكاة السنوية (النصاب والفئات)</div>
-  </div>
-</button>
+      </div>
+    </button>
 
-<button class="tool-card" data-tool="sadaqa-jaria" aria-describedby="desc-sj">
-  <i class="fas fa-seedling" aria-hidden="true"></i>
-  <div>
+    <button class="tool-card" data-tool="sadaqa-jaria" aria-describedby="desc-sj">
+      <i class="fas fa-seedling" aria-hidden="true"></i>
+      <div>
     <h3>الصدقة الجارية</h3>
     <div id="desc-sj" class="card-desc">تقدير تعليمي للمشاريع المستدامة</div>
-  </div>
+      </div>
 </section>
 
-<div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
-  <div class="modal-overlay" id="modalOverlay"></div>
-  <div class="modal-panel" role="document" aria-labelledby="modalTitle">
-    <button class="modal-close" id="modalClose" aria-label="إغلاق النافذة">&times;</button>
-    <div class="modal-content" id="modalContent">
-      <h2 id="modalTitle"></h2>
-      <p id="modalIntro"></p>
-      <p id="modalExample" class="example"></p>
-      <div style="margin-top:18px;">
+      
+  <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-panel" role="document" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="إغلاق النافذة">&times;</button>
+      <div class="modal-content" id="modalContent">
+        <h2 id="modalTitle"></h2>
+        <p id="modalIntro"></p>
+        <p id="modalExample" class="example"></p>
+        <div style="margin-top:18px;">
         <button id="modalAction" class="tool-action">متابعة</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
 
 
   </main>
@@ -1345,7 +1405,6 @@ window.sourateContents = {
 };
 
 
-
 const douas = [
   {"title": "الصيغة الأولى لتقديم التعازي", "text": "اعظم الله اجرك واحسن عزاءك وغفر لميتك"},
   {"title": "الصيغة الثانية لتقديم التعازي", "text": "إن لله ما أخذ وله ما أعطى، وكل شيء عنده بأجل مسمى، فلتصبر ولتحتسب"},
@@ -1359,19 +1418,18 @@ const douas = [
 
 window.douaContents = {
   "formule-de-condoleances": {
-    short: "Doua de condoléances et réconfort.",
-    full: "Qu’Allah augmente ta récompense, améliore (ou apaise) ta consolation et pardonne à ton défunt."
+    short: "دعاء التعزية والتسلية.",
+    full: "أعظمَ اللهُ أجرك، وأحسنَ عزاءك، وغفرَ لميتك."
   },
   "formule-de-condoleances-ii": {
-    short: "Formule alternative de condoléances.",
-    full: "À Allah appartient ce qu’Il a repris et à Lui appartient ce qu’Il a donné. Toute chose auprès de Lui a un terme fixé. Fais preuve de patience et espère la récompense (auprès d’Allah)."
+    short: "صيغة بديلة للتعزية.",
+    full: "إنَّ لله ما أخذ وله ما أعطى، وكلُّ شيءٍ عنده بأجلٍ مسمّى، فاصبر واحتسب."
   },
   "doua-du-pardon-du-defunt": {
-    short: "Invocation pour le pardon du défunt.",
-    full: "Ô Allah, pardonne-lui, fais-lui miséricorde, accorde-lui la santé et le pardon. Honore son accueil, élargis son entrée, lave-le avec l’eau, la neige et la grêle, purifie-le de ses fautes comme on purifie le vêtement blanc de la saleté. Remplace sa demeure par une demeure meilleure, sa famille par une famille meilleure et son épouse par une épouse meilleure. Fais-le entrer au Paradis et protège-le du châtiment de la tombe et du châtiment du Feu."
+    short: "دعاء للمغفرة للميت.",
+    full: "اللهم اغفر له وارحمه، وعافه واعفُ عنه، وأكرم نُزُله، ووسّع مدخله، واغسله بالماء والثلج والبَرَد، ونقّه من الخطايا كما يُنقّى الثوب الأبيض من الدنس، وأبدله دارًا خيرًا من داره، وأهلًا خيرًا من أهله، وزوجًا خيرًا من زوجه، وأدخله الجنة، وأعذه من عذاب القبر ومن عذاب النار."
   }
 };
-
 
 if (popupClose) popupClose.addEventListener('click', ()=> {
   // Always close any open detail then close the list popup itself.
@@ -1524,7 +1582,7 @@ function makeSlug(name){
       } else if (kind === 'doua') {
         const slug = makeSlug(itemKey.title || itemKey.name || itemKey);
         const data = window.douaContents[slug] || {
-          short: 'Brève description non fournie. Éditez window.douaContents dans toolsfr.html.',
+          short: 'Brève description non fournie.',
           full: (itemKey.text || 'Texte complet non fourni. Ajoutez le texte complet dans window.douaContents["' + slug + '"].')
         };
         return {slug, short: data.short, full: data.full};
@@ -1542,7 +1600,6 @@ function makeSlug(name){
       if (toolKey === 'coran-audio'){
         const audioSlug = content.slug || makeSlug(item);
   const src1 = `audio/${audioSlug}.mp3`;
-  const src2 = `audio/${audioSlug}ar.mp3`;
 
 
   html = `<div class="detail-body">
@@ -1552,22 +1609,13 @@ function makeSlug(name){
       ${escapeHtml(content.short)}
     </div>
 
-  <div style="margin-top:0px; display:flex; align-items:center; gap:0px;">
-    <div style="min-width:110px; font-weight:600;">
-      🎧 Français
-    </div>
-    <audio controls preload="none" style="flex:1;">
-      <source src="${escapeHtml(src1)}" type="audio/mpeg">
-      Votre navigateur ne supporte pas l'audio.
-    </audio>
-  </div>
 
-  <div style="margin-top:0px; display:flex; align-items:center; gap:0px;">
+  <div style="margin-top:0px; display:flex; align-items:center; gap:0px;direction: ltr">
     <div style="min-width:110px; font-weight:600;font-family: 'Cairo';">
       🎧 العربية
     </div>
     <audio controls preload="none" style="flex:1;">
-      <source src="${escapeHtml(src2)}" type="audio/mpeg">
+      <source src="${escapeHtml(src1)}" type="audio/mpeg">
       Votre navigateur ne supporte pas l'audio.
     </audio>
   </div>
@@ -1585,7 +1633,7 @@ function makeSlug(name){
           <h3>${escapeHtml(item)}</h3>
           <div class="detail-short"style="text-align: center;margin-top:8px">${escapeHtml(content.short)}</div>
           <hr style="margin:14px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
-          <div class="detail-full" style="text-align: center;white-space:pre-wrap;color:var(--primary)";font-size: x-large;  font-family: 'Amiri';>${escapeHtml(content.full)}</div>
+          <div class="detail-full" style="text-align: center;white-space:pre-wrap;color:var(--primary)";font-size: x-large;  font-family: 'Cairo';>${escapeHtml(content.full)}</div>
         </div>`;
       }
 
@@ -1598,7 +1646,7 @@ function makeSlug(name){
       html = `<div class="detail-body" style="text-align: center;margin-top:8px;margin-bottom:8px;font-size: x-large">
         <h3>${escapeHtml(title)}</h3>
         <div style="margin-top:12px">
-            <div style="margin-top:0px; display:flex; align-items:center; gap:0px;">
+            <div style="margin-top:0px; display:flex; align-items:center; gap:0px;direction: ltr">
     <div style="min-width:110px; font-weight:600;font-family: 'Cairo';font-size: medium ">
       🎧 العربية
     </div>
@@ -1658,21 +1706,21 @@ const toolData = {
   'zakat-fitr': {
     id:'zakat-fitr',
     title: 'زكاة الفطر',
-    intro: "زكاة الفطر تُطهّر الصيام ويجب إخراجها قبل صلاة العيد؛ ويتم حسابها بالطعام (صاع واحد ≈ 2.5 كغ) أو بالقيمة المالية المكافئة.",
-    example: "مثال: 4 أشخاص × 2.5 كغ = 10 كغ إجمالي",
+    intro: "زكاة الفطر تُطهِّر الصيام ويجب إخراجها قبل صلاة العيد؛ ويتم حسابها بالطعام (صاع واحد ≈ 2.5 كغ) أو بما يعادله من المال.",
+    example: "مثال: 4 أشخاص × 2.5 كغ = 10 كغ المجموع",
     actionLabel: "احسب"
   },
   'zakat-annuelle': {
     id:'zakat-annuelle',
     title: 'زكاة المال (السنوية)',
-    intro: "تجب زكاة المال إذا بلغت ثروتك النصاب ومضى عليها حول قمري كامل. مقدارها 2.5٪ من صافي المال.",
+    intro: "تجب زكاة المال إذا بلغ المال النصاب ومضت عليه سنة قمرية كاملة (حول). مقدارها 2.5٪ من صافي المال.",
     example: "مثال: مجموع المال 10000€ − الديون 1000€ = الصافي 9000€ → الزكاة 225€",
     actionLabel: "احسب"
   },
   'sadaqa-jaria': {
     id:'sadaqa-jaria',
-    title: 'الصدقة الجارية',
-    intro: "الصدقة الجارية تطوعية ولا نسبة ثابتة لها؛ يساعدك هذا المحاكي على تقدير الأثر والميزانية وتوزيع المشاريع المستدامة.",
+    title: 'صدقة جارية',
+    intro: "الصدقة الجارية صدقة تطوعية وليس لها نسبة ثابتة؛ يساعدك هذا المحاكي على تقدير التأثير والميزانية وتوزيع المشاريع المستدامة.",
     example: "مثال: ميزانية 2000€ لبئر → تقدير وتوصيات للتوزيع",
     actionLabel: "تقدير"
   }
@@ -1685,267 +1733,177 @@ if(skipTools.includes(toolId)) return;
   modalTitle.textContent = data.title || '';
   
   const htmlByTool = {
-    'zakat-fitr': `
+'zakat-fitr': `
       <div style="display:flex;align-items:center;justify-content:center;gap:8px">
         <p class="small-muted" style="text-align:center;margin:0;font-weight:600">${data.intro}</p>
-        <button type="button" class="info-toggle" aria-expanded="false" title="Info"><i class="fas fa-info-circle" aria-hidden="true"></i></button>
+        <button type="button" class="info-toggle" aria-expanded="false" title="معلومات"><i class="fas fa-info-circle" aria-hidden="true"></i></button>
       </div>
 
 <div class="info-popup">
-  <strong>ما هي زكاة الفطر؟</strong>
-  <p class="small-muted" style="margin:8px 0 0">
-    تُدفع زكاة الفطر في نهاية شهر رمضان لتطهير الصيام ومساعدة العائلات على الاحتفال بعيد الفطر.
-    تقليديًا يتم إخراج كمية من الطعام عن كل شخص تُسمّى "صاع".
-  </p>
-  <p class="small-muted" style="margin:6px 0 0">
-    <em>التعريف — الصاع:</em>
-    الصاع وحدة قياس تقليدية تعادل تقريبًا ثلاث حفنات باليد؛
-    وفي التطبيق العملي يُقدَّر غالبًا بحوالي 2.5 كغ من الحبوب (الأرز أو القمح).
-  </p>
-  <p class="small-muted" style="margin:8px 0 0">
-    <em>طريقة الحساب:</em>
-    اضرب عدد الأشخاص في الكمية (صاع) للحصول على الإجمالي بالكيلوغرام.
-    إذا لم يكن من الممكن توزيع الطعام، يمكن استخدام السعر المحلي للكيلوغرام
-    لتحويله إلى قيمة مالية (MAD).
-  </p>
-</div>
-
-<form id="zf-form" class="calc-form" onsubmit="return false;">
-  <div class="small-muted">
-    نصيحة: قدّم القيمة المالية إذا لم يكن توزيع الطعام ممكنًا في منطقتك.
-  </div>
-
-  <div class="row">
-    <div class="field" style="flex:1">
-      <label for="zf-adults">عدد البالغين</label>
-      <input id="zf-adults" type="number" min="0" value="2">
-    </div>
-    <div class="field" style="flex:1">
-      <label for="zf-children">عدد الأطفال</label>
-      <input id="zf-children" type="number" min="0" value="1">
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="field" style="flex:1">
-      <label for="zf-type">نوع الطعام</label>
-      <select id="zf-type">
-        <option value="riz">أرز</option>
-        <option value="blé">قمح</option>
-        <option value="dattes">تمر</option>
-        <option value="orge">شعير</option>
-        <option value="autre">أخرى</option>
-      </select>
-    </div>
-    <div class="field" style="flex:1">
-      <label for="zf-qty">الكمية لكل شخص (كغ)</label>
-      <input id="zf-qty" type="number" min="0" step="0.1" value="2.5">
-    </div>
-  </div>
-
-  <div class="field">
-    <label for="zf-price">السعر المحلي لكل كغ (MAD)</label>
-    <input id="zf-price" type="number" min="0" step="0.01" value="12.00">
-  </div>
-
-  <div class="result-box" id="zf-result" aria-live="polite">
-    <div class="info-line small-muted">
-      مجموع الأشخاص: <strong id="zf-total-people">—</strong>
-    </div>
-    <div class="info-line">
-      إجمالي الطعام: <span class="big" id="zf-total-kg">—</span> كغ
-    </div>
-    <div class="info-line">
-      القيمة التقديرية: <span class="big" id="zf-total-eur">—</span> MAD
-    </div>
-    <div class="small-muted">
-      يُنصح بإخراج الزكاة على شكل طعام؛ ويتم عرض القيمة المالية للتسهيل فقط.
-    </div>
-  </div>
-
-  <div class="calc-actions">
-    <button id="zf-reset" type="button" class="btn-ghost">إعادة التعيين</button>
-    <button id="zf-calc" class="tool-action">التبرع عبر Quboor</button>
-  </div>
-</form>
-    `,
-    
-'zakat-annuelle': `
-  <div style="display:flex;align-items:center;justify-content:center;gap:8px">
-    <p class="small-muted" style="text-align:center;margin:0;font-weight:600">${data.intro}</p>
-    <button type="button" class="info-toggle" aria-expanded="false" title="معلومات"><i class="fas fa-info-circle" aria-hidden="true"></i></button>
-  </div>
-
-  <div class="info-popup">
-    <strong>ما هي زكاة المال؟</strong>
-    <p class="small-muted" style="margin:8px 0 0">
-      زكاة المال هي صدقة سنوية واجبة تُخرج عندما تبلغ ثروتك الصافية النصاب أو تتجاوزه
-      ويَمرّ عليها حول قمري كامل. وهي وسيلة لتطهير المال وإعادة توزيع جزء من الثروة
-      على المحتاجين.
-    </p>
-    <p class="small-muted" style="margin:8px 0 0">
-      التعريف — النصاب: هو الحد الأدنى للمال (وغالبًا يُحسب بقيمة الذهب أو الفضة)
-      الذي إذا بلغه المال وجبت فيه الزكاة. يُنصح بالتحقق من قيمة النصاب المحلية
-      الحالية للحصول على حساب دقيق.
-    </p>
-    <p class="small-muted" style="margin:6px 0 0">
-      <em>طريقة الحساب:</em>
-      اجمع الأصول السائلة (النقد، الحسابات البنكية، الأسهم، البضائع التجارية)
-      مع القيمة التقديرية للذهب والفضة، وأضف قيمة المحاصيل أو الماشية إن وُجدت،
-      ثم اطرح الديون المستحقة. إذا كانت القاعدة الصافية ≥ النصاب
-      فإن مقدار الزكاة هو 2.5٪ من هذا المبلغ.
-    </p>
-    <p class="small-muted" style="margin:6px 0 0">
-      مثال: 10,000 درهم من الأصول − 1,000 درهم من الديون = 9,000 درهم
-      → الزكاة = 9,000 × 2.5٪ = 225 درهم.
-    </p>
-    <p class="small-muted" style="margin:6px 0 0">
-      نصيحة: احتفظ بتاريخ بداية الحول القمري، واستخدم القيم المحلية (MAD)
-      وقم بتوثيق حساباتك.
-    </p>
-  </div>
-
-  <form id="zm-form" class="calc-form" onsubmit="return false;">
-    <div class="small-muted">
-      نصيحة: احتفظ بالإثباتات وسجّل تاريخ بداية الحول القمري قبل إجراء الحساب.
-    </div>
-
-    <div class="field">
-      <label for="zm-cash">النقد / الحسابات البنكية (MAD)</label>
-      <input id="zm-cash" type="number" min="0" step="0.01" value="0">
-    </div>
-
-    <div class="field">
-      <label for="zm-gold">الذهب / الفضة (القيمة التقديرية MAD)</label>
-      <input id="zm-gold" type="number" min="0" step="0.01" value="0">
-    </div>
-
-    <div class="field">
-      <label for="zm-assets">الأسهم / الأصول السائلة (MAD)</label>
-      <input id="zm-assets" type="number" min="0" step="0.01" value="0">
-    </div>
-
-    <div class="field">
-      <label for="zm-inventory">البضائع المخصصة للبيع (MAD)</label>
-      <input id="zm-inventory" type="number" min="0" step="0.01" value="0">
-    </div>
-
-    <div class="field">
-      <label for="zm-debt">الديون المستحقة قصيرة الأجل (MAD)</label>
-      <input id="zm-debt" type="number" min="0" step="0.01" value="0">
-    </div>
-
-    <details style="margin-top:6px">
-      <summary class="small-muted">خيارات متقدمة (الماشية / المحاصيل)</summary>
-
-      <div class="field">
-        <label for="zm-harvest">المحاصيل (القيمة MAD)</label>
-        <input id="zm-harvest" type="number" min="0" step="0.01" value="0">
-
-        <label class="small-muted" style="margin-top:6px">طريقة السقي؟</label>
-        <select id="zm-harvest-type">
-          <option value="auto">طبيعية (10٪)</option>
-          <option value="irr">مروية (5٪)</option>
-        </select>
+        <strong>ما هي زكاة الفطر؟</strong>
+        <p class="small-muted" style="margin:8px 0 0">تُدفع زكاة الفطر في نهاية شهر رمضان لتطهير الصيام ومساعدة العائلات على الاحتفال بالعيد. تقليدياً يتم إعطاء مقدار من الطعام عن كل شخص يسمى "صاع".</p>
+        <p class="small-muted" style="margin:6px 0 0"><em>تعريف — الصاع:</em> الصاع وحدة تقليدية تعادل تقريباً ثلاث حفنات باليد؛ ويُقدَّر عادة بحوالي 2.5 كغ من الحبوب مثل الأرز أو القمح.</p>
+        <p class="small-muted" style="margin:8px 0 0"><em>الطريقة:</em> اضرب عدد الأشخاص في الكمية (الصاع) للحصول على المجموع بالكيلوغرام. إذا تعذر توزيع الطعام يمكن استخدام السعر المحلي للكيلوغرام لتحويله إلى قيمة مالية.</p>
       </div>
 
-      <div class="field">
-        <label for="zm-livestock">الماشية (القيمة التقديرية MAD)</label>
-        <input id="zm-livestock" type="number" min="0" step="0.01" value="0">
-        <div class="small-muted" style="margin-top:6px">
-          ملاحظة: في حالة الماشية الكبيرة يجب استخدام جدول زكاة خاص
-          (غير مفصل هنا).
+
+      <form id="zf-form" class="calc-form" onsubmit="return false;">
+        <div class="small-muted">نصيحة: يمكنك إعطاء القيمة المالية إذا كان توزيع الطعام غير ممكن محلياً.</div>
+
+        <div class="row">
+          <div class="field" style="flex:1">
+            <label for="zf-adults">عدد البالغين</label>
+            <input id="zf-adults" type="number" min="0" value="2">
+          </div>
+          <div class="field" style="flex:1">
+            <label for="zf-children">عدد الأطفال</label>
+            <input id="zf-children" type="number" min="0" value="1">
+          </div>
         </div>
+
+<div class="row">
+          <div class="field" style="flex:1">
+            <label for="zf-type">نوع الطعام</label>
+            <select id="zf-type">
+              <option value="riz">أرز</option>
+              <option value="blé">قمح</option>
+              <option value="dattes">تمر</option>
+              <option value="orge">شعير</option>
+              <option value="autre">آخر</option>
+            </select>
+          </div>
+          <div class="field" style="flex:1">
+            <label for="zf-qty">الكمية لكل شخص (كغ)</label>
+            <input id="zf-qty" type="number" min="0" step="0.1" value="2.5">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="zf-price">السعر المحلي لكل كغ</label>
+          <input id="zf-price" type="number" min="0" step="0.01" value="12.00">
+        </div>
+
+
+<div class="result-box" id="zf-result" aria-live="polite">
+          <div class="info-line small-muted">إجمالي الأشخاص: <strong id="zf-total-people">—</strong></div>
+          <div class="info-line">إجمالي الطعام: <span class="big" id="zf-total-kg">—</span> كغ</div>
+          <div class="info-line">القيمة التقديرية: <span class="big" id="zf-total-eur">—</span></div>
+          <div class="small-muted">إخراج الطعام هو الأفضل؛ والقيمة المالية للراحة فقط.</div>
+        </div>
+
+        <div class="calc-actions">
+          <button id="zf-reset" type="button" class="btn-ghost">إعادة تعيين</button>
+          <button id="zf-calc" class="tool-action"> التبرع عبر قبور</button>
+        </div>
+      </form>
+          `,
+
+'zakat-annuelle': `
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px">
+        <p class="small-muted" style="text-align:center;margin:0;font-weight:600">${data.intro}</p>
+        <button type="button" class="info-toggle" aria-expanded="false" title="معلومات"><i class="fas fa-info-circle"></i></button>
       </div>
-    </details>
-    
-<div class="result-box" id="zm-result" aria-live="polite">
-  <div class="info-line">المجموع الكلي: <strong id="zm-total-sum">—</strong> MAD</div>
-  <div class="info-line">الديون التي يجب خصمها: <strong id="zm-debts">—</strong> MAD</div>
-  <div class="info-line">الصافي: <span class="big" id="zm-base-net">—</span> MAD</div>
-  <div class="info-line">الزكاة (2.5٪): <span class="big" id="zm-zakat">—</span> MAD</div>
-  <div class="small-muted">إذا كان الصافي أقل من النصاب فلا تجب الزكاة؛ تحقق من قيمة النصاب المحلية.</div>
-</div>
 
-<div class="calc-actions">
-  <button id="zm-reset" type="button" class="btn-ghost">إعادة التعيين</button>
-  <button id="zm-calc" class="tool-action">التبرع عبر Quboor</button>
-</div>
-</form>
-`,
-'sadaqa-jaria': `
-<div style="display:flex;align-items:center;justify-content:center;gap:8px">
-  <p class="small-muted" style="text-align:center;margin:0;font-weight:600">${data.intro}</p>
-  <button type="button" class="info-toggle" aria-expanded="false" title="معلومات"><i class="fas fa-info-circle" aria-hidden="true"></i></button>
-</div>
+      <div class="info-popup">
+        <strong>ما هي زكاة المال؟</strong>
+        <p class="small-muted" style="margin:8px 0 0">
+        زكاة المال صدقة سنوية واجبة عندما يبلغ المال النصاب ويُحتفظ به لمدة سنة قمرية كاملة.
+        </p>
+        <p class="small-muted" style="margin:8px 0 0">
+        تعريف — النصاب: الحد الأدنى من المال الذي إذا بلغه المال وجبت الزكاة.
+        </p>
+        <p class="small-muted" style="margin:6px 0 0">
+        الطريقة: اجمع الأصول السائلة مثل النقد والحسابات البنكية والأسهم والبضائع التجارية ثم اطرح الديون المستحقة. إذا كان الصافي أكبر من النصاب فالزكاة 2.5%.
+        </p>
+      </div>
 
-<div class="info-popup">
-  <strong>ما هي الصدقة الجارية؟</strong>
-  <p class="small-muted" style="margin:8px 0 0">
-    الصدقة الجارية هي صدقة مستمرة يبقى أثرها بعد تقديمها،
-    مثل مشاريع المياه، التعليم، نشر الكتب، أو بناء المرافق.
-    وتهدف إلى تحقيق أثر دائم ومفيد لعدد كبير من الناس.
-  </p>
+      <form id="zm-form" class="calc-form" onsubmit="return false;">
+        <div class="field">
+          <label for="zm-cash">النقد / الحسابات</label>
+          <input id="zm-cash" type="number" min="0" step="0.01" value="0">
+        </div>
 
-  <p class="small-muted" style="margin:8px 0 0">
-    <em>طريقة التقدير:</em>
-    اختر نوع المشروع، وحدد الميزانية الشهرية التي يمكنك تخصيصها،
-    ومدة المشروع بالسنوات. اضرب الميزانية الشهرية في
-    12 × عدد السنوات للحصول على التكلفة الإجمالية المتوقعة،
-    مع إضافة نسبة مخصصة للصيانة السنوية.
-  </p>
+        <div class="field">
+          <label for="zm-gold">الذهب / الفضة</label>
+          <input id="zm-gold" type="number" min="0" step="0.01" value="0">
+        </div>
 
-  <p class="small-muted" style="margin:6px 0 0">
-    مثال: ميزانية 500 درهم شهريًا × 12 × سنتين = 12000 درهم إجمالي،
-    ويمكن إضافة 10٪ للصيانة إذا لزم الأمر.
-  </p>
+        <div class="field">
+          <label for="zm-assets">الأسهم / الأصول</label>
+          <input id="zm-assets" type="number" min="0" step="0.01" value="0">
+        </div>
 
-  <p class="small-muted" style="margin:6px 0 0">
-    نصيحة: ركّز على الاستدامة (الصيانة، التدريب، الإدارة المحلية)
-    لتعظيم الأثر الروحي والاجتماعي للصدقة.
-  </p>
-</div>
+        <div class="field">
+          <label for="zm-inventory">البضائع للبيع</label>
+          <input id="zm-inventory" type="number" min="0" step="0.01" value="0">
+        </div>
 
-<form id="sj-form" class="calc-form" onsubmit="return false;">
-  <div class="small-muted">
-    نصيحة: أعطِ الأولوية للصيانة والاستدامة لتحقيق أثر مستمر.
-  </div>
+        <div class="field">
+          <label for="zm-debt">الديون</label>
+          <input id="zm-debt" type="number" min="0" step="0.01" value="0">
+        </div>
 
-  <div class="field">
-    <label for="sj-type">نوع المشروع</label>
-    <select id="sj-type">
-      <option value="puits">بئر ماء</option>
-      <option value="ecole">مدرسة / تعليم</option>
-      <option value="mosquee">مسجد</option>
-      <option value="publication">نشر كتاب</option>
-      <option value="sanitaire">معدات صحية</option>
-      <option value="projets-quboor">مشاريع Quboor</option>
-      <option value="autre">أخرى</option>
-    </select>
-  </div>
+        <div class="result-box" id="zm-result">
+          <div class="info-line">المجموع: <strong id="zm-total-sum">—</strong></div>
+          <div class="info-line">الديون: <strong id="zm-debts">—</strong></div>
+          <div class="info-line">الصافي: <span class="big" id="zm-base-net">—</span></div>
+          <div class="info-line">الزكاة (2.5%): <span class="big" id="zm-zakat">—</span></div>
+        </div>
 
-  <div class="field">
-    <label for="sj-budget">الميزانية الشهرية المتاحة (MAD)</label>
-    <input id="sj-budget" type="number" min="0" step="0.01" value="500">
-  </div>
+        <div class="calc-actions">
+          <button id="zm-reset" type="button" class="btn-ghost">إعادة تعيين</button>
+          <button id="zm-calc" class="tool-action"> التبرع عبر قبور</button>
+        </div>
+      </form>
+          `,
+    'sadaqa-jaria': `
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px">
+        <p class="small-muted" style="text-align:center;margin:0;font-weight:600">${data.intro}</p>
+        <button type="button" class="info-toggle" aria-expanded="false" title="معلومات"><i class="fas fa-info-circle"></i></button>
+      </div>
 
-  <div class="field">
-    <label for="sj-years">المدة المتوقعة (بالسنوات)</label>
-    <input id="sj-years" type="number" min="1" step="1" value="1">
-  </div>
+      <div class="info-popup">
+        <strong>ما هي الصدقة الجارية؟</strong>
+        <p class="small-muted" style="margin:8px 0 0">
+        الصدقة الجارية هي صدقة يستمر نفعها بعد تقديمها مثل بناء بئر أو مدرسة أو مسجد.
+        </p>
+      </div>
 
-  <div class="result-box" id="sj-result" aria-live="polite">
-    <div class="info-line">الميزانية الشهرية: <span class="big" id="sj-budget-out">—</span> MAD</div>
-    <div class="info-line">التكلفة الإجمالية (خلال المدة): <span class="big" id="sj-total-cost">—</span> MAD</div>
-    <div class="info-line small-muted" id="sj-advice">نصيحة: —</div>
-    <div class="small-muted">تقدير تعليمي للأثر الروحي يظهر أدناه (رمزي).</div>
-  </div>
+      <form id="sj-form" class="calc-form" onsubmit="return false;">
+        <div class="field">
+          <label for="sj-type">نوع المشروع</label>
+          <select id="sj-type">
+            <option value="puits">بئر</option>
+            <option value="ecole">مدرسة</option>
+            <option value="mosquee">مسجد</option>
+            <option value="publication">كتاب</option>
+            <option value="sanitaire">معدات صحية</option>
+            <option value="autre">آخر</option>
+          </select>
+        </div>
 
-  <div class="calc-actions">
-    <button id="sj-reset" type="button" class="btn-ghost">إعادة التعيين</button>
-    <button id="sj-calc" class="tool-action">التبرع عبر Quboor</button>
-  </div>
-</form>    `
+        <div class="field">
+          <label for="sj-budget">الميزانية الشهرية</label>
+          <input id="sj-budget" type="number" min="0" step="0.01" value="500">
+        </div>
+
+        <div class="field">
+          <label for="sj-years">المدة (سنوات)</label>
+          <input id="sj-years" type="number" min="1" step="1" value="1">
+        </div>
+
+        <div class="result-box" id="sj-result">
+          <div class="info-line">الميزانية الشهرية: <span class="big" id="sj-budget-out">—</span></div>
+          <div class="info-line">التكلفة الإجمالية: <span class="big" id="sj-total-cost">—</span></div>
+          <div class="info-line small-muted" id="sj-advice">نصيحة: —</div>
+        </div>
+
+        <div class="calc-actions">
+          <button id="sj-reset" type="button" class="btn-ghost">إعادة تعيين</button>
+        <button id="sj-calc" class="tool-action"> التبرع عبر قبور</button>
+        </div>
+      </form>
+    `
   };
 
   modalIntro.textContent = '';
@@ -2002,8 +1960,9 @@ function attachCalculatorHandlers(toolId){
 calc.addEventListener('click', (e)=>{
   e.preventDefault();
   showToast('Redirection vers Dons Quboor');
-  window.location.href = 'projetsar.html';
-});    reset.addEventListener('click', ()=>{
+window.location.href = 'projetsar.html#nous-soutenir';});    
+
+reset.addEventListener('click', ()=>{
       adults.value = 2; children.value = 1; qty.value = 2.5; price.value = 1.2;
       computeZF();
     });
@@ -2026,9 +1985,9 @@ calc.addEventListener('click', (e)=>{
     const assets = document.getElementById('zm-assets');
     const inventory = document.getElementById('zm-inventory');
     const debt = document.getElementById('zm-debt');
-    const harvest = document.getElementById('zm-harvest');
-    const harvestType = document.getElementById('zm-harvest-type');
-    const livestock = document.getElementById('zm-livestock');
+ const harvest = { value:0 };
+const harvestType = { value:0 };
+const livestock = { value:0 };
     const totalSum = document.getElementById('zm-total-sum');
     const debtsOut = document.getElementById('zm-debts');
     const baseNet = document.getElementById('zm-base-net');
@@ -2057,17 +2016,21 @@ calc.addEventListener('click', (e)=>{
       baseNet.textContent = base.toLocaleString();
       zakatOut.textContent = zak.toLocaleString();
     }
-    [cash,gold,assets,inventory,harvest,harvestType,livestock,debt].forEach(i=> i.addEventListener('input', computeZM));
+[cash,gold,assets,inventory,debt].forEach(i=> 
+  i.addEventListener('input', computeZM));
 calc.addEventListener('click', (e)=>{
   e.preventDefault();
   showToast('Redirection vers Dons Quboor');
-  window.location.href = 'projetsar.html';
-});    reset.addEventListener('click', ()=>{
+window.location.href = 'projetsar.html#nous-soutenir';});    reset.addEventListener('click', ()=>{
+});
+    reset.addEventListener('click', ()=>{
       [cash,gold,assets,inventory,harvest,livestock,debt].forEach(i=> i.value = 0);
       harvestType.value = 'auto';
       computeZM();
     });
     computeZM();
+
+    
 
     // info popup toggles inside the modal (same behavior as ZF)
     document.querySelectorAll('.info-toggle').forEach(btn=>{
@@ -2097,19 +2060,17 @@ calc.addEventListener('click', (e)=>{
       const total = +(monthly * 12 * y).toFixed(2);
       outBudget.textContent = monthly.toLocaleString();
       totalCost.textContent = total.toLocaleString();
-let adv = 'اختر مشروعًا مستدامًا: توفر البنية التحتية والتعليم فوائد مستمرة.';
-
-if(type.value === 'well') adv = 'البئر: خصص ميزانية لتكاليف الصيانة السنوية؛ وخصص أموالًا للضخ والحفر.';
-
-if(type.value === 'publication') adv = 'النشر: خصص ميزانية للطباعة والتوزيع والصيانة الرقمية.';
-
-if(type.value === 'school') adv = 'التعليم: خصص ميزانية لتكاليف التشغيل واستبقاء المعلمين.';      advice.textContent = adv;
+      let adv = 'Choisissez un projet durable : les infrastructures et l’éducation offrent un bénéfice continu.';
+      if(type.value === 'puits') adv = 'Puits : prévoyez coûts d’entretien annuels ; répartissez budget pour pompe et forage.';
+      if(type.value === 'publication') adv = 'Publication : prévoyez impression, distribution et maintenance numérique.';
+      if(type.value === 'ecole') adv = 'Éducation : prévoir frais de fonctionnement et pérennité des enseignants.';
+      advice.textContent = adv;
     }
     [type,budget,years].forEach(i=> i.addEventListener('input', computeSJ));
 calc.addEventListener('click', (e)=>{
   e.preventDefault();
   showToast('Redirection vers Dons Quboor');
-  window.location.href = 'projetsar.html';
+window.location.href = 'projetsar.html#nous-soutenir';});    reset.addEventListener('click', ()=>{
 });    reset.addEventListener('click', ()=>{
       type.value='puits'; budget.value=500; years.value=1; computeSJ();
     });

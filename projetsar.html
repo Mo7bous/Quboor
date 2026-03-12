@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>مشاريعنا - قبور</title>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -13,10 +14,10 @@
 
   <style>
 :root{
-  --blue-dark: #2C3E50;     
-  --beige-cold: #cdd4c3;    
-  --blue-very-pale: #ebf4f8; 
-  --pastel-orange: #fffefb;   
+  --blue-dark: #2C3E50;      /* base dark blue */
+  --beige-cold: #cdd4c3;     /* very light / cold beige */
+  --blue-very-pale: linear-gradient(0deg, #edf2f5, #f5f4f0);  /* very pale blue for cards / popup backgrounds */
+  --pastel-orange: #fffefb;   /* near-white with an ultra-pale orange tint for tool cards (lighter) */
   --primary: #2C3E50;
   --nav-bg: #2C3E50;
   --card-bg: #fffefb;
@@ -28,7 +29,7 @@
 
 /* Reset and base */
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{margin-top :0%;height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
+html,body{margin-top :0%;height:100%;font-family:'Cairo',system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 
 body::before{
@@ -38,26 +39,14 @@ body::before{
   left:0;
   width:100%;
   height:40px;
-  background:var(--third-color);
-  z-index:999;
-}
-.dark body::before{
-  background: var(--fifth-color);
+background: linear-gradient(0deg, #edf2f5, #f5f4f0) ; z-index:999;
 }
 
-body::before{
-  content:"";
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:35px;
-  background:var(--third-color);
-  z-index:999;
-}
 .dark body::before{
-  background: var(--fifth-color);
+background:#2C3E50
 }
+
+
 
 body::after{
   content:"";
@@ -79,13 +68,9 @@ body::after{
   
 }
 
-.dark body::after{
-  background:linear-gradient( to bottom,#0b0c0f 0%,transparent 100%);
-
-}
 
 .dark body::after{
-  background:linear-gradient( to bottom,#0b0c0f 0%,transparent 100%);
+  background:linear-gradient( to bottom,#2C3E50 0%,transparent 100%);
 }
 
 /* Top nav (copied structure used elsewhere) */
@@ -96,11 +81,10 @@ body::after{
   width: 90%;
   height: 10%;
   margin-top: -92px;
-  margin-right: 22px;
+  margin-left: 5%;
+  margin-right : 5%;
   border-radius: 20px;
-
-  background:var(--nav-bg);
-  color:var(--card-bg);
+background: linear-gradient(135deg, #2C3E50, #0b0c0f) ; color:var(--card-bg);
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -108,10 +92,32 @@ body::after{
   box-shadow:0 4px 12px rgba(0,0,0,0.25);
   z-index:1000;
 }
+
+.top-nav{
+    animation: floatNav 6s ease-in-out infinite;
+}
+
+@keyframes floatNav{
+    0%{ transform: translateY(0px); }
+    50%{ transform: translateY(-3px); }
+    100%{ transform: translateY(0px); }
+}
+
+body.dark-mode .top-nav {     background-color: var(--primary-color);
+}
+
+.page {
+    opacity: 1;
+    transition: opacity 0.35s ease;
+}
+
+.page.fade-out {
+    opacity: 0;
+}
   
   .logo {
   height: 47px;
-  margin-right: -2px;
+  margin-right: 1px;
   margin-top: 4px;
 }
 .menu-btn{background:none;border:0;color:var(--pastel-orange);font-size:20px;padding:8px;border-radius:6px;cursor:pointer;    animation: pulse 2s infinite ease-in-out;
@@ -128,7 +134,7 @@ body::after{
         transform: scale(1);
     }
 }
-.dark-btn{margin-left: 1px; margin-bottom: 2px ;background:none;border:0;color:var(--pastel-orange);font-size:18px;padding:8px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.dark-btn{background:none;border:0;color:var(--pastel-orange);font-size:18px;padding:8px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
 
 /* Sidebar - same layout as other pages */
 .sidebar{z-index: 1000; position:fixed;left:-280px;top:0;height:100%;width:280px;background:var(--nav-bg);color:var(--card-bg);padding-top:20px;padding-bottom:140px;transition:left .28s;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto}
@@ -145,17 +151,19 @@ body::after{
 #main{width:100%;
   max-width:1100px;
   margin:110px auto 0;
+  background: linear-gradient(0deg, #edf2f5, #f5f4f0);
+  height:auto;display:block;overflow:auto}
 
-  ;height:auto;display:block;overflow:auto}
+.dark #main{
+  background: #2C3E50
+  };
 
-/* Card styles */
-.collapsible-card{width:90%;
-  max-width:1100px;
-  margin:110px auto 0;
-  margin-top: 0%;
-  margin-left: 5%;
-  margin-right: 5%;background:var(--card-bg);border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15);overflow:hidden;margin-bottom:14px}
+
+.collapsible-card{width:90%;   max-width:1100px; margin:110px auto 0;margin-top: 0%; margin-left: 5%; margin-right: 5%;background: linear-gradient(0deg, #edf2f5, #f5f4f0);border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15);overflow:hidden;margin-bottom:14px}
+.dark .collapsible-card{background: #2C3E50}
+
 .collapsible-card2{background:var(--card-bg);border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15);overflow:hidden;margin-bottom:14px;margin-left: 5%;margin-right: 5%;}
+.dark .collapsible-card2{background: linear-gradient(135deg, #2C3E50, #0b0c0f)}
 
 .card-header{display:flex;align-items:center;justify-content:space-between;padding:3px 16px;cursor:pointer}
 .card-header .title{display:flex;flex-direction:column}
@@ -163,7 +171,7 @@ body::after{
 .card-sub{font-size:14px;color:var(--muted)}
 .card-arrow{width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;background:transparent;border:0;color:var(--primary);font-size:14px;transition:transform .22s}
 .card-content{padding:0 16px 16px 16px;max-height:0;overflow:hidden;transition:max-height .28s,padding .22s}
-.card-content.open{padding:12px 16px 16px 16px}
+.card-content.open{padding:12px 40px 16px 16px}
 
 /* content text */
 .content-inner p{margin: 5% 5% 10% 5%;line-height: 1.6;font-size:14px;line-height:1.45;color:var(--primary);text-align:justify}
@@ -172,15 +180,15 @@ body::after{
 .intro{background:var(--card-bg);padding:14px;border-radius:10px;margin-bottom:3%;box-shadow:0 6px 14px rgba(0,0,0,0.15)}
   /* Dark mode support for nosprojets page */
   .dark{
-    --page-bg: #0b0c0f;
+    --page-bg: #2C3E50;
     --card-bg: #2C3E50;
     --primary: #FFFCFA;
     --muted: #cfcfcf;
     --nav-bg: #2C3E50;
   }
-  .dark body, .dark html { background: var(--page-bg); }
-  .dark .intro, .dark .collapsible-card, .dark .support-card { background: var(--card-bg); color: var(--primary); box-shadow:  0 6px 14px rgba(0, 0, 0, 0.15); }
-  .dark .card-sub, .dark .content-inner, .dark .support-card div { color: var(--primary); }
+  .dark body, .dark html { background: #2C3E50 }
+  .dark .intro, .dark .support-card { background: #2C3E50; color: var(--primary); box-shadow:  0 6px 14px rgba(0, 0, 0, 0.15); }
+  .dark .card-sub, .dark .content-inner, .dark .support-card div { color: #FFFCFA; }
   .dark .card-arrow { color: var(--primary); }
   .dark .support-card a { color: var(--primary); }
   .dark .support-card { box-shadow: 0 6px 14px rgba(0,0,0,0.15); }
@@ -190,7 +198,7 @@ body::after{
 
   <header class="top-nav">
     <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
-    <div class="brand"><img src="img/logotitre.png" alt="Logo Quboor" class="logo"></div>
+    <div class="brand"><img src="img/logo/logotitre.png" alt="Logo Quboor" class="logo"></div>
     <div class="nav-controls"><button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button></div>
   </header>
 
@@ -214,41 +222,42 @@ body::after{
     </div>
   </div>
 
-  <main id="main">
+<main id="main">
       <article class="collapsible-card">
     <h1 style="margin-top: 13.5%;font-size:30px;text-align:center;margin-bottom: 3%;">مشاريعنا</h1>
       <p style="max-width:880px;font-size: medium;margin:0% 5% 10% 5%;line-height: 1.6;text-align:center;color:var(--primary)">
-    اكتشفوا أنشطتنا الرامية للحفاظ على الذاكرة الجماعية وترميم الأماكن الجنائزية: التدخلات الميدانية، رقمنة وأرشفة البيانات، التوعية والمشاركة المجتمعية.
+اكتشفوا أنشطتنا المخصصة للحفاظ على الذاكرة الجماعية:
+العمل الميداني، الرقمنة، التكوين، والتنسيق المؤسسي.
 </p>
       </p>
   
             <div style="display:flex;justify-content:center;margin-bottom:10px;">
-        <img src="img/img1.jpeg" alt="Soutenir Quboor" style="width:92%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);margin-bottom: 15px;">
+        <img src="img/pictures/img1.jpeg" alt="دعم قبور" style="width:92%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);margin-bottom: 15px;">
       </div>
 
     <!-- Project 1 -->
     <article class="collapsible-card2" id="proj1">
       <div class="card-header" role="button" aria-expanded="false" tabindex="0">
         <div class="title">
-          <h3><i class="fas fa-broom" style="margin-left:8px;color:var(--muted)"></i>التنظيف والترميم</h3>
-        <div class="card-sub">أيام عمل تطوعية</div>
+          <h3><i class="fas fa-broom" style="margin-left:8px;color:var(--muted)"></i>الصيانة</h3>
+          <div class="card-sub">أيام عمل مواطنية</div>
         </div>
         <button class="card-arrow" aria-hidden="true">▾</button>
       </div>
       <div class="card-content" id="proj1Content">
 
         <div class="content-inner">
-        <p>حملات ميدانية منظمة لترميم المقابر المتدهورة وتعزيز قيمتها، تشمل أعمال قصيرة (يوم إلى يومين) ومتابعات ربع سنوية.</p>
+          <p>حملات ميدانية منظمة لترميم وتثمين المقابر المتضررة، تجمع بين تدخلات قصيرة (يوم إلى يومين) وعمليات متابعة كل ثلاثة أشهر.</p>
 
           <h4 style="margin:10px 0 6px 0;text-align: center;">الأهداف</h4>
           <ul style="margin:10px 0 6px 18px;color:var(--primary);font-size: small;">
-          <li>تنظيف 5 مواقع تجريبية خلال السنة الأولى</li>
-          <li>تعبئة 200 متطوع</li>
-          <li>تقليل الفوضى وتحديد 100 قبر ذو أولوية</li>
+            <li>تنظيف 5 مواقع نموذجية في السنة الأولى</li>
+            <li>تعبئة 200 متطوع</li>
+            <li>تقليل النفايات وتحديد 100 قبر ذي أولوية</li>
           </ul>
 
           <h4 style="margin:10px 0 6px 0;text-align: center;">الوسائل</h4>
-        <p>توفير المعدات (قفازات، أكياس، فراشي)، التنسيق اللوجستي، فرق ميدانية وشراكات محلية. التقدير: 12 فريقًا تطوعيًا، 2 منسقين ميدانيين.</p>
+          <p>توفير المعدات (قفازات، أكياس، فرش)، تنسيق لوجستي، فرق ميدانية وشراكات محلية. التقدير: 12 فريق متطوع و2 منسقين ميدانيين.</p>
 
           <h4 style="margin:10px 0 6px 0;text-align: center;">الميزانية: 60,000 درهم</h4>
         </div>
@@ -259,150 +268,147 @@ body::after{
     <article class="collapsible-card2" id="proj2">
       <div class="card-header" role="button" aria-expanded="false" tabindex="0">
         <div class="title">
-          <h3><i class="fas fa-database" style="margin-left:8px;color:var(--muted)"></i>رقمنة البيانات الجنائزية</h3>
-        <div class="card-sub">قاعدة بيانات آمنة ومتاحة للجميع</div>
+          <h3><i class="fas fa-database" style="margin-left:8px;color:var(--muted)"></i>الرقمنة</h3>
+          <div class="card-sub">قاعدة بيانات آمنة ومتاحة</div>
         </div>
         <button class="card-arrow" aria-hidden="true">▾</button>
       </div>
       <div class="card-content" id="proj2Content">
 
         <div class="content-inner">
-        <p>إنشاء مرجع رقمي يضم الصور، النصوص، وإحداثيات GPS لكل قبر مدرج في القاعدة.</p>
+          <p>إنشاء مرجع رقمي يجمع المعلومات والصور والنصوص المنسوخة وإحداثيات GPS لكل قبر يتم جرده.</p>
 
           <h4 style="margin:10px 0 6px 0;text-align: center">الأهداف</h4>
           <ul style="margin:6px 0 10px 18px;color:var(--primary);font-size: small;">
-          <li>توثيق 2,000 قبر خلال 18 شهرًا</li>
-          <li>إتاحة 80% من الملفات للعرض عبر الإنترنت</li>
-          <li>ضمان البيانات الوصفية وقابلية التتبع</li>
+            <li>توثيق 2000 قبر خلال 18 شهراً</li>
+            <li>إتاحة 80٪ من الملفات للاستشارة عبر الإنترنت</li>
+            <li>ضمان البيانات الوصفية وإمكانية التتبع</li>
           </ul>
 
           <h4 style="margin:10px 0 6px 0;text-align: center">الوسائل</h4>
-        <p>فريق إدخال البيانات، خوادم آمنة، واجهة ويب، تدريب لتوحيد تسجيل البيانات. التقدير: 4 مراكز إدخال، 1 مدير خادم.</p>
+          <p>فريق إدخال بيانات، خوادم آمنة، واجهة ويب، وتكوين لتوحيد منهجية الجرد. التقدير: 4 محطات إدخال بيانات و1 مسؤول خادم.</p>
 
           <h4 style="margin:10px 0 6px 0;text-align: center">الميزانية: 160,000 درهم</h4>
         </div>
       </div>
     </article>
 
-    <!-- Project 3 (summary placeholder) -->
+    <!-- Project 3 -->
     <article class="collapsible-card2" id="proj3">
       <div class="card-header" role="button" aria-expanded="false" tabindex="0">
         <div class="title">
-          <h3><i class="fas fa-chalkboard-teacher" style="margin-left:8px;color:var(--muted)"></i>Sensibilisation</h3>
-        <div class="card-sub">ورش عمل وجلسات للمتطوعين</div>
+          <h3><i class="fas fa-chalkboard-teacher" style="margin-left:8px;color:var(--muted)"></i>التوعية</h3>
+          <div class="card-sub">ورشات ودورات للمتطوعين</div>
         </div>
         <button class="card-arrow" aria-hidden="true">▾</button>
       </div>
       <div class="card-content" id="proj3Content">
 
         <div class="content-inner">
-        <p>برنامج ورش عمل لتوعية المشاركين باحترام الأماكن، الممارسات الصحيحة للتصوير، ومنهجيات تسجيل البيانات.</p>
+          <p>برنامج ورشات للتوعية باحترام الأماكن، وأفضل الممارسات في التصوير، ومنهجيات الجرد والتوثيق.</p>
 
           <h4 style="margin:10px 0 6px 0;text-align: center">الأهداف</h4>
           <ul style="margin:6px 0 10px 18px;color:var(--primary);font-size: small;">
-          <li>تدريب 100 متطوع خلال 12 شهرًا</li>
-          <li>توحيد طريقة تسجيل الصور والنصوص</li>
-          <li>إنشاء دليل عملي متاح للجميع</li>
+            <li>تكوين 150 متطوعاً خلال 12 شهراً</li>
+            <li>توحيد معايير التوثيق بالصور والنصوص</li>
+            <li>إعداد دليل عملي متاح للجميع</li>
           </ul>
 
           <h4 style="margin:10px 0 6px 0;text-align: center">الوسائل</h4>
-        <p>جلسات محلية، وحدات تعليمية على الإنترنت، مواد مطبوعة، وفرق تدريبية (3 مدربين رئيسيين).</p>
+          <p>دورات محلية، وحدات تدريبية عبر الإنترنت، مواد مطبوعة وفرق تدريب.</p>
 
           <h4 style="margin:10px 0 6px 0;text-align: center">الميزانية: 70,000 درهم</h4>
         </div>
       </div>
     </article>
 
-    <!-- Project 4 (summary placeholder) -->
+    <!-- Project 4 -->
     <article class="collapsible-card2" id="proj4">
       <div class="card-header" role="button" aria-expanded="false" tabindex="0">
         <div class="title">
           <h3><i class="fas fa-handshake" style="margin-left:8px;color:var(--muted)"></i>التنسيق</h3>
-        <div class="card-sub">أنشطة مستدامة ودمج محلي</div>
+          <div class="card-sub">إجراءات مستدامة واندماج محلي</div>
         </div>
         <button class="card-arrow" aria-hidden="true">▾</button>
       </div>
       <div class="card-content" id="proj4Content">
 
         <div class="content-inner">
-        <p>تعزيز الروابط المؤسساتية لتأمين الوصول للمواقع، الحصول على التصاريح، وتنسيق الأنشطة المستدامة محليًا.</p>
+          <p>تعزيز الروابط مع المؤسسات لتأمين الوصول إلى المواقع، والحصول على التراخيص، وتنسيق أعمال مستدامة على المستوى المحلي.</p>
 
-          <h4 style="margin:10px 0 6px 0;text-align: center">Objectifs</h4>
+          <h4 style="margin:10px 0 6px 0;text-align: center">الأهداف</h4>
           <ul style="margin:6px 0 10px 18px;color:var(--primary);font-size: small;">
-          <li>تفعيل 6 شراكات محلية رسمية</li>
-          <li>تأمين الدعم اللوجستي والتصاريح الرسمية</li>
-          <li>وضع بروتوكولات للحفظ المشترك</li>
+            <li>إبرام 6 شراكات محلية رسمية</li>
+            <li>تأمين الدعم اللوجستي والتراخيص الرسمية</li>
+            <li>وضع بروتوكولات مشتركة للحفاظ على المواقع</li>
           </ul>
 
-        <h4 style="margin:10px 0 6px 0;text-align: center">الوسائل</h4>
-        <p>اجتماعات مؤسساتية، اتفاقيات، توثيق قانوني، وتنسيق المشروع (1 مسؤول شراكات).</p>
+          <h4 style="margin:10px 0 6px 0;text-align: center">الوسائل</h4>
+          <p>اجتماعات مؤسساتية، اتفاقيات تعاون، توثيق قانوني، وتنسيق المشاريع.</p>
 
-        <h4 style="margin:10px 0 6px 0;text-align: center">الميزانية: 50,000 درهم</h4>
+          <h4 style="margin:10px 0 6px 0;text-align: center">الميزانية: 50,000 درهم</h4>
         </div>
       </div>
     </article>
 
-          <br></br>
+<br></br>
+<br></br>
 
+<h2 id="nous-soutenir" style="font-size:24px;margin:0 0 3% 0;text-align:center">
+دعمنا
+</h2>
 
-            <br></br>
+<p class="content-inner" style=" line-height: 1.6;font-size: medium; max-width:880px;margin:0 auto;text-align:center;margin-left: 15%;margin-right: 15%;">
+مساهمتكم تساعد في تمويل الأنشطة الميدانية والرقمنة والتكوين.
+</p>
 
-      <h2 style="font-size:24px;margin:0 0 3% 0;text-align:center">ادعمنا</h2>
+<br></br>
 
-      <p class="content-inner" style=" line-height: 1.6;font-size: medium; max-width:880px;margin:0 auto;text-align:center;margin-left: 15%;margin-right: 15%;">
-مساهمتكم تساهم في تمويل الأنشطة الميدانية، الرقمنة، وبرامج التكوين  </p>
+<div class="support-grid" style="display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:18px;">
 
-            <br></br>
+<div class="collapsible-card2" style="padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.20);position:relative;text-align:center;">
+<div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
+<h4 style="margin:10px 0 6px 0"><i class="fab fa-paypal" style="margin-left:8px;color:var(--primary)"></i>بايبال</h4>
+<div style="font-size:13px;margin-bottom:8px">تبرع سريع وآمن عبر PayPal.</div>
 
-    <div class="support-grid" style="display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:18px;">
-      <!-- PayPal card -->
-      <div class="collapsible-card2" style="background:var(--card-bg);padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.20);position:relative;text-align:center;">
-        <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
-          <h4 style="margin:10px 0 6px 0"><i class="fab fa-paypal" style="margin-left:8px;color:var(--primary)"></i>PayPal</h4>
-        <div style="font-size:13px;margin-bottom:8px">تبرع سريع وآمن عبر بايبال.</div>
+<img src="img/qr/qr-paypal.jpeg" alt="دعم قبور" style="width:75%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);">
 
-                  <img src="img/qr-paypal.jpeg" alt="Soutenir Quboor" style="width:75%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);">
+<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
+<a href="https://www.paypal.com/ncp/payment/CVUNYDNC38HMN" target="_blank" rel="noreferrer" style="font-weight:600;color: #355b97;text-decoration: underline solid #355b97 2px;">المساهمة</a>
+<div style="font-size:13px">تبرع لمرة واحدة أو بشكل دوري.</div>
+</div>
+</div>
+</div>
 
+<div class="collapsible-card2" style="padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.20);position:relative;text-align:center;">
+<div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
+<h4 style="margin:10px 0 6px 0"><i class="fa fa-credit-card" style="margin-left:8px;color:var(--primary)"></i>القرض الفلاحي للمغرب</h4>
+<div style="font-size:13px;margin-bottom:8px">تبرع سريع وآمن عبر الخدمات البنكية الإلكترونية.</div>
 
-          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
-            <a href="https://www.paypal.com/ncp/payment/CVUNYDNC38HMN" target="_blank" rel="noreferrer" style="font-weight:600;color: #355b97;text-decoration: underline solid #355b97 2px;">المساهمة</a>
-          <div style="font-size:13px">مساهمة لمرة واحدة أو دورية عبر بايبال.</div>
-          </div>
-        </div>
-      </div>
+<img src="img/qr/qr-ca.jpeg" alt="دعم قبور" style="width:75%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);">
 
+<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
+<div style="font-size:13px">مساهمة لمرة واحدة أو بشكل دوري.</div>
+</div>
+</div>
+</div>
 
-                <div class="collapsible-card2" style="background:var(--card-bg);padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.20);position:relative;text-align:center;">
-        <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
-          <h4 style="margin:10px 0 6px 0"><i class="fa fa-credit-card" style="margin-left:8px;color:var(--primary)"></i>القرض الفلاحي للمغرب</h4>
-          <div style="font-size:13px;margin-bottom:8px">تبرع سريع وآمن عبر الخدمات المصرفية الإلكترونية.</div>
+<div class="collapsible-card2" style="padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.20);position:relative;text-align:center;">
+<div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
+<h4 style="margin:10px 0 6px 0"><i class="fa-brands fa-instagram" style="margin-left:8px;color:var(--primary)"></i>قبور - Quboor</h4>
+<div style="font-size:13px;margin-bottom:8px">حملات إعلامية لدعم مشاريعنا.</div>
 
-                  <img src="img/qr-ca.jpeg" alt="Soutenir Quboor" style="width:75%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);">
+<img src="img/qr/qr-insta.jpeg" alt="دعم قبور" style="width:75%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);">
 
+<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
+<a href="https://www.instagram.com/quboor_?igsh=M21nd29zaGVsMHR5" target="_blank" rel="noreferrer" style="font-weight:600;color: #cf9251;text-decoration: underline solid #cf9251 2 px;">الاشتراك</a>
+<div style="font-size:13px">دعوات للتبرع لدعم المبادرات والمعدات.</div>
+</div>
+</div>
+</div>
 
-          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
-            <div style="font-size:13px">مساهمة لمرة واحدة أو مساهمة متكررة.</div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="collapsible-card2" style="background:var(--card-bg);padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.20);position:relative;text-align:center;">
-        <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
-          <h4 style="margin:10px 0 6px 0"><i class="fa-brands fa-instagram" style="margin-left:8px;color:var(--primary)"></i>Quboor - قبور</h4>
-          <div style="font-size:13px;margin-bottom:8px">الحملات الإعلامية لمشاريعنا.</div>
-
-        <img src="img/qr-insta.jpeg" alt="Soutenir Quboor" style="width:75%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);">
-
-          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
-            <a href="https://www.instagram.com/quboor_?igsh=M21nd29zaGVsMHR5" target="_blank" rel="noreferrer" style="font-weight:600;color: #cf9251;text-decoration: underline solid #cf9251 2 px;">اشترك</a>
-            <div style="font-size:13px">دعوات للتبرع من أجل المبادرات والمعدات.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </main>
+</div>
+</main>
 
   <script>
   /* Sidebar toggle, language, dark-mode logic consistent with other pages */

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Nos Événements - Quboor</title>
+<title>فعالياتنا - قبور</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -28,7 +28,7 @@
 
 /* Reset and base */
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:Inter,system-ui,Arial,sans-serif;background:var(--page-bg);color:var(--primary);-webkit-font-smoothing:antialiased}
+html,body{height:auto;font-family:'Cairo',system-ui,Arial,sans-serif;background: linear-gradient(0deg, #edf2f5, #f5f4f0);color:var(--primary);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 
 
@@ -43,7 +43,7 @@ body::before{
   z-index:1000;
 }
 html.dark body::before{
-  background: #0b0c0f;
+  background: #2C3E50;
 }
 
 html.body::after{
@@ -67,7 +67,7 @@ html.body::after{
 }
 
 html.dark body::after{
-  background:linear-gradient( to bottom,#0b0c0f 0%,transparent 100%);
+  background:linear-gradient( to bottom,#2C3E50 0%,transparent 100%);
 }
 
 
@@ -77,19 +77,43 @@ html.dark body::after{
     width: 90%;
     height: 10%;
     margin-top: 15px;
-    margin-right: 18px;
+    margin-left: 18px;
+    margin-right: 5%;
     border-radius: 20px;
     background: var(--nav-bg);
-    color: var(--card-bg);
+    background: linear-gradient(135deg, #2C3E50, #0b0c0f);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 8px 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     z-index: 1000;}
+
+    .top-nav{
+    animation: floatNav 6s ease-in-out infinite;
+}
+
+@keyframes floatNav{
+    0%{ transform: translateY(0px); }
+    50%{ transform: translateY(-3px); }
+    100%{ transform: translateY(0px); }
+}
+
+body.dark-mode .top-nav {     background-color: var(--primary-color);
+}
+
+.page {
+    opacity: 1;
+    transition: opacity 0.35s ease;
+}
+
+.page.fade-out {
+    opacity: 0;
+}
+
 .logo {
   height: 47px;
-  margin-right: -3px;
+  margin-right: 1px;
   margin-top: 4px;
 }
 .menu-btn{background:none;border:0;color:var(--pastel-orange);font-size:20px;padding:8px;border-radius:6px;cursor:pointer;    animation: pulse 2s infinite ease-in-out;
@@ -120,11 +144,13 @@ html.dark body::after{
 .lang-btn .flag{font-size:18px;line-height:1}
 
 /* Page main area scrollable like contact us */
-#main{width:90%;max-width:1100px;margin:3px 19px 2px 19px;padding:100px 0 0 0;height:auto;display:block;overflow:auto}
+#main{width:90%;max-width:1100px;margin:3px 1px 2px 20px;padding:100px 0 0 0;height:auto;display:block;overflow:auto;background: linear-gradient(0deg, #edf2f5, #f5f4f0)}
+
+.dark #main{background: #2C3E50}
 
 /* Card styles */
-.collapsible-card{background:var(--card-bg);border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15);overflow:hidden;margin:0 0 0 0;width: 100%;}
-.collapsible-card2{background:var(--card-bg);border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15);overflow:hidden;margin-bottom:14px;margin-left: 5%;margin-right: 5%;}
+.collapsible-card{background: #f6f1f1;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15);overflow:hidden;margin-bottom:14px}
+.collapsible-card2{background: linear-gradient(0deg, #edf2f5, #f5f4f0);border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15);overflow:hidden;margin-bottom:14px;margin-left: 5%;margin-right: 5%;}
 
 .card-header{display:flex;align-items:center;justify-content:space-between;padding:3px 16px;cursor:pointer;position: relative;}
 .card-header::after {
@@ -136,9 +162,9 @@ html.dark body::after{
 .card-header .title{display:flex;flex-direction:column}
 .card-header h3{    margin-top: 8%;;font-size:large;margin-bottom: 7px;}
 .card-sub{font-size:14px;color:var(--muted)}
-.card-arrow{width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;background:transparent;border:0;color:var(--primary);font-size:20px;transition:transform .22s;z-index: 1;margin-left: 10px;margin-right: 10px;}
+.card-arrow{width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;background:transparent;border:0;color:var(--primary);font-size:20px;transition:transform .22s;z-index: 1;}
 .card-content{padding:0 16px 16px 16px;max-height:0;overflow:hidden;transition:max-height .28s,padding .22s}
-.card-content.open{padding:12px 16px 16px 16px}
+.card-content.open{padding:12px 40px 16px 16px}
 
 /* content text */
 .content-inner p{margin: 5% 5% 10% 5%;line-height: 1.6;font-size:14px;line-height:1.45;color:var(--primary);text-align:justify}
@@ -153,8 +179,9 @@ html.dark body::after{
     --muted: #cfcfcf;
     --nav-bg: #2C3E50;
   }
-  .dark body, .dark html { background: var(--page-bg); }
-  .dark .intro, .dark .collapsible-card, .dark .support-card { background: var(--card-bg); color: var(--primary); box-shadow:  0 6px 14px rgba(0, 0, 0, 0.15); }
+  .dark body, .dark html { background: #2C3E50; }
+   .dark .collapsible-card { background: #2C3E50; color: var(--primary); box-shadow:  0 6px 14px rgba(0, 0, 0, 0.15); }
+   .dark .collapsible-card2 { background: linear-gradient(135deg, #2C3E50, #0b0c0f); color: var(--primary); box-shadow:  0 6px 14px rgba(0, 0, 0, 0.15); }
   .dark .card-sub, .dark .content-inner, .dark .support-card div { color: var(--primary); }
   .dark .card-arrow { color: var(--primary); }
   .dark .support-card a { color: var(--primary); }
@@ -173,6 +200,7 @@ html.dark body::after{
   gap: 6px;
   padding: 8px 6px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  margin-right: 15px;
   margin-top: 15px;
   z-index: 5;
 }
@@ -183,7 +211,7 @@ html.dark body::after{
 }
 
 .date-text {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
 }
 
@@ -194,7 +222,7 @@ html.dark body::after{
   color: var(--primary);
   border: none;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 600;
   padding: 4px 8px;
   cursor: pointer;
@@ -230,10 +258,8 @@ html.dark body::after{
 
   <header class="top-nav">
     <button id="menuBtn" class="menu-btn" aria-label="menu"><i class="fas fa-bars"></i></button>
-    <div class="brand"><img src="img/logotitre.png" alt="Logo Quboor" class="logo"></div>
-    <div class="nav-controls"><button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon" style="    margin-right: -1px;
-    margin-left: 1px;
-    margin-top: -2px;"></i></button></div>
+    <div class="brand"><img src="img/logo/logotitre.png" alt="Logo Quboor" class="logo"></div>
+    <div class="nav-controls"><button id="darkModeBtn" class="dark-btn" aria-pressed="false" aria-label="Basculer le mode sombre"><i class="fas fa-moon"></i></button></div>
   </header>
 
   <div id="mySidebar" class="sidebar">
@@ -258,17 +284,14 @@ html.dark body::after{
     </div>
   </div>
 
-    <main id="main">
-
-      
+<main id="main">
       <article class="collapsible-card">
-
-    <h1 style="margin : 30px;font-size:30px;text-align:center;">فعاليات</h1>
-
+    <h1 style="margin-top: 13.5%;font-size:30px;text-align:center;margin-bottom: 3%;">فعالياتنا</h1>
 <p style="max-width:880px;font-size:medium;margin:0% 5% 10% 5%;line-height:1.6;text-align:center;color:var(--primary)">
-تنظم أيامنا التضامنية بمشاركة المتطوعين والشركاء حول أنشطة ميدانية ملموسة:
-تنظيف، توزيع مساعدات غذائية، وحملات توعوية اجتماعية.
-</p>  
+تجمع أيامنا التضامنية المتطوعين والشركاء حول أنشطة ملموسة:
+التنظيف، توزيع المواد الغذائية، والتوعية الاجتماعية.
+</p>      </p>
+  
             <div style="display:flex;justify-content:center;margin-bottom:10px;">
       </div>
 
@@ -277,7 +300,7 @@ html.dark body::after{
       <div class="card-header" role="button" aria-expanded="false" tabindex="0">
         <div class="title">
         
-          <h3></i>الحفاظ على المواقع</h3>
+          <h3></i>الحفاظ على الأماكن</h3>
 
           
           <div class="card-sub">يوم عمل للتنظيف</div>
@@ -287,7 +310,7 @@ html.dark body::after{
         <button class="card-arrow" aria-hidden="true">▾</button>
                 <div class="event-date">
   <div class="calendar-icon">📅</div>
-  <div class="date-text">قريبًا</div>
+  <div class="date-text">سيتم التحديد لاحقاً</div>
   <button class="event-btn">مجاني</button>
   <button class="event-btn">متاح</button>
 
@@ -295,19 +318,19 @@ html.dark body::after{
       </div>
 
       
-
-      
       <div class="card-content" id="proj1Content">
               <div class="content-inner">
-<p>حملة تطوعية لتنظيف وإعادة تأهيل موقع ذي أولوية.</p>
+<p>تعبئة مواطنية لتنظيف وترميم موقع ذي أولوية.</p>
           <h4 style="margin:10px 0 6px 0;text-align: center;">البرنامج</h4>
-          <ul style="margin:10px 18px 6px 0px;color:var(--primary);font-size: small;">
-<li>30 متطوعاً مشاركاً</li>
-<li>تنظيف 100 قبر</li>
-<li>جمع 500 كلغ من النفايات</li>          </ul>
+          <ul style="margin:10px 0 6px 18px;color:var(--primary);font-size: small;">
+            <li>مشاركة 30 متطوعاً</li>
+            <li>تنظيف 100 قبر</li>
+            <li>جمع 500 كغ من النفايات</li>
+          </ul>
 
           <h4 style="margin:10px 0 6px 0;text-align: center;">الوسائل</h4>
-<p>توفير المعدات (قفازات، أكياس، فُرَش)، تنسيق لوجستي.</p>        </div>
+          <p>توفير المعدات (قفازات، أكياس، فرش)، وتنسيق لوجستي.</p>
+        </div>
       </div>
     </article>
 
@@ -315,15 +338,15 @@ html.dark body::after{
     <article class="collapsible-card2" id="proj2">
       <div class="card-header" role="button" aria-expanded="false" tabindex="0">
         <div class="title">
-          <h3>إعادة تأهيل الغطاء النباتي</h3>
-<div class="card-sub">مبادرة بيئية مستدامة</div>
+          <h3></i>إعادة تأهيل الغطاء النباتي</h3>
+          <div class="card-sub">عمل بيئي مستدام</div>
         </div>
         <button class="card-arrow" aria-hidden="true">▾</button>
                         <div class="event-date">
   <div class="calendar-icon">📅</div>
-  <div class="date-text">قريبًا</div>
-<button class="event-btn">مجاني</button>
-<button class="event-btn">متاح</button>
+  <div class="date-text">سيتم التحديد لاحقاً</div>
+  <button class="event-btn">مجاني</button>
+  <button class="event-btn">متاح</button>
 
 </div>
       </div>
@@ -331,16 +354,18 @@ html.dark body::after{
       <div class="card-content" id="proj2Content">
 
         <div class="content-inner">
-<p>تنظيف شامل وغرس شجيرات لتحسين مستدام للموقع.</p>
+          <p>تنظيف شامل وزراعة شجيرات من أجل تحسين مستدام.</p>
+
           <h4 style="margin:10px 0 6px 0;text-align: center">البرنامج</h4>
-          <ul style="margin:10px 18px 6px 0px;color:var(--primary);font-size: small;">
+          <ul style="margin:6px 0 10px 18px;color:var(--primary);font-size: small;">
 <li>غرس 120 شجيرة</li>
 <li>إعادة تأهيل المناطق المحيطة</li>
 <li>مشاركة مدارس محلية</li>
           </ul>
 
           <h4 style="margin:10px 0 6px 0;text-align: center">الوسائل</h4>
-<p>توفير المعدات (قفازات، أكياس، أدوات بستنة)، تنسيق لوجستي.</p>        </div>
+          <p>توفير المعدات (قفازات، أكياس، أدوات البستنة) وتنسيق لوجستي.</p>
+        </div>
       </div>
     </article>
 
@@ -348,14 +373,14 @@ html.dark body::after{
     <article class="collapsible-card2" id="proj3">
       <div class="card-header" role="button" aria-expanded="false" tabindex="0">
         <div class="title">
-<h3>رحلة توبقال</h3>          
-<div class="card-sub">رحلة لجمع التبرعات</div>
+          <h3></i>رحلة توبقال</h3>
+          <div class="card-sub">رحلة لجمع التبرعات.</div>
         </div>
         <button class="card-arrow" aria-hidden="true">▾</button>
   <div class="event-date">
   <div class="calendar-icon">📅</div>
-  <div class="date-text">قريبًا</div>
-  <button class="event-btn">مجاني</button>
+  <div class="date-text">سيتم التحديد لاحقاً</div>
+  <button class="event-btn">500 درهم</button>
   <button class="event-btn">متاح</button>
 
 </div>
@@ -364,15 +389,17 @@ html.dark body::after{
       <div class="card-content" id="proj3Content">
 
         <div class="content-inner">
-<p>صعود جبل توبقال في إطار رحلة تضامنية تهدف إلى جمع التبرعات لدعم أنشطتنا الإنسانية.</p>          <h4 style="margin:10px 0 6px 0;text-align: center">البرنامج</h4>
-          <ul style="margin:10px 18px 6px 0px;color:var(--primary);font-size: small;">
-<li>جمع التبرعات لتمويل مشاريعنا التضامنية</li>
-<li>التوعية بالقضية</li>
-<li>تعبئة فريق من المشاركين الملتزمين</li>
+        <p>صعود جبل توبقال في إطار رحلة تضامنية تهدف إلى جمع التبرعات لدعم أنشطتنا الإنسانية.</p>
+          <h4 style="margin:10px 0 6px 0;text-align: center">البرنامج</h4>
+          <ul style="margin:6px 0 10px 18px;color:var(--primary);font-size: small;">
+        <li>جمع التبرعات لتمويل مشاريعنا التضامنية</li>
+        <li>التوعية بالقضية</li>
+        <li>تعبئة فريق من المشاركين الملتزمين</li>
           </ul>
 
           <h4 style="margin:10px 0 6px 0;text-align: center">الوسائل</h4>
-<p>رحلة مؤطرة بمرشدين محليين، إعداد بدني مسبق، تنسيق لوجستي (النقل، المبيت في الملجأ، معدات الجبال).</p>        </div>
+        <p>رحلة مؤطرة مع مرشدين محليين، إعداد بدني مسبق، وتنسيق لوجستي (النقل، الإقامة في الملجأ الجبلي، معدات التسلق).</p>
+        </div>
       </div>
     </article>
 
@@ -380,15 +407,15 @@ html.dark body::after{
     <article class="collapsible-card2" id="proj4">
       <div class="card-header" role="button" aria-expanded="false" tabindex="0">
         <div class="title">
-<h3>إعلام وحوار</h3>
-<div class="card-sub">التوعية بالحقوق الاجتماعية</div>
+          <h3></i>المعلومة والحوار</h3>
+          <div class="card-sub">التوعية بالحقوق الاجتماعية</div>
         </div>
         <button class="card-arrow" aria-hidden="true">▾</button>
       <div class="event-date">
   <div class="calendar-icon">📅</div>
-  <div class="date-text">قريبًا</div>
-<button class="event-btn">مجاني</button>
-<button class="event-btn">متاح</button>
+  <div class="date-text">سيتم التحديد لاحقاً</div>
+  <button class="event-btn">مجاني</button>
+  <button class="event-btn">متاح</button>
 
 </div>
       </div>
@@ -396,62 +423,80 @@ html.dark body::after{
       <div class="card-content" id="proj4Content">
 
         <div class="content-inner">
-<p>جلسة مخصصة لمختلف المهن العاملة في المقابر لتعزيز الحقوق الاجتماعية.</p>
+<p>جلسة مخصصة لمختلف المهن الموجودة في المقابر من أجل تعزيز الحقوق الاجتماعية.</p>
+
           <h4 style="margin:10px 0 6px 0;text-align: center">البرنامج</h4>
-          <ul style="margin:10px 18px 6px 0px;color:var(--primary);font-size: small;">
+          <ul style="margin:6px 0 10px 18px;color:var(--primary);font-size: small;">
 <li>تكوين 10 مشغلين</li>
 <li>توزيع دليل عملي</li>
 <li>جلستا نقاش</li>
           </ul>
 
           <h4 style="margin:10px 0 6px 0;text-align: center">الوسائل</h4>
-<p>لقاءات، نقاشات، توثيق، توعية وتنسيق مشاريع.</p>
+          <p>لقاءات، نقاشات، توثيق، توعية وتنسيق المشاريع.</p>
         </div>
       </div>
     </article>
-<br></br>
+
 <br></br>
 
-      <h2 style="font-size:24px;margin:0 0 3% 0;text-align:center">ادعمنا</h2>
+<h2 style="font-size:24px;margin:0 0 3% 0;text-align:center">دعمنا</h2>
 
 <p class="content-inner" style=" line-height: 1.6;font-size: medium; max-width:880px;margin:0 auto;text-align:center;margin-left: 15%;margin-right: 15%;">
-مساهمتكم تساعد على تمويل الأنشطة الميدانية، والرقمنة، وبرامج التكوين.
+مساهمتكم تساعد في تمويل الأنشطة الميدانية والرقمنة والتكوين.
 </p>
 
 <br></br>
 
 <div class="support-grid" style="display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:18px;">
-  <div class="collapsible-card2" style="background:var(--card-bg);padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.20);position:relative;text-align:center;">
-    <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
-      <h4 style="margin:10px 0 6px 0"><i class="fab fa-paypal" style="margin-left:8px;color:var(--primary)"></i>PayPal</h4>
-      <div style="font-size:13px;margin-bottom:8px">تبرع سريع وآمن عبر.</div>
-      <img src="img/qr-paypal.jpeg" alt="دعم Quboor" style="width:75%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);">
-      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
-        <a href="https://www.paypal.com/ncp/payment/CVUNYDNC38HMN" target="_blank" rel="noreferrer" style="font-weight:600;color: #355b97;text-decoration: underline solid #355b97 2px;">ساهم</a>
-        <div style="font-size:15px">مساهمة لمرة واحدة أو مساهمة متكررة.</div>
-      </div>
-    </div>
-  </div>
 
-  <div class="collapsible-card2" style="background:var(--card-bg);padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.20);position:relative;text-align:center;">
-    <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
-      <h4 style="margin:10px 0 6px 0"><i class="fa-brands fa-instagram" style="margin-left:8px;color:var(--primary)"></i>Quboor - قبور</h4>
-      <div style="font-size:13px;margin-bottom:8px">حملات إعلامية لدعم مشاريعنا.</div>
-      <img src="img/qr-insta.jpeg" alt="دعم Quboor" style="width:75%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);">
-      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
-        <a href="https://www.instagram.com/quboor_?igsh=M21nd29zaGVsMHR5" target="_blank" rel="noreferrer" style="font-weight:600;color: #cf9251;text-decoration: underline solid #cf9251 2 px;">اشترك</a>
-        <div style="font-size:13px">دعوات للتبرع لدعم المبادرات والمعدات.</div>
-      </div>
-    </div>
-  </div>
-</div>          </div>
-        </div>
-      </div>
-    </div>
+<div class="collapsible-card2" style="padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.20);position:relative;text-align:center;">
+<div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
+<h4 style="margin:10px 0 6px 0"><i class="fab fa-paypal" style="margin-left:8px;color:var(--primary)"></i>بايبال</h4>
+<div style="font-size:13px;margin-bottom:8px">تبرع سريع وآمن عبر PayPal.</div>
 
-  </main>
+<img src="img/qr/qr-paypal.jpeg" alt="دعم قبور" style="width:75%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);">
+
+<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
+<a href="https://www.paypal.com/ncp/payment/CVUNYDNC38HMN" target="_blank" rel="noreferrer" style="font-weight:600;color: #355b97;text-decoration: underline solid #355b97 2px;">المساهمة</a>
+<div style="font-size:13px">مساهمة لمرة واحدة أو بشكل متكرر.</div>
+</div>
+</div>
+</div>
+
+<div class="collapsible-card2" style="padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.20);position:relative;text-align:center;">
+<div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
+<h4 style="margin:10px 0 6px 0"><i class="fa fa-credit-card" style="margin-left:8px;color:var(--primary)"></i>القرض الفلاحي للمغرب</h4>
+<div style="font-size:13px;margin-bottom:8px">تبرع سريع وآمن عبر الخدمات البنكية الإلكترونية.</div>
+
+<img src="img/qr/qr-ca.jpeg" alt="دعم قبور" style="width:75%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);">
+
+<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
+<div style="font-size:13px">مساهمة لمرة واحدة أو بشكل متكرر.</div>
+</div>
+</div>
+</div>
+
+<div class="collapsible-card2" style="padding:12px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.20);position:relative;text-align:center;">
+<div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-direction:column;">
+<h4 style="margin:10px 0 6px 0"><i class="fa-brands fa-instagram" style="margin-left:8px;color:var(--primary)"></i>Quboor - قبور</h4>
+<div style="font-size:13px;margin-bottom:8px">حملات إعلامية لمشاريعنا.</div>
+
+<img src="img/qr/qr-insta.jpeg" alt="دعم قبور" style="width:75%;max-width:880px;border-radius:8px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,0.15);">
+
+<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;">
+<a href="https://www.instagram.com/quboor_?igsh=M21nd29zaGVsMHR5" target="_blank" rel="noreferrer" style="font-weight:600;color: #cf9251;text-decoration: underline solid #cf9251 2 px;">الاشتراك</a>
+<div style="font-size:13px">حملات تبرع لدعم المبادرات والمعدات.</div>
+</div>
+</div>
+</div>
+
+</div>
+
+</main>
 
   <script>
+  /* Sidebar toggle, language, dark-mode logic consistent with other pages */
   const sidebar = document.getElementById('mySidebar');
   const menuBtn = document.getElementById('menuBtn');
   const closeSidebar = document.querySelector('#mySidebar .closebtn');
@@ -495,17 +540,18 @@ if (langBtnFR) {
   langBtnFR.addEventListener('click', () => {
     langBtnFR.classList.add('active');
     if (langBtnMA) langBtnMA.classList.remove('active');
-    window.location.href = 'events.html';
+    window.location.href = 'projets.html';
   });
 }
 if (langBtnMA) {
   langBtnMA.addEventListener('click', () => {
     langBtnMA.classList.add('active');
     if (langBtnFR) langBtnFR.classList.remove('active');
-    window.location.href = 'eventsar.html';
+    window.location.href = 'projetsar.html';
   });
 }
 
+  /* Collapsible card behavior for the four projects */
   function setupProjects(){
     const cards = [
       {id:'proj1', content:'proj1Content'},
@@ -531,6 +577,7 @@ if (langBtnMA) {
           header.setAttribute('aria-expanded','false');
           arrow.style.transform = 'rotate(0deg)';
         }
+        // allow page scrolling when any card expands
         document.getElementById('main').style.overflow = 'auto';
       }
       setOpen(false);
