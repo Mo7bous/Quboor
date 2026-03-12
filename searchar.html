@@ -10,7 +10,7 @@
     <style>
 
 :root {--text-color: #fffefb;--background-color: #fffefb;--accent-color: #fffefb;--primary-color: #2C3E50;--secondary-color: #fffdf6; --third-color: #ebf4f8;--fifth-color: #0b0c0f;--fourth-color: #000000;--sixth-color: #000000;--seventh-color: #000000; --eighth-color: #000000;--ninth-color: #0056b3;--tenth-color: #cf9251; }
-html, body {font-family: 'Inter', sans-serif;color: var(--primary-color);    background: linear-gradient(135deg, #edf2f5, #f5f4f0);margin: 0;padding: 0;text-align: right;overflow-x: hidden;}
+html, body {font-family: 'Cairo', sans-serif;color: var(--primary-color);    background: linear-gradient(135deg, #edf2f5, #f5f4f0);margin: 0;padding: 0;text-align: right;overflow-x: hidden;}
        
 .lang-switch{position:absolute;left:50%;transform:translateX(-50%);bottom:32px;z-index:70;display:flex;flex-direction:row;gap:10px;align-items:center;}
 .lang-btn{font-family: 'Cairo'; display:flex;align-items:center;gap:8px;background:transparent;border:none;outline:none;
@@ -110,10 +110,10 @@ animation: pulse 2s infinite ease-in-out;
     transform: scale(1.1);
 }
 
-.sidebar{position:fixed;left:-280px;top:0;height:100%;width:280px;background:var(--primary-color);color:var(--secondary-color);padding-top:20px;transition:left .28s;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto;z-index: 1002;}
+.sidebar{position:fixed;left:-280px;top:0;height:100%;width:280px;background:var(--primary-color);color:var(--secondary-color);padding-top:20px;transition:left .28s;display:flex;flex-wrap:wrap;align-content:flex-start;overflow:auto;z-index: 1002}
 .sidebar.open{left:0}
-.sidebar a{display:flex;flex-direction:column;align-items:center;justify-content:center;width:50%;box-sizing:border-box;gap:6px;padding:12px 6px;color:var(--pastel-orange);text-align:center;font-size:14px;min-height:72px;  text-decoration: none;}
-.sidebar a:nth-child(odd){ border-right:none;}
+.sidebar a{ border-right: 1px solid rgba(255, 255, 255, 0.03);font-family: 'Cairo';display:flex;flex-direction:column;align-items:center;justify-content:center;width:50%;box-sizing:border-box;gap:6px;padding:12px 6px;color:var(--pastel-orange);text-align:center;font-size:14px;min-height:72px;  text-decoration: none;}
+.sidebar a:nth-child(odd){ border-right: 1px solid rgba(255, 255, 255, 0.03);}
 .sidebar a i{font-size:20px;display:block}
 .closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:var(--pastel-orange);cursor:pointer}
 .sidebar-separator{width:100%;height:18px;box-sizing:border-box;margin-top:42px;border-top:0;opacity:0.0;pointer-events:none;}
@@ -1023,7 +1023,7 @@ font-size: 14px;
 
 .news-category-list a:hover{
 
-text-decoration:underline;
+text-decoration:none;
 
 }
 
@@ -1082,6 +1082,7 @@ text-decoration:underline;
         <a href="indexar.html"><i class="fas fa-home"></i>الرئيسية</a>
     </div>
 
+    
     <div id="main">
         <div id="map"></div>
         <div class="search-explanation">
