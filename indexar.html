@@ -171,7 +171,7 @@ padding:8px 10px;font-size:13px;cursor:pointer;border-radius:8px;line-height:1;o
 </head>
 <body>
     <div class="landing-container">
-        <img src="img/logo/logotitrear.png" alt="Logo" class="logo">
+<img src="img/logo/logotitre.png" alt="Logo" class="logo" id="logo">
         <br><br/>
         <p>اكتشف التاريخ وقدم التحية لأحبائك الراحلين. تعرف على الأماكن واحتفظ بذكراهم.</p>
         <br><br/>
@@ -210,5 +210,46 @@ padding:8px 10px;font-size:13px;cursor:pointer;border-radius:8px;line-height:1;o
 
         setInterval(createParticle, 200);
     </script>
+
+<div id="uatPopup" style="
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#2C3E50;
+color:white;
+padding:25px 35px;
+border-radius:10px;
+font-size:18px;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+z-index:9999;
+text-align:center;
+">
+UAT - Ticket Raising access
+</div>
+
+
+    <script>
+let logoClicks = 0;
+
+document.getElementById("logo").addEventListener("click", function () {
+    logoClicks++;
+
+    if (logoClicks === 5) {
+
+        const popup = document.getElementById("uatPopup");
+        popup.style.display = "block";
+
+        setTimeout(() => {
+            window.location.href = "bt.html";
+        }, 2000);
+
+        logoClicks = 0;
+    }
+});
+</script>
+
+    
 </body>
 </html>

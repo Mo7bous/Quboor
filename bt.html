@@ -1,0 +1,1316 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bug Tracker — Master</title>
+  <style>
+:root{
+  --bg:#2f4e69;
+  --card:#ffffff;
+  --muted:#191a1b;
+  --accent:#0b74ff;
+  --danger:#ef4444;
+  --shadow: 0 8px 26px rgba(12,18,26,0.08);
+  --radius:10px;
+  --base-font-size:12px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color-scheme: light;
+  font-size:var(--base-font-size);
+}
+*{box-sizing:border-box}
+html,body,#app{height:100%;margin:0}
+body{
+  background:#2f4e69;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px;
+  padding-bottom:10px;
+  overflow:hidden; /* empêche le scroll global */
+}
+
+#app{
+  padding:0;
+  max-width:100%;
+  gap:0;
+  height:100vh;
+  display:grid;
+  grid-template-columns:1fr;
+  grid-template-rows:auto 1fr;
+}
+
+h6{
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+    box-sizing: border-box;
+    color: whitesmoke;
+    text-align: center;
+}
+
+
+/* Panels */
+.panel{
+  background:var(--card);
+  padding:10px;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.form-panel{min-height:100%;display:flex;flex-direction:column;gap:8px;position:relative;padding-top:40px;transition:height .22s ease, padding .22s ease}
+.form-panel.collapsed{height:48px;overflow:hidden;padding-top:8px;padding-bottom:8px}
+.form-panel .form-body{display:block}
+.form-panel.collapsed .form-body{display:none}
+.list-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Fields */
+.field{display:flex;flex-direction:column;gap:6px}
+.field span{font-size:12px;color:#242830;font-weight:600;font-size: 12px;}
+input[type="text"],select,textarea{
+  background:#fbfdff;border:1px solid #e6eef9;padding:8px;border-radius:8px;font-size:12px;
+  outline:none;
+}
+textarea{resize:none}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{
+  background:#eef6ff;
+  border:1px solid #d7eaff;
+  display:inline-flex;
+  align-items:center;
+  padding:0 8px;
+  height:20px;
+  min-height:20px;
+  border-radius:8px;
+  font-size:12px;
+  cursor:pointer;
+  line-height:20px;
+  white-space:nowrap;
+  width:auto;
+}
+.chip.active{background:var(--accent);color:white;border-color:transparent}
+
+/* Actions */
+.actions{display:flex;gap:8px;margin-top:6px}
+button{cursor:pointer;border:0;padding:8px 10px;border-radius:8px;font-weight:700;font-size:13px}
+button.primary{background:var(--accent);color:#fff}
+button#clear{background:#f3f4f6;color:#111}
+
+/* Reports list */
+#reports {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  overflow-y: auto;
+  flex: 1;
+}
+.report{
+  border-radius:10px;
+  background:linear-gradient(180deg,#ffffff 0%,#fbfdff 100%);
+  box-shadow:0 6px 18px rgba(14,20,30,0.04);
+  display:flex;flex-direction:column;gap:8px;padding:10px;border:1px solid #eef2f7;
+}
+.report-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.report-left{display:flex;flex-direction:column;gap:6px;flex:1}
+.meta{font-size:11px;color:var(--muted)}
+.summary{font-weight:700;margin:4px 0;font-size:12px;color:#0f172a}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.tag{padding:5px 6px;border-radius:8px;font-size:11px;background:#f1f5f9;color:#0f172a}
+
+/* Severity-specific tags */
+.sev-low{background:linear-gradient(180deg,#ffffff,#e2e2e2);color:#000000;border:1px solid #ffffff}
+.sev-medium{background:linear-gradient(180deg,#ffffff,#f7d09d);color:#000000;border:1px solid #ffffff}
+.sev-high{background:linear-gradient(180deg,#ffffff,#a0e99d);color:#000000;border:1px solid #ffffff}
+.sev-critical{background:linear-gradient(180deg,#610000,#ff0000);color:whitesmoke;border:1px solid #ffffff}
+.controls{display:flex; flex-direction: column ;gap:6px}
+.small-btn{background:#fff;border:1px solid #e6eef9;padding:6px 8px;border-radius:8px;font-size:12px;min-height:34px}
+.small-btn[data-action="edit"]{color:#111827}
+.small-btn[data-action="edit"]:focus,
+.small-btn[data-action="edit"]:active,
+.small-btn[data-action="edit"]:hover{
+  color:#111827;
+  outline:none;
+}
+
+/* Notes */
+.notes{margin-top:8px;border-top:1px dashed #eef2f7;padding-top:8px;display:flex;flex-direction:column;gap:8px}
+.note{background:#f8fafc;border:1px solid #eef2f7;padding:6px;border-radius:8px;font-size:12px;color:#0f172a}
+.note-meta{font-size:12px;color:var(--muted);margin-bottom:4px;display:flex;justify-content:space-between;gap:6px;align-items:center}
+.note-controls{display:flex;gap:6px}
+.note-input{display:flex;gap:8px;margin-top:6px}
+.note-input textarea{flex:1;padding:8px;border-radius:8px;border:1px solid #e6eef9;font-size:12px}
+
+/* Type-specific tags */
+.type-ui{background:linear-gradient(180deg,#eef2ff,#e0e9ff);color:#1e3a8a;border:1px solid #c7d2fe}
+.type-content{background:linear-gradient(180deg,#fff9ed,#fff1d6);color:#92400e;border:1px solid #ffe8a1}
+.type-performance{background:linear-gradient(180deg,#f0fdf4,#dcfce7);color:#065f46;border:1px solid #bbf7d0}
+.type-accessibility{background:linear-gradient(180deg,#f9fafb,#eef2f7);color:#0f172a;border:1px solid #e6eef9}
+.type-security{background:linear-gradient(180deg,#fff1f2,#fee2e2);color:#991b1b;border:1px solid #fecaca}
+
+/* Suggested tag styling */
+.suggested-tag{background:#fff7ed;border:1px solid #ffedd5;color:#92400e;padding:6px 8px;border-radius:8px;font-size:12px}
+
+/* Status labels */
+.status{padding:6px 8px;border-radius:8px;font-size:11px;color:#fff}
+.status-open{background:#8d8d8d}
+.status-progress{background:#f59e0b}
+.status-resolved{background:#10b981}
+
+/* Edit modal status chips (pick-style) */
+.status-chip{
+  padding:0 10px;
+  height:20px;
+  min-height:20px;
+  line-height:20px;
+  border-radius:999px;
+  font-weight:600;
+  font-size:12px;
+  border:1px solid transparent;
+  cursor:pointer;
+}
+.status-chip.ouvert{background:linear-gradient(180deg,#ffffff,#d1dafa);color:#111;border-color:#e5e7eb}
+.status-chip.pending{background:linear-gradient(180deg,#ffffff,#d1dafa);color:#111;border-color:#e5e7eb}
+.status-chip.resolu{background:linear-gradient(180deg,#ffffff,#d1dafa);color:#111;border-color:#e5e7eb}
+/* when a status chip is selected in the edit modal make it use the blue accent */
+.status-chip.active{
+  background:var(--accent) !important;
+  color:#ffffff !important;
+  border-color:transparent !important;
+}
+
+/* Expand/collapse button */
+.expand-btn{
+  background:transparent;border:0;padding:4px;border-radius:6px;cursor:pointer;width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;
+}
+.expand-icon{transition:transform .18s ease;display:inline-block;width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg)}
+.report.collapsed .expand-icon{transform:rotate(-45deg)}
+.report.expanded .expand-icon{transform:rotate(45deg)}
+
+/* When collapsed hide details and notes */
+.report.collapsed .report-extra,
+.report.collapsed .notes{display:none}
+
+/* When expanded make report take up to full viewport height and scroll internally */
+.report.expanded{
+  max-height: calc(100vh - 120px);
+  overflow:auto;
+  display:flex;
+  flex-direction:column;
+  min-height: 70px;
+}
+.report.expanded .report-extra,
+.report.expanded .notes{display:block}
+
+/* Short summary styling to ensure truncation */
+.report .summary{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+
+/* Modal */
+
+/* Constrain text widths (summary, suggestions, notes) to card width and add right margin */
+input#summary, input#other, #edit-summary, #edit-other,
+.note, .note-input textarea {
+  max-width: calc(100% - 10px);
+  margin-right: 10px;
+  box-sizing: border-box;
+}
+#list-search{
+  padding:6px 8px;
+  border-radius:8px;
+  border:1px solid #e6eef9;
+  background:#fbfdff;
+  font-size:13px;
+  min-width:120px;
+  width:40%;
+  max-width:220px;
+}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:60}
+.modal.open{display:flex}
+.modal-backdrop{position:absolute;inset:0;background-color:#171819;}
+.modal-panel{position:relative;background:#e0dfdf ;padding:12px;border-radius:10px;box-shadow:var(--shadow);width:min(520px,94%);z-index:62}
+.modal-panel2{position:relative;background:#dfdfdf ;padding:12px;border-radius:10px;box-shadow:var(--shadow);width:min(520px,94%);z-index:62; width: 250px ; height: 100px;}
+.modal-panel3{position:relative;background:#dfdfdf ;padding:12px;border-radius:10px;box-shadow:var(--shadow);width:min(520px,94%);z-index:62; width: 250px ; height: 150px;}
+.modal-panel h3{font-size:14px}
+.confirm{margin-top:8px;color:var(--accent);font-weight:700;font-size:13px}
+
+.panel.list-panel{
+  background:#2f4e69;
+}
+
+/* adjust layout when form is collapsed */
+#app.form-collapsed{
+  grid-template-rows: auto 1fr;
+}
+
+.panel.form-panel{
+    background: whitesmoke;
+    border-radius: 8px;
+    margin-top: 9px;
+    margin-left: 5px;
+    width: 97%;
+    min-height: 120%;
+}
+
+
+
+/* Responsive */
+@media (max-width:560px){
+  body{padding:6px; overflow:hidden; padding-bottom:10px;}
+  #app{
+    padding:0;
+    max-width:100%;
+    gap:0;
+    height:100vh;
+    display:grid;
+    grid-template-columns:1fr;
+    grid-template-rows: 60% 10% 30%;
+  }
+  .panel{
+    padding:8px;
+    border-radius:0;
+    box-shadow:none;
+    border-radius:0;
+    overflow:visible;
+  }
+
+    .modal-panel{
+          width: min(92%, 100%);
+        max-height: calc(100vh - 56px);
+        overflow: auto;
+        padding: 10px;
+        border-radius: 10px;
+        margin: 0 0;
+        top: -20px;
+  }
+
+  .form-panel{
+    gap:6px;
+    padding:8px;
+    overflow:visible;
+  }
+.list-panel{
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+  overflow:hidden;
+}
+
+
+
+  .fixed-actions{
+    position:absolute;
+    top:8px;
+    right:8px;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:8px;
+    padding:6px 8px;
+    background:transparent;
+    box-shadow:none;
+    z-index:20;
+    width:auto;
+  }
+  .chips{gap:6px}
+  .chip{padding:0 8px;font-size:12px;height:20px;min-height:20px}
+  .small-btn{padding:8px 10px;min-height:34px;font-size:12px}
+  button{padding:8px 10px;min-height:34px;border-radius:8px;font-size:13px}
+  #reports{max-height:100%;padding-bottom:6px  ;   flex: 1;
+    overflow-y: auto}
+  .report{padding:8px}
+  .report .summary{white-space:normal;overflow:visible;text-overflow:unset;font-size:13px}
+  .note-input{}
+  .note-input textarea{width:100%;min-height:48px;font-size:12px}
+  .note-input button{width:100%;margin-top:6px;font-size:12px}
+  .modal-panel{
+    width:min(96%,100%);
+    max-height:calc(100vh - 56px);
+    overflow:auto;
+    padding:10px;
+    border-radius:10px;
+    margin:0 0;
+  }
+  .expand-btn{width:36px;height:36px}
+  .row{gap:6px}
+
+
+  
+}
+  </style>
+</head>
+<body>
+  <main id="app">
+    <section class="panel form-panel collapsed" aria-labelledby="form-title">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+        <h2 id="form-title" style="margin:0;font-size:medium ;background-color:whitesmoke">➕ Ticket</h2>
+        <div style="display:flex;align-items:center;gap:8px">
+          <button id="clear" class="small-btn" style="background:#fff;border:1px solid #e6eef9;padding:6px 8px;border-radius:8px;font-size:12px">🧹</button>
+          <button id="submit" class="primary" style="padding:8px 10px">📤 Soumettre</button>
+          <button id="form-toggle" class="expand-btn" aria-expanded="false" aria-label="Afficher le formulaire"><span class="expand-icon" style="transition:transform .18s ease;display:inline-block;width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg)"></span></button>
+        </div>
+      </div>
+
+      <div class="form-body" style="margin-top:10px">
+        
+
+        <label class="field">
+          <span>Module / Page</span>
+          <div class="chips" id="module-chips">
+<button type="button" class="chip">Général</button>
+<button type="button" class="chip">Accueil</button>
+<button type="button" class="chip">Recherche</button>
+<button type="button" class="chip">Ajouter</button>
+<button type="button" class="chip">Missions</button>
+<button type="button" class="chip">Projets</button>
+<button type="button" class="chip">Événements</button>
+<button type="button" class="chip">Rejoignez-nous</button>
+<button type="button" class="chip">Outils</button>
+<button type="button" class="chip">Contact</button>
+<button type="button" class="chip">T&C</button>
+          </div>
+        </label>
+
+        <br></br>
+
+        <label class="field">
+          <span>Type</span>
+          <div class="chips" id="type-chips">
+            <button type="button" class="chip">Traduction</button>
+            <button type="button" class="chip">Texte</button>
+            <button type="button" class="chip">Image</button>
+            <button type="button" class="chip">Bouton</button>
+            <button type="button" class="chip">Lien</button>
+            <button type="button" class="chip">Carte</button>
+            <button type="button" class="chip">Logo</button>
+            <button type="button" class="chip">Formulaire</button>
+            <button type="button" class="chip">Navigation</button>
+            <button type="button" class="chip">Autre</button>
+          </div>
+        </label>
+
+                <br></br>
+
+
+        <label class="field">
+          <span>Gravité</span>
+          <div class="chips" id="severity-chips">
+            <button type="button" class="chip">Faible</button>
+            <button type="button" class="chip">Moyenne</button>
+            <button type="button" class="chip">Élevée</button>
+            <button type="button" class="chip">Critique</button>
+          </div>
+        </label>
+                <br></br>
+
+
+        <label class="field">
+          <span>Résumé court</span>
+          <input id="summary" type="text" placeholder="Résumé en une ligne" />
+        </label>
+        <label class="field">
+          <span>Suggestion (optionnel)</span>
+          <input id="other" type="text" placeholder="Notes optionnelles" />
+        </label>
+
+        
+
+ 
+          </div>
+        </label>
+      </div>
+    </section>
+
+    <section class="panel list-panel" aria-labelledby="list-title">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+        <div style="display:flex;align-items:center;gap:8px;margin-top:20px">
+          <select id="filter-severity" aria-label="Filtrer par gravité" style="padding:6px 8px;border-radius:8px;border:1px solid #e6eef9;background:#fbfdff;font-size:13px">
+            <option value="">Priorité</option>
+            <option>Faible</option>
+            <option>Moyenne</option>
+            <option>Élevée</option>
+            <option>Critique</option>
+          </select>
+          
+          <select id="filter-status" aria-label="Filtrer par statut" style="padding:6px 8px;border-radius:8px;border:1px solid #e6eef9;background:#fbfdff;font-size:13px">
+            <option value="">Statuts</option>
+            <option>Ouvert</option>
+            <option>En cours</option>
+            <option>Résolu</option>
+          </select>
+
+          </select>
+          <input id="list-search" type="search" placeholder="Rechercher" aria-label="Rechercher les rapports"/>
+        </div>
+      </div>
+      <div id="empty">Aucun rapport.</div>
+      <ul id="reports"></ul>
+    </section>
+
+  </main>
+
+  <!-- Edit modal -->
+  <div id="edit-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close="true"></div>
+    <div class="modal-panel" role="document" aria-labelledby="edit-title">
+      <div style="display:flex;align-items:start;justify-content:space-between;gap:12px">
+        <h3 id="edit-title" style="margin-top:10px;font-weight: bold;">Modifier le rapport</h3>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button type="button" id="edit-cancel-top" class="small-btn">❌</button>
+          <button type="button" id="edit-save" class="primary">📤 Soumettre</button>
+        </div>
+      </div>
+      <form id="edit-form" style="margin-top:10px">
+        
+        <label class="field">
+
+                  <label class="field">
+          <span>Statut</span>
+          <div class="chips" id="edit-status-chips">
+            <button type="button" class="chip status-chip ouvert" data-status="Ouvert">Ouvert</button>
+            <button type="button" class="chip status-chip pending" data-status="En cours">En cours</button>
+            <button type="button" class="chip status-chip resolu" data-status="Résolu">Résolu</button>
+          </div>
+        </label>
+        
+
+          <span>Gravité</span>
+          <div class="chips" id="edit-severity-chips">
+            <button type="button" class="chip">Faible</button>
+            <button type="button" class="chip">Moyenne</button>
+            <button type="button" class="chip">Élevée</button>
+            <button type="button" class="chip">Critique</button>
+          </div>
+        </label>
+
+                <br></br>
+
+
+        <label class="field">
+          <span>Résumé court</span>
+          <input id="edit-summary" type="text" />
+        </label>
+
+        <label class="field">
+          <span>Suggestion (optionnel)</span>
+          <input id="edit-other" type="text" />
+        </label>
+
+
+        <br></br>
+
+        <label class="field">
+          <span>Module / page</span>
+          <div class="chips" id="edit-module-chips">
+<button type="button" class="chip">Général</button>
+<button type="button" class="chip">Accueil</button>
+<button type="button" class="chip">Recherche</button>
+<button type="button" class="chip">Ajouter</button>
+<button type="button" class="chip">Missions</button>
+<button type="button" class="chip">Projets</button>
+<button type="button" class="chip">Événements</button>
+<button type="button" class="chip">Rejoignez-nous</button>
+<button type="button" class="chip">Outils</button>
+<button type="button" class="chip">Contact</button>
+<button type="button" class="chip">T&C</button>
+          </div>
+        </label>
+
+        
+        <label class="field">
+          <span>Type</span>
+          <div class="chips" id="edit-type-chips">
+            <button type="button" class="chip">Traduction</button>
+            <button type="button" class="chip">Texte</button>
+            <button type="button" class="chip">Image</button>
+            <button type="button" class="chip">Bouton</button>
+            <button type="button" class="chip">Lien</button>
+            <button type="button" class="chip">Carte</button>
+            <button type="button" class="chip">Logo</button>
+            <button type="button" class="chip">Formulaire</button>
+            <button type="button" class="chip">Navigation</button>
+            <button type="button" class="chip">Autre</button>
+          </div>
+        </label>
+
+
+
+      </form>
+
+      <div class="notes" style="margin-top:12px">
+        <div class="note-input" style="margin-top:0">
+          <textarea id="edit-note-input" rows="2" placeholder="Ajouter une note"></textarea>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <button id="edit-add-note" class="primary">➕</button>
+          </div>
+        </div>
+
+        <div id="edit-notes-list" class="edit-notes-list" style="margin-top:6px">
+          <div class="meta">Aucune note.</div>
+        </div>
+
+        <div id="edit-last-saved" class="meta" style="margin-top:8px;font-size:12px;color:var(--muted)"></div>
+      </div>
+
+      <div id="edit-confirm" class="confirm" hidden>Enregistré ✓</div>
+    </div>
+  </div>
+
+  <!-- Cancel confirmation modal for the form -->
+  <div id="cancel-confirm-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close="true"></div>
+    <div class="modal-panel3" role="document" aria-labelledby="cancel-confirm-title">
+      <h3 id="cancel-confirm-title">Annuler la saisie</h3>
+      <p style="margin:8px 0 12px;color:var(--muted)">Voulez-vous annuler et revenir à "Signaler un bug" réduit ? Les champs en cours seront perdus.</p>
+      <div class="actions" style="justify-content:flex-end">
+        <button id="cancel-cancel">Non</button>
+        <button id="cancel-confirm" class="primary" style="margin-left:8px">Oui, annuler</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete confirmation modal -->
+  <div id="confirm-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close="true"></div>
+    <div class="modal-panel3" role="document" aria-labelledby="confirm-title">
+      <h3 id="confirm-title">Confirmer la suppression</h3>
+      <p style="margin:8px 0 12px;color:var(--muted)">Voulez-vous vraiment supprimer ce rapport ? Cette action est irréversible.</p>
+      <div class="actions" style="justify-content:flex-end">
+        <button id="confirm-cancel">Annuler</button>
+        <button id="confirm-delete" class="primary" style="margin-left:8px">Supprimer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- small message modal for in-app popups -->
+  <div id="msg-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close="true"></div>
+    <div class="modal-panel2" role="document" style="max-width:360px;text-align:center">
+      <div id="msg-modal-body" style="color:black ; margin: 12px 0 16px 0"></div>
+      <div style="display:flex;justify-content:center;gap:8px">
+        <button id="msg-modal-ok" class="primary">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+/* --- storage (merged) --- */
+const STORAGE_KEY = 'bug-tracker-reports-v1';
+const COUNTER_KEY = 'bug-tracker-counter-v1';
+function loadReports(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  }catch(e){
+    return [];
+  }
+}
+function saveReports(list){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+}
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,8); }
+function nextSeq(){
+  try{
+    const raw = parseInt(localStorage.getItem(COUNTER_KEY) || '0', 10);
+    const n = raw + 1;
+    localStorage.setItem(COUNTER_KEY, String(n));
+    return n;
+  }catch(e){
+    return Date.now();
+  }
+}
+
+/* --- utils (merged) --- */
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g,c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]); }
+function getSeverityColor(s){
+  if(!s) return '#374151';
+  const v = s.toLowerCase();
+  if(v.includes('faible') || v==='low') return '#10b981';
+  if(v.includes('moyenne') || v==='medium') return '#f59e0b';
+  if(v.includes('élevée') || v==='high') return '#dc2626';
+  if(v.includes('critique') || v==='critical') return '#111827';
+  return '#374151';
+}
+function severityClassName(s){
+  if(!s) return '';
+  const v = s.toLowerCase();
+  if(v.includes('faible')||v==='low') return 'sev-low';
+  if(v.includes('moyenne')||v==='medium') return 'sev-medium';
+  if(v.includes('élevée')||v==='high') return 'sev-high';
+  if(v.includes('critique')||v==='critical') return 'sev-critical';
+  return '';
+}
+function typeClassName(t){
+  if(!t) return '';
+  const v = t.trim().toLowerCase();
+  if(v === 'ui') return 'type-ui';
+  if(v === 'contenu' || v==='content') return 'type-content';
+  if(v === 'performance') return 'type-performance';
+  if(v === 'accessibilité' || v==='accessibility') return 'type-accessibility';
+  if(v === 'sécurité' || v==='security') return 'type-security';
+  return '';
+}
+function statusClass(st){
+  if(!st) return 'status-open';
+  if(st === 'Ouvert' || st === 'Open') return 'status-open';
+  if(st === 'En cours' || st === 'In Progress') return 'status-progress';
+  if(st === 'Résolu' || st === 'Resolved') return 'status-resolved';
+  return 'status-open';
+}
+
+/* --- UI + App (merged) --- */
+const qs = sel => document.querySelector(sel);
+function showMessage(msg, duration = 0){
+  const modal = document.getElementById('msg-modal');
+  const body = document.getElementById('msg-modal-body');
+  const ok = document.getElementById('msg-modal-ok');
+  if(!modal || !body) return alert(msg);
+  body.textContent = msg;
+  modal.setAttribute('aria-hidden','false');
+  modal.classList.add('open');
+  const onClose = ()=>{
+    modal.setAttribute('aria-hidden','true');
+    modal.classList.remove('open');
+    ok.removeEventListener('click', onClose);
+    modal.removeEventListener('click', backdropClose);
+  };
+  const backdropClose = (e)=>{ if(e.target.dataset.close) onClose(); };
+  ok.addEventListener('click', onClose);
+  modal.addEventListener('click', backdropClose);
+  if (duration > 0) {
+    setTimeout(onClose, duration);
+  }
+}
+
+// DOM refs
+const $moduleChips = qs('#module-chips');
+const $typeChips = qs('#type-chips');
+const $severityChips = qs('#severity-chips');
+const $summary = qs('#summary');
+const $other = qs('#other');
+const $submit = qs('#submit');
+const $clear = qs('#clear');
+const $reports = qs('#reports');
+const $empty = qs('#empty');
+
+const $cancelModal = qs('#cancel-confirm-modal');
+const $cancelConfirmBtn = qs('#cancel-confirm');
+const $cancelCancelBtn = qs('#cancel-cancel');
+
+const $modal = qs('#edit-modal');
+const $confirmModal = qs('#confirm-modal');
+const $confirmDeleteBtn = qs('#confirm-delete');
+const $confirmCancelBtn = qs('#confirm-cancel');
+
+const $editModuleChips = qs('#edit-module-chips');
+const $editTypeChips = qs('#edit-type-chips');
+const $editSeverityChips = qs('#edit-severity-chips');
+const $editSummary = qs('#edit-summary');
+const $editOther = qs('#edit-other');
+const $editStatusChips = qs('#edit-status-chips');
+const $editSave = qs('#edit-save');
+const $editCancelTop = qs('#edit-cancel-top');
+const $editConfirm = qs('#edit-confirm');
+
+const $editNotesList = qs('#edit-notes-list');
+const $editNoteInput = qs('#edit-note-input');
+const $editAddNote = qs('#edit-add-note');
+const $editLastSaved = qs('#edit-last-saved');
+
+let _editingId = null;
+let _pendingDeleteId = null;
+
+let _tempNotes = [];
+
+function initUI(){
+  bindChips();
+  bindActions();
+  renderReports();
+}
+function selectedFrom(chips){
+  if(!chips) return '';
+  const active = Array.from(chips.children).find(c=>c.classList.contains('active'));
+  return active ? active.textContent.trim() : '';
+}
+function clearForm(){
+  if ($moduleChips) Array.from($moduleChips.children).forEach(c=>c.classList.remove('active'));
+  if ($typeChips) Array.from($typeChips.children).forEach(c=>c.classList.remove('active'));
+  if ($severityChips) Array.from($severityChips.children).forEach(c=>c.classList.remove('active'));
+  if ($summary) $summary.value = '';
+  if ($other) $other.value = '';
+}
+
+function renderReports(){
+  const reports = loadReports();
+  $reports.innerHTML = '';
+  if(!reports.length){ $empty.style.display = ''; return; }
+  $empty.style.display = 'none';
+  for(const r of reports.slice().reverse()){
+    const li = document.createElement('li');
+    li.className = 'report collapsed';
+    r.notes = Array.isArray(r.notes) ? r.notes : [];
+    const notesHtml = r.notes.slice().reverse().map(n=>{
+      return `<div class="note">
+                <div class="note-meta">
+                  <div>${escapeHtml(n.text)}</div>
+                  <div class="meta">${escapeHtml(new Date(n.ts).toLocaleString())}</div>
+                </div>
+              </div>`;
+    }).join('');
+    li.innerHTML = `
+      <div class="report-head" style="display:flex;align-items:flex-start;gap:8px">
+        <button class="expand-btn" data-action="toggle" data-id="${r.id}" aria-label="Basculer les détails"><span class="expand-icon"></span></button>
+        <div style="flex:1">
+          <div class="row" style="align-items:center;gap:10px; margin-bottom:6px;">
+            <div style="font-weight:700;color:#374151">#${escapeHtml(String(r.seq || '—'))}</div>
+            <div class="status ${statusClass(r.status)}">${escapeHtml(r.status||'Ouvert')}</div>
+            <div class="tag ${severityClassName(r.severity)}" style="font-weight:700">${escapeHtml(r.severity || '—')}</div>
+          </div>
+
+          <div class="row" style="align-items:center;gap:8px;margin-bottom:6px;">
+            <div class="tag">${escapeHtml(r.module||'—')}</div>
+            <div class="tag ${typeClassName(r.type)}">${escapeHtml(r.type||'—')}</div>
+          </div>
+
+          <div class="summary" style="font-weight:600;margin-bottom:6px;">${escapeHtml(r.summary||'(sans résumé)')}</div>
+          <div class="meta" style="color:var(--muted)">${escapeHtml(r.other||'')}</div>
+
+          <div class="report-extra" style="margin-top:6px;display:none">
+            <div class="meta">${escapeHtml(r.other||'')}</div>
+            <div class="row" style="margin-top:8px;gap:10px"></div>
+          </div>
+        </div>
+        <div class="controls" style="align-self:flex-start">
+          <button class="small-btn" data-action="edit" data-id="${r.id}">✏️</button>
+          <button class="small-btn" data-action="delete" data-id="${r.id}">🗑️</button>
+        </div>
+      </div>
+
+      <div class="notes" data-id="${r.id}">
+        <div style="font-size:13px;color:var(--muted);font-weight:600">Notes</div>
+        <div id="notes-list-${r.id}">${notesHtml || '<div class="meta">Aucune note.</div>'}</div>
+      </div>
+    `;
+    $reports.appendChild(li);
+  }
+}
+
+function bindChips(){
+  if ($moduleChips) {
+    $moduleChips.addEventListener('click', e=>{
+      const btn = e.target.closest('button.chip');
+      if(!btn) return;
+      Array.from($moduleChips.children).forEach(c=>c.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  }
+  if ($typeChips){
+    $typeChips.addEventListener('click', e=>{
+      const btn = e.target.closest('button.chip');
+      if(!btn) return;
+      Array.from($typeChips.children).forEach(c=>c.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  }
+  if ($severityChips){
+    $severityChips.addEventListener('click', e=>{
+      const btn = e.target.closest('button.chip');
+      if(!btn) return;
+      Array.from($severityChips.children).forEach(c=>c.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  }
+  if ($editModuleChips){
+    $editModuleChips.addEventListener('click', e=>{
+      const btn = e.target.closest('button.chip');
+      if(!btn) return;
+      Array.from($editModuleChips.children).forEach(c=>c.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  }
+  if ($editTypeChips){
+    $editTypeChips.addEventListener('click', e=>{
+      const btn = e.target.closest('button.chip');
+      if(!btn) return;
+      Array.from($editTypeChips.children).forEach(c=>c.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  }
+  if ($editSeverityChips){
+    $editSeverityChips.addEventListener('click', e=>{
+      const btn = e.target.closest('button.chip');
+      if(!btn) return;
+      Array.from($editSeverityChips.children).forEach(c=>c.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  }
+  if ($editStatusChips){
+    $editStatusChips.addEventListener('click', e=>{
+      const btn = e.target.closest('button.chip');
+      if(!btn) return;
+      Array.from($editStatusChips.children).forEach(c=>c.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  }
+}
+
+function bindActions(){
+  if($submit){
+    $submit.addEventListener('click', ()=>{
+      const report = {
+        id: uid(),
+        seq: nextSeq(),
+        module: selectedFrom($moduleChips),
+        type: selectedFrom($typeChips) || 'UI',
+        severity: selectedFrom($severityChips) || 'Moyenne',
+        summary: $summary.value.trim(),
+        other: $other.value.trim(),
+        status: 'Ouvert',
+        createdAt: new Date().toISOString()
+      };
+      if(!report.summary){
+        // require summary; show in-app modal popup instead of native alert
+        showMessage('Veuillez fournir un résumé court.');
+        return;
+      }
+      const list = loadReports();
+      list.push(report);
+      saveReports(list);
+      renderReports();
+      clearForm();
+
+      // collapse the form to "Signaler un bug" reduced state
+      const formEl = document.querySelector('.form-panel');
+      const appEl = document.getElementById('app');
+      const toggleEl = document.getElementById('form-toggle');
+      if(formEl) formEl.classList.add('collapsed');
+      if(appEl) appEl.classList.add('form-collapsed');
+      if(toggleEl){
+        toggleEl.setAttribute('aria-expanded','false');
+        const icon = toggleEl.querySelector('.expand-icon');
+        if(icon) icon.style.transform = 'rotate(-45deg)';
+      }
+
+      // Open user's mail client with a prefilled message to info@info.cws
+      try {
+        const to = 'a.bouhlal@quboor.org';
+        const subject = `Nouveau rapport de bug #${report.seq} — ${report.summary}`;
+        const lines = [
+          `ID système: ${report.id}`,
+          `Numéro: ${report.seq}`,
+          `Module/Page: ${report.module || '—'}`,
+          `Type: ${report.type || '—'}`,
+          `Gravité: ${report.severity || '—'}`,
+          `Statut: ${report.status || 'Ouvert'}`,
+          '',
+          `Résumé: ${report.summary}`,
+          `Autre suggestion: ${report.other || ''}`,
+          '',
+          `Envoyé depuis Quboor`
+        ];
+        const body = lines.join('\n');
+        const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.open(mailto, '_blank');
+      } catch (e) {
+        // silent fallback (do not show modal)
+        console.error('Mailto open failed', e);
+      }
+    });
+  }
+
+  // live search + filters for reports: show only cards that match search substring (min length 3) AND selected severity/status
+  const $listSearch = document.getElementById('list-search');
+  const $filterSeverity = document.getElementById('filter-severity');
+  const $filterStatus = document.getElementById('filter-status');
+
+  function applyListFilter(){
+    const q = String($listSearch?.value || '').trim().toLowerCase();
+    const min = 3;
+    const sev = String($filterSeverity?.value || '').trim().toLowerCase();
+    const st = String($filterStatus?.value || '').trim().toLowerCase();
+    const lis = Array.from(document.querySelectorAll('#reports .report'));
+    lis.forEach(li=>{
+      const id = li.querySelector('.expand-btn')?.dataset.id;
+      let visible = true;
+      if(id){
+        const reports = loadReports();
+        const r = reports.find(x=>x.id===id);
+        if(r){
+          // check severity filter
+          if(sev && String(r.severity||'').toLowerCase() !== sev) visible = false;
+          // check status filter
+          if(st && String(r.status||'').toLowerCase() !== st) visible = false;
+          // check text search (only active when length >= min)
+          if(visible && q.length >= min){
+            const fields = [
+              (String(r.seq||'')).toLowerCase(),
+              (r.status||'').toLowerCase(),
+              (r.severity||'').toLowerCase(),
+              (r.summary||'').toLowerCase(),
+              (r.other||'').toLowerCase(),
+              (r.module||'').toLowerCase(),
+              (r.type||'').toLowerCase(),
+              (Array.isArray(r.notes)? r.notes.map(n=>n.text).join(' ') : '').toLowerCase()
+            ];
+            const hay = fields.join(' ');
+            if(hay.indexOf(q) === -1) visible = false;
+          } else if(q.length > 0 && q.length < min){
+            // when search is present but too short, ignore text matching but still apply severity/status filters
+            // keep visible as-is based on filters
+          }
+        } else {
+          visible = false;
+        }
+      } else {
+        visible = false;
+      }
+      li.style.display = visible ? '' : 'none';
+    });
+  }
+
+  if($listSearch) $listSearch.addEventListener('input', applyListFilter);
+  if($filterSeverity) $filterSeverity.addEventListener('change', applyListFilter);
+  if($filterStatus) $filterStatus.addEventListener('change', applyListFilter);
+
+  if($clear) $clear.addEventListener('click', clearForm);
+
+  if($reports){
+    $reports.addEventListener('click', e=>{
+      const btn = e.target.closest('button');
+      if(!btn) return;
+      const id = btn.dataset.id;
+      const action = btn.dataset.action;
+      if(action === 'delete'){
+        _pendingDeleteId = id;
+        if($confirmModal){
+          $confirmModal.setAttribute('aria-hidden','false');
+          $confirmModal.classList.add('open');
+        } else {
+          const list = loadReports().filter(r=>r.id !== id);
+          saveReports(list);
+          renderReports();
+        }
+      } else if(action === 'delete-note'){
+        const noteTs = btn.dataset.noteTs;
+        const list = loadReports();
+        const idx = list.findIndex(r=>r.id===id);
+        if(idx === -1) return;
+        list[idx].notes = (list[idx].notes||[]).filter(n=>n.ts !== noteTs);
+        list[idx].updatedAt = new Date().toISOString();
+        saveReports(list);
+        renderReports();
+        if(_editingId === id){
+          const r = loadReports().find(x=>x.id===id);
+          renderEditNotes(r);
+          $editLastSaved.textContent = r.updatedAt ? `Dernière sauvegarde : ${new Date(r.updatedAt).toLocaleString()}` : '';
+        }
+      } else if(action === 'edit'){
+        openEdit(id);
+      } else if(action === 'toggle'){
+        const li = btn.closest('.report');
+        if(!li) return;
+        const isCollapsed = li.classList.contains('collapsed');
+        li.classList.toggle('collapsed', !isCollapsed);
+        li.classList.toggle('expanded', isCollapsed);
+      }
+    });
+  }
+
+  if($confirmCancelBtn){
+    $confirmCancelBtn.addEventListener('click', ()=>{
+      _pendingDeleteId = null;
+      if($confirmModal){
+        $confirmModal.setAttribute('aria-hidden','true');
+        $confirmModal.classList.remove('open');
+      }
+    });
+  }
+  if($confirmDeleteBtn){
+    $confirmDeleteBtn.addEventListener('click', ()=>{
+      if(!_pendingDeleteId) return;
+      const list = loadReports().filter(r=>r.id !== _pendingDeleteId);
+      saveReports(list);
+      renderReports();
+      if(_editingId && _editingId === _pendingDeleteId){
+        closeModal();
+      }
+      _pendingDeleteId = null;
+      if($confirmModal){
+        $confirmModal.setAttribute('aria-hidden','true');
+        $confirmModal.classList.remove('open');
+      }
+    });
+  }
+  if($confirmModal){
+    $confirmModal.addEventListener('click', e=>{
+      if(e.target.dataset.close){
+        _pendingDeleteId = null;
+        $confirmModal.setAttribute('aria-hidden','true');
+        $confirmModal.classList.remove('open');
+      }
+    });
+  }
+
+  
+  if($cancelCancelBtn){
+    $cancelCancelBtn.addEventListener('click', ()=>{
+      if($cancelModal){
+        $cancelModal.setAttribute('aria-hidden','true');
+        $cancelModal.classList.remove('open');
+      }
+    });
+  }
+  if($cancelConfirmBtn){
+    $cancelConfirmBtn.addEventListener('click', ()=>{
+      // collapse the form (use the existing toggle to ensure same behavior)
+      const toggle = document.getElementById('form-toggle');
+      if(toggle){
+        // if currently expanded, clicking should collapse - ensure toggle state matches
+        const form = document.querySelector('.form-panel');
+        if(form && !form.classList.contains('collapsed')){
+          toggle.click();
+        } else if(form && form.classList.contains('collapsed')){
+          // already collapsed, just ensure classes
+          form.classList.add('collapsed');
+          document.getElementById('app').classList.add('form-collapsed');
+        }
+      }
+      clearForm();
+      if($cancelModal){
+        $cancelModal.setAttribute('aria-hidden','true');
+        $cancelModal.classList.remove('open');
+      }
+    });
+  }
+  if($cancelModal){
+    $cancelModal.addEventListener('click', e=>{
+      if(e.target.dataset.close){
+        $cancelModal.setAttribute('aria-hidden','true');
+        $cancelModal.classList.remove('open');
+      }
+    });
+  }
+
+  if($editSave) $editSave.addEventListener('click', saveEdit);
+  if($editCancelTop) $editCancelTop.addEventListener('click', closeModal);
+
+  if($modal){
+    $modal.addEventListener('click', e=>{
+      if(e.target.dataset.close) closeModal();
+    });
+  }
+
+  if($editAddNote){
+    $editAddNote.addEventListener('click', ()=>{
+      if(!_editingId) return;
+      const text = $editNoteInput.value.trim();
+      if(!text) return;
+      const list = loadReports();
+      const idx = list.findIndex(r=>r.id===_editingId);
+      if(idx === -1) return;
+      const note = { text, ts: new Date().toISOString() };
+      list[idx].notes = Array.isArray(list[idx].notes) ? list[idx].notes : [];
+      list[idx].notes.push(note);
+      list[idx].updatedAt = new Date().toISOString();
+      saveReports(list);
+      renderEditNotes(list[idx]);
+      $editNoteInput.value = '';
+      $editLastSaved.textContent = `Dernière sauvegarde : ${new Date(list[idx].updatedAt).toLocaleString()}`;
+      renderReports();
+    });
+  }
+}
+
+function renderEditNotes(r){
+  $editNotesList.innerHTML = '';
+  const notes = Array.isArray(r.notes) ? r.notes.slice().reverse() : [];
+  if(!notes.length){
+    $editNotesList.innerHTML = '<div class="meta">Aucune note.</div>';
+    return;
+  }
+  for(const n of notes){
+    const div = document.createElement('div');
+    div.className = 'note';
+    div.innerHTML = `<div class="note-meta">
+        <div>${escapeHtml(n.text)}</div>
+        <div class="meta">${escapeHtml(new Date(n.ts).toLocaleString())}</div>
+      </div>`;
+    $editNotesList.appendChild(div);
+  }
+}
+
+function openEdit(id){
+  const r = loadReports().find(x=>x.id===id);
+  if(!r) return;
+  _editingId = id;
+  if ($editModuleChips) {
+    Array.from($editModuleChips.children).forEach(c=>{
+      if(c.textContent === r.module) c.classList.add('active'); else c.classList.remove('active');
+    });
+  }
+  if ($editTypeChips) {
+    Array.from($editTypeChips.children).forEach(c=>{
+      if(c.textContent === r.type) c.classList.add('active'); else c.classList.remove('active');
+    });
+  }
+  if ($editSeverityChips) {
+    Array.from($editSeverityChips.children).forEach(c=>{
+      if(c.textContent === r.severity) c.classList.add('active'); else c.classList.remove('active');
+    });
+  }
+  if($editSummary) $editSummary.value = r.summary || '';
+  if($editOther) $editOther.value = r.other || '';
+  if($editStatusChips) {
+    Array.from($editStatusChips.children).forEach(c=>{
+      if(c.dataset.status === (r.status || 'Ouvert')) c.classList.add('active'); else c.classList.remove('active');
+    });
+  }
+  renderEditNotes(r);
+  if($editNoteInput) $editNoteInput.value = '';
+  if($editLastSaved) $editLastSaved.textContent = r.updatedAt ? `Dernière sauvegarde : ${new Date(r.updatedAt).toLocaleString()}` : '';
+  showModal();
+}
+
+function showModal(){
+  if(!$modal) return;
+  $modal.setAttribute('aria-hidden','false');
+  $modal.classList.add('open');
+  if($editConfirm) $editConfirm.hidden = true;
+}
+
+function closeModal(){
+  if(!$modal) return;
+  $modal.setAttribute('aria-hidden','true');
+  $modal.classList.remove('open');
+  _editingId = null;
+}
+
+function saveEdit(){
+  if(!_editingId) return;
+  const list = loadReports();
+  const idx = list.findIndex(r=>r.id===_editingId);
+  if(idx === -1) return;
+  list[idx] = {
+    ...list[idx],
+    module: selectedFrom($editModuleChips) || list[idx].module || '',
+    type: selectedFrom($editTypeChips) || list[idx].type || 'UI',
+    severity: selectedFrom($editSeverityChips) || list[idx].severity || 'Moyenne',
+    summary: $editSummary.value.trim(),
+    other: $editOther.value.trim(),
+    details: list[idx].details || '',
+    status: selectedFrom($editStatusChips) || list[idx].status || 'Ouvert',
+    updatedAt: new Date().toISOString()
+  };
+  saveReports(list);
+  if($editConfirm) $editConfirm.hidden = false;
+  if($editLastSaved) $editLastSaved.textContent = `Dernière sauvegarde : ${new Date(list[idx].updatedAt).toLocaleString()}`;
+
+  // Open user's mail client with a prefilled message to info@info.cws indicating an update
+  try {
+    const report = list[idx];
+    const to = 'a.bouhlal@quboor.org';
+    const subject = `Mise à jour du rapport #${report.seq} — ${report.summary || report.id}`;
+    const lines = [
+      `ID système: ${report.id}`,
+      `Numéro: ${report.seq}`,
+      `Module/Page: ${report.module || '—'}`,
+      `Type: ${report.type || '—'}`,
+      `Gravité: ${report.severity || '—'}`,
+      `Statut: ${report.status || '—'}`,
+      '',
+      `Résumé: ${report.summary || ''}`,
+      `Autre suggestion: ${report.other || ''}`,
+      '',
+      `Mise à jour effectuée par l'utilisateur via l'application de suivi des bugs.`,
+      `Dernière sauvegarde: ${new Date(report.updatedAt).toLocaleString()}`
+    ];
+    const body = lines.join('\n');
+    const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(mailto, '_blank');
+  } catch (e) {
+    console.error('Mailto open failed', e);
+  }
+
+  closeModal();
+  renderReports();
+}
+
+/* initialize */
+initUI();
+
+ // form toggle behavior: collapsed by default, updates layout and icon
+ (function(){
+   const form = document.querySelector('.form-panel');
+   const app = document.getElementById('app');
+   const toggle = document.getElementById('form-toggle');
+   const title = document.getElementById('form-title');
+   if(!form || !toggle || !app) return;
+   // ensure collapsed by default (matches initial class in markup)
+   function updateState(collapsed){
+     form.classList.toggle('collapsed', collapsed);
+     app.classList.toggle('form-collapsed', collapsed);
+     toggle.setAttribute('aria-expanded', String(!collapsed));
+     const icon = toggle.querySelector('.expand-icon');
+     if(icon){
+       icon.style.transform = collapsed ? 'rotate(-45deg)' : 'rotate(45deg)';
+     }
+     // move reports title/list position adjustments handled by CSS via #app.form-collapsed
+   }
+   // initial state read from class
+   updateState(form.classList.contains('collapsed'));
+   toggle.addEventListener('click', ()=>{
+     const nowCollapsed = form.classList.contains('collapsed');
+     updateState(!nowCollapsed);
+     // ensure focus context
+     if(!nowCollapsed){
+       // just collapsed -> keep focus on title button
+       toggle.focus();
+     } else {
+       // expanded -> focus first input
+       const first = form.querySelector('input, textarea, button.chip');
+       if(first) first.focus();
+     }
+   });
+
+   // make the title clickable to toggle the form too
+   if(title){
+     title.style.cursor = 'pointer';
+     title.addEventListener('click', (e)=>{
+       // ignore clicks if they target interactive elements inside title (none expected)
+       const nowCollapsed = form.classList.contains('collapsed');
+       updateState(!nowCollapsed);
+       // mirror focus behavior
+       if(nowCollapsed){
+         const first = form.querySelector('input, textarea, button.chip');
+         if(first) first.focus();
+       } else {
+         toggle.focus();
+       }
+     });
+     // accessibility: make title keyboard-toggleable via Enter/Space
+     title.setAttribute('tabindex','0');
+     title.addEventListener('keydown', (e)=>{
+       if(e.key === 'Enter' || e.key === ' '){
+         e.preventDefault();
+         title.click();
+       }
+     });
+   }
+ })();
+  </script>
+</body>
+</html>
