@@ -527,29 +527,31 @@ h4 {
 .modal-content .example{font-style:italic;color:#fff}
 
 .dark .modal-content .example{font-style:italic;color:var(--muted)}
-.tool-action{background:var(--primary);color:#fff;border:0;padding:10px 14px;border-radius:10px;cursor:pointer}
-.dark .tool-action{background:#fff;color:#2C3E50;border:0;padding:10px 14px;border-radius:10px;cursor:pointer}
+.tool-action{width:50px;background-color:var(--primary);color:whitesmoke;border:0;padding:10px 14px;border-radius:10px;cursor:pointer}
+.dark .tool-action{background:#cf9251;color:#fff;border:0;padding:10px 14px;border-radius:10px;cursor:pointer}
+
+.tool-action2{width:180px;background-color:var(--primary);color:whitesmoke;border:0;padding:10px 14px;border-radius:10px;cursor:pointer}
+.dark .tool-action2{background:#cf9251;color:#fff;border:0;padding:10px 14px;border-radius:10px;cursor:pointer}
 
 
 /* Info icon button shown next to modal intro — primary BG in normal, secondary in dark mode */
 .info-toggle{
-  margin-left:8px;
+  margin-right:8px;
   border:0;
   color:var(--primary);
-  width:36px;
-  height:36px;
+  width:5px;
+  height:5px;
   border-radius:10px;
   display:inline-flex;
   align-items:center;
   justify-content:center;
   cursor:pointer;
   box-shadow:0 6px 14px rgba(0,0,0,0.12);
-  background-color: transparent;
 }
-.info-toggle i{font-size:16px}
+.info-toggle i{font-size:15px;animation: pulse 2s infinite ease-in-out}
 .dark .info-toggle{
-  color:#fffdf6;
-    margin-left:8px;
+  color:#2C3E50 ;
+    margin-right:8px;
   border:0;
   width:36px;
   height:36px;
@@ -559,12 +561,39 @@ h4 {
   justify-content:center;
   cursor:pointer;
   box-shadow:0 6px 14px rgba(0,0,0,0.12);
-  background-color: transparent;
 }
+
 
 @media (max-width:640px){
   .modal-panel{left:3%;right:3%;top:3%;bottom:3%;padding:14px;border-radius:10px}
   .modal-content h2{font-size:x-large}
+}
+
+
+.disclaimer-card{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  text-align: center;
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#f6f1f1;  color:#3d4b4d;
+  font-size:0.85rem;
+  line-height:1.4;
+  box-shadow:0 6px 14px rgba(0,0,0,0.15);
+}
+
+.dark .disclaimer-card{background:#3d4b4d;color:whitesmoke;}
+.disclaimer-card i{
+  font-size:18px;
+  margin-top:2px;
+}
+
+.disclaimer-card a{
+  color:inherit;
+  text-decoration:underline;
+  font-weight:600;
 }
 
 
@@ -1739,25 +1768,14 @@ if(skipTools.includes(toolId)) return;
         <div class="row">
           <div class="field" style="flex:1">
             <label for="zf-adults">عدد البالغين</label>
-            <input id="zf-adults" type="number" min="0" value="2">
+            <input id="zf-adults" type="number" min="0" value="">
           </div>
           <div class="field" style="flex:1">
             <label for="zf-children">عدد الأطفال</label>
-            <input id="zf-children" type="number" min="0" value="1">
+            <input id="zf-children" type="number" min="0" value="">
           </div>
         </div>
 
-<div class="row">
-          <div class="field" style="flex:1">
-            <label for="zf-type">نوع الطعام</label>
-            <select id="zf-type">
-              <option value="riz">أرز</option>
-              <option value="blé">قمح</option>
-              <option value="dattes">تمر</option>
-              <option value="orge">شعير</option>
-              <option value="autre">آخر</option>
-            </select>
-          </div>
           <div class="field" style="flex:1">
             <label for="zf-qty">الكمية لكل شخص (كغ)</label>
             <input id="zf-qty" type="number" min="0" step="0.1" value="2.5">
@@ -1765,8 +1783,8 @@ if(skipTools.includes(toolId)) return;
         </div>
 
         <div class="field">
-          <label for="zf-price">السعر المحلي لكل كغ</label>
-          <input id="zf-price" type="number" min="0" step="0.01" value="12.00">
+<label for="zf-price">السعر المحلي للكيلوغرام (بالدرهم المغربي) على سبيل المثال: الأرز، الدقيق، الشعير</label>
+          <input id="zf-price" type="number" min="0" step="0.01" value="">
         </div>
 
 
@@ -1774,12 +1792,21 @@ if(skipTools.includes(toolId)) return;
           <div class="info-line small-muted">إجمالي الأشخاص: <strong id="zf-total-people">—</strong></div>
           <div class="info-line">إجمالي الطعام: <span class="big" id="zf-total-kg">—</span> كغ</div>
           <div class="info-line">القيمة التقديرية: <span class="big" id="zf-total-eur">—</span></div>
-          <div class="small-muted">إخراج الطعام هو الأفضل؛ والقيمة المالية للراحة فقط.</div>
         </div>
+
+        <div class="disclaimer-card">
+<i class="fas fa-circle-exclamation"></i>
+
+<div>
+تُقدّم Quboor هذا المُحاكي مجانًا لأغراض إعلامية. لا يتطلّب استخدامه أيّ تبرّع، ولكن يُمكنك دعم مشاريعنا عبر الزرّ أدناه. تُموّل التبرّعات أنشطتنا بشفافية تامّة. اطّلع على <a href="tecar.html">الشروط والأحكام</a>.
+
+
+</div>
+</div>
 
         <div class="calc-actions">
           <button id="zf-reset" type="button" class="btn-ghost">إعادة تعيين</button>
-          <button id="zf-calc" class="tool-action"> التبرع عبر قبور</button>
+          <button id="zf-calc" class="tool-action2"> التبرع عبر قبور</button>
         </div>
       </form>
           `,
@@ -1806,27 +1833,27 @@ if(skipTools.includes(toolId)) return;
       <form id="zm-form" class="calc-form" onsubmit="return false;">
         <div class="field">
           <label for="zm-cash">النقد / الحسابات</label>
-          <input id="zm-cash" type="number" min="0" step="0.01" value="0">
+          <input id="zm-cash" type="number" min="0" step="0.01" value="">
         </div>
 
         <div class="field">
           <label for="zm-gold">الذهب / الفضة</label>
-          <input id="zm-gold" type="number" min="0" step="0.01" value="0">
+          <input id="zm-gold" type="number" min="0" step="0.01" value="">
         </div>
 
         <div class="field">
           <label for="zm-assets">الأسهم / الأصول</label>
-          <input id="zm-assets" type="number" min="0" step="0.01" value="0">
+          <input id="zm-assets" type="number" min="0" step="0.01" value="">
         </div>
 
         <div class="field">
           <label for="zm-inventory">البضائع للبيع</label>
-          <input id="zm-inventory" type="number" min="0" step="0.01" value="0">
+          <input id="zm-inventory" type="number" min="0" step="0.01" value="">
         </div>
 
         <div class="field">
           <label for="zm-debt">الديون</label>
-          <input id="zm-debt" type="number" min="0" step="0.01" value="0">
+          <input id="zm-debt" type="number" min="0" step="0.01" value="">
         </div>
 
         <div class="result-box" id="zm-result">
@@ -1836,9 +1863,18 @@ if(skipTools.includes(toolId)) return;
           <div class="info-line">الزكاة (2.5%): <span class="big" id="zm-zakat">—</span></div>
         </div>
 
+        <div class="disclaimer-card">
+<i class="fas fa-circle-exclamation"></i>
+
+<div>
+تُقدّم Quboor هذا المُحاكي مجانًا لأغراض إعلامية. لا يتطلّب استخدامه أيّ تبرّع، ولكن يُمكنك دعم مشاريعنا عبر الزرّ أدناه. تُموّل التبرّعات أنشطتنا بشفافية تامّة. اطّلع على <a href="tec.html">الشروط والأحكام</a>.
+
+
+</div>
+</div>
         <div class="calc-actions">
           <button id="zm-reset" type="button" class="btn-ghost">إعادة تعيين</button>
-          <button id="zm-calc" class="tool-action"> التبرع عبر قبور</button>
+          <button id="zm-calc" class="tool-action2"> التبرع عبر قبور</button>
         </div>
       </form>
           `,
@@ -1859,23 +1895,23 @@ if(skipTools.includes(toolId)) return;
         <div class="field">
           <label for="sj-type">نوع المشروع</label>
           <select id="sj-type">
-            <option value="puits">بئر</option>
-            <option value="ecole">مدرسة</option>
-            <option value="mosquee">مسجد</option>
-            <option value="publication">كتاب</option>
-            <option value="sanitaire">معدات صحية</option>
-            <option value="autre">آخر</option>
+<option value="entretien"></option>
+<option value="metiers">تكامل الوظائف</option>
+<option value="projets-quboor">دعم جميع المشاريع</option>
+<option value="entretien">الصيانة والحفظ</option>
+<option value="registre">التسجيل والرقمنة</option>
+<option value="analyse">التحليل وإعداد التقارير</option>
           </select>
         </div>
 
         <div class="field">
           <label for="sj-budget">الميزانية الشهرية</label>
-          <input id="sj-budget" type="number" min="0" step="0.01" value="500">
+          <input id="sj-budget" type="number" min="0" step="0.01" value="">
         </div>
 
         <div class="field">
           <label for="sj-years">المدة (سنوات)</label>
-          <input id="sj-years" type="number" min="1" step="1" value="1">
+          <input id="sj-years" type="number" min="1" step="1" value="">
         </div>
 
         <div class="result-box" id="sj-result">
@@ -1884,9 +1920,18 @@ if(skipTools.includes(toolId)) return;
           <div class="info-line small-muted" id="sj-advice">نصيحة: —</div>
         </div>
 
+        <div class="disclaimer-card">
+<i class="fas fa-circle-exclamation"></i>
+
+<div>
+تُقدّم Quboor هذا المُحاكي مجانًا لأغراض إعلامية. لا يتطلّب استخدامه أيّ تبرّع، ولكن يُمكنك دعم مشاريعنا عبر الزرّ أدناه. تُموّل التبرّعات أنشطتنا بشفافية تامّة. اطّلع على <a href="tec.html">الشروط والأحكام</a>.
+
+
+</div>
+</div>
         <div class="calc-actions">
           <button id="sj-reset" type="button" class="btn-ghost">إعادة تعيين</button>
-        <button id="sj-calc" class="tool-action"> التبرع عبر قبور</button>
+        <button id="sj-calc" class="tool-action2"> التبرع عبر قبور</button>
         </div>
       </form>
     `
@@ -2046,12 +2091,29 @@ window.location.href = 'projetsar.html#nous-soutenir';});    reset.addEventListe
       const total = +(monthly * 12 * y).toFixed(2);
       outBudget.textContent = monthly.toLocaleString();
       totalCost.textContent = total.toLocaleString();
-      let adv = 'Choisissez un projet durable : les infrastructures et l’éducation offrent un bénéfice continu.';
-      if(type.value === 'puits') adv = 'Puits : prévoyez coûts d’entretien annuels ; répartissez budget pour pompe et forage.';
-      if(type.value === 'publication') adv = 'Publication : prévoyez impression, distribution et maintenance numérique.';
-      if(type.value === 'ecole') adv = 'Éducation : prévoir frais de fonctionnement et pérennité des enseignants.';
-      advice.textContent = adv;
-    }
+let adv = "اختر مشروعًا مستدامًا: كل مساهمة تُساعد في الحفاظ على الذاكرة وتعزيزها.";
+
+if(type.value === "metiers")
+
+adv = "دمج المهارات: دعم التدريب والتوظيف لضمان استمرارية المشروع.";
+
+if(type.value === "projets-quboor")
+
+adv = "ادعم جميع المشاريع: يتم توزيع تبرعك لتحقيق أقصى قدر من التأثير الإجمالي.";
+
+if(type.value === "entretien")
+
+adv = "الصيانة والحفظ: التخطيط لدعم منتظم لضمان استدامة البنية التحتية.";
+
+if(type.value === "registre")
+
+adv = "التسجيل والرقمنة: يُساهم في حفظ البيانات وإتاحتها.";
+
+if(type.value === "analyse")
+
+adv = "التحليل وإعداد التقارير: تحسين مراقبة الإجراءات المتخذة وشفافيتها.";
+
+advice.textContent = adv;    }
     [type,budget,years].forEach(i=> i.addEventListener('input', computeSJ));
 calc.addEventListener('click', (e)=>{
   e.preventDefault();
