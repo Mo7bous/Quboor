@@ -45,6 +45,36 @@
             position: relative;
         }
 
+
+        .download-android{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+width:60%;
+padding:12px 20px;
+font-size:16px;
+background:#4a6988;
+color:whitesmoke;
+border:none;
+border-radius:10px;
+cursor:pointer;
+margin-top:15px;
+margin-bottom: 10px;
+font-family:'Cairo';
+transition:0.3s;
+}
+
+.download-android:hover{
+transform:translateY(-3px);
+box-shadow:0 6px 14px rgba(0,0,0,0.2);
+}
+
+.android-icon{
+width:26px;
+height:26px;
+}
+
         .logo {
     width: 250px;
     height: auto;
@@ -170,6 +200,7 @@ padding:8px 10px;font-size:13px;cursor:pointer;border-radius:8px;line-height:1;o
     </style>
 </head>
 <body>
+
     <div class="landing-container">
 <img src="img/logo/logotitre.png" alt="Logo" class="logo" id="logo">
         <br><br/>
@@ -180,6 +211,14 @@ padding:8px 10px;font-size:13px;cursor:pointer;border-radius:8px;line-height:1;o
                 <button class="enter-btn2" onclick="window.location.href='index.html'">Français</button>
 
         <div class="particles"></div>
+                <div class="particles"></div>
+            <a href="Apk-iOS/Android/Quboor.apk" class="download-android" download>
+    <img src="Apk-iOS/Android/android.png" class="android-icon">
+    قم بتنزيل ملف  الخاص بنظام 
+</a>
+<p style="font-size:12px;opacity:0.7"> إذا تم حظر التنزيل، ففعّل خيار التثبيت من مصادر غير معروفة.
+
+</p>
     </div>
 
     <script>
