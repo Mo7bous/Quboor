@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ar" dir="rtl">  
+  
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -45,6 +46,8 @@ body::before{
 html.dark body::before{
   background: #2C3E50;
 }
+
+
 
 html.body::after{
   content:"";
@@ -152,14 +155,17 @@ body.dark-mode .top-nav {     background-color: var(--primary-color);
 .collapsible-card{background: #f6f1f1;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15);overflow:hidden;margin-bottom:14px}
 .collapsible-card2{background: linear-gradient(0deg, #edf2f5, #f5f4f0);border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,0.15);overflow:hidden;margin-bottom:14px;margin-left: 5%;margin-right: 5%;}
 
-.card-header{display:flex;align-items:center;justify-content:space-between;padding:3px 16px;cursor:pointer;position: relative;}
-.card-header::after {
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}.card-header::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 0;
 }
-.card-header .title{display:flex;flex-direction:column}
+.card-header .title{margin-right: 15px;display:flex;flex-direction:column}
 .card-header h3{    margin-top: 8%;;font-size:large;margin-bottom: 7px;}
 .card-sub{font-size:14px;color:var(--muted)}
 .card-arrow{width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;background:transparent;border:0;color:var(--primary);font-size:20px;transition:transform .22s;z-index: 1;}
@@ -187,9 +193,11 @@ body.dark-mode .top-nav {     background-color: var(--primary-color);
   .dark .support-card a { color: var(--primary); }
   .dark .support-card { box-shadow: 0 6px 14px rgba(0,0,0,0.15); }
 
-  .event-date {
+.event-date {
   width: 90px;
-  min-height: 110px;
+  height: 130px;
+  margin-top: 15px;
+    margin-left: 15px;
   background: var(--primary);
   color: white;
   border-radius: 12px;
@@ -200,11 +208,12 @@ body.dark-mode .top-nav {     background-color: var(--primary-color);
   gap: 6px;
   padding: 8px 6px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  margin-right: 15px;
-  margin-top: 15px;
-  z-index: 5;
+  margin-inline-start: 15px; /* MAGIC */
 }
 
+.title {
+  flex: 1;
+}
 .calendar-icon {
   font-size: 18px;
   line-height: 1;
@@ -310,7 +319,7 @@ body.dark-mode .top-nav {     background-color: var(--primary-color);
         <button class="card-arrow" aria-hidden="true">▾</button>
                 <div class="event-date">
   <div class="calendar-icon">📅</div>
-  <div class="date-text">سيتم التحديد لاحقاً</div>
+<div class="date-text">قريباً</div>
   <button class="event-btn">مجاني</button>
   <button class="event-btn">متاح</button>
 
@@ -344,7 +353,7 @@ body.dark-mode .top-nav {     background-color: var(--primary-color);
         <button class="card-arrow" aria-hidden="true">▾</button>
                         <div class="event-date">
   <div class="calendar-icon">📅</div>
-  <div class="date-text">سيتم التحديد لاحقاً</div>
+<div class="date-text">قريباً</div>
   <button class="event-btn">مجاني</button>
   <button class="event-btn">متاح</button>
 
@@ -379,7 +388,7 @@ body.dark-mode .top-nav {     background-color: var(--primary-color);
         <button class="card-arrow" aria-hidden="true">▾</button>
   <div class="event-date">
   <div class="calendar-icon">📅</div>
-  <div class="date-text">سيتم التحديد لاحقاً</div>
+<div class="date-text">قريباً</div>
   <button class="event-btn">500 درهم</button>
   <button class="event-btn">متاح</button>
 
@@ -413,7 +422,7 @@ body.dark-mode .top-nav {     background-color: var(--primary-color);
         <button class="card-arrow" aria-hidden="true">▾</button>
       <div class="event-date">
   <div class="calendar-icon">📅</div>
-  <div class="date-text">سيتم التحديد لاحقاً</div>
+<div class="date-text">قريباً</div>
   <button class="event-btn">مجاني</button>
   <button class="event-btn">متاح</button>
 
