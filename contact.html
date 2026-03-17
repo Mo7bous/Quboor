@@ -23,10 +23,10 @@
 
   --primary: var(--blue-dark);
   --nav-bg: var(--blue-dark);
-  --card-bg: #FFFCFA;
+  --card-bg: whitesmoke;
   --page-bg: var(--blue-very-pale);
   --text-on-nav: var(--beige-cold);
-  --popup-search-bg: #f7fbfd;
+  --popup-search-bg: whitesmoke;
 
   --dm-nav-bg: var(--beige-cold);
   --dm-sidebar-bg: #254045;
@@ -122,7 +122,7 @@ body.dark-mode .top-nav {     background-color: var(--primary-color);
   margin-right: -1px;
   margin-top: 4px;
 }.menu-btn{
-  background:none;border:0;color:#FFFCFA;font-size:20px;padding:8px;border-radius:6px;cursor:pointer;    animation: pulse 2s infinite ease-in-out;
+  background:none;border:0;color:whitesmoke;font-size:20px;padding:8px;border-radius:6px;cursor:pointer;    animation: pulse 2s infinite ease-in-out;
 }
 
 @keyframes pulse {
@@ -142,7 +142,7 @@ body.dark-mode .top-nav {     background-color: var(--primary-color);
 .dark-btn{
   background:none;
   border:0;
-  color:#FFFCFA;
+  color:whitesmoke;
   font-size:18px;
   padding:8px;
   border-radius:6px;
@@ -151,6 +151,8 @@ body.dark-mode .top-nav {     background-color: var(--primary-color);
   align-items:center;
   justify-content:center;
 }
+
+
 .dark-btn i{width:20px; height:20px}
 .nav-controls{display:flex;gap:8px;align-items:center}
 
@@ -176,7 +178,7 @@ body.dark-mode .top-nav {     background-color: var(--primary-color);
 
 .sidebar a:nth-child(odd){ border-right:1px solid rgba(255,255,255,0.03);}
 .sidebar a i{font-size:20px;display:block}
-.closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:#FFFCFA;cursor:pointer}
+.closebtn{position:absolute;top:18px;right:12px;font-size:28px;background:none;border:0;color:whitesmoke;cursor:pointer}
 
 .sidebar-separator{width:100%;height:18px;box-sizing:border-box;margin-top:42px;border-top:0;opacity:0.0;pointer-events:none;}
 
@@ -297,7 +299,6 @@ textarea::placeholder {
   padding:10px 12px;
   border-radius:8px;
   border:1px solid rgba(0,0,0,0.06);
-  background:transparent;
   font-size:small;
   color:inherit;
   box-sizing:border-box;
@@ -305,6 +306,7 @@ textarea::placeholder {
 }
 textarea{min-height:100px;resize:vertical}
 .form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+
 .btn{
   background:var(--nav-bg);
   color:var(--card-bg);
@@ -314,7 +316,12 @@ textarea{min-height:100px;resize:vertical}
   cursor:pointer;
   font-weight:600;
 }
-.btn.secondary{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--primary)}
+
+.dark .btn{background: #cf9251;color:whitesmoke}
+
+.btn.secondary{background:transparent;color:var(--primary)}
+.dark .btn.secondary{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--primary)}
+
 
 .note{font-size:medium;color:var(--muted);margin-top:8px}
 .note2{font-size:small;color:var(--muted);margin-top:8px}
@@ -323,15 +330,14 @@ textarea{min-height:100px;resize:vertical}
   --page-bg: #0b0c0f;
   --card-bg: var(--dm-card-bg);
   --card-border: rgba(255,255,255,0.06);
-  --primary: #FFFCFA;
-  --pastel-orange: #FFFCFA;
+  --primary: whitesmoke;
+  --pastel-orange: whitesmoke ;
   --popup-search-bg: #274a50;
 }
 .dark .top-nav{background:var(--nav-bg)}
 .dark .content-card{color:var(--primary);background:var(--card-bg)}
-.dark .btn{background: #0b0c0f;color:#FFFCFA}
-.dark .input,.dark textarea,.dark select{border:1px solid rgba(255,255,255,0.15);color:#FFFCFA;background:transparent}
-.dark .note{color:#FFFCFA}
+.dark .input,.dark textarea,.dark select{color:whitesmoke;background:#3d4b4d}
+.dark .note{color:whitesmoke}
   </style>
 </head>
 <body>
@@ -435,7 +441,7 @@ textarea{min-height:100px;resize:vertical}
                 <textarea id="c_message" class="input" placeholder="Détaillez votre demande..." required style="min-height:120px"></textarea>
               </div>
 
-              <div style="gap:8px;justify-content:flex-end;margin-top:6px;">
+              <div style="gap:8px;justify-content:flex-end;margin-top:6px;direction:rtl">
                 <button id="c_generateBtn" class="btn" type="button">Générer l'e-mail</button>
                 <button id="c_clearBtn" class="btn secondary" type="button">Effacer</button>
               </div>

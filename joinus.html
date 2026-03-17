@@ -166,13 +166,13 @@ background: linear-gradient(135deg, #2C3E50, #0b0c0f);
   --page-bg: #2C3E50; /* match other pages' dark page background */
   --card-bg: #2C3E50; /* dark card background */
   --card-border: rgba(255,255,255,0.06);
-  --primary: #FFFCFA; /* pale-orange text in dark */
-  --pastel-orange: #FFFCFA;
+  --primary: whitesmoke; /* pale-orange text in dark */
+  --pastel-orange:whitesmoke;
   --popup-search-bg: #274a50;
 }
 .dark .top-nav{background: linear-gradient(135deg, #2C3E50, #0b0c0f)} /* keep nav same as other pages */
 .dark .hero-card, .dark .features-card { background: linear-gradient(135deg, #2C3E50, #0b0c0f); color:var(--primary) }
-.dark .btn{background:var(--nav-bg);color:var(--pastel-orange)}
+.dark .btn{background: #cf9251;color:whitesmoke}
 .lang-btn:focus{outline:none;box-shadow:none}
 
 /* Unified heading sizing for consistency across pages */
@@ -222,7 +222,7 @@ h1, .hero-card h1, .page-header h1, .collapsible-card .card-header h3 {
 
 /* Image styling: smaller and centered for phones */
 .hero-image{width:100%;display:flex;justify-content:center;margin-bottom:12px}
-.hero-image img{width:92%;max-width:460px;border-radius:10px;object-fit:cover;box-shadow:0 6px 16px rgba(0,0,0,0.15)}
+.hero-image img{margin-bottom: 15px ;width:92%;max-width:460px;border-radius:10px;object-fit:cover;box-shadow:0 6px 16px rgba(0,0,0,0.15)}
 
 /* Remove CTA and actions styling (kept minimal if future use) */
 .btn{display:inline-block;padding:10px 14px;border-radius:10px;font-weight:700;background:var(--nav-bg);color:var(--card-bg);border:none;text-align:center}
@@ -284,7 +284,7 @@ Notre mission pilote à Rabat vise à créer une base de données ouverte, éthi
     <br></br>
     <!-- Call-to-action button: contact us (placed before features card) -->
     <div style="width:100%;display:flex;justify-content:center;margin:12px 0 18px 0;">
-      <a href="contact.html" class="btn" style="padding:12px 18px;border-radius:10px;font-weight:700;background:var(--nav-bg);color:#FFFCFA;text-decoration:none;">
+      <a href="contact.html" class="btn" style="padding:12px 18px;border-radius:10px;font-weight:700;color:whitesmoke;text-decoration:none;">
         <i class="fas fa-envelope" style="margin-right:8px"></i>Contactez-nous
       </a>
     </div>
