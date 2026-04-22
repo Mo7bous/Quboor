@@ -1,0 +1,274 @@
+:root{
+  --bg: whitesmoke;
+  --card: #ffffff;
+  --muted: #3b5670; /* muted dark-blue for secondary text */
+  --accent: #ff6b35;
+  --glass: rgba(0,0,0,0.03);
+  --radius:12px;
+  --text: #072a4b; /* dark blue for main text */
+  --gap:14px;
+  --mobile-break:720px;
+  /* base scaling: make overall text ~30% smaller */
+  font-size:70%;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background: whitesmoke;color:var(--text);-webkit-font-smoothing:antialiased}
+a{
+  background: linear-gradient(180deg,#526aef 0%, #131a1e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  text-decoration: none;
+}
+.topbar{
+  position:fixed;left:0;right:0;top:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:8px 12px;gap:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+  backdrop-filter: blur(6px);z-index:30;border-bottom:1px solid rgba(255,255,255,0.03)
+}
+.brand{display:flex;align-items:center;gap:10px}
+.brand img{width:44px;height:44px;border-radius:8px;object-fit:cover}
+.brand strong{display:block}
+.nav{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:var(--bg);
+  /* allow an optional decorative texture that we enable for the slide-out on mobile */
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:cover;
+}
+.nav a{color:var(--muted);padding:8px 10px;border-radius:8px;font-size:14px}
+.nav .cta{margin-left:6px;padding:8px 12px;border-radius:10px;background:var(--accent);border:none;color:#fff;font-weight:600}
+/* Hamburger for small screens */
+.hamburger{display:none;background:none;border:0;padding:8px;cursor:pointer}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:4px 0;border-radius:2px;opacity:0.9}
+
+/* Layout frame with fixed header and footer, central scrollable area */
+.frame{padding-top:76px;padding-bottom:72px;min-height:calc(100vh - 148px);overflow:auto}
+.panel{max-width:1100px;margin:18px 2%;padding:18px;border-radius:var(--radius);background:var(--card);box-shadow:none;border:1px solid rgba(2,6,23,0.04)}
+.hero{display:flex;gap:18px;align-items:center}
+.hero-left{flex:1}
+.hero-right{flex:1;text-align:center}
+.hero-right img{width:100%;max-width:378px;border-radius:12px;transform:translateY(-4px)}
+.hero h1{font-size:20px;margin:0 0 8px}
+.features{list-style:none;padding:0;margin:12px 0 0;color:var(--muted);display:grid;gap:6px}
+.actions{display:flex;gap:8px;margin-top:12px}
+.btn{padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--text);cursor:pointer}
+
+/* Quboor Pro — dark blue metallic primary */
+.btn.primary{
+  background: linear-gradient(90deg, #0b3b73 0%, #0f2a56 100%);
+  border: none;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(11,59,115,0.18), inset 0 -2px 6px rgba(255,255,255,0.03);
+}
+
+/* Quboor Basic — light blue metallic (used with outline or standalone .basic) */
+.btn.basic{
+  background: linear-gradient(90deg,#dff4ff 0%, #bfe8ff 60%, #9fcfff 100%);
+  border: 1px solid rgba(159,207,255,0.9);
+  color: #072a4b;
+  box-shadow: 0 6px 16px rgba(31,125,195,0.06), inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* keep an explicit outline variant — combine with .basic when needed */
+.btn.outline{background:transparent;border:1px solid rgba(255,255,255,0.06)}
+.btn.small{padding:8px 10px;font-size:13px}
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.card{background:var(--glass);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);display:flex;flex-direction:column;gap:10px;margin:0 2%}
+.card img{width:100%;height:120px;object-fit:cover;border-radius:8px}
+.card h3{margin:0;font-size:16px}
+.meta{color:var(--muted);font-size:13px}
+.card-actions{display:flex;gap:8px;justify-content:flex-end;align-items:center}
+.articles .article-list{display:flex;flex-direction:column;gap:10px}
+.article{padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)}
+.about-grid{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.team{display:flex;flex-direction:column;gap:8px}
+.person{display:flex;gap:10px;align-items:center}
+.person img{width:56px;height:56px;border-radius:10px;object-fit:cover}
+.person-meta{display:flex;flex-direction:column}
+.person-meta strong{font-size:15px;line-height:1}
+.person-title{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* small 15x30 logo before article links */
+.article .link{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding-left:0;
+}
+.article .link .article-logo{
+  width:70px;
+  height:30px;
+  object-fit:contain;
+  border-radius:6px;
+  flex:0 0 72px;
+}
+
+/* Contact form */
+.form{display:flex;flex-direction:column;gap:8px}
+.form label{display:flex;flex-direction:column;font-size:13px;color:var(--text)}
+/* Make contact form fields have white background and dark-blue text for readability */
+.contact .form input,
+.contact .form textarea,
+.contact .form select{
+  margin-top:6px;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid rgba(2,6,23,0.06);
+  background: #ffffff;
+  color: var(--text);
+}
+/* Ensure the contact panel itself uses white background and dark text */
+.contact{ background: var(--card); color: var(--text) }
+.contact .legal, .contact .legal a { color: var(--text); margin-top:12px; }
+.form-actions{display:flex;gap:8px;margin-top:6px}
+
+/* Modal */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(255,255,255,0.85);z-index:60}
+.modal[aria-hidden="false"]{display:flex}
+/* constrain modal to viewport so injected offer popups never grow larger than the screen;
+   make the modal-card itself scrollable while keeping the page behind stable */
+.modal-card{
+  width:92%;
+  max-width:520px;
+  max-height:90vh;
+  overflow:auto;
+  box-sizing:border-box;
+  background:linear-gradient(180deg,#ffffff,#f7fafc);
+  padding:18px;
+  border-radius:14px;
+  border:1px solid rgba(0,0,0,0.06);
+  position:relative;
+}
+.modal .close{position:absolute;right:12px;top:12px;background:none;border:0;color:var(--muted);font-size:18px}
+
+/* details styling was used before; now terms are opened via a dedicated popup */
+.modal-card{position:relative}
+
+/* small info button next to term label (50% smaller) */
+.info-btn, .btn.info {
+  display:inline-grid;
+  place-items:center;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  padding:0;
+  font-size:9px;
+  color:#fff;
+  border:0;
+  cursor:pointer;
+  /* updated blue → near-black gradient for the round icon */
+  background: linear-gradient(180deg,#526aef 0%, #131a1e 100%);
+  box-shadow: 0 4px 10px rgba(13,26,30,0.12), inset 0 -1px 0 rgba(0,0,0,0.06);
+}
+
+/* terms popup (created dynamically) */
+#termsPopup{
+  /* wrapper styles set inline by JS for positioning */
+}
+#termsPopup .btn.outline{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.06);
+  color:var(--muted);
+}
+#termsPopup div{
+  word-break:break-word;
+}
+.footer{position:fixed;left:0;right:0;bottom:0;height:56px;display:flex;align-items:center;justify-content:center;border-top:1px solid rgba(255,255,255,0.02);background:linear-gradient(0deg, rgba(255,255,255,0.01), rgba(255,255,255,0));z-index:20}
+.footer small{font-size:60%}
+
+/* Responsive */
+@media (max-width: 720px){
+  .topbar{padding:8px}
+  .nav{
+    position: fixed;
+    left: 0;
+    top: 63px;
+    bottom: 67px;
+    height: 300px;
+    right: 0;
+    background: var(--bg);
+    flex-direction: column;
+    padding: 12px;
+    gap: 12px;
+    transform: translateX(-110%);
+    transition: transform .28s ease;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.6);
+    z-index: 80;
+    /* ensure the nav has layering for the decorative texture when opened */
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+  }
+  /* subtle vector texture applied only when the slide-out nav is open */
+  .nav.open{
+    transform:translateX(0);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'><g fill='none' stroke='%230b3b73' stroke-opacity='0.06' stroke-width='1'><circle cx='48' cy='64' r='44'/><circle cx='168' cy='124' r='28'/><circle cx='360' cy='48' r='60'/><path d='M0 420 C120 360 280 480 400 420 C520 360 680 480 800 420' /></g></svg>");
+    /* keep the texture very light so nav content remains readable */
+    background-color: var(--bg);
+  }
+  .hamburger{display:block}
+  .brand strong{font-size:15px}
+  .hero{flex-direction:column-reverse;gap:12px}
+  .card-grid{grid-template-columns:1fr}
+  .frame{padding-top:72px;padding-bottom:72px}
+}
+
+/* Small animations */
+.fade-in{opacity:0;transform:translateY(8px);transition:all .7s cubic-bezier(.2,.9,.25,1)}
+.fade-in.show{opacity:1;transform:none}
+.ripple{
+  position:relative;overflow:hidden
+}
+.ripple:after{
+  content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.12);transform:scale(0);opacity:0;transition:transform .6s,opacity .6s
+}
+.ripple:active:after{transform:scale(40);opacity:1;transition:0s}
+
+/* Demo panel: occupy the available viewport under the fixed header/footer */
+.demo-panel{max-width:1100px;margin:18px 2%;padding:0;border-radius:var(--radius);background:var(--card);box-shadow:none;border:none}
+.demo-card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  padding:12px;
+  border-radius:var(--radius);
+  /* height: viewport minus topbar (64px) and footer (56px) and small margins */
+  height: calc(100vh - 64px - 56px - 36px);
+  box-sizing:border-box;
+  background:var(--card);
+  box-shadow:none;
+  border:none;
+}
+.demo-media{flex:1;display:flex;align-items:center;justify-content:center;width:100%}
+.demo-media img{max-width:92%;max-height:100%;border-radius:10px;object-fit:contain}
+.demo-actions{display:flex;gap:12px;justify-content:center;padding:8px;width:100%}
+@media (max-width:720px){
+  .demo-card{height: calc(100vh - 64px - 56px - 28px);padding:10px}
+  .demo-actions{flex-direction:column;gap:10px}
+}
+
+/* Justify paragraph and article copy across the site for a consistent readable layout */
+.panel p,
+.panel .features,
+.article p,
+.card p,
+.hero-left p,
+.about p,
+.article-list .article p,
+.modal-card p,
+#coursePopup div,
+#termsPopup div,
+.article .link,
+.article .link .article-logo + * {
+  text-align:justify;
+  text-justify:inter-word;
+}
