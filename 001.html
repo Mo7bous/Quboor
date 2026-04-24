@@ -3,26 +3,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
-  <title>JSON Result Parser</title>
+  <title>QuboorAI</title>
   <link rel="stylesheet" href="001.css" />
 </head>
 <body>
   <div id="app">
+    <!-- Top header with greeting text and AI image -->
+    <header class="welcome-header">
+      <div class="welcome-left">
+        <div class="hello-line">Bonjour Achraf</div>
+        <div class="welcome-sub">Quboor AI - Ton assistant pour </div>
+        <div class="welcome-sub small">des candidatures qui se démarquent.</div>
+      </div>
+      <div class="welcome-right" aria-hidden="true">
+        <video src="Quboor.mp4" class="welcome-robot" autoplay loop muted playsinline aria-hidden="true"></video>
+      </div>
+    </header>
     <!-- Top controls -->
     <button class="top-btn left" id="btnData">Data</button>
 
     <!-- Center Start button -->
     <div class="center-start">
-      <button id="btnStart" class="start-btn">Start</button>
+      <button id="btnStart" class="start-btn"> ✧ Démarrer</button>
     </div>
 
-    <!-- Step 1: Search an offer (input removed as requested) -->
-    <div class="panel">
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <h2 style="margin:0;font-size:16px;">1. Find a Job</h2>
-        <div class="hint" style="margin-top:6px;">Select a job offer you want to target.</div>
-      </div>
-    </div>
 
     <!-- Top profile card: avatar + name & position (now placed above Step 1) -->
     <div class="panel" id="topProfileCard" style="display:flex;align-items:center;gap:12px;">
@@ -36,14 +40,29 @@
         <div id="top_position" class="profile-subtext" style="color:#555;font-size:13px;">Job Matching &amp; Optimisation des candidatures | ATS &amp; IA</div>
       </div>
     </div>
+    
+    <!-- Step 1: Search an offer (input removed as requested) -->
+    <div class="panel">
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+<div class="panel-icon">⌕</div> 
+          <h2 style="margin:0;font-size:14px;">Trouver une offre d'emploi</h2>
+        </div>
+      </div>
+    </div>
+
+    
 
     <!-- Step 2: short title and job input -->
     <div class="panel">
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <h2 style="margin:0;font-size:16px;">2. Paste the Offer bellow</h2>
+        <div style="display:flex;align-items:center;gap:8px;">
+<div class="panel-icon">⎘</div>
+          <h2 style="margin:0;font-size:14px;">Coller la déscription de l'offre</h2>
+        </div>
 
-        <input id="mainTitle" type="text" placeholder="Drop the full job description into this field." style="padding:10px;border-radius:8px;border:1px solid #e6e6e6;font-size:14px;">
-         <div class="hint" style="margin-top:4px;font-size:19px: ">The prompt is automatically generated and copied into your clipboard 📋  → Run in ChatGPT and paste the prompt.</div>
+        <input id="mainTitle" type="text" placeholder="Coller le texte ici" style="padding:10px;border-radius:8px;border:1px solid #e6e6e6;font-size:14px;">
+         <div class="hint" style="margin-top:4px;font-size:19px: ">Le prompt est généré automatiquement et copié dans votre presse-papiers 📋 → Coller-le dans ChatGPT</div>
       </div>
     </div>
 
@@ -53,8 +72,11 @@
     <div class="panel">
       <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px;">
       </div>
-      <label for="input">4. GPT response</label>
-      <textarea id="input" placeholder="Paste the GPT JSON response as it is to generate your optimized application and press Start button." style="padding:10px;border-radius:8px;border:1px solid #e6e6e6;font-size:12px;min-height:120px;font-family:monospace;resize:vertical;"></textarea>
+      <div style="display:flex;align-items:center;gap:8px;">
+<div class="panel-icon">{ }</div>
+          <h2 style="margin:0;font-size:14px;">Réponse Prompt</h2>
+      </div>
+      <textarea id="input" placeholder="Coller ici la réponse de GPT" style="margin-top: 6px;padding:10px;border-radius:8px;border:1px solid #e6e6e6;font-size:14px;"></textarea>
     </div>
 
 
@@ -79,8 +101,8 @@
             <div class="card-head">Controls</div>
             <div class="card-body">
               <div class="row" style="justify-content:flex-end">
-                <button id="clear">Clear</button>
-                <button id="showRaw">Show raw JSON</button>
+                <button id="clear">Effacer</button>
+                <button id="showRaw">Afficher</button>
               </div>
               <pre id="raw" class="raw hidden"></pre>
             </div>
@@ -205,7 +227,7 @@
 
               <div class="card">
                 <div class="card-head">Linkedin</div>
-                <div id="profile_linkedin" class="card-body"><a href="https://www.linkedin.com/in/achraf-bouhlal-50210149/" target="_blank" rel="noopener">https://www.linkedin.com/in/achraf-bouhlal-50210149/</a></div>
+                <div id="profile_linkedin" class="card-body"><a href="in/achraf-bouhlal-50210149/" target="_blank" rel="noopener">in/achraf-bouhlal-50210149/</a></div>
               </div>
 
               <div class="card">
@@ -225,7 +247,7 @@
 
               <div class="card">
                 <div class="card-head">Address</div>
-                <div id="profile_address" class="card-body">Bruxelles, BE</div>
+                <div id="profile_address" class="card-body">Bruxelles</div>
               </div>
 
               <div class="card">
@@ -431,10 +453,10 @@
           <div class="step hidden" data-step="5">
             <div class="grid">
               <div class="card transparent-card">
-                <div class="card-head">Generate</div>
+                <div class="card-head">Téléchargements</div>
                 <div class="card-body" style="display:flex;gap:8px;flex-wrap:wrap;">
-                  <button id="generateResume" class="btn-primary">Generate resume</button>
-                  <button id="generateLetter">Generate letter</button>
+                  <button id="generateResume" class="btn-primary">Générer CV</button>
+                  <button id="generateLetter">Générer lettre</button>
                 </div>
               </div>
             </div>
@@ -450,9 +472,9 @@
             <div class="step-pill" data-step="5" title="Download">📥</div>
           </div>
           <div style="display:flex;gap:8px;align-items:center;">
-            <button id="stepPrev" class="btn-ghost">Previous</button>
-            <button id="stepPrevInline" class="btn-ghost" title="Previous (inline)">Previous</button>
-            <button id="stepNext" class="btn-primary">Next</button>
+            <button id="stepPrev" class="btn-ghost">Précédent</button>
+            <button id="stepPrevInline" class="btn-ghost" title="Previous (inline)">Précédent</button>
+            <button id="stepNext" class="btn-primary">Suivant</button>
           </div>
         </div>
       </div>

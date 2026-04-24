@@ -615,12 +615,9 @@ if (generateResumeBtn) generateResumeBtn.addEventListener('click', () => {
 
   const content = contentParts.join('\n');
 
-  // inject avatar image (if present in localStorage) as top-right positioned element in the page
-  const avatarData = localStorage.getItem('avatarData');
-  const avatarImgHtml = avatarData ? `<div style="position:absolute;top:10px;right:10px;width:36mm;height:36mm;border-radius:50%;overflow:hidden;border:1px solid #ddd;"><img src="${avatarData}" style="width:100%;height:100%;object-fit:cover;display:block;"></div>` : '';
-
+  // Do not inject avatar image into the generated resume output
   closePopup(popupStart);
-  openPrintWindow(buildA4Template('Resume', avatarImgHtml + content));
+  openPrintWindow(buildA4Template('Resume', content));
 });
 
 if (generateLetterBtn) generateLetterBtn.addEventListener('click', () => {
