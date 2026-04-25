@@ -151,7 +151,7 @@ Cordialement,
 
 Numéro de demande: ${reqId}`
       );
-      window.location.href = `mailto:contact@example.com?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:a.bouhlal@quboor.org?subject=${subject}&body=${body}`;
     });
   }
 
@@ -285,7 +285,7 @@ Cordialement,
 
 Numéro de demande: ${reqId}`
        );
-       window.location.href = `mailto:contact@example.com?subject=${subject}&body=${body}`;
+       window.location.href = `mailto:a.bouhlal@quboor.org?subject=${subject}&body=${body}`;
      });
    }
 
@@ -351,7 +351,7 @@ enrollForm.addEventListener('submit', (e)=>{
    const body = encodeURIComponent(bodyText);
 
    // open default mail client
-   window.location.href = `mailto:contact@example.com?subject=${subject}&body=${body}`;
+   window.location.href = `mailto:a.bouhlal@quboor.org?subject=${subject}&body=${body}`;
 
    contactForm.reset();
  });
