@@ -151,7 +151,7 @@ Cordialement,
 
 Numéro de demande: ${reqId}`
       );
-      window.location.href = `mailto:a.bouhlal@quboor.org?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:contact@example.com?subject=${subject}&body=${body}`;
     });
   }
 
@@ -162,10 +162,32 @@ Numéro de demande: ${reqId}`
       // ensure page is at top when popups open
       window.scrollTo({ top: 0, behavior: 'smooth' });
       showTermsPopup('Offre Basic — Termes et conditions', `
-        <p>Ce document est une proposition / brouillon et n’engage pas contractuellement les parties.</p>
-        <p>Les détails finaux (délais, livrables) seront confirmés après échange et validation par email.</p>
-        <p>Les prix indiqués peuvent être ajustés en fonction des demandes particulières ou options supplémentaires.</p>
-        <p>Les révisions et livraisons se font selon les conditions convenues lors de la validation finale.</p>
+        <div>
+          <p>Ce message constitue une demande d’information et ne crée pas de contrat contraignant.</p>
+          <p>Les détails finaux (délais, livrables) seront confirmés et validés par échange email avant toute production.</p>
+          <p>Les prix indiqués peuvent être ajustés en fonction d’options supplémentaires ou demandes particulières.</p>
+          <p>Les révisions incluses sont réalisées selon les modalités convenues lors de la validation finale.</p>
+          <p>Les livrables finaux seront fournis après paiement ou selon l’accord convenu par email.</p>
+        </div>
+
+        <p><strong>Propriété intellectuelle et usage des outils</strong></p>
+        <p>Tous les codes, prompts, scripts, modèles, algorithmes et éléments techniques fournis dans le cadre de Quboor AI sont la propriété exclusive de Quboor AI. Toute utilisation, reproduction, adaptation, distribution ou exploitation sans l'autorisation écrite préalable de Quboor AI est strictement interdite.</p>
+        <p>Les prompts fournis par Quboor AI sont destinés à un usage personnel et non transférable par l'utilisateur final. Le détournement, la revente, le partage public ou toute exploitation non autorisée des prompts est strictement interdit.</p>
+
+        <p><strong>Tests, vérifications et limites de responsabilité</strong></p>
+        <p>Quboor AI fournit l'outil après des vérifications et tests préalables raisonnables ; toutefois, l'outil est livré "tel quel" et l'utilisateur est responsable de la manière dont il l'exploite. Quboor AI ne saurait être tenu responsable des dommages, incidents, ou "casse" résultant de modifications, manipulations ou usages impropres du code, des prompts ou des livrables fournis.</p>
+
+        <p><strong>Intermédiation et responsabilité vis‑à‑vis des plateformes</strong></p>
+        <p>Quboor AI agit uniquement en tant qu'intermédiaire technique entre l'utilisateur et les plateformes publiques (sites d'offres, réseaux sociaux, portails de recrutement, etc.). Quboor AI n'est pas responsable des résultats, décisions, retours, contenus ou politiques appliqués par ces plateformes, ni des conséquences découlant de l'interaction entre l'utilisateur et ces services tiers.</p>
+
+        <p><strong>Clauses complémentaires de limitation</strong></p>
+        <ul>
+          <li>Vous vous engagez à ne pas divulguer ni publier des éléments techniques (prompts, extraits de code) reçus sans accord préalable.</li>
+          <li>Quboor AI ne garantit pas l'absence d'erreurs, bugs, incompatibilités ou performances spécifiques sur tous les environnements et décline toute garantie implicite autre que celles prévues par la loi.</li>
+          <li>Dans la mesure permise par la loi, la responsabilité financière de Quboor AI, pour tout préjudice direct résultant d'une prestation, est limitée au montant payé par l'utilisateur pour l'offre concernée.</li>
+          <li>Quboor AI décline toute responsabilité pour les pertes indirectes, immatérielles, commerciales ou imprévisibles résultant de l'utilisation des outils, prompts ou livrables.</li>
+          <li>Ces dispositions s'ajoutent aux conditions générales existantes et prévalent lorsque des clauses spécifiques viennent encadrer la propriété ou la responsabilité liée aux outils techniques fournis.</li>
+        </ul>
       `);
     });
   }
@@ -285,7 +307,7 @@ Cordialement,
 
 Numéro de demande: ${reqId}`
        );
-       window.location.href = `mailto:a.bouhlal@quboor.org?subject=${subject}&body=${body}`;
+       window.location.href = `mailto:contact@example.com?subject=${subject}&body=${body}`;
      });
    }
 
@@ -296,11 +318,32 @@ Numéro de demande: ${reqId}`
        // ensure page is at top when popups open
        window.scrollTo({ top: 0, behavior: 'smooth' });
        showTermsPopup('Pro — Termes et conditions', `
-         <p>Ce message constitue une demande d’information et ne crée pas de contrat contraignant.</p>
-         <p>Les détails finaux (délais, livrables) seront confirmés et validés par échange email avant toute production.</p>
-         <p>Les prix indiqués peuvent être ajustés en fonction d’options supplémentaires ou demandes particulières.</p>
-         <p>Les révisions incluses sont réalisées selon les modalités convenues lors de la validation finale.</p>
-         <p>Les livrables finaux seront fournis après paiement ou selon l’accord convenu par email.</p>
+         <div>
+           <p>Ce message constitue une demande d’information et ne crée pas de contrat contraignant.</p>
+           <p>Les détails finaux (délais, livrables) seront confirmés et validés par échange email avant toute production.</p>
+           <p>Les prix indiqués peuvent être ajustés en fonction d’options supplémentaires ou demandes particulières.</p>
+           <p>Les révisions incluses sont réalisées selon les modalités convenues lors de la validation finale.</p>
+           <p>Les livrables finaux seront fournis après paiement ou selon l’accord convenu par email.</p>
+         </div>
+
+         <p><strong>Propriété intellectuelle et usage des outils</strong></p>
+         <p>Tous les codes, prompts, scripts, modèles, algorithmes et éléments techniques fournis dans le cadre de Quboor AI sont la propriété exclusive de Quboor AI. Toute utilisation, reproduction, adaptation, distribution ou exploitation sans l'autorisation écrite préalable de Quboor AI est strictement interdite.</p>
+         <p>Les prompts fournis par Quboor AI sont destinés à un usage personnel et non transférable par l'utilisateur final. Le détournement, la revente, le partage public ou toute exploitation non autorisée des prompts est strictement interdit.</p>
+
+         <p><strong>Tests, vérifications et limites de responsabilité</strong></p>
+         <p>Quboor AI fournit l'outil après des vérifications et tests préalables raisonnables ; toutefois, l'outil est livré "tel quel" et l'utilisateur est responsable de la manière dont il l'exploite. Quboor AI ne saurait être tenu responsable des dommages, incidents, ou "casse" résultant de modifications, manipulations ou usages impropres du code, des prompts ou des livrables fournis.</p>
+
+         <p><strong>Intermédiation et responsabilité vis‑à‑vis des plateformes</strong></p>
+         <p>Quboor AI agit uniquement en tant qu'intermédiaire technique entre l'utilisateur et les plateformes publiques (sites d'offres, réseaux sociaux, portails de recrutement, etc.). Quboor AI n'est pas responsable des résultats, décisions, retours, contenus ou politiques appliqués par ces plateformes, ni des conséquences découlant de l'interaction entre l'utilisateur et ces services tiers.</p>
+
+         <p><strong>Clauses complémentaires de limitation</strong></p>
+         <ul>
+           <li>Vous vous engagez à ne pas divulguer ni publier des éléments techniques (prompts, extraits de code) reçus sans accord préalable.</li>
+           <li>Quboor AI ne garantit pas l'absence d'erreurs, bugs, incompatibilités ou performances spécifiques sur tous les environnements et décline toute garantie implicite autre que celles prévues par la loi.</li>
+           <li>Dans la mesure permise par la loi, la responsabilité financière de Quboor AI, pour tout préjudice direct résultant d'une prestation, est limitée au montant payé par l'utilisateur pour l'offre concernée.</li>
+           <li>Quboor AI décline toute responsabilité pour les pertes indirectes, immatérielles, commerciales ou imprévisibles résultant de l'utilisation des outils, prompts ou livrables.</li>
+           <li>Ces dispositions s'ajoutent aux conditions générales existantes et prévalent lorsque des clauses spécifiques viennent encadrer la propriété ou la responsabilité liée aux outils techniques fournis.</li>
+         </ul>
        `);
      });
    }
@@ -351,7 +394,7 @@ enrollForm.addEventListener('submit', (e)=>{
    const body = encodeURIComponent(bodyText);
 
    // open default mail client
-   window.location.href = `mailto:a.bouhlal@quboor.org?subject=${subject}&body=${body}`;
+   window.location.href = `mailto:contact@example.com?subject=${subject}&body=${body}`;
 
    contactForm.reset();
  });
@@ -592,8 +635,3 @@ document.addEventListener('keydown', (e)=>{
    });
  });
 
- // Demo buttons inside the demo panel: open Pro panel or Basic offer modal
- const demoProBtn = document.getElementById('demoPro');
- const demoBasicBtn = document.getElementById('demoBasic');
- if(demoProBtn) demoProBtn.addEventListener('click', quickEnrollHandler);
- if(demoBasicBtn) demoBasicBtn.addEventListener('click', ()=>openOfferModal());
