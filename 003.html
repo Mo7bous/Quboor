@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <title>QuboorAI</title>
+  <link rel="stylesheet" href="003.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Top header with greeting text and AI image -->
+    <header class="welcome-header">
+      <div class="welcome-left">
+        <div class="hello-line">Bonjour Pierre</div>
+        <div class="welcome-sub">Quboor AI - Ton assistant pour </div>
+        <div class="welcome-sub small">des candidatures qui se démarquent.</div>
+
+      </div>
+      <div class="welcome-right" aria-hidden="true">
+        <video src="Quboor.mp4" class="welcome-robot" autoplay loop muted playsinline aria-hidden="true"></video>
+      </div>
+    </header>
+    <!-- Top controls -->
+    <button class="top-btn left" id="btnData">Data</button>
+
+    <!-- Center Start button -->
+    <div class="center-start">
+      <button id="btnStart" class="start-btn"> ✨ Démarrer</button>
+    </div>
+
+
+    <!-- Top profile card: avatar + name & position (now placed above Step 1) -->
+    <div class="panel" id="topProfileCard" style="display:flex;align-items:center;gap:12px;">
+      <div class="avatar-circle" id="avatarWrap" title="Click to upload photo">
+        <img id="avatarImg" src="" alt="Avatar" class="hidden">
+        <div id="avatarPlaceholder">Upload</div>
+        <input id="avatarInput" type="file" accept="image/*" class="hidden" />
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+
+        <div id="top_name" class="profile-text" style="font-weight:700;font-size:16px;">Pierre Dupont</div>
+        <div id="top_position" class="profile-subtext" style="color:#555;font-size:13px;">Job Matching &amp; Optimisation des candidatures | ATS &amp; IA</div>
+      </div>
+    </div>
+    
+    <!-- Step 1: Search an offer (input removed as requested) -->
+    <div class="panel">
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+<div class="panel-icon">🔎</div> 
+          <h2 style="margin:0;font-size:14px;">Trouver une offre d'emploi</h2>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <!-- Step 2: short title and job input -->
+    <div class="panel">
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+<div class="panel-icon">📋</div>
+          <h2 style="margin:0;font-size:14px;">Coller l'offre</h2>
+        </div>
+
+        <input id="mainTitle" type="text" placeholder="Déscription ou l'URL de l'offre " style="padding:10px;border-radius:8px;border:1px solid #e6e6e6;font-size:10px;">
+         <div class="hint" style="margin-top:4px;font-size:19px: ">Le prompt est généré automatiquement et copié dans votre presse-papiers 📋 → Coller-le dans ChatGPT</div>
+      </div>
+    </div>
+
+
+
+    <!-- Step 3: paste content -->
+    <div class="panel">
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px;">
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+<div class="panel-icon">🧩</div>
+          <h2 style="margin:0;font-size:14px;">Réponse Prompt</h2>
+      </div>
+      <textarea id="input" placeholder="Coller ici la réponse de GPT" style="margin-top: 6px;padding:10px;border-radius:8px;border:1px solid #e6e6e6;font-size:14px;"></textarea>
+    </div>
+
+
+
+
+  </div>
+
+  <!-- Popups -->
+  <div class="popup hidden" id="popupData" aria-hidden="true">
+    <div class="popup-inner">
+      <button class="popup-close" data-target="popupData">✖️</button>
+      <h3>Data</h3>
+      <div class="popup-body">
+        <div class="panel">
+        <div class="grid">
+          <div class="card">
+            <div class="card-head">ATS</div>
+            <div id="ats" class="card-body empty">—</div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">Controls</div>
+            <div class="card-body">
+              <div class="row" style="justify-content:flex-end">
+                <button id="clear">Effacer</button>
+                <button id="showRaw">Afficher</button>
+              </div>
+              <pre id="raw" class="raw hidden"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup hidden" id="popupProfile" aria-hidden="true">
+    <div class="popup-inner">
+      <button class="popup-close" data-target="popupProfile">✖️</button>
+      <h3>Profile</h3>
+      <div class="popup-body">Profile content goes here.</div>
+    </div>
+  </div>
+
+  <div class="popup hidden" id="popupStart" aria-hidden="true">
+    <div class="popup-inner">
+      <button class="popup-close" data-target="popupStart">✖️</button>
+
+      <div class="popup-body steps-root">
+
+
+        <!-- Step 1: moved cards grid -->
+        <div class="steps">
+          <div class="step" data-step="1">
+            <div class="grid">
+              <div class="card">
+                <div class="card-head">Score</div>
+                <div class="card-body empty">
+                  <div class="score-inner" style="display:flex;align-items:center;justify-content:space-between;gap:180px;">
+                    <div id="score" class="score-value">—</div>
+                    <div class="score-img-wrap" style="position:relative;width:56px;height:40px;display:flex;align-items:center;justify-content:center;">
+                      <img src="/arrow2.png" alt="arrow" class="score-top-arrow" aria-hidden="true" />
+                      <img src="/speedo.png" alt="gauge" class="score-img" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Summary</span><span class="card-head-icon" title="summary">📄</span></div>
+                <div id="summary" class="card-body empty">—</div>
+              </div>
+
+
+
+              <div class="card">
+                <div class="card-head"><span>Author</span><span class="card-head-icon" title="author">✍️</span></div>
+                <div id="author" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">Company<span class="card-head-icon" title="company">🏢</span></div>
+                <div id="company" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">Values<span class="card-head-icon" title="values">💡</span></div>
+                <div id="values" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">News<span class="card-head-icon" title="news">📰</span></div>
+                <div id="news" class="card-body empty">—</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Step 2: skills / tools / arguments / forces / faiblesse -->
+          <div class="step hidden" data-step="2">
+            <div class="grid">
+              <div class="card">
+                <div class="card-head"><span>About me</span><span class="card-head-icon" title="about">👤</span></div>
+                <div id="about" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Requirements</span><span class="card-head-icon" title="requirements">🔎</span></div>
+                <div id="requirements" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Skills</span><span class="card-head-icon" title="skills">⚙️</span></div>
+                <div id="skills" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>MissingSkills</span><span class="card-head-icon" title="missing skills">❗</span></div>
+                <div id="missingSkills" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Tools</span><span class="card-head-icon" title="tools">🛠️</span></div>
+                <div id="tools" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>MissingTools</span><span class="card-head-icon" title="missing tools">❗</span></div>
+                <div id="missingTools" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Arguments</span><span class="card-head-icon" title="arguments">👍</span></div>
+                <div id="arguments" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Forces</span><span class="card-head-icon" title="strengths">💪</span></div>
+                <div id="forces" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Faiblesse</span><span class="card-head-icon" title="weaknesses">🤏</span></div>
+                <div id="faiblesse" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Name</span><span class="card-head-icon" title="name">👤</span></div>
+                <div id="profile_name" class="card-body">Pierre Dupont</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Position</span><span class="card-head-icon" title="position">💼</span></div>
+                <div id="profile_position" class="card-body">Data and Project Manager</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Linkedin</span><span class="card-head-icon" title="linkedin">🔗</span></div>
+                <div id="profile_linkedin" class="card-body"><a href="in/achraf-bouhlal-50210149/" target="_blank" rel="noopener">in/pierre-dupont-50210149/</a></div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Birthdate</span><span class="card-head-icon" title="birthdate">🎂</span></div>
+                <div id="profile_birthdate" class="card-body">1988-08-15</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Email</span><span class="card-head-icon" title="email">📧</span></div>
+                <div id="profile_email" class="card-body">pierre.dupont@gmail.com</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Phone</span><span class="card-head-icon" title="phone">📞</span></div>
+                <div id="profile_phone" class="card-body">+32 475 33 22 44</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Address</span><span class="card-head-icon" title="address">📍</span></div>
+                <div id="profile_address" class="card-body">Bruxelles</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Driving Licence</span><span class="card-head-icon" title="driving">🚗</span></div>
+                <div id="profile_driving" class="card-body">B</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Languages</span><span class="card-head-icon" title="languages">🌐</span></div>
+                <div id="profile_languages" class="card-body">French: C2 (Native)<br>English: C1 (Fluent)<br>Dutch: B1 (Intermediate)</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Education 1 — Institution</span><span class="card-head-icon" title="education1">🎓</span></div>
+                <div id="profile_edu1_institution" class="card-body">Tataouine Business School</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Education 1 — Degree / Details</span><span class="card-head-icon" title="education1-degree">📜</span></div>
+                <div id="profile_edu1_degree" class="card-body">Bachelor of Business Administration – Foreign Trade</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Education 1 — Dates</span><span class="card-head-icon" title="education1-dates">📅</span></div>
+                <div id="profile_edu1_dates" class="card-body">2008-09 to 2012-01</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Education 2 — Institution</span><span class="card-head-icon" title="education2">🎓</span></div>
+                <div id="profile_edu2_institution" class="card-body">IPMA®</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Education 2 — Degree / Details</span><span class="card-head-icon" title="education2-degree">📜</span></div>
+                <div id="profile_edu2_degree" class="card-body">Certified Project Management Associate Level D</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><span>Education 2 — Dates</span><span class="card-head-icon" title="education2-dates">📅</span></div>
+                <div id="profile_edu2_dates" class="card-body">2022-03 to 2022-07</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: CV lines -->
+          <div class="step hidden" data-step="3">
+            <div class="grid">
+
+
+              <div class="card">
+                <div class="card-head">CVline1<span class="card-head-icon" title="cvline1">📝</span></div>
+                <div id="cv1" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">CVline2<span class="card-head-icon" title="cvline2">📝</span></div>
+                <div id="cv2" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">CVline3<span class="card-head-icon" title="cvline3">📝</span></div>
+                <div id="cv3" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">CVline4<span class="card-head-icon" title="cvline4">📝</span></div>
+                <div id="cv4" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">CVline5<span class="card-head-icon" title="cvline5">📝</span></div>
+                <div id="cv5" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">CVline6<span class="card-head-icon" title="cvline6">📝</span></div>
+                <div id="cv6" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">CVline7<span class="card-head-icon" title="cvline7">📝</span></div>
+                <div id="cv7" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">CVline8<span class="card-head-icon" title="cvline8">📝</span></div>
+                <div id="cv8" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">CVline9<span class="card-head-icon" title="cvline9">📝</span></div>
+                <div id="cv9" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">CVline10<span class="card-head-icon" title="cvline10">📝</span></div>
+                <div id="cv10" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">CVline11<span class="card-head-icon" title="cvline11">📝</span></div>
+                <div id="cv11" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">CVline12<span class="card-head-icon" title="cvline12">📝</span></div>
+                <div id="cv12" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">CVline13<span class="card-head-icon" title="cvline13">📝</span></div>
+                <div id="cv13" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">CVline14<span class="card-head-icon" title="cvline14">📝</span></div>
+                <div id="cv14" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">CVline15<span class="card-head-icon" title="cvline15">📝</span></div>
+                <div id="cv15" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">CVline16<span class="card-head-icon" title="cvline16">📝</span></div>
+                <div id="cv16" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">Experience 1<span class="card-head-icon" title="experience1">🏢</span></div>
+                <div id="exp1" class="card-body">
+                  <div class="exp-item">Quboor AI</div>
+                  <div class="exp-item">Business Financial Reporting Specialist</div>
+                  <div class="exp-item">Remote</div>
+                  <div class="exp-item">08/2023 - Present</div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">Experience 2<span class="card-head-icon" title="experience2">🏢</span></div>
+                <div id="exp2" class="card-body">
+                  <div class="exp-item">Data Fund Center</div>
+                  <div class="exp-item">Platform Manager - Business Tester</div>
+                  <div class="exp-item">Zurich</div>
+                  <div class="exp-item">03/2022 - 05/2023</div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">Experience 3<span class="card-head-icon" title="experience3">🏢</span></div>
+                <div id="exp3" class="card-body">
+                  <div class="exp-item">Swiss Bank</div>
+                  <div class="exp-item">Back Office Specialist</div>
+                  <div class="exp-item">Limassol - Geneve</div>
+                  <div class="exp-item">05/2019 - 02/2022</div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">Experience 4<span class="card-head-icon" title="experience4">🏢</span></div>
+                <div id="exp4" class="card-body">
+                  <div class="exp-item">Benchmark Company </div>
+                  <div class="exp-item">Senior Oversight Manager</div>
+                  <div class="exp-item">Bruxelles - Prague</div>
+                  <div class="exp-item">07/2013 - 03/2029</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: empty placeholder for future content -->
+          <div class="step hidden" data-step="4">
+            <div class="grid">
+              <div class="card">
+                <div class="card-head">Objet<span class="card-head-icon" title="objet">✉️</span></div>
+                <div id="objet" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">Formule 1<span class="card-head-icon" title="formule1">🔖</span></div>
+                <div id="formule1" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">Body<span class="card-head-icon" title="body">📝</span></div>
+                <div id="body" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">Formule 2<span class="card-head-icon" title="formule2">🔖</span></div>
+                <div id="formule2" class="card-body empty">—</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">Signature<span class="card-head-icon" title="signature">✒️</span></div>
+                <div id="signature" class="card-body empty">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5: generate actions -->
+          <div class="step hidden" data-step="5">
+            <div class="grid">
+              <div class="card transparent-card">
+                <div class="card-head">Téléchargements</div>
+                <div class="card-body" style="display:flex;flex-direction:column;gap:12px;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+                    <div style="font-size:13px;color:#444;">Générer un CV A4 (marges par défaut : 10mm gauche/droite)</div>
+                    <button id="generateResume" class="btn-primary">📩</button>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+                    <div style="font-size:13px;color:#444;">Générer une lettre de motivation format A4</div>
+                    <button id="generateLetter">📩</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="steps-actions">
+          <div class="steps-indicator" aria-hidden="true">
+            <div class="step-pill active" data-step="1" title="Company">💼</div>
+            <div class="step-pill" data-step="2" title="Profile">👥</div>
+            <div class="step-pill" data-step="3" title="CV">📑</div>
+            <div class="step-pill" data-step="4" title="Letter">📜</div>
+            <div class="step-pill" data-step="5" title="Download">📩</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <button id="stepPrev" class="btn-ghost">←</button>
+            <button id="stepPrevInline" class="btn-ghost" title="Previous (inline)">←</button>
+            <button id="stepNext" class="btn-primary">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="003.js"></script>
+</body>
+</html>
