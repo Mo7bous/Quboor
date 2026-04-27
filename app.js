@@ -108,7 +108,7 @@ function openOfferModal(){
       </ul>
       <p>Profitez d’un CV et d’une lettre de motivation entièrement personnalisés, conçus pour mettre en valeur vos compétences et maximiser vos chances auprès des recruteurs. Chaque document est adapté à votre profil et aux exigences du poste visé, pour vous démarquer immédiatement. Vous bénéficiez également d’un accompagnement par mail 7j/7, pour ajuster vos documents et répondre à toutes vos questions. Donnez un véritable coup d’accélérateur à votre recherche d’emploi avec un service professionnel, réactif et sur mesure.</p>
       <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
-        <button class="btn basic" id="basicValidate">S'inscrire</button>
+        <button class="btn basic" id="basicValidate" style="background: linear-gradient(180deg,#526aef 0%, #131a1e 100%); color: #fff;">S'inscrire</button>
         <button class="btn outline" id="modalCancelInjected">Annuler</button>
       </div>
       <hr style="border:none;border-top:1px solid rgba(0,0,0,0.06);margin:16px 0">
@@ -254,16 +254,16 @@ function restoreMainContent(){
      <button class="close" id="modalClose" aria-label="Fermer">✕</button>
      <div style="position:relative">
        <div style="position:absolute;top:44px;right:16px;font-size:20px;font-weight:700">€249</div>
-       <h3 style="margin-top:8px">Quboor Pro — Premium</h3>
+       <h3 style="margin-top:8px">Quboor — Premium</h3>
        <p><strong>Accompagnement premium, livraison prioritaire</strong></p>
        <ul style="color:var(--muted);margin:10px 0 12px;line-height:1.4">
          <li>Jusqu’à 3 modèles et variantes</li>
          <li>Jusqu’à 5 heures de travail dédiées</li>
          <li>Support prioritaire et optimisation</li>
        </ul>
-       <p>Avec Quboor Pro — Premium, bénéficiez d’un accompagnement haut de gamme et d’une livraison prioritaire pour avancer plus vite et plus efficacement. Profitez de jusqu’à 3 modèles et variantes de CV et lettres, conçus sur mesure pour valoriser chaque facette de votre profil. Jusqu’à 5 heures de travail dédiées sont investies pour optimiser chaque détail et maximiser votre impact auprès des recruteurs. Grâce à un support prioritaire et des ajustements continus, vous mettez toutes les chances de votre côté avec un service réactif et exigeant.</p>
+       <p>Avec Quboor Premium, bénéficiez d’un accompagnement haut de gamme et d’une livraison prioritaire pour avancer plus vite et plus efficacement. Profitez de jusqu’à 3 modèles et variantes de CV et lettres, conçus sur mesure pour valoriser chaque facette de votre profil. Jusqu’à 5 heures de travail dédiées sont investies pour optimiser chaque détail et maximiser votre impact auprès des recruteurs. Grâce à un support prioritaire et des ajustements continus, vous mettez toutes les chances de votre côté avec un service réactif et exigeant.</p>
        <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
-         <button class="btn basic" id="proValidate">S'inscrire</button>
+         <button class="btn basic" id="proValidate" style="background: linear-gradient(180deg,#526aef 0%, #131a1e 100%); color: #fff;">S'inscrire</button>
          <button class="btn outline" id="proCancelInjected">Annuler</button>
        </div>
        <hr style="border:none;border-top:1px solid rgba(0,0,0,0.06);margin:16px 0">
@@ -293,11 +293,11 @@ function restoreMainContent(){
          return out;
        }
        const reqId = genId(9);
-       const subject = encodeURIComponent('Demande d’information — Plan Pro');
+       const subject = encodeURIComponent('Demande d’information — Plan Premium');
        const body = encodeURIComponent(
 `Bonjour,
 
-Je souhaite obtenir des informations et valider une demande pour le plan Pro — Accompagnement complet et service multi-modèles (€249).
+Je souhaite obtenir des informations et valider une demande pour le plan Premium — Accompagnement complet et service multi-modèles (€249).
 
 Merci de me contacter pour confirmer les délais, livrables et modalités.
 
@@ -317,7 +317,7 @@ Numéro de demande: ${reqId}`
      injectedProInfo.addEventListener('click', ()=>{
        // ensure page is at top when popups open
        window.scrollTo({ top: 0, behavior: 'smooth' });
-       showTermsPopup('Pro — Termes et conditions', `
+       showTermsPopup('Premium — Termes et conditions', `
          <div>
            <p>Ce message constitue une demande d’information et ne crée pas de contrat contraignant.</p>
            <p>Les détails finaux (délais, livrables) seront confirmés et validés par échange email avant toute production.</p>
@@ -510,36 +510,43 @@ enrollForm.addEventListener('submit', (e)=>{
 
    const map = {
      "CV": {
-       title: "Pack CV & Lettre — Détails",
+       title: "Pack CV & Lettre",
        topics: [
          "Analyse et restructuration de votre CV",
          "Rédaction ciblée par métier et ATS",
-         "Modèles de lettre et prompts réutilisables",
+         "Modèles de documents et prompts réutilisables",
          "Exemples concrets et checklist de candidature"
        ],
        results: [
-         "CV clair, concis et orienté résultats",
+         "CV clair, concis, orienté résultats : compatible ATS",
          "Lettre adaptée au poste et facile à personnaliser",
-         "Kit de templates prêt à l'emploi"
+         "Templates personelles prête à l'emploi"
        ],
        duration: "1 heure",
        price: "0€ (inclus dans Quboor Basic)"
      },
      "Prospection": {
-       title: "Automatisation de la prospection — Détails",
+       title: "Automatisation de la prospection",
        topics: [
-         "Recherche d'offres et sourcing structuré",
-         "Séquences d'approche et templates",
-         "Automatisation des suivis",
-         "Mesures et optimisation du pipeline"
+         "Analyse et restructuration de votre CV",
+         "Rédaction ciblée par métier et ATS",
+         "Modèles de documents et prompts réutilisables",
+         "Exemples concrets et checklist de candidature",
+"Recrutement et fonctionnement des ATS",
+"Scoring et screening automatisé",
+"On-demand video interview",
+"Performances et et taux de conversion",
+"Intégration de l’IA"
        ],
        results: [
-         "Processus de prospection reproductible",
-         "Séquences prêtes à envoyer",
-         "Gain de temps et meilleur taux de réponse"
+         "Processus de candidature reproductible",
+"Modèles de CV, lettres et prompts optimisés ATS",
+"Automatisation des candidatures",
+"Maîtrise des outils ATS , HireVue",
+"Optimisation du recrutement et intégration de l’IA"
        ],
        duration: "5 heures",
-       price: "0€ (inclus dans Quboor Basic)"
+       price: "0€ (inclus dans Quboor Premium)"
      }
    };
    const info = map[key] || { title: key, topics: [], results: [], duration: "", price: "" };
