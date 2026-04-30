@@ -19,65 +19,204 @@
       <span></span><span></span><span></span>
     </button>
     <div class="brand">
-      <img src="/banner2.png" alt="logo" />
-      <div>
-        <strong>uboor</strong>
-        <small>Ne postulez plus au hasard</small>
+      <div class="video-wrap">
+        <video class="brand-video" id="brandVideo" playsinline muted preload="auto" loop>
+          <source src="/Quboor.mp4" type="video/mp4">
+          <!-- fallback to image if video not supported -->
+        </video>
       </div>
+      <img class="logo-main" src="/loglog.png" alt="Quboor logo" />
     </div>
     <nav id="nav" class="nav">
-      <a href="#hero" data-cat="hero">Accueil</a>
-      <a href="#courses" data-cat="courses">Services</a>
+      <!-- Close X shown at top of slide-out on mobile -->
+      <button id="navClose" class="close-slider" aria-label="Fermer le menu">✕</button>
+
+      <a href="#accueil" data-cat="accueil">Accueil</a>
+      <a href="#inscription" data-cat="inscription">Particuliers</a>
+      <a href="#demo" data-cat="demo"><img src="/banner2 (6).png" alt="Quboor AI banner" class="nav-banner" /><span style="margin-left:6px">Demo</span></a>
       <a href="#articles" data-cat="articles">Articles</a>
       <a href="#documents" data-cat="documents">Documents</a>
-      <a href="#demo" data-cat="demo">Demo</a>
+      <a href="#courses" data-cat="courses">B2B</a>
       <a href="#about" data-cat="about">À propos</a>
       <a href="#contact" data-cat="contact">Contact</a>
     </nav>
   </header>
 
   <main class="frame">
-    <section id="hero" class="panel hero">
+    <section id="inscription" class="panel hero">
       <div class="hero-left">
-        <h1>Automatisez votre recherche d'emploi avec Quboor en intégrant l'IA</h1>
-        <p>Apprenez à utiliser les meilleurs outils d'IA pour rédiger votre CV, préparer vos entretiens, automatiser votre prospection et décrocher le job.</p>
+        <h1>Automatisez votre recherche d'emploi et/ou transformez votre métier avec Quboor.</h1>
+        <p>Utilisez Quboor — notre outil unique pour générer des CV et des lettres, analyser et scorer les offres (compatibilité ATS) et fournir des retours personnalisés.</p>
+        <p>Nous vous accompagnons également dans la cartographie de vos processus et la conception d'automatisations et de workflows pour optimiser votre activité professionnelle si vous êtes déjà en poste.</p>
         <div class="actions">
-          <button class="btn outline basic" id="learnMore">Quboor Basic</button>
-          <button class="btn primary" id="quickEnroll">Quboor Premium</button>
+          <!-- Buttons moved into service cards below -->
         </div>
         <div class="features dashes">
-          <div>- Modules pratiques couvrant le CV, la lettre de motivation, avec des conseils directement applicables.</div>
-          <div>- Sessions de consultations personnalisées pour un accompagnement ciblé et des retours concrets sur votre profil.</div>
-          <div>- Outil prêts à l’emploi pour créer des candidatures efficaces et professionnelles rapidement.</div>
+          <ul style="margin:8px 0 0;padding-left:18px;color:var(--muted);line-height:1.45">
+            <li>Modules pratiques couvrant le CV, la lettre de motivation, avec des conseils directement applicables.</li>
+            <li>Sessions de consultations personnalisées pour un accompagnement ciblé et des retours concrets sur votre profil.</li>
+            <li>Outil prêts à l’emploi pour créer des candidatures efficaces et professionnelles rapidement.</li>
+            <li>Ateliers « Transformer son métier » : cartographie des tâches, identification des tâches automatisables et conception de workflows automatisés pour gagner en efficacité.</li>
+          </ul>
         </div>
+
+        <!-- moved service cards (Pack CV & Lettre + Automatisation de la prospection) -->
+        <div class="hero-services" style="margin-top:12px;display:grid;grid-template-columns:1fr;gap:12px;">
+          <article class="card" style="flex-direction:column;align-items:flex-start;">
+            <img src="/img2.jpeg" alt="Optimisation de CV" style="width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:8px;">
+            <h3>Pack CV & Lettre optimisés</h3>
+            <p>Rédigez des CV impactants et des lettres ciblées à l'aide d'outils et modèles prêts à l'emploi.</p>
+            <div class="meta">Durée : 1h • Prix : <s>49€</s> <strong>0€</strong> (inclus dans Quboor Basic)</div>
+            <div class="card-actions" style="width:100%;justify-content:flex-end;margin-top:8px;gap:8px">
+              <button class="btn small outline basic" id="basicFromCV" style="margin-right:auto;">Quboor Basic</button>
+              <button class="btn small primary" data-course="CV" style="background:linear-gradient(180deg,#ffffff 0%, #f5f7f8 100%);color:var(--text);border:1px solid rgba(2,6,23,0.04);">En savoir</button>
+            </div>
+          </article>
+
+          <article class="card" style="flex-direction:column;align-items:flex-start;">
+            <img src="/img3.jpeg" alt="Automatisation de la prospection" style="width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:8px;">
+            <h3>Automatisation de la prospection</h3>
+            <p>Apprenez à utiliser les outils pour trouver des offres, automatiser candidatures et suivi.</p>
+            <div class="meta">Durée : 5h • Prix : <s>249€</s> <strong>0€</strong> (inclus dans Quboor Premium)</div>
+            <div class="card-actions" style="width:100%;justify-content:flex-end;margin-top:8px;gap:8px">
+              <button class="btn small outline" id="premiumFromProspect" style="margin-right:auto; background: linear-gradient(180deg, #526aef 0%, #131a1e 100%); color:#fff; border:none;">Quboor Premium</button>
+              <button class="btn small primary" data-course="Prospection" style="background:linear-gradient(180deg,#ffffff 0%, #f5f7f8 100%);color:var(--text);border:1px solid rgba(2,6,23,0.04);">En savoir</button>
+            </div>
+          </article>
+
+          <article class="card" style="flex-direction:column;align-items:flex-start;">
+            <img src="/img44.png" alt="Transformer son métier" style="width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:8px;">
+            <h3>Transformer son métier avec l’automatisation</h3>
+            <p>De l’analyse des tâches à l’automatisation : apprenez à repenser vos activités, identifier les tâches automatisables et déployer des flux de travail automatisés.</p>
+            <div class="meta">Durée : à définir • Tarification : Sur devis - HTVA</div>
+            <div class="card-actions" style="width:100%;justify-content:flex-end;margin-top:8px;gap:8px">
+              <button class="btn small primary" data-course="Transformer" style="background:linear-gradient(180deg,#ffffff 0%, #f5f7f8 100%);color:var(--text);border:1px solid rgba(2,6,23,0.04);">En savoir</button>
+            </div>
+          </article>
+        </div>
+
       </div>
       <div class="hero-right">
         <img src="/img1.jpeg" alt="IA illustration" />
       </div>
     </section>
 
+    <section id="accueil" class="panel prequel" aria-label="Accueil">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:6px 0;">
+        <div style="flex:1">
+          <img src="/img22.png" alt="Illustration IA & recrutement" style="width:100%;max-width:860px;border-radius:10px;object-fit:cover;margin-bottom:10px" />
+          <p style="margin:6px 0 10px;color:var(--muted);max-width:900px">
+            Quboor conçoit des solutions d'automatisation et d'accompagnement pour moderniser vos pratiques professionnelles, en aidant particuliers et petites entreprises à gagner en efficacité.
+          </p>
+
+          <div class="collapsible" id="collap-cv" style="margin-bottom:6px">
+            <div class="collapsible-title" style="display:flex;align-items:center;gap:8px;justify-content:flex-start">
+              <button class="collapse-toggle" aria-expanded="false" aria-controls="cv-content" title="Afficher le détail" style="border:0;background:transparent;cursor:pointer;font-size:18px;line-height:1;color:var(--brand-blue)">▸</button>
+              <h2 style="margin:0">Optimisation des CV & lettres — Rendre vos candidatures compatibles ATS</h2>
+            </div>
+            <div class="collapsible-content" id="cv-content" hidden>
+              <p style="margin:10px 0 0;color:var(--muted);max-width:900px">
+                Nous aidons à structurer et rédiger des CV et des lettres de motivation lisibles par les recruteurs et par les systèmes automatisés (ATS). Cela inclut l'ordre des sections, le choix des mots‑clés et la clarté des descriptions d'expérience.
+              </p>
+              <p style="margin:10px 0 0;color:var(--muted);max-width:900px">
+                Les ateliers couvrent : la sélection des mots-clés pertinents, la conversion d'expériences en résultats mesurables, l'adaptation des formats (.docx / PDF) et des variantes rapides à personnaliser pour différentes offres.
+              </p>
+            </div>
+          </div>
+
+          <div class="collapsible" id="collap-particuliers" style="margin-bottom:6px">
+            <div class="collapsible-title" style="display:flex;align-items:center;gap:8px;justify-content:flex-start">
+              <button class="collapse-toggle" aria-expanded="false" aria-controls="particuliers-content" title="Afficher le détail" style="border:0;background:transparent;cursor:pointer;font-size:18px;line-height:1;color:var(--brand-blue)">▸</button>
+              <h2 style="margin:0">Particuliers & PME — Intégrer des solutions automatisées dans le milieu professionnel</h2>
+            </div>
+            <div class="collapsible-content" id="particuliers-content" hidden>
+              <p style="margin:10px 0 0;color:var(--muted);max-width:900px">
+                Nous aidons les particuliers et les petites et moyennes entreprises à moderniser leurs pratiques professionnelles grâce à des outils d'automatisation et des workflows numériques. Notre approche valorise votre expérience métier et vos données existantes pour concevoir des solutions et des stratégies sur mesure, adaptées à vos enjeux concrets.
+              </p>
+              <p style="margin:10px 0 0;color:var(--muted);max-width:900px">
+                Nous intervenons notamment sur : l’optimisation des candidatures et des parcours professionnels, l’automatisation des actions de prospection, la conception de flux de travail performants, et la mise en place de formations personnalisées pour faciliter l’adoption. Objectif : simplifier vos processus, améliorer l’efficacité et générer des gains de productivité mesurables et durables.
+              </p>
+            </div>
+          </div>
+
+          <hr style="margin:8px 0;border:none;border-top:1px solid rgba(2,6,23,0.04)">
+
+          <div class="collapsible" id="collap-b2b" style="margin-bottom:6px">
+            <div class="collapsible-title" style="display:flex;align-items:center;gap:8px;justify-content:flex-start">
+              <button class="collapse-toggle" aria-expanded="false" aria-controls="b2b-content" title="Afficher le détail" style="border:0;background:transparent;cursor:pointer;font-size:18px;line-height:1;color:var(--brand-blue)">▸</button>
+              <h2 style="margin:0">Partenariats B2B — Accompagnement des entreprises et organisations</h2>
+            </div>
+            <div class="collapsible-content" id="b2b-content" hidden>
+              <p style="margin:10px 0 0;color:var(--muted);max-width:900px">
+                Nous accompagnons les entreprises et équipes internes dans leurs projets de transformation digitale via l'automatisation de processus, l'intégration d'outils connectés et la réorganisation de workflows métiers. Notre approche B2B vise la création de valeur opérationnelle concrète avec des améliorations progressives et mesurables.
+              </p>
+              <p style="margin:10px 0 0;color:var(--muted);max-width:900px">
+                Nos interventions incluent : audit et optimisation des processus à grande échelle, conception et déploiement de solutions d'automatisation sur mesure, intégration d'outils (RPA, API, plateformes internes), accompagnement des équipes (formation, conduite du changement) et mise en place de KPIs et tableaux de bord pour piloter les performances. Objectif : réduire les tâches à faible valeur ajoutée et structurer une adoption durable des solutions automatisées.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px">
+        <div style="padding:12px;border-radius:10px;border:1px solid rgba(2,6,23,0.04);background:linear-gradient(180deg,#fff,#fbfdff)">
+
+          <div style="display:flex;flex-direction:row;gap:8px;margin-top:10px;flex-wrap:wrap">
+            <a class="btn basic ripple" href="#inscription" data-cat="inscription" style="flex:1;min-width:140px;text-align:center;color: white;-webkit-text-fill-color: white;background: linear-gradient(90deg, rgb(11, 59, 115) 0%, rgb(15, 42, 86) 100%);-webkit-background-clip:unset;background-clip: unset;" w-tid="179">Particulier</a>
+            <a class="btn primary ripple" href="#courses" data-cat="courses" style="flex:1;min-width:140px;text-align:center;color:whitesmoke;-webkit-text-fill-color:whitesmoke;/* background:transparent; */-webkit-background-clip:unset;background-clip: unset;" w-tid="181">B2B</a>
+          </div>
+        </div>
+
+        <div style="padding:12px;border-radius:10px;border:1px solid rgba(2,6,23,0.04);background:linear-gradient(180deg,#fff,#fbfdff)">
+          <strong>Articles recommandés</strong>
+          <ul style="margin:8px 0 0 18px;color:var(--muted);padding:0">
+            <li><a class="link" href="#articles" data-cat="articles">Comprendre les ATS et l'impact de l'IA</a></li>
+            <li style="margin-top:6px"><a class="link" href="#articles" data-cat="articles">Pratiques pour candidatures compatibles ATS</a></li>
+          </ul>
+        </div>
+
+        <div style="padding:12px;border-radius:10px;border:1px solid rgba(2,6,23,0.04);background:linear-gradient(180deg,#fff,#fbfdff)">
+          <strong>Documents utiles</strong>
+
+          <ul style="margin-top:8px;padding-left:18px">
+            <li style="margin-bottom:6px"><a class="link" href="#documents" data-cat="documents">Modèles CV & Templates lettre</a></li>
+            <li><a class="link" href="#documents" data-cat="documents">Télécharger les documents disponibles</a></li>
+          </ul>
+        </div>
+      </div>
+
+
+    </section>
+
     <section id="courses" class="panel cards">
-      <h2></h2>
       <div class="card-grid">
+
+
+
+
         <article class="card">
-          <img src="/img2.jpeg" alt="Optimisation de CV">
-          <h3>Pack CV & Lettre optimisés</h3>
-          <p>Rédigez des CV impactants et des lettres ciblées à l'aide d'outils et modèles prêts à l'emploi.</p>
-          <div class="meta">Durée : 1h • Prix : <s>49€</s> <strong>0€</strong> (inclus dans Quboor Basic)</div>
+          <div class="card-image">
+            <img src="/img44.png" alt="Transformer son métier">
+            <span class="badge-b2b">PME</span>
+          </div>
+          <h3>Transformer son métier avec l’automatisation</h3>
+          <p>De l’analyse des tâches à l’automatisation : apprenez à repenser vos activités, identifier les tâches automatisables et déployer des flux de travail automatisés.</p>
+          <div class="meta">Durée : à définir • Tarification : Sur devis - HTVA</div>
           <div class="card-actions">
-            <button class="btn small primary" data-course="CV">En savoir</button>
+            <button class="btn small primary" data-course="Transformer">En savoir</button>
           </div>
         </article>
 
-
-
         <article class="card">
-          <img src="/img3.jpeg" alt="Automatisation de la prospection">
-          <h3>Automatisation de la prospection</h3>
-          <p>Apprenez à utiliser les outils pour trouver des offres, automatiser candidatures et suivi.</p>
-          <div class="meta">Durée : 5h • Prix : <s>249€</s> <strong>0€</strong> (inclus dans Quboor Premium)</div>
+          <div class="card-image">
+            <img src="/img55.png" alt="Optimisation des opérations">
+            <span class="badge-b2b">PME</span>
+          </div>
+          <h3>Optimisation des opérations & automatisation intelligente</h3>
+          <p>Méthodes et outils pour identifier gains d’efficacité, automatiser les processus métiers et intégrer l’IA dans les opérations des entreprises.</p>
+          <div class="meta">Durée : à définir • Tarification : Sur devis - HTVA</div>
           <div class="card-actions">
-            <button class="btn small primary" data-course="Prospection">En savoir</button>
+            <button class="btn small primary" data-course="Optimisation">En savoir</button>
           </div>
         </article>
       </div>
@@ -88,8 +227,11 @@
       <div style="margin-bottom:8px;color:var(--muted);font-size:14px">
         Suivez-nous sur <a class="link" href="https://www.instagram.com/quboorai" target="_blank" rel="noopener">Instagram</a> et sur <a class="link" href="https://www.linkedin.com/in/achraf-bouhlal-497266288/" target="_blank" rel="noopener">LinkedIn</a> pour des astuces quotidiennes — cliquez pour ouvrir.
       </div>
-      <p style="margin:6px 0 12px;color:var(--muted);font-size:14px;line-height:1.35;text-align:justify;text-justify:inter-word;">
-        Découvrez le fonctionnement des systèmes ATS et l’impact croissant de l’IA sur le recrutement : presse, agences, plateformes de candidature et employeurs décrivent à la fois les bénéfices (gain d’efficacité, tri à grande échelle) et les risques (biais, manque de transparence). Ils montrent comment l’IA transforme les pratiques RH tout en soulevant des enjeux éthiques et réglementaires. Informez‑vous pour mieux préparer vos candidatures, adapter vos documents aux filtres automatisés et savoir qui influence réellement les décisions de recrutement.
+      <p style="margin:6px 0 12px;color:var(--muted);font-size:12px;line-height:1.25;text-align:justify;text-justify:inter-word;">
+        Comprenez rapidement les ATS et leurs effets sur le tri des candidatures pour mieux adapter vos documents.
+      </p>
+      <p style="margin:6px 0 12px;color:var(--muted);font-size:12px;line-height:1.25;text-align:justify;text-justify:inter-word;">
+        Côté B2B, l’automatisation transforme les métiers : optimisation des processus, réduction des tâches répétitives et conception de workflows pour mesurer le gain de productivité et sécuriser l’adoption en entreprise.
       </p>
       <div class="article-list">
         <article class="article">
@@ -182,20 +324,23 @@
       </div>
     </section>
 
-    <section id="demo" class="panel demo-panel">
+    <section id="demo" class="panel demo-panel" aria-label="Quboor Ai (demo)">
       <div class="demo-card" role="region" aria-label="Démo">
         <div class="demo-header" style="text-align:center;max-width:920px;margin:0 auto;padding:6px 8px;">
-          <h2 style="margin:4px 0 6px">Comment utiliser la démo</h2>
+          <h2 style="margin:4px 0 6px">Comment utiliser Quboor</h2>
           <p style="margin:0;color:var(--muted);line-height:1.45;">
             Suivez ces 4 étapes simples pour transformer une offre d'emploi en documents prêts à envoyer : copiez la description, laissez Quboor l'analyser, enrichissez avec ChatGPT et générez vos CV et lettres optimisés.
-          </p>
-                  <p style="margin:0;color:var(--muted);line-height:1.45;">
-           Ce profil vous permet de tester notre outil ; les informations et les prompts présentés sont fournis à titre d’exemple et restent évolutifs, afin d’être ensuite entièrement adaptés à votre profil.
           </p>
         </div>
 
         <div style="width:100%;text-align:center;margin-top:12px">
-          <a class="demo-test-link" href="https://quboor.org/F7K2L9A3D" title="Profile Test" target="_blank" rel="noopener">
+          <!-- Banner + label added as requested -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:10px">
+            <img src="/banner2 (6).png" alt="Quboor banner" style="max-width:320px;width:25%;height:auto;border-radius:8px;object-fit:contain;" w-tid="379">
+            <div style="font-weight:700;color:var(--brand-blue);font-size:15px">Quboor</div>
+          </div>
+
+          <a class="demo-test-link" href="https://quboor.org/001" title="Profile Test" target="_blank" rel="noopener">
             <span class="icon" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
@@ -206,22 +351,22 @@
 
         <div class="demo-steps" role="list" aria-label="Étapes de la démo">
           <div class="step-card" role="listitem">
-            <strong>1. Copier l'offre / descriptif</strong>
+            <strong>📋 💬</strong>
             <p class="step-desc">Sélectionnez et copiez le texte de l'offre (URL ou descriptif complet).</p>
           </div>
 
           <div class="step-card" role="listitem">
-            <strong>2. Coller dans Quboor AI</strong>
+            <strong>📄 👉</strong>
             <p class="step-desc">Collez la description dans l'outil Quboor pour l'analyser et extraire compétences et exigences.</p>
           </div>
 
           <div class="step-card" role="listitem">
-            <strong>3. Copier → Coller vers ChatGPT</strong>
+            <strong>📋 → 🧠</strong>
             <p class="step-desc">Prenez le résumé généré et collez-le dans ChatGPT pour personnaliser le ton et les détails.</p>
           </div>
 
           <div class="step-card" role="listitem">
-            <strong>4. Générer les documents</strong>
+            <strong>📥 🧾</strong>
             <p class="step-desc">Cliquez pour créer CV & lettre optimisés, téléchargeables et prêts à envoyer.</p>
           </div>
         </div>
@@ -232,18 +377,32 @@
       <h2>À propos</h2>
       <div class="about-grid">
         <div>
-          <p>Des outils pratiques et un accompagnement personnalisé pour vous aider à rédiger vos CV, lettres de motivation et candidatures avec confiance.</p>
+          <p>Quboor aide les particuliers et les entreprises à gagner en efficacité grâce à des solutions d'automatisation, des outils IA et un accompagnement sur mesure pour les parcours professionnels et les processus métiers.</p>
 
-          <h3 style="margin-top:12px">Assistance</h3>
-          <p>Ce service est assuré par un consultant professionnel qui analyse et adapte personnellement vos CV et lettres de motivation. Vous bénéficiez d’un accompagnement humain, de retours concrets et d’une expérience issue du recrutement réel.</p>
-
-          <h3 style="margin-top:12px">Ce que je propose</h3>
+          <h3 style="margin-top:12px">Services pour particuliers</h3>
           <ul>
-            <li>Révision et optimisation de CV et lettres de motivation</li>
-            <li>Variantes multi-modèles pour les utilisateurs Pro</li>
-            <li>Traitement prioritaire sur demande</li>
-            <li>Accompagnement pratique pendant la préparation des candidatures</li>
+            <li>Optimisation de CV et lettres de motivation (formats compatibles ATS)</li>
+            <li>Création de modèles et variantes personnalisées</li>
+            <li>Ateliers pratiques : rédaction ciblée, préparation d'entretiens, pitch professionnel</li>
+            <li>Outils et prompts prêts à l’emploi pour automatiser la prospection d'offres</li>
+            <li>Assistance et révisions par un consultant (retours concrets, priorisation)</li>
+            <li>Guides et ressources téléchargeables pour candidatures efficaces</li>
           </ul>
+
+          <h3 style="margin-top:12px">Services B2B & Entreprises</h3>
+          <ul>
+            <li>Audit des processus de recrutement et cartographie des workflows</li>
+            <li>Conception et déploiement de workflows automatisés (RPA, intégrations API)</li>
+            <li>Intégration d'outils d'automatisation pour screening, scoring et enrichissement de candidatures</li>
+            <li>Conception de tableaux de bord KPI et reporting pour piloter la performance</li>
+            <li>Formations et conduite du changement pour faciliter l’adoption par les équipes</li>
+            <li>Proof of concepts et prototypes pour démontrer faisabilité et ROI</li>
+          </ul>
+
+          <h3 style="margin-top:12px">Approche & valeur ajoutée</h3>
+          <p style="margin-top:6px;color:var(--muted);max-width:900px">
+            Notre approche combine l’expertise métier et l’exploitation de vos données existantes pour définir des solutions pragmatiques, modulaires et mesurables. Nous privilégions la simplicité, la réutilisabilité (templates, prompts, scripts) et la gouvernance (KPIs, limites, bonnes pratiques) afin d'assurer une adoption durable.
+          </p>
 
           <h3 style="margin-top:12px">Horaires de consultation</h3>
           <div style="color:var(--muted);margin-top:6px">
@@ -257,6 +416,14 @@
               <img src="/me.png" alt="">
               <div class="person-meta">
                 <strong>Achraf B</strong>
+                <div class="person-title">Job Matching &amp; Optimisation des candidatures | ATS &amp; IA</div>
+              </div>
+            </div>
+
+            <div class="person">
+              <img src="/img66.png" alt="Mohammed Boussati">
+              <div class="person-meta">
+                <strong>Mohammed Boussati</strong>
                 <div class="person-title">Job Matching &amp; Optimisation des candidatures | ATS &amp; IA</div>
               </div>
             </div>
@@ -275,19 +442,11 @@
       <p style="margin:0 0 12px;color:var(--muted);font-size:13px;line-height:1.35;">
         Utilisez ces modèles pour créer un CV et une lettre de motivation compatibles avec les systèmes ATS — n'hésitez pas à télécharger les documents ci‑dessous pour les adapter à votre profil.
       </p>
-      <div style="margin:12px 0 0">
-        <a href="https://quboor.org/#articles" style="color:var(--text);text-decoration:underline;font-weight:600;" target="_blank" rel="noopener">
-          Qu'est-ce qu'un système de suivi des candidats (ATS) ?
-        </a>
-      </div>
+
+
+
       <div class="doc-list" style="display:flex;flex-direction:column;gap:10px">
-
-
-
-
-
-
-        <!-- Uploaded .docx files for direct download -->
+        <!-- keep the previous download cards for quick access -->
         <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px;border-radius:8px;border:1px solid rgba(2,6,23,0.04);background:transparent">
           <div>
             <strong>Modèle 1</strong>
@@ -327,11 +486,11 @@
     </section>
 
     <section id="contact" class="panel contact">
-      <h2>Contact</h2>
       <form id="contactForm" class="form">
         <label>
           Sujet
           <select name="sujet" required>
+            <option value="" disabled selected>Choisir un sujet...</option>
             <option value="Inscription">Inscription</option>
             <option value="Information">Information</option>
             <option value="GDPR">GDPR</option>

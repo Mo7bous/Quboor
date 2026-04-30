@@ -4,7 +4,7 @@
   --muted: #3b5670; /* muted dark-blue for secondary text */
   --accent: #ff6b35;
   --glass: rgba(0,0,0,0.03);
-  --radius:12px;
+  --radius:0px;
   --text: #072a4b; /* dark blue for main text */
   --gap:14px;
   --mobile-break:720px;
@@ -17,7 +17,7 @@
 }
 
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;background: whitesmoke;color:var(--text);-webkit-font-smoothing:antialiased}
+html,body{height:100%;margin:0;position:relative;background: url("/backbacknav.png") center top / cover fixed, whitesmoke;color:var(--text);-webkit-font-smoothing:antialiased}
 a{
   background: linear-gradient(180deg,#526aef 0%, #131a1e 100%);
   -webkit-background-clip: text;
@@ -27,61 +27,350 @@ a{
   text-decoration: none;
 }
 .topbar{
-  position:fixed;left:0;right:0;top:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:8px 12px;gap:12px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
-  backdrop-filter: blur(6px);z-index:30;border-bottom:1px solid rgba(255,255,255,0.03)
+  position:fixed;
+  left:0;
+  right:0;
+  top:0;
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 12px;
+  gap:12px;
+  /* make header visually distinct and stable while content scrolls */
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index:100;
 }
-.brand{display:flex;align-items:center;gap:10px}
-.brand img {
-    width: 40px;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
-}
-.brand strong{display:block;color:var(--brand-blue)}
-.brand small{display:block;color:var(--brand-blue-muted);font-size:11px}
-.nav{
+.brand{
   display:flex;
   align-items:center;
   gap:10px;
-  background:var(--bg);
-  /* allow an optional decorative texture that we enable for the slide-out on mobile */
+  /* fixed at top-right so logo remains visible while scrolling */
+  position: fixed;
+  right: 12px;
+  top: 8px;
+  z-index: 120;
+  /* keep the brand visually light without a blurred background */
+  background: transparent;
+  padding: 6px 8px;
+  border-radius: 8px;
+  /* removed box-shadow to keep the brand flush with the page */
+}
+
+/* logo sits inline (left) inside the brand block */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  /* fixed at top-right so logo+text remain visible while scrolling */
+  position: fixed;
+  right: 12px;
+  top: 8px;
+  z-index: 120;
+  background: transparent;
+  padding: 6px 8px;
+  border-radius: 8px;
+  /* removed box-shadow to keep branding unobtrusive */
+}
+
+/* main logo (graphic) */
+.brand .logo-main{
+  width: 56px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  flex: 0 0 auto;
+  transition: width .18s ease, transform .18s ease, margin .18s ease;
+  border: none;
+}
+
+/* small looping video displayed inline left of the logo, fades in/out via JS */
+.brand .video-wrap{
+  width:56px;
+  height:56px;
+  flex:0 0 auto;
+  margin-right:8px;
+  position:relative;
+  border-radius:8px; /* container radius requested */
+  overflow:hidden;    /* clip video to the rounded container */
+  display:inline-block;
+  vertical-align:middle;
+}
+.brand-video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  /* video itself doesn't need its own radius; container handles rounding */
+  border-radius:0;
+  flex:0 0 auto;
+  opacity:0;
+  transition:opacity .8s ease;
+  pointer-events:none;
+  display:inline-block;
+  vertical-align:middle;
+  position:relative; /* needed for pseudo-element border around the video */
+  overflow:visible;
+}
+
+/* visible state (video fades in) */
+.brand-video.visible{
+  opacity:1;
+}
+
+/* when the brand video is visible, give the whole brand block a blue→black gradient border */
+.brand.video-visible{
+  /* no gradient on the entire brand container anymore; keep spacing and fixed positioning */
+  padding:6px;
+  border-radius:10px;
+  position: fixed;
+  right: 12px;
+  top: 8px;
+  z-index: 120;
+}
+
+/* apply a focused gradient ring only around the video when the brand is in video-visible state */
+.brand.video-visible .brand-video::before{
+  content: "";
+  position: absolute;
+  /* slightly larger than the video to create a visible ring */
+  inset: -4px;
+  border-radius: 12px;
+  background: linear-gradient(180deg,#526aef 0%, #131a1e 100%);
+  z-index: -1; /* positioned behind the video */
+  pointer-events: none;
+  /* subtle blur to soften the ring */
+  filter: blur(0.6px);
+}
+
+/* ensure video and logo align on same baseline */
+.brand .logo-main, .brand .brand-video{
+  vertical-align: middle;
+}
+
+/* secondary logo (text image) placed to the left/right of main logo */
+.brand .logo-alt{
+  height:34px;
+  width:auto;
+  object-fit:contain;
+  border-radius:6px;
+  flex:0 0 auto;
+  margin-left:4px;
+  border:none;
+}
+
+/* make the logos slightly smaller on narrow screens but keep them aligned to the right inside the header */
+@media (max-width: 720px){
+  .brand { right: 12px; top: 8px; }
+  .brand .logo-main { width: 135px; }
+  .brand .logo-alt { height:28px; }
+}
+
+/* make the logo slightly smaller on narrow screens but keep it aligned to the right inside the header */
+@media (max-width: 720px){
+  .brand { right: 12px; top: 8px; }
+  .brand img { width: 48px; }
+}
+
+/* apply the same font as the hero headline and a blue→black gradient to the brand name */
+.brand strong{
+  display:block;
+  font-weight:700;
+  font-family: inherit; /* match the hero / base font */
+  background: linear-gradient(180deg,#526aef 0%, #131a1e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-size: 15px;
+}
+
+/* tagline: same font as headline and dark blue → black linear gradient for the text */
+.brand small{
+  display:block;
+  font-family: inherit; /* match the hero / base font */
+  font-size:11px;
+  /* dark blue to near-black gradient text */
+  background: linear-gradient(180deg, #0b3b73 0%, #07121a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+.nav{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  /* use a solid background (not transparent) and apply the decorative nav image */
+  background-color: var(--bg);
+  background-image: url("/backbacknav.png");
   background-repeat:no-repeat;
   background-position:center;
   background-size:cover;
+  position: relative; /* establish stacking context for blur overlay */
+  z-index: 10;
 }
-.nav a{color:var(--muted);padding:8px 10px;border-radius:8px;font-size:14px}
+
+/* blurred overlay that sits above the decorative image but below nav content */
+.nav::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.18); /* slightly mute the texture */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+/* ensure nav children (links, buttons) render above the blur overlay */
+.nav > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* Close button placed at the top of the mobile slide-out nav */
+.close-slider{
+  display:none;
+  position:absolute;
+  top:12px;
+  right:12px;
+  width:40px;
+  height:40px;
+  border-radius:0;
+  border:0;
+  background: transparent;
+  color:var(--text);
+  font-size:18px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow: none;
+}
+.nav .nav-banner{
+  width:36px;
+  height:28px;
+  object-fit:contain;
+  margin-right:6px;
+  border-radius:6px;
+  vertical-align:middle;
+  flex:0 0 auto;
+}
+.nav a{color:var(--muted);padding:6px 8px;border-radius:8px;font-size:14px}
 .nav .cta{margin-left:6px;padding:8px 12px;border-radius:10px;background:var(--accent);border:none;color:#fff;font-weight:600}
+
+/* When the slide-out nav is open (mobile), make links use the specified blue→black gradient for categories */
+.nav.open a {
+  font-family: inherit;
+  font-weight:700;
+  font-size:15px;
+  /* requested blue → near-black gradient for sidebar category text */
+  background: linear-gradient(180deg, #526aef 0%, #131a1e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  padding:8px 10px;
+}
 /* Hamburger for small screens */
-.hamburger{display:none;background:none;border:0;padding:8px;cursor:pointer}
-.hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:4px 0;border-radius:2px;opacity:0.9}
+.hamburger{display:none;background:none;border:0;padding:8px;cursor:pointer;display:inline-grid;place-items:center}
+.hamburger span{
+  display:block;
+  width:22px;
+  height:2px;
+  background:var(--text);
+  margin:4px 0;
+  border-radius:2px;
+  opacity:0.9;
+  transition:transform .22s cubic-bezier(.2,.9,.25,1), opacity .18s, background-color .18s;
+  transform-origin: center;
+}
+/* animated state: morph into X when hamburger has .is-active */
+.hamburger.is-active span:nth-child(1){
+  transform: translateY(6px) rotate(45deg);
+  width:22px;
+}
+.hamburger.is-active span:nth-child(2){
+  opacity:0;
+  transform: scaleX(0);
+}
+.hamburger.is-active span:nth-child(3){
+  transform: translateY(-6px) rotate(-45deg);
+  width:22px;
+}
 
 /* Layout frame with fixed header and footer, central scrollable area */
 .frame{padding-top:76px;padding-bottom:72px;min-height:calc(100vh - 148px);overflow:auto}
-.panel{max-width:1100px;margin:18px 2%;padding:18px;border-radius:var(--radius);background:var(--card);box-shadow:none;border:1px solid rgba(2,6,23,0.04)}
+.panel{max-width:1100px;margin:18px 2%;padding:18px;border-radius:var(--radius);background:var(--card);box-shadow:none;border:1px solid rgba(2,6,23,0.04);background-image: url("/backback.png"); background-repeat:no-repeat; background-position:center; background-size:cover}
 .hero{display:flex;gap:18px;align-items:center}
 .hero-left{flex:1}
 .hero-right{flex:1;text-align:center}
+
+/* Ensure the three service cards (.hero-services) have equal spacing:
+   - single column on small screens
+   - three equal columns with consistent gap on larger screens */
+.hero-services{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px; /* consistent spacing between items */
+}
+
+/* Desktop: arrange hero-services as three equal columns with the same gap */
+@media (min-width: 721px){
+  .hero-services{
+    grid-template-columns:repeat(3, 1fr);
+    gap:12px;
+  }
+}
 .hero-right img{width:100%;max-width:378px;border-radius:12px;transform:translateY(-4px)}
 .hero h1{font-size:20px;margin:0 0 8px}
 .features{list-style:none;padding:0;margin:12px 0 0;color:var(--muted);display:grid;gap:6px}
 .actions{display:flex;gap:8px;margin-top:12px}
-.btn{padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--text);cursor:pointer}
+.btn{padding:10px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--text);cursor:pointer}
 
-/* Quboor Pro — dark blue metallic primary */
+/* Quboor Pro — default primary (kept for general use) */
 .btn.primary{
-  background: linear-gradient(90deg, #0b3b73 0%, #0f2a56 100%);
+  background: linear-gradient(180deg, #526aef 0%, #131a1e 100%);
   border: none;
   color: #fff;
-  box-shadow: 0 8px 20px rgba(11,59,115,0.18), inset 0 -2px 6px rgba(255,255,255,0.03);
+  box-shadow: 0 8px 20px rgba(11, 59, 115, 0.18), inset 0 -2px 6px rgba(255, 255, 255, 0.03);
+  border-radius: 8px; /* ensure primary buttons have consistent 8px radius */
 }
 
-/* Quboor Basic — light blue metallic (used with outline or standalone .basic) */
+/* Premium button appearance inside the JobSearch (hero) area */
+#hero .btn.primary{
+  background: linear-gradient(180deg, #526aef 0%, #131a1e 100%);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 10px 24px rgba(37,90,174,0.12), inset 0 -2px 6px rgba(255,255,255,0.03);
+}
+
+/* "En savoir" buttons inside the hero services: white → whitesmoke with dark text */
+#hero .hero-services .btn.primary,
+#hero .hero-services .btn.small.primary{
+  background: linear-gradient(180deg, #ffffff 0%, #f5f7f8 100%);
+  color: var(--text);
+  border: 1px solid rgba(2,6,23,0.04);
+  box-shadow: none;
+}
+
+/* Quboor Basic — dark blue gradient for JobSearch primary appearance */
 .btn.basic{
-  background: linear-gradient(90deg,#dff4ff 0%, #bfe8ff 60%, #9fcfff 100%);
-  border: 1px solid rgba(159,207,255,0.9);
+  background: linear-gradient(90deg, rgb(223, 244, 255) 0%, rgb(191, 232, 255) 60%, rgb(159, 207, 255) 100%);
   color: #072a4b;
-  box-shadow: 0 6px 16px rgba(31,125,195,0.06), inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* Override Basic button appearance specifically inside the hero/service area (job search) */
+.hero-services .btn.basic,
+#inscription .hero-services .btn.basic {
+  background: linear-gradient(90deg, #0b3b73 0%, #0f2a56 100%);
+  border: none;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(11,59,115,0.18), inset 0 -2px 6px rgba(255,255,255,0.04);
 }
 
 /* keep an explicit outline variant — combine with .basic when needed */
@@ -98,14 +387,51 @@ a{
   align-items:center;
   gap:12px;
   margin:0 2%;
+  /* apply decorative card image where inner surfaces are white-looking */
+  background-image: url("/backback.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
-.card img{
+.card .card-image{
+  position:relative;
+  flex:0 0 120px;
+  order:2; /* keep image on the right for desktop layout */
   width:120px;
   height:120px;
+}
+.card .card-image img{
+  width:100%;
+  height:100%;
   object-fit:cover;
   border-radius:8px;
-  flex:0 0 120px;
-  order:2; /* keep image on the right */
+  display:block;
+}
+
+/* B2B badge placed at bottom-right corner of the image */
+.badge-b2b{
+  position:absolute;
+  right:8px;
+  bottom:8px;
+  background: linear-gradient(180deg,#0b3b73 0%, #265f99 100%);
+  color:#fff;
+  font-weight:700;
+  font-size:11px;
+  padding:6px 8px;
+  border-radius:8px;
+  box-shadow: 0 6px 18px rgba(11,59,115,0.18);
+  border: 1px solid rgba(255,255,255,0.06);
+  letter-spacing: 0.6px;
+  text-transform:uppercase;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ensure badge and image scale on small screens (stacked card layout) */
+@media (max-width:520px){
+  .card .card-image{width:100%;height:160px;order:0;flex:0 0 auto}
+  .badge-b2b{right:12px;bottom:12px;font-size:12px;padding:8px 10px;border-radius:10px}
 }
 .card h3{margin:0;font-size:16px}
 .meta{color:var(--muted);font-size:13px}
@@ -165,7 +491,11 @@ a{
   max-height:90vh;
   overflow:auto;
   box-sizing:border-box;
-  background:linear-gradient(180deg,#ffffff,#f7fafc);
+  /* use decorative card background image instead of plain white */
+  background-image: url("/backback.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   padding:18px;
   border-radius:14px;
   border:1px solid rgba(0,0,0,0.06);
@@ -208,46 +538,153 @@ a{
 .footer{position:fixed;left:0;right:0;bottom:0;height:56px;display:flex;align-items:center;justify-content:center;border-top:1px solid rgba(255,255,255,0.02);background:linear-gradient(0deg, rgba(255,255,255,0.01), rgba(255,255,255,0));z-index:20}
 .footer small{font-size:60%}
 
+/* subtle blur overlay above the decorative background image */
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  /* a translucent layer to slightly mute + blur the background */
+  background: rgba(255,255,255,0.14);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ensure main content sits above the overlay while header/footer keep their higher stacking */
+.frame{position:relative;z-index:10}
+.panel{position:relative;z-index:11}
+
 /* Responsive */
+
+/* Remove all borders site-wide but allow buttons to keep their radius */
+* { border: none !important; }
+/* restore button radius explicitly to override the global reset */
+.btn { border-radius: 8px !important; }
+
+/* Keep inputs and form controls visually clear by restoring background contrast
+   while still removing outlines and borders. If you prefer to keep subtle dividers
+   for inputs, remove or tweak the second rule above. */
+input, textarea, select, button {
+  border: none !important;
+  background-clip: padding-box;
+}
 @media (max-width: 720px){
   .topbar{padding:8px}
   .nav{
     position: fixed;
     left: 0;
-    top: 63px;
-    bottom: 67px;
-    height: 350px;
-    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    /* start closed as off-canvas; width is zero to avoid covering content when closed */
+    width: 0;
     background: var(--bg);
     flex-direction: column;
-    padding: 12px;
-    gap: 12px;
+    /* add extra top spacing so the first nav item sits lower on mobile */
+    padding: 60px 12px 12px;
+    gap: 5px;
     transform: translateX(-110%);
-    transition: transform .28s ease;
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
-    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.6);
+    transition: transform .28s ease, width .28s ease;
     z-index: 80;
     /* ensure the nav has layering for the decorative texture when opened */
     background-repeat:no-repeat;
     background-position:center;
     background-size:cover;
+    /* remove any rounded corners, borders and shadow to create a clean panel */
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    overflow: hidden;
   }
   /* subtle vector texture applied only when the slide-out nav is open */
   .nav.open{
     transform:translateX(0);
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'><g fill='none' stroke='%230b3b73' stroke-opacity='0.06' stroke-width='1'><circle cx='48' cy='64' r='44'/><circle cx='168' cy='124' r='28'/><circle cx='360' cy='48' r='60'/><path d='M0 420 C120 360 280 480 400 420 C520 360 680 480 800 420' /></g></svg>");
-    /* keep the texture very light so nav content remains readable */
+    /* limit the opened nav to at most 50% of the viewport width */
+    width: 50vw;
+    /* use the provided decorative image asset as the nav background when open */
+    background-image: url("/backbacknav.png");
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: cover;
+    /* keep the texture light and readable by layering a subtle background color */
     background-color: var(--bg);
+    /* ensure full-bleed appearance when open */
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    overflow: auto;
+  }
+
+  /* show the close X when nav is open on mobile */
+  .nav.open .close-slider{
+    display:flex;
   }
   .hamburger{display:block}
   .brand strong{margin-top:12px;font-size:15px}
   .brand small{display:block;color:var(--brand-blue-muted);font-size:11px;margin-top:-2px}
-.brand img {
-    width: 32px;
-}
+
+  /* mobile-specific logo alt sizing and overlap */
+  .brand .logo-alt {
+      height: 60px;
+      margin-left: -20px;
+  }
+
   .hero{flex-direction:column-reverse;gap:12px}
   .card-grid{grid-template-columns:1fr}
   .frame{padding-top:72px;padding-bottom:72px}
+}
+
+/* Desktop: show nav links under the logo images in the header and make topbar adjust to content */
+@media (min-width: 721px){
+  .topbar{
+    height: auto;
+    padding: 10px 18px;
+    align-items: flex-start;
+    gap: 8px;
+    /* keep header layering above content */
+    z-index: 30;
+  }
+
+  /* keep the brand fixed at top-right so the logo remains visible while scrolling */
+  .brand{
+    position: fixed;
+    right: 12px;
+    top: 8px;
+    margin-left: 0;
+    padding: 6px 8px;
+    background: transparent;
+    z-index: 60; /* ensure it sits above other content */
+  }
+
+  /* position nav as a horizontal row under the brand images */
+  .nav{
+    position: static;
+    transform: none;
+    width: auto;
+    flex-direction: row;
+    padding: 0;
+    gap: 5px;
+    background: transparent;
+    background-image: none;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    align-self: center;
+    margin-top: 8px;
+  }
+
+  /* make nav links more prominent on desktop */
+  .nav a{
+    color:var(--muted);
+    padding:6px 10px;
+    font-size:15px;
+    border-radius:6px;
+    background: transparent;
+  }
+
+  /* hide the hamburger on larger screens (already default but ensure no display artifact) */
+  .hamburger{display:none}
 }
 
 /* Small animations */
@@ -272,7 +709,11 @@ a{
   padding:18px;
   border-radius:var(--radius);
   box-sizing:border-box;
-  background:var(--card);
+  /* decorative background image for demo card */
+  background-image: url("/backback.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   box-shadow: 0 8px 24px rgba(11,59,115,0.04);
   border:1px solid rgba(2,6,23,0.04);
 }
@@ -304,6 +745,11 @@ a{
   border:1px solid rgba(2,6,23,0.04);
   transition:transform .22s cubic-bezier(.2,.9,.25,1), box-shadow .22s;
   min-height:92px;
+  /* decorative image applied to step cards for consistency */
+  background-image: url("/backback.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 .step-card:hover{
   transform:translateY(-4px);
@@ -425,4 +871,37 @@ a{
 .article .link .article-logo + * {
   text-align:justify;
   text-justify:inter-word;
+}
+
+/* Collapsible intro blocks on Accueil */
+.collapsible{margin-bottom:6px}
+.collapsible .collapsible-title h2{font-size:18px;margin:0}
+
+/* Reduce font size specifically for the Accueil collapsible headings requested */
+#collap-cv .collapsible-title h2,
+#collap-particuliers .collapsible-title h2,
+#collap-b2b .collapsible-title h2 {
+  font-size:14px;
+}
+.collapse-toggle{
+  width:28px;height:28px;display:inline-grid;place-items:center;border-radius:6px;background:transparent;border:1px solid rgba(2,6,23,0.04);cursor:pointer;color:var(--brand-blue);font-weight:700;
+}
+.collapse-toggle[aria-expanded="true"]{transform:rotate(90deg)}
+.collapsible-content{margin-top:8px}
+.collapsible-content[hidden]{display:none}
+
+/* When user scrolls we toggle this class to remove the header blur for clearer readability */
+.topbar.no-blur{
+  backdrop-filter: none;
+  /* slightly increase header contrast when blur is removed */
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0));
+  border-bottom-color: rgba(0,0,0,0.04);
+}
+
+/* Center section titles for Articles and Documents */
+.articles > h2,
+.documents > h2 {
+  text-align: center;
+  margin-left: 0;
+  margin-right: 0;
 }

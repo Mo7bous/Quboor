@@ -31,7 +31,41 @@ yearEl.textContent = new Date().getFullYear();
 
 /* navigation toggle for mobile and category behavior:
    clicking a nav item will close the sidebar and display only that panel */
-navToggle.addEventListener('click', ()=>nav.classList.toggle('open'));
+navToggle.addEventListener('click', ()=>{
+  nav.classList.toggle('open');
+  // toggle active state for animated hamburger (morph to X)
+  navToggle.classList.toggle('is-active');
+});
+
+// Close button inside slide-out nav (mobile): close nav and reset hamburger
+const navCloseBtn = document.getElementById('navClose');
+if(navCloseBtn){
+  navCloseBtn.addEventListener('click', ()=>{
+    nav.classList.remove('open');
+    navToggle.classList.remove('is-active');
+  });
+}
+
+// Close the slide-out nav when clicking anywhere outside it (works for mouse/touch).
+// We check the composedPath when available to correctly detect clicks inside shadow DOM or nested elements.
+document.addEventListener('click', (e) => {
+  if (!nav.classList.contains('open')) return;
+
+  // get event path (fallbacks for cross-browser)
+  const path = (e.composedPath && e.composedPath()) || e.path || (function () {
+    const p = [];
+    let el = e.target;
+    while (el) { p.push(el); el = el.parentElement; }
+    return p;
+  })();
+
+  // If click was inside nav or on the nav toggle button or the close button, do nothing.
+  if (path.includes(nav) || path.includes(navToggle) || path.includes(navCloseBtn)) return;
+
+  // Otherwise close nav and reset hamburger visual.
+  nav.classList.remove('open');
+  navToggle.classList.remove('is-active');
+});
 
 // show/hide panels by category and close nav on selection
 const navLinks = Array.from(document.querySelectorAll('#nav a[data-cat]'));
@@ -45,8 +79,8 @@ function showCategory(catId, updateHash = true){
   // scroll to top when showing a new section
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  // special handling: if user asks for 'hero' (Accueil) and main was replaced by Pro offer, restore original content
-  if(catId === 'hero' && document.getElementById('pro-offer')){
+  // special handling: if user asks for 'inscription' (Accueil) and main was replaced by Pro offer, restore original content
+  if(catId === 'inscription' && document.getElementById('pro-offer')){
     restoreMainContent();
   }
 
@@ -58,11 +92,54 @@ navLinks.forEach(a=>{
     e.preventDefault();
     const cat = a.dataset.cat;
     if(cat) showCategory(cat);
+    // close mobile nav and reset hamburger visual (morph back to bars)
+    nav.classList.remove('open');
+    navToggle.classList.remove('is-active');
   });
 });
-// default view: accueil (hero) or preserve hash if present
-const initial = location.hash ? location.hash.replace('#','') : 'hero';
-if(document.getElementById(initial)) showCategory(initial, false);
+ // default view: accueil (inscription) or preserve hash if present
+ const initial = location.hash ? location.hash.replace('#','') : 'accueil';
+ if(document.getElementById(initial)) showCategory(initial, false);
+
+ // Ensure the Accueil "Particulier" and "B2B" buttons navigate via showCategory
+ // (these are anchors inside #accueil that should redirect to the panels without full reload)
+ const accueilEl = document.getElementById('accueil');
+ if(accueilEl){
+   const partBtn = accueilEl.querySelector('a[href="#inscription"]');
+   const b2bBtn = accueilEl.querySelector('a[href="#courses"]');
+   // links on Accueil that point to documents should use the site's showCategory routing
+   const docsLinks = Array.from(accueilEl.querySelectorAll('a[href="#documents"]'));
+   // links on Accueil that point to articles should also use showCategory
+   const articlesLinks = Array.from(accueilEl.querySelectorAll('a[href="#articles"]'));
+   if(partBtn){
+     partBtn.addEventListener('click', (e)=>{
+       e.preventDefault();
+       showCategory('inscription');
+     });
+   }
+   if(b2bBtn){
+     b2bBtn.addEventListener('click', (e)=>{
+       e.preventDefault();
+       showCategory('courses');
+     });
+   }
+   if(docsLinks && docsLinks.length){
+     docsLinks.forEach(a=>{
+       a.addEventListener('click', (e)=>{
+         e.preventDefault();
+         showCategory('documents');
+       });
+     });
+   }
+   if(articlesLinks && articlesLinks.length){
+     articlesLinks.forEach(a=>{
+       a.addEventListener('click', (e)=>{
+         e.preventDefault();
+         showCategory('articles');
+       });
+     });
+   }
+ }
 
 // open modal helper
 function openModal(selectedCourse){
@@ -90,9 +167,12 @@ function openModal(selectedCourse){
 function openOfferModal(){
   if(!modalCard) return openModal();
 
-  // give the modal a grey overlay and ensure the card itself is white (like the Pro offer look)
+  // give the modal a grey overlay and ensure the card shows the decorative card art
   modal.style.background = 'rgba(2,6,23,0.6)'; // grey dim around the card
-  modalCard.style.background = '#ffffff';
+  modalCard.style.backgroundImage = 'url("/backback.png")';
+  modalCard.style.backgroundRepeat = 'no-repeat';
+  modalCard.style.backgroundPosition = 'center';
+  modalCard.style.backgroundSize = 'cover';
   modalCard.style.border = '1px solid rgba(0,0,0,0.06)';
 
   modalCard.innerHTML = `
@@ -100,20 +180,22 @@ function openOfferModal(){
     <div style="position:relative">
       <div style="position:absolute;top:44px;right:16px;font-size:20px;font-weight:700">€49</div>
       <h3 style="margin-top:8px">Offre Basic — Confirmation</h3>
-      <p><strong>One-off professional CV + cover</strong></p>
+      <p><strong>CV professionnel unique + lettre de motivation</strong></p>
       <ul style="color:var(--muted);margin:10px 0 12px;line-height:1.4">
-        <li> CV personalisé</li>
+        <li> CV personnalisé</li>
         <li> Lettre de motivation</li>
         <li> Support par mail 7/7</li>
       </ul>
-      <p>Profitez d’un CV et d’une lettre de motivation entièrement personnalisés, conçus pour mettre en valeur vos compétences et maximiser vos chances auprès des recruteurs. Chaque document est adapté à votre profil et aux exigences du poste visé, pour vous démarquer immédiatement. Vous bénéficiez également d’un accompagnement par mail 7j/7, pour ajuster vos documents et répondre à toutes vos questions. Donnez un véritable coup d’accélérateur à votre recherche d’emploi avec un service professionnel, réactif et sur mesure.</p>
-      <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
-        <button class="btn basic" id="basicValidate" style="background: linear-gradient(180deg,#526aef 0%, #131a1e 100%); color: #fff;">S'inscrire</button>
-        <button class="btn outline" id="modalCancelInjected">Annuler</button>
+      <p style="margin-top:6px">Nous créons pour vous un CV clair et ciblé, conçu pour mettre en avant vos compétences et votre expérience de manière lisible par les recruteurs et les systèmes ATS.</p>
+      <p style="margin-top:6px">La lettre de motivation fournie est rédigée pour s’adapter précisément à l’offre visée et à votre profil, avec des formulations faciles à personnaliser.</p>
+      <p style="margin-top:6px">Vous bénéficiez d’un accompagnement par email 7j/7 pour ajuster les documents et obtenir des réponses rapides à vos questions.</p>
+      <p style="margin-top:8px">Un service professionnel et réactif pour donner un coup d’accélérateur à votre recherche d’emploi.</p>
+      <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;justify-content:center">
+        <button class="btn basic" id="basicValidate" style="width:80%;background: linear-gradient(180deg,#526aef 0%, #131a1e 100%); color: #fff;">S'inscrire</button>
       </div>
       <hr style="border:none;border-top:1px solid rgba(0,0,0,0.06);margin:16px 0">
-      <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
-        <span style="color:var(--muted)">Termes et conditions</span>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:8px;justify-content:center">
+        <span style="color:var(--muted);text-align:center">Termes et conditions</span>
         <button class="btn info" id="basicInfo" aria-label="Infos">ℹ</button>
       </div>
     </div>
@@ -126,7 +208,6 @@ function openOfferModal(){
   const injectedValidate = modal.querySelector('#basicValidate');
 
   if(injectedClose) injectedClose.addEventListener('click', closeModal);
-  if(injectedCancel) injectedCancel.addEventListener('click', closeModal);
   if(injectedValidate) {
     injectedValidate.addEventListener('click', ()=>{
       // generate 9-char alphanumeric request id
@@ -141,7 +222,7 @@ function openOfferModal(){
       const body = encodeURIComponent(
 `Bonjour,
 
-Je souhaite obtenir des informations et valider une demande pour l'Offre Basic — One-off professional CV + cover (€49).
+Je souhaite obtenir des informations et valider une demande pour l'Offre Basic — CV professionnel unique + lettre de motivation (€49).
 
 Merci de me contacter pour confirmer les délais, livrables et modalités.
 
@@ -245,9 +326,12 @@ function restoreMainContent(){
    // open a Pro-style modal instead of replacing the main page
    if(!modalCard) return openModal();
 
-   // give modal a grey overlay and ensure the card is white like Pro look
+   // give modal a grey overlay and ensure the card shows the decorative card art
    modal.style.background = 'rgba(2,6,23,0.6)';
-   modalCard.style.background = '#ffffff';
+   modalCard.style.backgroundImage = 'url("/backcard2.png")';
+   modalCard.style.backgroundRepeat = 'no-repeat';
+   modalCard.style.backgroundPosition = 'center';
+   modalCard.style.backgroundSize = 'cover';
    modalCard.style.border = '1px solid rgba(0,0,0,0.06)';
 
    modalCard.innerHTML = `
@@ -261,14 +345,16 @@ function restoreMainContent(){
          <li>Jusqu’à 5 heures de travail dédiées</li>
          <li>Support prioritaire et optimisation</li>
        </ul>
-       <p>Avec Quboor Premium, bénéficiez d’un accompagnement haut de gamme et d’une livraison prioritaire pour avancer plus vite et plus efficacement. Profitez de jusqu’à 3 modèles et variantes de CV et lettres, conçus sur mesure pour valoriser chaque facette de votre profil. Jusqu’à 5 heures de travail dédiées sont investies pour optimiser chaque détail et maximiser votre impact auprès des recruteurs. Grâce à un support prioritaire et des ajustements continus, vous mettez toutes les chances de votre côté avec un service réactif et exigeant.</p>
-       <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
-         <button class="btn basic" id="proValidate" style="background: linear-gradient(180deg,#526aef 0%, #131a1e 100%); color: #fff;">S'inscrire</button>
-         <button class="btn outline" id="proCancelInjected">Annuler</button>
+       <p style="margin-top:6px">Quboor Premium offre un accompagnement sur‑mesure : plusieurs modèles de CV et de lettres sont créés pour valoriser distinctement chaque aspect de votre parcours.</p>
+       <p style="margin-top:6px">Nous consacrons jusqu’à 5 heures à l’optimisation de vos documents et à l’ajustement fin du contenu pour maximiser votre impact auprès des recruteurs.</p>
+       <p style="margin-top:6px">Vous profitez d’une livraison prioritaire et d’un support réactif pour obtenir des révisions rapides et un suivi continu jusqu’à validation finale.</p>
+       <p style="margin-top:8px">Un service exigeant et personnalisé pour accélérer vos candidatures et augmenter vos chances de succès.</p>
+       <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;justify-content:center">
+         <button class="btn basic" id="proValidate" style="width:80%;background: linear-gradient(180deg,#526aef 0%, #131a1e 100%); color: #fff;">S'inscrire</button>
        </div>
        <hr style="border:none;border-top:1px solid rgba(0,0,0,0.06);margin:16px 0">
-       <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
-         <span style="color:var(--muted)">Termes et conditions</span>
+       <div style="display:flex;align-items:center;gap:8px;margin-top:8px;justify-content:center">
+         <span style="color:var(--muted);text-align:center">Termes et conditions</span>
          <button class="btn info" id="proInfoInjected" aria-label="Infos">ℹ</button>
        </div>
      </div>
@@ -282,7 +368,6 @@ function restoreMainContent(){
    const injectedValidate = modal.querySelector('#proValidate');
 
    if(injectedClose) injectedClose.addEventListener('click', closeModal);
-   if(injectedCancel) injectedCancel.addEventListener('click', closeModal);
    if(injectedValidate){
      injectedValidate.addEventListener('click', ()=>{
        // generate 9-char alphanumeric request id
@@ -348,9 +433,15 @@ Numéro de demande: ${reqId}`
      });
    }
  }
-// initial binding for quickEnroll and learnMore
-if(quickEnroll) quickEnroll.addEventListener('click', quickEnrollHandler);
-if(learnMore) learnMore.addEventListener('click', ()=>openOfferModal());
+ // initial binding for quickEnroll and learnMore
+ if(quickEnroll) quickEnroll.addEventListener('click', quickEnrollHandler);
+ if(learnMore) learnMore.addEventListener('click', ()=>openOfferModal());
+
+ // bind relocated buttons inside service cards
+ const basicFromCV = document.getElementById('basicFromCV');
+ const premiumFromProspect = document.getElementById('premiumFromProspect');
+ if(basicFromCV) basicFromCV.addEventListener('click', ()=> openOfferModal()); // opens Basic offer
+ if(premiumFromProspect) premiumFromProspect.addEventListener('click', ()=> quickEnrollHandler()); // opens Premium offer
 
 modalClose.addEventListener('click', closeModal);
 modalCancel.addEventListener('click', closeModal);
@@ -483,7 +574,11 @@ enrollForm.addEventListener('submit', (e)=>{
    card.style.maxWidth = '560px';
    card.style.maxHeight = '70vh';
    card.style.overflow = 'auto';
-   card.style.background = 'linear-gradient(180deg,#ffffff,#f7fafc)';
+   // use decorative card image instead of plain gradient
+   card.style.backgroundImage = 'url("/backback.png")';
+   card.style.backgroundRepeat = 'no-repeat';
+   card.style.backgroundPosition = 'center';
+   card.style.backgroundSize = 'cover';
    card.style.padding = '16px';
    card.style.borderRadius = '12px';
    card.style.border = '1px solid rgba(0,0,0,0.04)';
@@ -509,6 +604,43 @@ enrollForm.addEventListener('submit', (e)=>{
    window.scrollTo({ top: 0, behavior: 'smooth' });
 
    const map = {
+     "Transformer": {
+       title: "Transformer son métier avec l’IA",
+       topics: [
+         "Cartographie des tâches et identification des opportunités d’automatisation",
+         "Conception de workflows assistés par IA",
+         "Choix et mise en place d’outils (RPA, scripts, intégrations API)",
+         "Mesure d’impact et gouvernance des automations"
+       ],
+       results: [
+         "Roadmap d’automatisation pour votre poste ou équipe",
+         "Workflows automatisés prêts à déployer",
+         "Gains de productivité identifiés et chiffrés"
+       ],
+       duration: "à définir",
+       price: "Sur devis - HTVA"
+     },
+     "Optimisation": {
+      title: "Optimisation des opérations & automatisation intelligente",
+      topics: [
+        "Audit des processus métiers",
+        "Cartographie des flux de travail existants",
+        "Analyse des tâches manuelles, répétitives ou à faible valeur",
+        "Identification des points de blocage, erreurs et pertes de temps",
+        "Priorisation des initiatives d’automatisation",
+        "Évaluation impact vs effort et définition de roadmap",
+        "Intégration d'automatisation pour pilotage et automatisation (Excel, ChatGPT, RPA, API)",
+        "Plan de déploiement, KPI et suivi"
+      ],
+      results: [
+        "Plan d’optimisation opérationnelle détaillé avec recommandations et priorités",
+        "Automatisations prototypes (selon périmètre) démontrant faisabilité",
+        "Templates et outils réutilisables pour standardiser les opérations",
+        "Tableau de bord KPI pour mesurer et suivre les améliorations"
+      ],
+      duration: "Session d’analyse stratégique (4 heures) — durée finale adaptable • TJM: 500-600 €/jour",
+      price: "📌 Tarification : sur devis personnalisé"
+    },
      "CV": {
        title: "Pack CV & Lettre",
        topics: [
@@ -532,18 +664,18 @@ enrollForm.addEventListener('submit', (e)=>{
          "Rédaction ciblée par métier et ATS",
          "Modèles de documents et prompts réutilisables",
          "Exemples concrets et checklist de candidature",
-"Recrutement et fonctionnement des ATS",
-"Scoring et screening automatisé",
-"On-demand video interview",
-"Performances et et taux de conversion",
-"Intégration de l’IA"
+         "Recrutement et fonctionnement des ATS",
+         "Scoring et screening automatisé",
+         "On-demand video interview",
+         "Performances et et taux de conversion",
+         "Intégration de l'automatisation"
        ],
        results: [
          "Processus de candidature reproductible",
-"Modèles de CV, lettres et prompts optimisés ATS",
-"Automatisation des candidatures",
-"Maîtrise des outils ATS , HireVue",
-"Optimisation du recrutement et intégration de l’IA"
+         "Modèles de CV, lettres et prompts optimisés ATS",
+         "Automatisation des candidatures",
+         "Maîtrise des outils ATS , HireVue",
+         "Optimisation du recrutement et intégration de l’IA"
        ],
        duration: "5 heures",
        price: "0€ (inclus dans Quboor Premium)"
@@ -570,7 +702,11 @@ enrollForm.addEventListener('submit', (e)=>{
    card.style.maxWidth = '600px';
    card.style.maxHeight = '78vh';
    card.style.overflow = 'auto';
-   card.style.background = 'linear-gradient(180deg,#ffffff,#f7fafc)';
+   // use decorative card background for course popup
+   card.style.backgroundImage = 'url("/backback.png")';
+   card.style.backgroundRepeat = 'no-repeat';
+   card.style.backgroundPosition = 'center';
+   card.style.backgroundSize = 'cover';
    card.style.padding = '16px';
    card.style.borderRadius = '12px';
    card.style.border = '1px solid rgba(0,0,0,0.04)';
@@ -593,6 +729,12 @@ enrollForm.addEventListener('submit', (e)=>{
          ${info.results.map(r=>`<li>${r}</li>`).join('')}
        </ul>
      </div>
+
+     <div style="display:flex;gap:10px;justify-content:center;margin-top:8px">
+       <button id="courseContact" class="btn primary" style="padding:8px 12px;border-radius:8px">Nous contacter</button>
+     </div>
+
+     <div style="height:8px"></div>
    `;
    wrap.appendChild(card);
    document.body.appendChild(wrap);
@@ -601,6 +743,40 @@ enrollForm.addEventListener('submit', (e)=>{
    function rm(){ wrap.remove(); }
    close.addEventListener('click', rm);
    wrap.addEventListener('click', (e)=>{ if(e.target === wrap) rm(); });
+
+   // bind the "Nous contacter" button to open a prefilled mailto for enquiries (only if present)
+   const contactBtn = document.getElementById('courseContact');
+   if(contactBtn){
+     contactBtn.addEventListener('click', ()=>{
+       // compose subject and body with course info and full topics list
+       const subj = encodeURIComponent(`${info.title} — Demande d'information`);
+       const lines = [];
+       lines.push('Bonjour,');
+       lines.push('');
+       lines.push('Je souhaite obtenir un devis et des informations complémentaires pour la prestation suivante :');
+       lines.push(info.title);
+       lines.push('');
+       lines.push('Détails souhaités :');
+       lines.push('- Disponibilités pour une session d’analyse');
+       lines.push('- Budget à prévoir');
+       lines.push('- Modalités (distanciel / présentiel)');
+       lines.push('');
+       lines.push('Sujets que nous souhaitons aborder :');
+       // include the full list of topics from the course details
+       if(Array.isArray(info.topics) && info.topics.length){
+         info.topics.forEach(t=> lines.push(`- ${t}`));
+         lines.push('');
+       }
+       lines.push('Merci de me contacter pour convenir des prochaines étapes.');
+       lines.push('');
+       lines.push('Cordialement,');
+       lines.push('[Votre prénom et nom]');
+       lines.push('[Votre e-mail / téléphone]');
+
+       const body = encodeURIComponent(lines.join('\n'));
+       window.location.href = `mailto:contact@example.com?subject=${subj}&body=${body}`;
+     });
+   }
  }
 
  // reveal animations on scroll for panels
@@ -615,6 +791,37 @@ enrollForm.addEventListener('submit', (e)=>{
    io.observe(panel);
    observers.push(io);
  });
+
+ // Collapsible toggles for Accueil intro blocks
+ function bindCollapsibles(){
+   const toggles = Array.from(document.querySelectorAll('.collapse-toggle'));
+   toggles.forEach(btn=>{
+     const targetId = btn.getAttribute('aria-controls');
+     const target = targetId ? document.getElementById(targetId) : null;
+     btn.addEventListener('click', ()=>{
+       const isOpen = btn.getAttribute('aria-expanded') === 'true';
+       if(target){
+         if(isOpen){
+           target.setAttribute('hidden','');
+           btn.setAttribute('aria-expanded','false');
+           btn.textContent = '▸';
+         } else {
+           target.removeAttribute('hidden');
+           btn.setAttribute('aria-expanded','true');
+           btn.textContent = '▾';
+         }
+       }
+     });
+   });
+ }
+ // bind on initial load and after any main content restore
+ bindCollapsibles();
+ // ensure collapsibles rebind after main content restore
+ const originalRestoreMainContent = restoreMainContent;
+ restoreMainContent = function(){
+   originalRestoreMainContent();
+   setTimeout(bindCollapsibles, 50);
+ };
 
 // small animated accent on hero headline using anime.js
 anime({
@@ -641,4 +848,51 @@ document.addEventListener('keydown', (e)=>{
      // small visual feedback already via CSS :active
    });
  });
+
+ // Brand video: fade in for a short period then fade out, repeating every 20s.
+ (function(){
+   const vid = document.getElementById('brandVideo');
+   const brand = document.querySelector('.brand');
+   if(!vid) return;
+   // Try to play the video (some browsers require interaction; muted helps)
+   vid.play().catch(()=>{ /* ignore play failures */ });
+
+   const VISIBLE_MS = 4000; // how long video stays visible
+   const CYCLE_MS = 20000;  // total cycle length
+
+   // Use class toggling for smooth CSS transitions and apply a gradient border on the brand container
+   function showOnce(){
+     vid.classList.add('visible');
+     if(brand) brand.classList.add('video-visible');
+     // ensure playback starts when visible
+     if(vid.paused) vid.play().catch(()=>{});
+     setTimeout(()=> {
+       vid.classList.remove('visible');
+       if(brand) brand.classList.remove('video-visible');
+     }, VISIBLE_MS);
+   }
+
+   // start with a small stagger so it feels natural
+   setTimeout(showOnce, 1200);
+   // repeat on interval
+   setInterval(showOnce, CYCLE_MS);
+ })();
+
+ // Remove header blur when user scrolls: toggle a class on the topbar to disable backdrop-filter
+ (function(){
+   const topbar = document.querySelector('.topbar');
+   if(!topbar) return;
+   let lastState = window.scrollY > 8;
+   function update(){
+     const scrolled = window.scrollY > 8;
+     if(scrolled !== lastState){
+       lastState = scrolled;
+       if(scrolled) topbar.classList.add('no-blur');
+       else topbar.classList.remove('no-blur');
+     }
+   }
+   // initial check and bind
+   update();
+   window.addEventListener('scroll', update, {passive:true});
+ })();
 
