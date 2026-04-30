@@ -33,13 +33,10 @@ a{
 }
 .brand{display:flex;align-items:center;gap:10px}
 .brand img {
-    width: 19%;
+    width: 40px;
     height: auto;
     border-radius: 8px;
     object-fit: cover;
-    position: fixed;
-    right: 97px;
-    top: 6px;
 }
 .brand strong{display:block;color:var(--brand-blue)}
 .brand small{display:block;color:var(--brand-blue-muted);font-size:11px}
@@ -245,15 +242,9 @@ a{
   .hamburger{display:block}
   .brand strong{margin-top:12px;font-size:15px}
   .brand small{display:block;color:var(--brand-blue-muted);font-size:11px;margin-top:-2px}
-  .brand img {
-    width: 19%;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
-    position: fixed;
-    right: 99px;
-    top: 8px;
-  }
+.brand img {
+    width: 32px;
+}
   .hero{flex-direction:column-reverse;gap:12px}
   .card-grid{grid-template-columns:1fr}
   .frame{padding-top:72px;padding-bottom:72px}
