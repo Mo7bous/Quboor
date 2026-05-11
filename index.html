@@ -2,554 +2,65 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-  <title>Formation IA - Recherche d'emploi assistée</title>
-  <link rel="stylesheet" href="styles.css">
-  <script type="importmap">
-  {
-    "imports": {
-      "animejs": "https://esm.sh/animejs@3.2.1"
-    }
-  }
-  </script>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>LGEC - Les Génies En Chanson</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--card:#fff;--accent:#ff6b6b;--accent-2:#ffd93d;--muted:#5a5a5a;--shadow:0 6px 18px rgba(10,10,10,.08);font-family:'Baloo 2',cursive}
+    *{box-sizing:border-box}html,body,#app{height:100%}body{margin:0;background:linear-gradient(180deg,#fff9f4 0%,#fff 70%);color:#222;font-size:16px;font-family:'Baloo 2',cursive}a{text-decoration:none;color:inherit}
+    .topbar{height:64px;display:flex;align-items:center;padding:8px 12px;gap:8px;background:linear-gradient(90deg,var(--accent-2),#ffe6a3);position:sticky;top:0;z-index:30;box-shadow:var(--shadow);overflow:hidden}.topbar:before{content:"";position:absolute;left:0;top:0;width:50px;height:100%;background:linear-gradient(90deg,#fff,rgba(255,255,255,0));pointer-events:none;z-index:0}.topbar>*{position:relative;z-index:1}.top-actions{margin-left:auto;display:flex;align-items:center;gap:10px}.top-cta{margin-left:8px;display:flex;align-items:flex-start;gap:10px}.icon-btn{width:35px;height:35px;border-radius:10px;border:0;background:rgba(255,255,255,.8);font-size:16px;cursor:pointer}.download-btn{background:linear-gradient(90deg,var(--accent),#ff8b8b);box-shadow:var(--shadow);border-radius:12px;padding:0 10px;font-weight:700;color:#fff;text-decoration:none;height:30px;display:flex;align-items:center;justify-content:center;font-size:12.8px}.album-cta-btn{background:linear-gradient(135deg,#7d3aa7 0%,#ff6b6b 55%,#ffd93d 100%);box-shadow:0 10px 24px rgba(125,58,167,.28);border-radius:8px;padding:0 10px;font-weight:600;color:#fff;border:0;cursor:pointer;height:24px;display:flex;align-items:center;justify-content:center;font-size:10.8px}
+    #app{height:calc(100vh - 64px);overflow:hidden}.main{overflow:auto;padding:14px;height:100%}.section{background:transparent;margin-bottom:18px;display:none}.nav-list{display:flex;flex-direction:column;gap:8px}.topbar-nav{display:flex;flex-direction:row}.nav-link{padding:8px 12px;border-radius:10px;color:#2b2b2b;cursor:pointer;display:inline-flex;align-items:center;white-space:nowrap}.nav-link.active,.nav-link:hover{background:linear-gradient(90deg,#fff7f0,#ffe4d1)}
+    .sidebar{display:none}.sidebar-inner{background:linear-gradient(180deg,#fff,#fff4ef);border-radius:14px;padding:12px;height:100%;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}.sidebar-header{display:flex;align-items:center;gap:10px}.sidebar-close{margin-left:auto;width:36px;height:36px;border:0;border-radius:10px;background:linear-gradient(180deg,#ff6b6b,#e64545);color:#fff;font-size:22px;font-weight:900;display:none;align-items:center;justify-content:center;cursor:pointer;box-shadow:var(--shadow)}
+    h1,h2,h3{font-family:'Baloo 2',cursive;color:#2b2b2b}.hero{display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;border-radius:14px;padding:12px}.hero-content{text-align:center;padding:6px}h1{margin:6px 0;font-size:22px}.lead{color:var(--muted);margin:6px 0}.hero-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}#startExplore,#tryAI{margin:50px 0}.btn{padding:10px 14px;border-radius:10px;border:0;background:#fff;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px}.btn.primary{background:var(--accent);color:#fff}.btn.ghost{background:transparent;border:2px solid rgba(0,0,0,.06)}.btn.small{padding:8px 10px;font-size:14px}
+    .cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}.card{background:linear-gradient(180deg,#f4f6f8,#e7eaed);border-radius:8px;padding:12px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px;min-height:160px}.card .tag{font-size:12px;padding:6px;border-radius:8px;background:linear-gradient(90deg,#9e9e9e,#7f7f7f);color:#fff;width:max-content}.card h3{margin:0;font-size:16px;font-weight:700}.card p{margin:0;color:var(--muted);font-size:14px}.card .meta{display:flex;justify-content:flex-end;margin-top:auto}.btn.metallic{color:#fff;font-weight:800;border-radius:10px;border:0;box-shadow:0 6px 18px rgba(10,10,10,.12),inset 0 -2px 8px rgba(255,255,255,.08)}.animal-icon{display:inline-flex;width:28px;height:28px;min-width:28px;border-radius:8px;align-items:center;justify-content:center;font-size:16px;margin-right:8px;box-shadow:0 4px 10px rgba(10,10,10,.12);color:#fff}.m1{background:linear-gradient(180deg,#ff6b6b,#e64545)}.m2{background:linear-gradient(180deg,#ff8b3a,#ff6b00)}.m3{background:linear-gradient(180deg,#ffd93d,#ffb300)}.s1{background:linear-gradient(180deg,#4dd0e1,#00bcd4)}.s2{background:linear-gradient(180deg,#6ab04c,#3c8d0d)}.s3{background:linear-gradient(180deg,#9b59b6,#7d3aa7)}.t1{background:linear-gradient(180deg,#ff4d7e,#e02359)}.t2{background:linear-gradient(180deg,#3f51b5,#2b3aa6)}.t3{background:linear-gradient(180deg,#00c853,#00a140)}.card h3.m1,.card h3.m2,.card h3.m3,.card h3.s1,.card h3.s2,.card h3.s3,.card h3.t1,.card h3.t2,.card h3.t3{color:#fff}
+    .playlist-row{display:flex;gap:12px;flex-wrap:wrap}.playlist-card{display:flex;gap:12px;background:var(--card);padding:12px;border-radius:12px;align-items:center;box-shadow:var(--shadow)}.playlist-thumb{width:88px;height:88px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.08);padding:14px}.playlist-thumb img{width:100%;height:100%;object-fit:contain}.playlist-thumb.spotify{background:#1db954}.playlist-thumb.yt{background:#ff3333}
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:60}.modal[aria-hidden="false"]{display:flex}.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.45)}.modal-panel{position:relative;background:var(--card);border-radius:12px;padding:16px;max-width:720px;width:92%;box-shadow:var(--shadow);z-index:10;max-height:80vh;overflow:auto}.modal-close{position:absolute;top:14px;right:14px;background:linear-gradient(180deg,var(--accent),#e64545);color:#fff;border:0;width:40px;height:40px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;box-shadow:var(--shadow);z-index:5}
+    .programme-table th,.programme-table td{padding:10px;vertical-align:top;font-size:12px;text-align:left}.programme-table th:first-child,.programme-table td:first-child{width:22%;min-width:180px}.programme-table tbody tr td{border-bottom:1px solid rgba(255,198,160,.6)}.contact-form{display:flex;flex-direction:column;gap:8px;background:#fff;padding:12px;border-radius:12px;box-shadow:var(--shadow)}.contact-form input,.contact-form select,.contact-form textarea{padding:10px;border-radius:10px;border:1px solid #eee;font-family:inherit}.form-msg{color:green;margin-top:6px;font-size:14px}
+    .theme-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}.theme-col{flex:1;min-width:180px}.objective-card{margin-top:12px;background:linear-gradient(90deg,#fff,#fff7f3);border-radius:12px;padding:12px;border:1px solid rgba(255,200,160,.4)}.objective-inner{display:flex;gap:12px;align-items:flex-start}.obj-ico{width:44px;height:44px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#fff,#ffefe0);font-size:20px}.muted{opacity:.9;color:var(--muted)}.kw-yellow{background:linear-gradient(90deg,#ffd93d,#ffb300);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}.kw-blue{background:linear-gradient(90deg,#42a5f5,#1976d2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}.kw-rose{background:linear-gradient(90deg,#ff4d7e,#e91e63);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}.kw-purple{background:linear-gradient(90deg,#b388ff,#7d3aa7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}.kw-green{background:linear-gradient(90deg,#66bb6a,#00a140);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}.kw-orange{background:linear-gradient(90deg,#ffb74d,#ff6b00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}
+    .welcome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.welcome-card{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:7px!important;line-height:1.15!important;text-align:center!important}.welcome-card .welcome-title{font-weight:900;font-size:15px}.welcome-card small{font-weight:700;opacity:.95}.welcome-card .welcome-desc{font-size:13px;font-weight:700;opacity:.95}.song-item{display:flex;align-items:center;gap:10px;justify-content:space-between;background:#fff6ee;border:1px solid rgba(255,200,160,.45);border-radius:12px;padding:10px;flex-wrap:wrap}.song-info{display:flex;flex-direction:column;gap:4px;min-width:220px}.song-item audio{max-width:280px;width:100%}.sales-card{background:linear-gradient(135deg,#7d3aa7 0%,#ff6b6b 55%,#ffd93d 100%);border-radius:18px;padding:16px;color:#fff;box-shadow:0 14px 34px rgba(125,58,167,.26);position:relative;overflow:hidden}.sales-badge{display:inline-flex;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800;margin-bottom:8px}.sales-title{font-size:24px;line-height:1.05;font-weight:800;margin:0 0 6px}.sales-subtitle{font-size:14px;line-height:1.45;margin:0;max-width:430px;color:rgba(255,255,255,.94)}.sales-points{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}.sales-point{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.26);border-radius:12px;padding:9px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:7px}.sales-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:rgba(255,255,255,.16);border-radius:14px;padding:10px;border:1px solid rgba(255,255,255,.25)}.sales-price{font-weight:900;font-size:14px}.sales-price span{font-size:22px}.sales-cta{background:#fff!important;color:#7d3aa7!important;border-radius:999px;padding:11px 16px;font-weight:900;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+    @media(max-width:699px){.hero-actions{gap:3px}.hero-actions #tryAI{margin-top:-30px!important}.topbar{background:linear-gradient(180deg,#fff9f4 0%,#fff 70%);box-shadow:none;overflow:visible}.main{padding-top:62px}.main p,.main li,.main td,.main .muted,.modal p,.modal li,.modal td{text-align:justify}.topbar:before{display:none}.icon-btn.menu-toggle{display:inline-flex!important;align-items:center;justify-content:center;background:linear-gradient(180deg,#fff9f4,#fff);box-shadow:var(--shadow);z-index:5;width:44px!important;min-width:44px!important;height:44px!important}.topbar-nav,.top-cta{display:none!important}.sidebar{display:block;position:fixed;left:0;top:8px;bottom:0;width:260px;transform:translateX(-120%);z-index:80;padding:8px 12px 12px}.sidebar.open{transform:translateX(0)}.sidebar-close{display:inline-flex}.sidebar-inner{height:calc(100vh - 16px)}.cards-grid,.welcome-grid{grid-template-columns:1fr}.theme-grid{flex-direction:column}.programme-table thead{display:none}.programme-table,.programme-table tbody,.programme-table tr,.programme-table td{display:block;width:100%}.modal{align-items:flex-start;padding:2vh 2vw}.modal-panel{width:96vw!important;max-width:96vw!important;height:96vh;max-height:96vh;margin:0;border-radius:14px;scrollbar-width:thin;scrollbar-color:transparent transparent}.modal-panel::-webkit-scrollbar{width:6px;background:transparent}.modal-panel::-webkit-scrollbar-track,.modal-panel::-webkit-scrollbar-thumb{background:transparent}.modal-backdrop{background:rgba(0,0,0,.28)}}
+    @media(min-width:700px){.icon-btn.menu-toggle{display:none}.topbar-nav{display:flex}}
+  </style>
 </head>
 <body>
-  <header class="topbar">
-    <button class="hamburger" id="navToggle" aria-label="Ouvrir le menu">
-      <span></span><span></span><span></span>
-    </button>
-    <div class="brand">
-      <div class="video-wrap">
-        <video class="brand-video" id="brandVideo" playsinline muted preload="auto" loop>
-          <source src="/Quboor.mp4" type="video/mp4">
-          <!-- fallback to image if video not supported -->
-        </video>
-      </div>
-      <img class="logo-main" src="/loglog.png" alt="Quboor logo" />
-    </div>
-    <nav id="nav" class="nav">
-      <!-- Close X shown at top of slide-out on mobile -->
-      <button id="navClose" class="close-slider" aria-label="Fermer le menu">✕</button>
-
-      <a href="#accueil" data-cat="accueil">Accueil</a>
-      <a href="#inscription" data-cat="inscription">Particuliers</a>
-      <a href="#demo" data-cat="demo"><img src="/banner2 (6).png" alt="Quboor AI banner" class="nav-banner" /><span style="margin-left:6px">Demo</span></a>
-      <a href="#articles" data-cat="articles">Articles</a>
-      <a href="#documents" data-cat="documents">Documents</a>
-      <a href="#courses" data-cat="courses">B2B</a>
-      <a href="#about" data-cat="about">À propos</a>
-      <a href="#contact" data-cat="contact">Contact</a>
-    </nav>
-  </header>
-
-  <main class="frame">
-    <section id="inscription" class="panel hero">
-      <div class="hero-left">
-        <h1>Automatisez votre recherche d'emploi et/ou transformez votre métier avec Quboor.</h1>
-        <p>Utilisez Quboor — notre outil unique pour générer des CV et des lettres, analyser et scorer les offres (compatibilité ATS) et fournir des retours personnalisés.</p>
-        <p>Nous vous accompagnons également dans la cartographie de vos processus et la conception d'automatisations et de workflows pour optimiser votre activité professionnelle si vous êtes déjà en poste.</p>
-        <div class="actions">
-          <!-- Buttons moved into service cards below -->
-        </div>
-        <div class="features dashes">
-          <ul style="margin:8px 0 0;padding-left:18px;color:var(--muted);line-height:1.45">
-            <li>Modules pratiques couvrant le CV, la lettre de motivation, avec des conseils directement applicables.</li>
-            <li>Sessions de consultations personnalisées pour un accompagnement ciblé et des retours concrets sur votre profil.</li>
-            <li>Outil prêts à l’emploi pour créer des candidatures efficaces et professionnelles rapidement.</li>
-            <li>Ateliers « Transformer son métier » : cartographie des tâches, identification des tâches automatisables et conception de workflows automatisés pour gagner en efficacité.</li>
-          </ul>
-        </div>
-
-        <!-- moved service cards (Pack CV & Lettre + Automatisation de la prospection) -->
-        <div class="hero-services" style="margin-top:12px;display:grid;grid-template-columns:1fr;gap:12px;">
-          <article class="card" style="flex-direction:column;align-items:flex-start;">
-            <img src="/img2.jpeg" alt="Optimisation de CV" style="width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:8px;">
-            <h3>Pack CV & Lettre optimisés</h3>
-            <p>Rédigez des CV impactants et des lettres ciblées à l'aide d'outils et modèles prêts à l'emploi.</p>
-            <div class="meta">Durée : 1h • Prix : <s>49€</s> <strong>0€</strong> (inclus dans Quboor Basic)</div>
-            <div class="card-actions" style="width:100%;justify-content:flex-end;margin-top:8px;gap:8px">
-              <button class="btn small outline basic" id="basicFromCV" style="margin-right:auto;">Quboor Basic</button>
-              <button class="btn small primary" data-course="CV" style="background:linear-gradient(180deg,#ffffff 0%, #f5f7f8 100%);color:var(--text);border:1px solid rgba(2,6,23,0.04);">En savoir</button>
-            </div>
-          </article>
-
-          <article class="card" style="flex-direction:column;align-items:flex-start;">
-            <img src="/img3.jpeg" alt="Automatisation de la prospection" style="width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:8px;">
-            <h3>Automatisation de la prospection</h3>
-            <p>Apprenez à utiliser les outils pour trouver des offres, automatiser candidatures et suivi.</p>
-            <div class="meta">Durée : 5h • Prix : <s>249€</s> <strong>0€</strong> (inclus dans Quboor Premium)</div>
-            <div class="card-actions" style="width:100%;justify-content:flex-end;margin-top:8px;gap:8px">
-              <button class="btn small outline" id="premiumFromProspect" style="margin-right:auto; background: linear-gradient(180deg, #526aef 0%, #131a1e 100%); color:#fff; border:none;">Quboor Premium</button>
-              <button class="btn small primary" data-course="Prospection" style="background:linear-gradient(180deg,#ffffff 0%, #f5f7f8 100%);color:var(--text);border:1px solid rgba(2,6,23,0.04);">En savoir</button>
-            </div>
-          </article>
-
-          <article class="card" style="flex-direction:column;align-items:flex-start;">
-            <img src="/img44.png" alt="Transformer son métier" style="width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:8px;">
-            <h3>Transformer son métier avec l’automatisation</h3>
-            <p>De l’analyse des tâches à l’automatisation : apprenez à repenser vos activités, identifier les tâches automatisables et déployer des flux de travail automatisés.</p>
-            <div class="meta">Durée : à définir • Tarification : Sur devis - HTVA</div>
-            <div class="card-actions" style="width:100%;justify-content:flex-end;margin-top:8px;gap:8px">
-              <button class="btn small primary" data-course="Transformer" style="background:linear-gradient(180deg,#ffffff 0%, #f5f7f8 100%);color:var(--text);border:1px solid rgba(2,6,23,0.04);">En savoir</button>
-            </div>
-          </article>
-        </div>
-
-      </div>
-      <div class="hero-right">
-        <img src="/img1.jpeg" alt="IA illustration" />
-      </div>
-    </section>
-
-    <section id="accueil" class="panel prequel" aria-label="Accueil">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:6px 0;">
-        <div style="flex:1">
-          <img src="/img22.png" alt="Illustration IA & recrutement" style="width:100%;max-width:860px;border-radius:10px;object-fit:cover;margin-bottom:10px" />
-          <p style="margin:6px 0 10px;color:var(--muted);max-width:900px">
-            Quboor conçoit des solutions d'automatisation et d'accompagnement pour moderniser vos pratiques professionnelles, en aidant particuliers et petites entreprises à gagner en efficacité.
-          </p>
-
-          <div class="collapsible" id="collap-cv" style="margin-bottom:6px">
-            <div class="collapsible-title" style="display:flex;align-items:center;gap:8px;justify-content:flex-start">
-              <button class="collapse-toggle" aria-expanded="false" aria-controls="cv-content" title="Afficher le détail" style="border:0;background:transparent;cursor:pointer;font-size:18px;line-height:1;color:var(--brand-blue)">▸</button>
-              <h2 style="margin:0">Optimisation des CV & lettres — Rendre vos candidatures compatibles ATS</h2>
-            </div>
-            <div class="collapsible-content" id="cv-content" hidden>
-              <p style="margin:10px 0 0;color:var(--muted);max-width:900px">
-                Nous aidons à structurer et rédiger des CV et des lettres de motivation lisibles par les recruteurs et par les systèmes automatisés (ATS). Cela inclut l'ordre des sections, le choix des mots‑clés et la clarté des descriptions d'expérience.
-              </p>
-              <p style="margin:10px 0 0;color:var(--muted);max-width:900px">
-                Les ateliers couvrent : la sélection des mots-clés pertinents, la conversion d'expériences en résultats mesurables, l'adaptation des formats (.docx / PDF) et des variantes rapides à personnaliser pour différentes offres.
-              </p>
-            </div>
-          </div>
-
-          <div class="collapsible" id="collap-particuliers" style="margin-bottom:6px">
-            <div class="collapsible-title" style="display:flex;align-items:center;gap:8px;justify-content:flex-start">
-              <button class="collapse-toggle" aria-expanded="false" aria-controls="particuliers-content" title="Afficher le détail" style="border:0;background:transparent;cursor:pointer;font-size:18px;line-height:1;color:var(--brand-blue)">▸</button>
-              <h2 style="margin:0">Particuliers & PME — Intégrer des solutions automatisées dans le milieu professionnel</h2>
-            </div>
-            <div class="collapsible-content" id="particuliers-content" hidden>
-              <p style="margin:10px 0 0;color:var(--muted);max-width:900px">
-                Nous aidons les particuliers et les petites et moyennes entreprises à moderniser leurs pratiques professionnelles grâce à des outils d'automatisation et des workflows numériques. Notre approche valorise votre expérience métier et vos données existantes pour concevoir des solutions et des stratégies sur mesure, adaptées à vos enjeux concrets.
-              </p>
-              <p style="margin:10px 0 0;color:var(--muted);max-width:900px">
-                Nous intervenons notamment sur : l’optimisation des candidatures et des parcours professionnels, l’automatisation des actions de prospection, la conception de flux de travail performants, et la mise en place de formations personnalisées pour faciliter l’adoption. Objectif : simplifier vos processus, améliorer l’efficacité et générer des gains de productivité mesurables et durables.
-              </p>
-            </div>
-          </div>
-
-          <hr style="margin:8px 0;border:none;border-top:1px solid rgba(2,6,23,0.04)">
-
-          <div class="collapsible" id="collap-b2b" style="margin-bottom:6px">
-            <div class="collapsible-title" style="display:flex;align-items:center;gap:8px;justify-content:flex-start">
-              <button class="collapse-toggle" aria-expanded="false" aria-controls="b2b-content" title="Afficher le détail" style="border:0;background:transparent;cursor:pointer;font-size:18px;line-height:1;color:var(--brand-blue)">▸</button>
-              <h2 style="margin:0">Partenariats B2B — Accompagnement des entreprises et organisations</h2>
-            </div>
-            <div class="collapsible-content" id="b2b-content" hidden>
-              <p style="margin:10px 0 0;color:var(--muted);max-width:900px">
-                Nous accompagnons les entreprises et équipes internes dans leurs projets de transformation digitale via l'automatisation de processus, l'intégration d'outils connectés et la réorganisation de workflows métiers. Notre approche B2B vise la création de valeur opérationnelle concrète avec des améliorations progressives et mesurables.
-              </p>
-              <p style="margin:10px 0 0;color:var(--muted);max-width:900px">
-                Nos interventions incluent : audit et optimisation des processus à grande échelle, conception et déploiement de solutions d'automatisation sur mesure, intégration d'outils (RPA, API, plateformes internes), accompagnement des équipes (formation, conduite du changement) et mise en place de KPIs et tableaux de bord pour piloter les performances. Objectif : réduire les tâches à faible valeur ajoutée et structurer une adoption durable des solutions automatisées.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px">
-        <div style="padding:12px;border-radius:10px;border:1px solid rgba(2,6,23,0.04);background:linear-gradient(180deg,#fff,#fbfdff)">
-
-          <div style="display:flex;flex-direction:row;gap:8px;margin-top:10px;flex-wrap:wrap">
-            <a class="btn basic ripple" href="#inscription" data-cat="inscription" style="flex:1;min-width:140px;text-align:center;color: white;-webkit-text-fill-color: white;background: linear-gradient(90deg, rgb(11, 59, 115) 0%, rgb(15, 42, 86) 100%);-webkit-background-clip:unset;background-clip: unset;" w-tid="179">Particulier</a>
-            <a class="btn primary ripple" href="#courses" data-cat="courses" style="flex:1;min-width:140px;text-align:center;color:whitesmoke;-webkit-text-fill-color:whitesmoke;/* background:transparent; */-webkit-background-clip:unset;background-clip: unset;" w-tid="181">B2B</a>
-          </div>
-        </div>
-
-        <div style="padding:12px;border-radius:10px;border:1px solid rgba(2,6,23,0.04);background:linear-gradient(180deg,#fff,#fbfdff)">
-          <strong>Articles recommandés</strong>
-          <ul style="margin:8px 0 0 18px;color:var(--muted);padding:0">
-            <li><a class="link" href="#articles" data-cat="articles">Comprendre les ATS et l'impact de l'IA</a></li>
-            <li style="margin-top:6px"><a class="link" href="#articles" data-cat="articles">Pratiques pour candidatures compatibles ATS</a></li>
-          </ul>
-        </div>
-
-        <div style="padding:12px;border-radius:10px;border:1px solid rgba(2,6,23,0.04);background:linear-gradient(180deg,#fff,#fbfdff)">
-          <strong>Documents utiles</strong>
-
-          <ul style="margin-top:8px;padding-left:18px">
-            <li style="margin-bottom:6px"><a class="link" href="#documents" data-cat="documents">Modèles CV & Templates lettre</a></li>
-            <li><a class="link" href="#documents" data-cat="documents">Télécharger les documents disponibles</a></li>
-          </ul>
-        </div>
-      </div>
-
-
-    </section>
-
-    <section id="courses" class="panel cards">
-      <div class="card-grid">
-
-
-
-
-        <article class="card">
-          <div class="card-image">
-            <img src="/img44.png" alt="Transformer son métier">
-            <span class="badge-b2b">PME</span>
-          </div>
-          <h3>Transformer son métier avec l’automatisation</h3>
-          <p>De l’analyse des tâches à l’automatisation : apprenez à repenser vos activités, identifier les tâches automatisables et déployer des flux de travail automatisés.</p>
-          <div class="meta">Durée : à définir • Tarification : Sur devis - HTVA</div>
-          <div class="card-actions">
-            <button class="btn small primary" data-course="Transformer">En savoir</button>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-image">
-            <img src="/img55.png" alt="Optimisation des opérations">
-            <span class="badge-b2b">PME</span>
-          </div>
-          <h3>Optimisation des opérations & automatisation intelligente</h3>
-          <p>Méthodes et outils pour identifier gains d’efficacité, automatiser les processus métiers et intégrer l’IA dans les opérations des entreprises.</p>
-          <div class="meta">Durée : à définir • Tarification : Sur devis - HTVA</div>
-          <div class="card-actions">
-            <button class="btn small primary" data-course="Optimisation">En savoir</button>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="articles" class="panel articles">
-      <h2>Articles récents</h2>
-      <div style="margin-bottom:8px;color:var(--muted);font-size:14px">
-        Suivez-nous sur <a class="link" href="https://www.instagram.com/quboorai" target="_blank" rel="noopener">Instagram</a> et sur <a class="link" href="https://www.linkedin.com/in/achraf-bouhlal-497266288/" target="_blank" rel="noopener">LinkedIn</a> pour des astuces quotidiennes — cliquez pour ouvrir.
-      </div>
-      <p style="margin:6px 0 12px;color:var(--muted);font-size:12px;line-height:1.25;text-align:justify;text-justify:inter-word;">
-        Comprenez rapidement les ATS et leurs effets sur le tri des candidatures pour mieux adapter vos documents.
-      </p>
-      <p style="margin:6px 0 12px;color:var(--muted);font-size:12px;line-height:1.25;text-align:justify;text-justify:inter-word;">
-        Côté B2B, l’automatisation transforme les métiers : optimisation des processus, réduction des tâches répétitives et conception de workflows pour mesurer le gain de productivité et sécuriser l’adoption en entreprise.
-      </p>
-      <div class="article-list">
-        <article class="article">
-          <h4>Qu'est-ce qu'un système de suivi des candidats (ATS) ?</h4>
-          <p>Un système de suivi des candidats (ATS) est une application logicielle destinée aux ressources humaines (RH) qui permet aux entreprises de gérer les tâches de recrutement et d'embauche de manière digitale. Il s'agit d'une base de données centrale qui regroupe les informations... - SAP</p>
-          <a class="link" href="https://www.sap.com/france/products/hcm/recruiting-software/what-is-an-applicant-tracking-system.html" target="_blank">
-            <img class="article-logo" src="/sap.png" alt="SAP">
-            Lire l'article →
-          </a>
-        </article>
-
-        <article class="article">
-          <h4>Pourquoi utiliser un ATS pour digitaliser vos processus de recrutement ?</h4>
-          <p>Dans une étude menée auprès de professionnels du recrutement, GetApp, un site de comparaison de logiciels pour PME, a observé que les personnes interrogées qui utilisaient un système de suivi des candidats (ATS) constataient... - LinkedIn</p>
-          <a class="link" href="https://business.linkedin.com/fr/fr/hire/resources/talent-engagement/what-is-an-applicant-tracking-system" target="_blank">
-            <img class="article-logo" src="/linkedin.png" alt="LinkedIn">
-            Lire l'article →
-          </a>
-        </article>
-
-        <article class="article">
-          <h4>Comprendre l’ATS : la base de données centrale du recrutement moderne</h4>
-          <p>Pour faciliter le processus de recrutement instauré au sein de votre entreprise, il est possible d’avoir recours à des outils performants. Parmi eux, nous retrouvons notamment l’ATS, un logiciel ... - Indeed</p>
-          <a class="link" href="https://fr.indeed.com/recrutement/c/info/ats-definition-utilisation" target="_blank">
-            <img class="article-logo" src="/indeed.png" alt="Indeed">
-            Lire l'article →
-          </a>
-        </article>
-
-        <article class="article">
-          <h4>Recruter et trier les CV avec l'IA ? 80% des entreprises sans garde-fous</h4>
-          <p>Le Curiculum Vitae, un incontournable pour se vendre auprès d’un employeur et décrocher un emploi. Un document qu’on peut aujourd’hui réaliser avec l’aide de l’intelligence artificielle, histoire de donner la meilleure impression possible.... - Claire Vermeulen - RTBF</p>
-          <a class="link" href="https://www.rtbf.be/article/recruter-et-trier-les-cv-avec-l-ia-de-plus-en-plus-utilise-par-les-entreprises-mais-a-encadrer-pour-eviter-les-derives-11675655" target="_blank">
-            <img class="article-logo" src="/rtbf.png" alt="RTBF">
-            Lire l'article →
-          </a>
-        </article>
-        <article class="article">
-          <h4>L'IA secoue le processus de recrutement traditionnel</h4>
-          <p>Ces dernières années, les évolutions technologiques ont remodelé les pratiques traditionnelles de recrutement et de sélection. L'intelligence artificielle (IA) se distingue comme un.... - Robert Walters</p>
-          <a class="link" href="https://www.robertwalters.be/fr/eclairages/conseils-en-recrutement/blog/L-IA-secoue-le-processus-de-recrutement-traditionnel.html" target="_blank">
-            <img class="article-logo" src="/robert.png" alt="Robert Walters">
-            Lire l'article →
-          </a>
-        </article>
-
-        <article class="article">
-          <h4>Le recrutement réinventé : Exploiter l'IA tout en gardant une touche humaine</h4>
-          <p>Aujourd'hui, la technologie et les compétences humaines se combinent comme jamais auparavant. Comprendre l'impact de l'intelligence artificielle (IA) sur le travail et le recrutement est donc essentiel pour toute entreprise souhaitant maintenir..... - Michael Page</p>
-          <a class="link" href="https://www.michaelpage.be/fr/recrutement/les-fondamentaux-du-management-d%C2%B4%C3%A9quipe/nyr24-ia-dans-le-recrutement" target="_blank">
-            <img class="article-logo" src="/michaelpage.png" alt="Michael Page">
-            Lire l'article →
-          </a>
-        </article>
-
-        <article class="article">
-          <h4>L’IA peut aider, mais pas décider : les Belges veulent un être humain aux commandes lors des recrutements</h4>
-          <p>L'intelligence artificielle s'immisce de plus en plus dans le processus de recrutement. Les employeurs y recourent pour screener des CV, préparer des entretiens et même évaluer des candidats. Mais dans le même temps, une enquête ... - HR Provider - Partena Professional</p>
-          <a class="link" href="https://www.partena-professional.be/fr/lia-peut-aider-mais-pas-decider-les-belges-veulent-un-etre-humain-aux-commandes-lors-des" target="_blank">
-            <img class="article-logo" src="/partena.png" alt="Partena PROFESSIONAL">
-            Lire l'article →
-          </a>
-        </article>
-        <article class="article">
-          <h4>74 % des recruteurs utilisent l’IA, mais très peu s’inquiètent des biais de genre</h4>
-          <p>Malgré la classification de ces outils comme « à haut risque » par l'UE en matière de recrutement, seule une minorité d'organisations belges a pris des mesures pour encadrer les pratiques....Laurraine Kihl - Le Soir</p>
-          <a class="link" href="https://www.lesoir.be/726328/article/2026-02-03/74-des-recruteurs-utilisent-lia-mais-tres-peu-sinquietent-des-biais-de-genre" target="_blank">
-            <img class="article-logo" src="/lesoir.png" alt="Le Soir">
-            Lire l'article →
-          </a>
-        </article>
-        <article class="article">
-          <h4>Un employeur sur quatre utilise l'IA pour "screener" des candidats, mais les travailleurs n'en veulent pas</h4>
-          <p>Trois employeurs sur dix utilisent l'IA pour rédiger des offres d'emploi. Les outils ne sont pas encore mûrs pour contribuer à une évaluation équitable et les candidats s'en méfient.... Journaliste - L'Echo</p>
-          <a class="link" href="https://www.lecho.be/entreprises/rh/un-employeur-sur-quatre-utilise-l-ia-pour-screener-des-candidats-mais-les-travailleurs-n-en-veulent-pas/10656517.html" target="_blank">
-            <img class="article-logo" src="/lecho (1).png" alt="L'Echo">
-            Lire l'article →
-          </a>
-        </article>
-
-
-        <article class="article">
-          <h4>Un employeur sur quatre utilise l’IA pour trier les CV</h4>
-          <p>L’intelligence artificielle s’impose progressivement dans les processus de recrutement en Belgique. Mais dès qu’elle intervient dans l’évaluation des candidats, la confiance laisse rapidement place.... Vanille Dujardin - 21news</p>
-          <a class="link" href="https://www.21news.be/ia-recrutement-cv-tri-candidats-belgique/" target="_blank">
-            <img class="article-logo" src="/news24 (1).png" alt="21news">
-            Lire l'article →
-          </a>
-        </article>
-      </div>
-    </section>
-
-    <section id="demo" class="panel demo-panel" aria-label="Quboor Ai (demo)">
-      <div class="demo-card" role="region" aria-label="Démo">
-        <div class="demo-header" style="text-align:center;max-width:920px;margin:0 auto;padding:6px 8px;">
-          <h2 style="margin:4px 0 6px">Comment utiliser Quboor</h2>
-          <p style="margin:0;color:var(--muted);line-height:1.45;">
-            Suivez ces 4 étapes simples pour transformer une offre d'emploi en documents prêts à envoyer : copiez la description, laissez Quboor l'analyser, enrichissez avec ChatGPT et générez vos CV et lettres optimisés.
-          </p>
-        </div>
-
-        <div style="width:100%;text-align:center;margin-top:12px">
-          <!-- Banner + label added as requested -->
-          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:10px">
-            <img src="/banner2 (6).png" alt="Quboor banner" style="max-width:320px;width:25%;height:auto;border-radius:8px;object-fit:contain;" w-tid="379">
-            <div style="font-weight:700;color:var(--brand-blue);font-size:15px">Quboor</div>
-          </div>
-
-          <a class="demo-test-link" href="https://quboor.org/F7K2L9A3D" title="Profile Test" target="_blank" rel="noopener">
-            <span class="icon" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-
-            <span class="label">Profile Test</span>
-          </a>
-        </div>
-
-        <div class="demo-steps" role="list" aria-label="Étapes de la démo">
-          <div class="step-card" role="listitem">
-            <strong>📋 💬</strong>
-            <p class="step-desc">Sélectionnez et copiez le texte de l'offre (URL ou descriptif complet).</p>
-          </div>
-
-          <div class="step-card" role="listitem">
-            <strong>📄 👉</strong>
-            <p class="step-desc">Collez la description dans l'outil Quboor pour l'analyser et extraire compétences et exigences.</p>
-          </div>
-
-          <div class="step-card" role="listitem">
-            <strong>📋 → 🧠</strong>
-            <p class="step-desc">Prenez le résumé généré et collez-le dans ChatGPT pour personnaliser le ton et les détails.</p>
-          </div>
-
-          <div class="step-card" role="listitem">
-            <strong>📥 🧾</strong>
-            <p class="step-desc">Cliquez pour créer CV & lettre optimisés, téléchargeables et prêts à envoyer.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="panel about">
-      <h2>À propos</h2>
-      <div class="about-grid">
-        <div>
-          <p>Quboor aide les particuliers et les entreprises à gagner en efficacité grâce à des solutions d'automatisation, des outils IA et un accompagnement sur mesure pour les parcours professionnels et les processus métiers.</p>
-
-          <h3 style="margin-top:12px">Services pour particuliers</h3>
-          <ul>
-            <li>Optimisation de CV et lettres de motivation (formats compatibles ATS)</li>
-            <li>Création de modèles et variantes personnalisées</li>
-            <li>Ateliers pratiques : rédaction ciblée, préparation d'entretiens, pitch professionnel</li>
-            <li>Outils et prompts prêts à l’emploi pour automatiser la prospection d'offres</li>
-            <li>Assistance et révisions par un consultant (retours concrets, priorisation)</li>
-            <li>Guides et ressources téléchargeables pour candidatures efficaces</li>
-          </ul>
-
-          <h3 style="margin-top:12px">Services B2B & Entreprises</h3>
-          <ul>
-            <li>Audit des processus de recrutement et cartographie des workflows</li>
-            <li>Conception et déploiement de workflows automatisés (RPA, intégrations API)</li>
-            <li>Intégration d'outils d'automatisation pour screening, scoring et enrichissement de candidatures</li>
-            <li>Conception de tableaux de bord KPI et reporting pour piloter la performance</li>
-            <li>Formations et conduite du changement pour faciliter l’adoption par les équipes</li>
-            <li>Proof of concepts et prototypes pour démontrer faisabilité et ROI</li>
-          </ul>
-
-          <h3 style="margin-top:12px">Approche & valeur ajoutée</h3>
-          <p style="margin-top:6px;color:var(--muted);max-width:900px">
-            Notre approche combine l’expertise métier et l’exploitation de vos données existantes pour définir des solutions pragmatiques, modulaires et mesurables. Nous privilégions la simplicité, la réutilisabilité (templates, prompts, scripts) et la gouvernance (KPIs, limites, bonnes pratiques) afin d'assurer une adoption durable.
-          </p>
-
-          <h3 style="margin-top:12px">Horaires de consultation</h3>
-          <div style="color:var(--muted);margin-top:6px">
-            <div>Lun–Ven: 09:00–13:00 CET</div>
-            <div>Sam: 10:00–18:00 CET</div>
-            <div style="margin-top:6px;font-size:13px">(Réponses généralement sous 24h les jours ouvrés)</div>
-          </div>
-
-          <div class="team" style="margin-top:12px">
-            <div class="person">
-              <img src="/me.png" alt="">
-              <div class="person-meta">
-                <strong>Achraf Bouhlal</strong>
-                <div class="person-title">Data Management &amp; Optimisation des candidatures | Support &amp; Outils</div>
-              </div>
-            </div>
-
-            <div class="person">
-              <img src="/img66.png" alt="Mohammed Boussati">
-              <div class="person-meta">
-                <strong>Mohammed Boussati</strong>
-                <div class="person-title">Job Matching &amp; Optimisation des candidatures | ATS &amp; Candidature</div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Documents panel: downloadable assets -->
-    <section id="documents" class="panel documents">
-      <h2>Documents téléchargeables</h2>
-      <p style="margin:6px 0 6px;color:var(--muted);font-size:14px;line-height:1.35;">
-        Téléchargez les fiches et ressources utiles pour optimiser vos candidatures.
-      </p>
-      <p style="margin:0 0 12px;color:var(--muted);font-size:13px;line-height:1.35;">
-        Utilisez ces modèles pour créer un CV et une lettre de motivation compatibles avec les systèmes ATS — n'hésitez pas à télécharger les documents ci‑dessous pour les adapter à votre profil.
-      </p>
-
-
-
-      <div class="doc-list" style="display:flex;flex-direction:column;gap:10px">
-        <!-- keep the previous download cards for quick access -->
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px;border-radius:8px;border:1px solid rgba(2,6,23,0.04);background:transparent">
-          <div>
-            <strong>Modèle 1</strong>
-            <div style="color:var(--muted);font-size:13px">Modèle CV optimisé pour les systèmes ATS — fichier .docx (Téléchargement : ATS modele 1)</div>
-          </div>
-          <div class="doc-item-right" style="display:flex;align-items:center;gap:8px">
-            <a class="doc-download-only" href="/ATS modele 1.docx" download aria-label="Télécharger Modèle 1 (ATS modele 1)" title="Télécharger Modèle 1 (ATS modele 1)" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:8px;background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--muted);text-decoration:none">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px;border-radius:8px;border:1px solid rgba(2,6,23,0.04);background:transparent">
-          <div>
-            <strong>Modèle 2</strong>
-            <div style="color:var(--muted);font-size:13px">Template CV pour profils finance — fichier .docx (Téléchargement : ATS modele 2)</div>
-          </div>
-          <div class="doc-item-right" style="display:flex;align-items:center;gap:8px">
-            <a class="doc-download-only" href="/ATS modele 2.docx" download aria-label="Télécharger Modèle 2 (ATS modele 2)" title="Télécharger Modèle 2 (ATS modele 2)" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:8px;background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--muted);text-decoration:none">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px;border-radius:8px;border:1px solid rgba(2,6,23,0.04);background:transparent">
-          <div>
-            <strong>Modèle 3</strong>
-            <div style="color:var(--muted);font-size:13px">A4 CV template — fichier .docx (Téléchargement : ATS modele 3)</div>
-          </div>
-          <div class="doc-item-right" style="display:flex;align-items:center;gap:8px">
-            <a class="doc-download-only" href="/ATS modele 3.docx" download aria-label="Télécharger Modèle 3 (ATS modele 3)" title="Télécharger Modèle 3 (ATS modele 3)" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:8px;background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--muted);text-decoration:none">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="panel contact">
-      <form id="contactForm" class="form">
-        <label>
-          Sujet
-          <select name="sujet" required>
-            <option value="" disabled selected>Choisir un sujet...</option>
-            <option value="Inscription">Inscription</option>
-            <option value="Information">Information</option>
-            <option value="GDPR">GDPR</option>
-            <option value="Autre">Autre</option>
-          </select>
-        </label>
-        <label>
-          Nom
-          <input type="text" name="name" required />
-        </label>
-        <label>
-          Email
-          <input type="email" name="email" required />
-        </label>
-        <label>
-          Message
-          <textarea name="message" rows="3"></textarea>
-        </label>
-        <div class="form-actions">
-          <button type="submit" class="btn primary">Envoyer</button>
-        </div>
-      </form>
-      <div style="height:12px"></div>
-      <div class="legal">
-        <a href="#" id="privacyLink">Politique de confidentialité</a> • <a href="#" id="termsLink">CGU</a>
-      </div>
-    </section>
-  </main>
-
-  <aside id="modal" class="modal" aria-hidden="true">
-    <div class="modal-card" role="dialog" aria-modal="true">
-      <button class="close" id="modalClose" aria-label="Fermer">✕</button>
-      <h3 id="modalTitle">Inscription</h3>
-      <p id="modalDesc">Choisissez votre formation et obtenez une réduction de lancement.</p>
-      <form id="enrollForm" class="form">
-        <label>Formation
-          <select name="course" id="courseSelect">
-            <option value="Pack CV">Pack CV & Lettre</option>
-            <option value="Prospection">Automatisation prospection</option>
-          </select>
-        </label>
-        <label>Prénom & Nom
-          <input name="fullname" required />
-        </label>
-        <label>Email
-          <input type="email" name="email" required />
-        </label>
-        <div class="form-actions">
-          <button type="submit" class="btn primary">Confirmer</button>
-          <button type="button" class="btn outline" id="modalCancel">Annuler</button>
-        </div>
-      </form>
-    </div>
-  </aside>
-
-  <footer class="footer">
-    <small>© <span id="year"></span> Quboor — Tous droits réservés</small>
-  </footer>
-
-  <script src="app.js" type="module"></script>
+  <div id="app">
+    <header class="topbar">
+      <button id="menuToggle" class="icon-btn menu-toggle" aria-label="Menu">☰</button>
+      <nav class="top-actions">
+        <nav class="nav-list topbar-nav">
+          <a data-target="intro" class="nav-link active">Accueil</a><a data-target="themes" class="nav-link">Thèmes & Matières</a><a data-target="programme" class="nav-link">Programme</a><a data-target="playlists" class="nav-link">Playlists</a><a data-target="about" class="nav-link">À propos</a><a data-target="contact" class="nav-link">Contact</a>
+        </nav>
+        <div class="top-cta"><div style="display:flex;flex-direction:column;gap:3px;width:152px"><a id="downloadBtn" class="download-btn" href="#">Télécharger</a><button id="albumCtaBtn" class="album-cta-btn" type="button">Album personnalisé</button></div><button id="loginBtn" class="icon-btn" aria-label="Connexion" title="Se connecter" style="padding:0;overflow:hidden;width:49px;height:49px;margin-top:3px;margin-right:3px"><img src="profilepic.png" alt="Profil" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></button></div>
+      </nav>
+    </header>
+    <aside id="sidebar" class="sidebar"><div class="sidebar-inner"><div class="sidebar-header"><img src="profilepic.png" alt="Profil" style="width:53px;height:53px;object-fit:cover;border-radius:10px;box-shadow:var(--shadow)"><strong>LGEC</strong><button id="sidebarClose" class="sidebar-close" type="button">×</button></div><nav class="nav-list"><a data-target="intro" class="nav-link active">Accueil</a><a data-target="themes" class="nav-link">Thèmes & Matières</a><a data-target="programme" class="nav-link">Programme</a><a data-target="playlists" class="nav-link">Playlists</a><a data-target="about" class="nav-link">À propos</a><a data-target="contact" class="nav-link">Contact</a></nav><div class="sidebar-cta" style="display:flex;flex-direction:column;gap:3px;margin-top:auto;width:100%"><a class="download-btn" href="#" id="sidebarDownload">Télécharger</a><button id="sidebarAlbumCta" class="album-cta-btn" type="button">Album personnalisé</button></div><footer><small>© LGEC — Les Génies En Chanson</small></footer></div></aside>
+    <main class="main">
+      <section id="intro" class="section hero"><div class="hero-media" style="width:100%;display:flex;justify-content:center"><img src="banner.png" alt="Les P'tits Génies en Chansons" style="width:60%;margin:0 auto;border-radius:12px;box-shadow:var(--shadow);max-height:420px;object-fit:cover"></div><div class="hero-content"><h1>Apprendre en chantant, grandir en s'amusant !</h1><p class="lead"><span class="kw-rose">Chansons éducatives</span>, comptines et <span class="kw-purple">leçons mises en musique</span> — adaptées au <span class="kw-blue">programme officiel</span> de la Fédération Wallonie-Bruxelles.</p><div class="hero-actions"><button class="btn primary" id="startExplore">Explorer les thèmes</button><button class="btn ghost" id="tryAI"><span class="kw-yellow">Découvrir nos playlists</span></button></div><p class="muted" style="max-width:760px;margin:auto;text-align:left">Ce projet propose des ressources musicales pédagogiques pour les enseignants et les familles : fiches par niveau, playlists et activités.</p><p style="font-size:14px;line-height:1.8">Ressources rapides : <a href="http://www.enseignement.be/index.php?page=28597&navi=4920" target="_blank" style="color:var(--accent-2);font-weight:700">Site officiel FWB</a> · <a href="https://pactepourunenseignementdexcellence.cfwb.be/wp-content/uploads/2023/08/Referentiels-des-competences-initiales.pdf" target="_blank" style="color:var(--accent-2);font-weight:700">Programme officiel (PDF)</a> · <a href="https://web.umons.ac.be/app/uploads/sites/103/2023/03/WP07_2019_Guide_3_planification-2019-2020.pdf" target="_blank" style="color:var(--accent-2);font-weight:700">Guide d'activités (PDF)</a> · <a href="https://www.enseignerplusquunmetier.be/sites/default/files/2024-06/Guide%20FWB-MN-210624.pdf" target="_blank" style="color:var(--accent-2);font-weight:700">Article de référence</a></p></div></section>
+      <section id="themes" class="section"><h2>Thèmes & Matières</h2><p class="muted"><span class="kw-blue">Contenus pédagogiques</span> clairs et modulables, destinés aux <span class="kw-purple">enseignants</span> et familles du cycle maternel jusqu'à la <span class="kw-green">6e primaire</span>.</p><div class="cards-grid" id="themesGrid"></div></section>
+      <section id="programme" class="section"><h2>Programme</h2><p class="muted">Nos <span class="kw-purple">parcours</span> et <span class="kw-rose">modules musicaux</span> suivent le <span class="kw-blue">programme francophone officiel</span>.</p><div class="programme-top" style="display:flex;gap:18px;flex-wrap:wrap"><div style="flex:1;min-width:240px;max-width:380px"><img src="Programme.png" alt="Programme LGEC" style="width:100%;border-radius:12px;box-shadow:var(--shadow);object-fit:cover"></div><div style="flex:2;min-width:280px"><h3>Programmes & Modules</h3><p class="muted">Nous proposons des albums, chansons et playlists pensés comme des outils pédagogiques.</p><a class="btn primary" href="http://www.enseignement.be/index.php?page=28597&navi=4920" target="_blank">Voir le programme officiel</a> <a class="btn ghost" href="#themes" id="programmeMoreBtn">En savoir plus →</a></div></div><table class="programme-table" style="width:100%;margin-top:20px"><thead><tr><th>Niveau</th><th>Domaine</th><th>Exemples d'apprentissages principaux détaillés</th></tr></thead><tbody><tr><td><strong>M1 — ≈ 2,5 à 4 ans</strong></td><td>Langage oral</td><td>Comprendre consignes simples ; chanter comptines ; premiers nombres.</td></tr><tr><td><strong>P1 — ≈ 6 à 7 ans</strong></td><td>Lecture & calcul</td><td>Lire syllabes simples ; écrire phrases courtes ; compter jusqu’à 100.</td></tr><tr><td><strong>P6 — ≈ 11 à 12 ans</strong></td><td>Citoyenneté & sciences</td><td>Analyse critique ; écriture structurée ; maths avancées.</td></tr></tbody></table></section>
+      <section id="playlists" class="section"><h2>Playlists & Lecteurs</h2><p class="muted">Notre <span class="kw-purple">plateforme web</span> et notre application Android permettent déjà l’écoute des albums.</p><div class="playlist-row"><div class="playlist-card"><div class="playlist-thumb spotify"><img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" alt="Spotify"></div><div><h3>Comptines & Chansons</h3><p>Playlist thématique pour les plus jeunes</p><a class="btn small" href="https://open.spotify.com/intl-fr/artist/1Cs0zKBU1kc0i8ypK3Beee" target="_blank">Ouvrir Spotify</a> <a class="btn small" href="https://open.spotify.com/intl-fr/artist/1Cs0zKBU1kc0i8ypK3Beee" target="_blank">S'abonner</a></div></div><div class="playlist-card"><div class="playlist-thumb yt"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube"></div><div><h3>Leçons en musique</h3><p>Vidéos éducatives adaptées par niveau</p><a class="btn small" href="https://www.youtube.com/@LesPtitsG%C3%A9niesenChansons" target="_blank">Ouvrir YouTube</a> <a class="btn small" href="https://www.youtube.com/@LesPtitsG%C3%A9niesenChansons" target="_blank">S'abonner</a></div></div></div></section>
+      <section id="about" class="section"><h2>Notre projet</h2><div style="display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap"><div style="flex:1 1 50%;min-width:280px"><p class="muted">Nous sommes une équipe dédiée à créer des <span class="kw-purple">ressources musicales éducatives</span> : <span class="kw-rose">comptines</span>, <span class="kw-orange">chansons</span> et <span class="kw-blue">playlists</span> conçues pour accompagner enfants, familles et enseignants.</p></div><div style="flex:1 1 50%;min-width:280px"><img src="Apropos.png" alt="Projet éducatif musical" style="width:100%;max-width:520px;border-radius:12px;box-shadow:var(--shadow);object-fit:cover"></div></div><div class="theme-grid"><div class="theme-col"><div class="objective-card"><div class="objective-inner"><div class="obj-ico">🎯</div><div><p><strong>Mission</strong></p><p class="muted">Rendre les apprentissages fondamentaux plus accessibles.</p></div></div></div></div><div class="theme-col"><div class="objective-card"><div class="objective-inner"><div class="obj-ico">👥</div><div><p><strong>Public</strong></p><p class="muted">Enseignants, parents et enfants.</p></div></div></div></div></div><a class="btn primary" href="#playlists" id="aboutPlaylists">Explorer les playlists</a> <a href="#contact" id="aboutContact" style="color:#e53935;font-weight:800">Nous contacter →</a></section>
+      <section id="contact" class="section"><h2>Contact & Partenariats</h2><p class="muted">Nous souhaitons développer des collaborations durables avec des enseignants, des écoles, des musiciens, des pédagogues et des éditeurs.</p><form id="contactForm" class="contact-form"><input type="text" id="name" placeholder="Nom Prénom" required><input type="text" id="establishment" placeholder="Établissement (facultatif)"><input type="email" id="email" placeholder="Email" required><select id="interest" required><option value="">Sujet</option><option value="partnership">Partenariat</option><option value="content">Création de contenu</option><option value="support">Support</option></select><textarea id="message" placeholder="Votre message..." rows="4" required></textarea><button class="btn primary" type="submit">Envoyer</button><div id="formMsg" class="form-msg"></div></form></section>
+    </main>
+    <div id="welcomeModal" class="modal" aria-hidden="true"><div class="modal-backdrop" data-close-welcome></div><div class="modal-panel" style="max-width:960px"><button class="modal-close" data-close-welcome>×</button><div style="padding-top:40px"><h1>Bienvenue !</h1><p class="muted">Vous êtes arrivé·e sur la page d'accueil post-connexion. Choisissez votre année pour afficher des ressources et playlists adaptées.</p><div class="welcome-grid" id="welcomeGrid"></div></div></div></div>
+    <div id="levelSongsModal" class="modal" aria-hidden="true"><div class="modal-backdrop" data-close-level-songs></div><div class="modal-panel"><button class="modal-close" data-close-level-songs>×</button><div style="padding-top:40px"><h2 id="levelSongsTitle">Playlist</h2><p id="levelSongsSubtitle" class="muted"></p><div id="levelSongsList"></div><div style="background:#fffaf6;padding:14px;border-radius:12px;border:1px solid rgba(255,200,160,.55)"><div class="sales-card"><div style="font-weight:900;font-size:16px;color:#fff">Découvrir plus en nous rejoignant :</div><div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap"><a class="btn small" href="https://open.spotify.com/intl-fr/artist/1Cs0zKBU1kc0i8ypK3Beee" target="_blank" style="background:#1db954;color:#fff;border-radius:999px"><img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" style="width:18px"> Spotify</a><a class="btn small" href="https://www.youtube.com/@LesPtitsG%C3%A9niesenChansons" target="_blank" style="background:#ff3333;color:#fff;border-radius:999px"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" style="width:22px"> YouTube</a></div><div class="sales-badge">✨ Offre personnalisée</div><h3 class="sales-title">Album personnalisé<br>20 titres uniques</h3><p class="sales-subtitle">Un album éducatif créé spécialement au nom de votre enfant.</p><div class="sales-points"><div class="sales-point">🧒 Nom de l’enfant</div><div class="sales-point">🎵 20 chansons</div><div class="sales-point">📚 Niveau adapté</div><div class="sales-point">🌈 Thèmes au choix</div><div class="sales-point">🏠 Classe & maison</div><div class="sales-point">💝 Souvenir unique</div></div><div class="sales-footer"><div class="sales-price">Album complet<br><span>14,99 €</span></div><button class="btn sales-cta" id="orderAlbumBtn">Commander l’album personnalisé</button></div></div></div></div></div></div>
+    <div id="albumOnlyModal" class="modal" aria-hidden="true"><div class="modal-backdrop" data-close-album-only></div><div class="modal-panel" style="background:transparent;box-shadow:none;padding:0"><div class="sales-card"><button class="modal-close" data-close-album-only style="background:linear-gradient(135deg,#7d3aa7,#ff8c42)">×</button><div style="padding-right:46px"><div style="font-weight:900;font-size:16px;color:#fff">Découvrir plus en nous rejoignant :</div><div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap"><a class="btn small" href="https://open.spotify.com/intl-fr/artist/1Cs0zKBU1kc0i8ypK3Beee" target="_blank" style="background:#1db954;color:#fff;border-radius:999px">Spotify</a><a class="btn small" href="https://www.youtube.com/@LesPtitsG%C3%A9niesenChansons" target="_blank" style="background:#ff3333;color:#fff;border-radius:999px">YouTube</a></div></div><div class="sales-badge">✨ Offre personnalisée</div><h3 class="sales-title">Album personnalisé<br>20 titres uniques</h3><p class="sales-subtitle">Un album éducatif créé spécialement au nom de votre enfant.</p><div class="sales-points"><div class="sales-point">🧒 Nom de l’enfant</div><div class="sales-point">🎵 20 chansons</div><div class="sales-point">📚 Niveau adapté</div><div class="sales-point">🌈 Thèmes au choix</div><div class="sales-point">🏠 Classe & maison</div><div class="sales-point">💝 Souvenir unique</div></div><div class="sales-footer"><div class="sales-price">Album complet<br><span>14,99 €</span></div><button class="btn sales-cta" id="orderAlbumOnlyBtn">Commander l’album personnalisé</button></div></div></div></div>
+    <div id="themeModal" class="modal" aria-hidden="true"><div class="modal-backdrop" data-close-theme></div><div class="modal-panel"><button class="modal-close" data-close-theme>×</button><div style="padding-top:40px"><audio id="modalAudio" controls preload="none" style="width:100%;border-radius:10px"><source src="Les_Poussins_Courageux.mp3" type="audio/mpeg"></audio><div style="display:flex;justify-content:center;width:100%;margin-top:10px"><img id="modalImg" src="theme-m1.png" alt="Illustration du thème" style="width:88%;border-radius:12px;box-shadow:var(--shadow);max-height:260px;object-fit:cover"></div><h3 id="modalTitle">Titre</h3><h4 id="modalSubtitle" class="muted"></h4><p id="modalDesc" class="muted">Description</p><a id="modalMore" class="btn primary" href="#playlists">Voir plus</a></div></div></div>
+  </div>
+  <script>
+    'use strict';
+    var sidebar=document.getElementById('sidebar'), sections=[].slice.call(document.querySelectorAll('main section')), navLinks=[].slice.call(document.querySelectorAll('.nav-link')), themesGrid=document.getElementById('themesGrid');
+    var THEMES=[{id:'m1',title:'   1ère année (≈ 2,5–4 ans)',tag:'Maternelles',desc:'Développement du langage oral, motricité, premiers nombres.'},{id:'m2',title:'   2ème année (≈ 4–5 ans)',tag:'Maternelles',desc:'Langage structuré, vocabulaire enrichi, comptage jusqu’à 10.'},{id:'m3',title:'   3ème année (≈ 5–6 ans)',tag:'Maternelles',desc:'Pré-lecture et pré-écriture, comptage jusqu’à 20+.'},{id:'p1',title:'   1ère année (≈ 6–7 ans)',tag:'Primaires',desc:'Entrée lecture/écriture, nombres jusqu’à 100.'},{id:'p2',title:'   2ème année (≈ 7–8 ans)',tag:'Primaires',desc:'Lecture fluide, récits courts, multiplication.'},{id:'p3',title:'   3ème année (≈ 8–9 ans)',tag:'Primaires',desc:'Compréhension, fractions, géométrie.'},{id:'p4',title:'   4ème année (≈ 9–10 ans)',tag:'Primaires',desc:'Fractions/décimaux, géométrie avancée.'},{id:'p5',title:'   5ème année (≈ 10–11 ans)',tag:'Primaires',desc:'Pourcentages, proportionnalité, volumes.'},{id:'p6',title:'   6ème année (≈ 11–12 ans)',tag:'Primaires',desc:'Analyse critique, maths avancées, citoyenneté.'}];
+    var LEVEL_SONGS={m1:{title:'🐣 1ère maternelle',subtitle:'≈ 2,5-4 ans',songs:[['M1 - La Ferme En Chanson','M1-La-Ferme-En-Chanson.mp3'],['M1 - Les Couleurs En Chantant','M1-Les-Couleurs-En-Chantant.mp3'],['M1 - La Chanson de la Famille','M1-La-Chanson-De-La-Famille.mp3']]},m2:{title:'🐿️ 2ème maternelle',subtitle:'≈ 4-5 ans',songs:[['M2 - Les Petits Corps','M2-Les-Petits-Corps.mp3'],['M2 - Les Transports Arrivent','M2-Les-Transports-Arrivent.mp3'],['M2 - Les Quatre Saisons','M2-Les-Quatre-Saisons.mp3']]},m3:{title:'🦊 3ème maternelle',subtitle:'≈ 5-6 ans',songs:[['M3 - Petit Caillou Bleu','M3-Petit-Caillou-Bleu.mp3'],['M3 - Les Lettres Dansent','M3-Les-Lettres-Dansent.mp3'],['M3 - Compte Jusqu’à Vingt','M3-Compte-Jusqua-Vingt.mp3']]},p1:{title:'🐼 1ère primaire',subtitle:'≈ 6-7 ans',songs:[['P1 - Le Son Voyage','P1-Le-Son-Voyage.mp3'],['P1 - Les Syllabes Magiques','P1-Les-Syllabes-Magiques.mp3'],['P1 - J’écris Ma Première Phrase','P1-Jecris-Ma-Premiere-Phrase.mp3']]},p2:{title:'🐬 2ème primaire',subtitle:'≈ 7-8 ans',songs:[['P2 - Petit Big Bang','P2-Petit-Big-Bang.mp3'],['P2 - Les Tables en Rythme','P2-Les-Tables-En-Rythme.mp3'],['P2 - Le Mètre et le Litre','P2-Le-Metre-Et-Le-Litre.mp3']]},p3:{title:'🦉 3ème primaire',subtitle:'≈ 8-9 ans',songs:[['P3 - Petit Vide Grand Ciel','P3-Petit-Vide-Grand-Ciel.mp3'],['P3 - La Fraction du Gâteau','P3-La-Fraction-Du-Gateau.mp3'],['P3 - Les Problèmes Malins','P3-Les-Problemes-Malins.mp3']]},p4:{title:'🐺 4ème primaire',subtitle:'≈ 9-10 ans',songs:[['P4 - Les Décimaux en Musique','P4-Les-Decimaux-En-Musique.mp3'],['P4 - Périmètre et Aire','P4-Perimetre-Et-Aire.mp3'],['P4 - L’Électricité Facile','P4-Electricite-Facile.mp3']]},p5:{title:'🦅 5ème primaire',subtitle:'≈ 10-11 ans',songs:[['P5 - Les Pourcentages','P5-Les-Pourcentages.mp3'],['P5 - Proportions en Chanson','P5-Proportions-En-Chanson.mp3'],['P5 - Notre Planète Respire','P5-Notre-Planete-Respire.mp3']]},p6:{title:'🦁 6ème primaire',subtitle:'≈ 11-12 ans',songs:[['P6 - La Règle de Trois','P6-La-Regle-De-Trois.mp3'],['P6 - Cap vers le Secondaire','P6-Cap-Vers-Le-Secondaire.mp3'],['P6 - Citoyens du Monde','P6-Citoyens-Du-Monde.mp3']]}};
+    function showSection(id){sections.forEach(function(s){s.style.display=s.id===id?'block':'none'});navLinks.forEach(function(l){l.classList.toggle('active',l.dataset.target===id)});if(sidebar)sidebar.classList.remove('open');var main=document.querySelector('.main');if(main)main.scrollTop=0}
+    function openModal(id){var m=document.getElementById(id);if(m)m.setAttribute('aria-hidden','false')} function closeModal(id){var m=document.getElementById(id);if(m)m.setAttribute('aria-hidden','true')}
+    function buildAlbumMailto(){var NL=String.fromCharCode(10), subject='Commande album personnalisé - 20 titres', body=['Bonjour Moh,','','Je souhaite commander un album personnalisé de 20 titres au nom de mon enfant.','','Nom et prénom du parent :','Email de contact :','Téléphone :','','Nom de l enfant :','Âge :','Niveau scolaire :','','Instructions personnalisées :','Exemple : mon enfant aime les dauphins, les étoiles et les chansons douces.','','Cordialement,'].join(NL);return 'mailto:moh.boussati@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body)}
+    function orderPersonalAlbum(e){if(e)e.preventDefault();window.location.href=buildAlbumMailto()}
+    function buildThemes(){var cls=['m1','m2','m3','s1','s2','s3','t1','t2','t3'], animals={m1:'🐣',m2:'🐿️',m3:'🦊',p1:'🐼',p2:'🐬',p3:'🦉',p4:'🐺',p5:'🦅',p6:'🦁'}, colors=['#e64545','#ff6b00','#ffb300','#00bcd4','#3c8d0d','#7d3aa7','#e02359','#2b3aa6','#00a140'];themesGrid.innerHTML='';THEMES.forEach(function(t,i){var c=document.createElement('div');c.className='card';c.innerHTML='<div class="tag"></div><h3></h3><p></p><div class="meta"><button class="btn small metallic"><span class="animal-icon"></span>Voir</button></div>';c.querySelector('.tag').textContent=t.tag;c.querySelector('h3').textContent=t.title;c.querySelector('h3').classList.add(cls[i]);c.querySelector('p').textContent=t.desc;var b=c.querySelector('button');b.classList.add(cls[i]);b.dataset.id=t.id;c.querySelector('.animal-icon').textContent=animals[t.id];c.querySelector('.animal-icon').style.background=colors[i];themesGrid.appendChild(c)});themesGrid.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){var id=b.dataset.id,t=THEMES.find(function(x){return x.id===id}), img=document.getElementById('modalImg'), aud=document.getElementById('modalAudio');document.getElementById('modalTitle').textContent=t.title;document.getElementById('modalSubtitle').textContent='Ressource pédagogique';document.getElementById('modalDesc').textContent=t.desc;if(img)img.src='theme-'+id+'.png';if(aud){var map={m1:'M1-La-Ferme-En-Chanson.mp3',m2:'M2-Les-Petits-Corps.mp3',m3:'M3-Petit-Caillou-Bleu.mp3',p1:'P1-Le-Son-Voyage.mp3',p2:'P2-Petit-Big-Bang.mp3',p3:'P3-Petit-Vide-Grand-Ciel.mp3',p4:'P4-Les-Decimaux-En-Musique.mp3',p5:'P5-Les-Pourcentages.mp3',p6:'P6-La-Regle-De-Trois.mp3'};aud.src=map[id];aud.load();aud.play().catch(function(){})}openModal('themeModal')})})}
+    function buildWelcome(){var grid=document.getElementById('welcomeGrid'), data=[['m1','🐣 1ère maternelle','≈ 2,5–4 ans','Découvrir activités & comptines','m1'],['m2','🐿️ 2ème maternelle','≈ 4–5 ans','Langage, jeux et motricité','m2'],['m3','🦊 3ème maternelle','≈ 5–6 ans','Prélecture & préparation primaire','m3'],['p1','🐼 1ère primaire','≈ 6–7 ans','Lecture, écriture, premiers calculs','s1'],['p2','🐬 2ème primaire','≈ 7–8 ans','Fluidité de lecture et multiplications','s2'],['p3','🦉 3ème primaire','≈ 8–9 ans','Compréhension, fractions, géométrie','s3'],['p4','🐺 4ème primaire','≈ 9–10 ans','Approfondissement & méthodes','t1'],['p5','🦅 5ème primaire','≈ 10–11 ans','Pourcentages & raisonnement','t2'],['p6','🦁 6ème primaire','≈ 11–12 ans','Préparation secondaire & projets','t3']];grid.innerHTML='';data.forEach(function(x){var a=document.createElement('a');a.href='#';a.className='btn metallic welcome-card '+x[4];a.dataset.level=x[0];a.innerHTML='<span class="welcome-title">'+x[1]+'</span><small>'+x[2]+'</small><span class="welcome-desc">'+x[3]+'</span>';grid.appendChild(a)});grid.querySelectorAll('[data-level]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();openLevelSongs(a.dataset.level)})})}
+    function openLevelSongs(id){var d=LEVEL_SONGS[id], list=document.getElementById('levelSongsList');document.getElementById('levelSongsTitle').textContent=d.title;document.getElementById('levelSongsSubtitle').textContent=d.subtitle+' — 3 chansons de démonstration';list.innerHTML='';d.songs.forEach(function(s,i){var item=document.createElement('div');item.className='song-item';item.innerHTML='<div class="song-info"><strong>'+s[0]+'</strong><small>Chanson '+(i+1)+' • Lecteur audio intégré</small></div><audio controls preload="none"><source src="'+s[1]+'" type="audio/mpeg"></audio>';list.appendChild(item)});openModal('levelSongsModal')}
+    function bind(){document.getElementById('menuToggle').onclick=function(){sidebar.classList.toggle('open')};document.getElementById('sidebarClose').onclick=function(){sidebar.classList.remove('open')};document.getElementById('loginBtn').onclick=function(){openModal('welcomeModal')};document.getElementById('albumCtaBtn').onclick=function(e){e.preventDefault();openModal('albumOnlyModal')};document.getElementById('sidebarAlbumCta').onclick=function(e){e.preventDefault();sidebar.classList.remove('open');openModal('albumOnlyModal')};document.getElementById('startExplore').onclick=function(){showSection('themes')};document.getElementById('tryAI').onclick=function(){showSection('playlists')};document.getElementById('aboutPlaylists').onclick=function(e){e.preventDefault();showSection('playlists')};document.getElementById('aboutContact').onclick=function(e){e.preventDefault();showSection('contact')};document.getElementById('programmeMoreBtn').onclick=function(e){e.preventDefault();showSection('themes')};navLinks.forEach(function(l){l.onclick=function(){showSection(l.dataset.target)}});document.querySelectorAll('[data-close-welcome]').forEach(function(x){x.onclick=function(){closeModal('welcomeModal')}});document.querySelectorAll('[data-close-level-songs]').forEach(function(x){x.onclick=function(){closeModal('levelSongsModal')}});document.querySelectorAll('[data-close-album-only]').forEach(function(x){x.onclick=function(){closeModal('albumOnlyModal')}});document.querySelectorAll('[data-close-theme]').forEach(function(x){x.onclick=function(){closeModal('themeModal')}});document.getElementById('orderAlbumBtn').onclick=orderPersonalAlbum;document.getElementById('orderAlbumOnlyBtn').onclick=orderPersonalAlbum;document.getElementById('contactForm').onsubmit=function(e){e.preventDefault();var NL=String.fromCharCode(10), subject='Contact & Partenariats LGEC - '+(document.getElementById('interest').value||'Demande'), body=['Bonjour,','','Je vous contacte depuis le site LGEC.','','Nom Prénom : '+document.getElementById('name').value,'Établissement : '+document.getElementById('establishment').value,'Email : '+document.getElementById('email').value,'Sujet : '+document.getElementById('interest').value,'','Message :',document.getElementById('message').value].join(NL);window.location.href='mailto:moh.boussati@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body)}}
+    buildThemes();buildWelcome();bind();showSection('intro');
+  </script>
 </body>
 </html>
